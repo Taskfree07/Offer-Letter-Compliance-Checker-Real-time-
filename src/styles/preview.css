@@ -1,0 +1,550 @@
+/* Enhanced Professional Preview CSS */
+.preview-container {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.pdf-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+  border-radius: 12px;
+}
+
+.email-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Professional PDF Preview Container - scoped to EmailEditor to avoid cross-component conflicts */
+.email-preview .pdf-preview-container {
+  position: relative;
+  width: 100%;
+  height: auto; /* Let content (canvas/iframe) define height to avoid overlap */
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* top-align content */
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px; /* Slightly more space from following panels */
+  z-index: 0; /* Establish stacking context */
+}
+
+/* PDF Iframe with professional styling - scoped */
+.email-preview .pdf-iframe-full {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Canvas rendering of PDF (PDF.js) */
+.email-preview .pdf-canvas-full {
+  width: 100%;
+  height: auto; /* auto height to preserve aspect ratio */
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Container to host floating page controls */
+.email-preview .pdf-viewport {
+  position: relative;
+  width: 100%;
+  height: auto; /* auto height to match canvas */
+  padding-bottom: 48px; /* Reserve space so floating controls don't overlap next section */
+}
+
+/* Official PDF.js viewer iframe (exact-fidelity mode) */
+.email-preview .pdf-viewer-iframe {
+  width: 100%;
+  height: 80vh; /* give ample space while staying within panel */
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Minimal floating pagination controls */
+.email-preview .page-controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: rgba(248, 250, 252, 0.95); /* #f8fafc */
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 5;
+}
+
+.email-preview .page-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 999px;
+  background: #4b5563; /* slate-600 */
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.email-preview .page-btn:hover:not(:disabled) {
+  background: #374151; /* slate-700 */
+  transform: translateY(-1px);
+}
+
+.email-preview .page-btn:disabled {
+  background: #9ca3af; /* gray-400 */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.email-preview .page-indicator {
+  font-size: 12px;
+  color: #334155; /* slate-700 */
+  padding: 0 6px;
+}
+
+/* Professional Document View - scoped and overriding global to prevent overflow/overlap */
+.email-preview .document-view {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  min-height: auto; /* override App.css */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: visible; /* allow inner sections to size naturally */
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+  z-index: 1; /* Keep content above background */
+}
+
+/* Ensure the preview and analysis stack cleanly */
+.email-preview .document-view > .pdf-preview-container { flex: 0 0 auto; }
+
+/* Removed fixed heights so the preview grows naturally and doesn't overlap following content */
+
+/* Structure mode indicator */
+.structure-mode-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.structure-mode-indicator span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Enhanced PDF Viewer Styles */
+.enhanced-pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-canvas-enhanced {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-info {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
+}
+
+.pdf-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.pdf-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Text Preview with Professional Formatting */
+.text-preview-content {
+  position: absolute;
+  top: 15%;  /* Professional header space */
+  left: 8%;  /* Professional left margin */
+  right: 8%; /* Professional right margin */
+  bottom: 15%; /* Professional footer space */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 50px; /* Professional padding */
+  border-radius: 8px;
+  line-height: 1.6; /* Professional line spacing */
+  font-size: 13px; /* Professional font size */
+  font-family: 'Times New Roman', 'Times', serif;
+  color: #1a202c;
+  overflow-y: auto;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Professional Paragraph Spacing */
+.text-preview-paragraph {
+  margin-bottom: 18px; /* Professional paragraph spacing */
+  text-align: left;
+  text-indent: 0;
+  line-height: 1.65;
+}
+
+.text-paragraph-scrollable {
+  margin-bottom: 18px;
+  text-align: left;
+  line-height: 1.65;
+  padding: 0;
+}
+
+/* Enhanced Loading States - scoped */
+.email-preview .pdf-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #4a5568;
+  padding: 40px;
+}
+
+.email-preview .pdf-loading .spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 20px;
+}
+
+.email-preview .pdf-loading p {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Professional Preview Placeholder - scoped */
+.email-preview .preview-placeholder {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  margin-top: 20px;
+  border: 2px dashed #cbd5e1;
+  color: #64748b;
+  padding: 40px;
+  text-align: center;
+}
+
+.email-preview .preview-placeholder svg {
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.email-preview .preview-placeholder h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.email-preview .preview-placeholder p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* Professional Error States - scoped */
+.email-preview .preview-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fecaca;
+  color: #dc2626;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.email-preview .preview-error svg {
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.email-preview .preview-error h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.email-preview .preview-error p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.email-preview .preview-error button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.email-preview .preview-error button:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(185, 28, 28, 0.3);
+}
+
+/* Professional Content Area Indicator - scoped */
+.email-preview .content-area-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.email-preview .content-area-box {
+  position: absolute;
+  top: 15%; /* Match text-preview-content positioning */
+  left: 8%;
+  right: 8%;
+  bottom: 15%;
+  border: 3px solid #3b82f6;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.email-preview .content-area-box span {
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  border: 1px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Professional Spinner Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Preview Header - scoped */
+.email-preview .preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.email-preview .preview-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.email-preview .preview-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Professional Button Styling in Preview - scoped */
+.email-preview .preview-actions .btn {
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.email-preview .preview-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.email-preview .preview-actions .btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+}
+
+.email-preview .preview-actions .btn-secondary {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  border: none;
+}
+
+/* Responsive Design for Professional Appearance */
+@media (max-width: 1024px) {
+  .email-preview .text-preview-content {
+    left: 5%;
+    right: 5%;
+    padding: 30px 35px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .email-preview .preview-container {
+    height: 500px;
+    border-radius: 8px;
+  }
+  
+  .email-preview .text-preview-content {
+    top: 12%;
+    bottom: 12%;
+    left: 4%;
+    right: 4%;
+    padding: 20px 25px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  
+  .email-preview .text-preview-paragraph,
+  .email-preview .text-paragraph-scrollable {
+    margin-bottom: 14px;
+  }
+  
+  .email-preview .preview-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .email-preview .preview-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Print Optimization */
+@media print {
+  .email-preview .preview-container,
+  .email-preview .pdf-preview-container {
+    box-shadow: none;
+    border: none;
+    height: auto;
+    background: white;
+  }
+
+  .email-preview .text-preview-content {
+    position: static;
+    background: white;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .email-preview .preview-header,
+  .email-preview .preview-actions {
+    display: none;
+  }
+}

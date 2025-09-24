@@ -1,0 +1,596 @@
+/* /src/styles/compliance.css */
+/* Comprehensive styling for the legal compliance system */
+
+/* Legal Compliance Section */
+.legal-compliance-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #dee2e6;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.compliance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #6c757d;
+}
+
+.compliance-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #495057;
+  font-size: 1.5rem;
+}
+
+.compliance-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-rules-manager {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-rules-manager:hover {
+  background: #138496;
+}
+
+/* State Selector */
+.state-selector-enhanced {
+  margin-bottom: 20px;
+}
+
+.state-selector-enhanced label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.state-dropdown {
+  padding: 10px 15px;
+  border: 2px solid #ced4da;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  min-width: 200px;
+  transition: border-color 0.3s;
+}
+
+.state-dropdown:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: 0;
+}
+
+.state-info {
+  margin-top: 8px;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.sources-info {
+  margin-top: 10px;
+}
+
+.sources-info summary {
+  color: #007bff;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.source-item {
+  margin: 5px 0;
+  padding-left: 15px;
+}
+
+.source-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.source-item a:hover {
+  text-decoration: underline;
+}
+
+/* Compliance Summary */
+.compliance-summary {
+  background: white;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.compliance-summary.success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border-color: #28a745;
+  color: #155724;
+}
+
+.summary-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.summary-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 600;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-stat.error {
+  background: #f8d7da;
+  border: 1px solid #dc3545;
+  color: #721c24;
+}
+
+.summary-stat.warning {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+}
+
+.summary-stat.info {
+  background: #d1ecf1;
+  border: 1px solid #17a2b8;
+  color: #0c5460;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+}
+
+/* Rules Manager */
+.rules-manager {
+  background: #fff;
+  border: 2px solid #6c757d;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.rules-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.rules-header h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px 0;
+}
+
+.add-rule-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #495057;
+}
+
+.rule-textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #ced4da;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.rule-textarea:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-save-rule {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-save-rule:hover {
+  background: #0056b3;
+}
+
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-cancel:hover {
+  background: #545b62;
+}
+
+.current-rules {
+  margin-top: 20px;
+}
+
+.rules-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+}
+
+.rule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.rule-item:last-child {
+  border-bottom: none;
+}
+
+.severity {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.severity.error {
+  background: #dc3545;
+  color: white;
+}
+
+.severity.warning {
+  background: #ffc107;
+  color: #212529;
+}
+
+.severity.info {
+  background: #17a2b8;
+  color: white;
+}
+
+/* Sentence Flagging */
+.sentence-normal {
+  padding: 12px 15px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+}
+
+.sentence-normal:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.sentence-flagged {
+  border-left: 4px solid;
+  padding-left: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sentence-flagged.error {
+  border-left-color: #dc3545;
+  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
+}
+
+.sentence-flagged.warning {
+  border-left-color: #ffc107;
+  background: linear-gradient(90deg, #fffbf0 0%, #ffffff 100%);
+}
+
+.sentence-flagged.info {
+  border-left-color: #17a2b8;
+  background: linear-gradient(90deg, #f0f9ff 0%, #ffffff 100%);
+}
+
+.section-number {
+  display: inline-block;
+  background: #6c757d;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 25px;
+  text-align: center;
+}
+
+/* Compliance Flags */
+.compliance-flags {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.compliance-flag {
+  background: white;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.compliance-flag.error {
+  border-left-color: #dc3545;
+}
+
+.compliance-flag.warning {
+  border-left-color: #ffc107;
+}
+
+.compliance-flag.info {
+  border-left-color: #17a2b8;
+}
+
+.flag-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.flag-icon {
+  font-size: 1.1rem;
+}
+
+.flag-content {
+  line-height: 1.4;
+}
+
+.flag-message {
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.law-reference {
+  background: #e9ecef;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 0.875rem;
+}
+
+.source {
+  background: #d1ecf1;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 0.875rem;
+  color: #0c5460;
+}
+
+.action-required {
+  background: #f8d7da;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  color: #721c24;
+  font-weight: 600;
+}
+
+.suggestion {
+  background: #fff3cd;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 8px 0;
+  color: #856404;
+}
+
+.alternative {
+  background: #d4edda;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  color: #155724;
+}
+
+.alt-text {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 8px;
+  border-left: 3px solid #28a745;
+  font-style: italic;
+  font-family: 'Times New Roman', serif;
+}
+
+/* Compliance Report Button */
+.compliance-report-btn {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s;
+}
+
+.compliance-report-btn:hover {
+  background: #138496;
+}
+
+/* Enhanced Tab Navigation */
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 15px;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tab-button.active {
+  background: white;
+  border-bottom-color: white;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.tab-button:hover:not(.active) {
+  background: #e9ecef;
+}
+
+/* Preview Actions */
+.preview-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .legal-compliance-section {
+    padding: 15px;
+  }
+  
+  .compliance-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .state-selector-enhanced {
+    width: 100%;
+  }
+  
+  .state-dropdown {
+    width: 100%;
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .summary-stat {
+    min-width: auto;
+  }
+  
+  .preview-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .compliance-report-btn,
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animation for save states */
+.checkmark {
+  animation: checkmark 0.3s ease-in-out;
+}
+
+@keyframes checkmark {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Status indicators */
+.status-success {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.status-error {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Loading spinner for PDF generation */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
