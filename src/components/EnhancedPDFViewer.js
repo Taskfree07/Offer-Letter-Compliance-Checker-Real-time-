@@ -49,6 +49,7 @@ const EnhancedPDFViewer = React.forwardRef(({
         hasPdfBytes: !!pdfBytes,
         pdfBytesLength: pdfBytes?.byteLength || 0
       });
+      // Note: Placeholder spanning logic is handled inside customTextReplacement()
 
       if (!pdfBytes) {
         console.log('EnhancedPDFViewer: No PDF bytes provided');
@@ -156,7 +157,7 @@ const EnhancedPDFViewer = React.forwardRef(({
     loadPDF();
   }, [pdfBytes]);
 
-  // Extract variables from all pages
+  // Extract variables using NLP service for precise positioning
   const extractVariablesFromAllPages = async (pdfDoc) => {
     const allVariables = {};
     const allPositions = new Map();
@@ -165,56 +166,350 @@ const EnhancedPDFViewer = React.forwardRef(({
       try {
         const page = await pdfDoc.getPage(pageNum);
         const textContent = await page.getTextContent();
-        const viewport = page.getViewport({ scale: 2.0 });
+        const viewport = page.getViewport({ scale: 1.5 });
+        
+        // Extract full page text for NLP processing
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        console.log(`Page ${pageNum} text:`, pageText);
+        
+        // Use NLP service to find entities with precise positions
+        const nlpResponse = await fetch('http://127.0.0.1:5000/api/extract-entities-with-positions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: pageText })
+        });
+        
+        if (!nlpResponse.ok) {
+          throw new Error(`NLP service error: ${nlpResponse.status}`);
+        }
+        
+        const nlpResult = await nlpResponse.json();
+        console.log(`🤖 NLP detected entities on page ${pageNum}:`, nlpResult);
         
         const pagePositions = [];
         
-        textContent.items.forEach((item, index) => {
-          if (!item.str || !item.str.trim()) return;
-
-          // Check for variable patterns: [Name], {{Name}}, ${Name}, <Name>
-          const variableMatches = item.str.match(/\[([^\]]+)\]|\{\{([^}]+)\}\}|\$\{([^}]+)\}|<([^>]+)>/g);
-          
-          if (variableMatches) {
-            variableMatches.forEach(match => {
-              const variableName = match.replace(/[\[\]{}$<>]/g, '').trim();
-              if (variableName) {
-                // Store variable
-                allVariables[variableName] = '';
-                
-                // Store position for rendering
-                const transform = item.transform;
-                const x = transform[4];
-                const y = viewport.height - transform[5];
-                const fontSize = Math.abs(transform[0]);
-                
-                pagePositions.push({
-                  variableName,
-                  originalText: item.str,
-                  variablePattern: match,
-                  x,
-                  y,
-                  fontSize,
-                  fontName: item.fontName || 'Arial',
-                  width: item.width || (item.str.length * fontSize * 0.6),
-                  height: item.height || fontSize
-                });
+        // Map NLP entities to PDF coordinates
+        if (nlpResult.data && nlpResult.data.entities) {
+          nlpResult.data.entities.forEach(entity => {
+            // Find the text item that contains this entity
+            let charOffset = 0;
+            let foundItem = null;
+            let itemIndex = -1;
+            
+            for (let i = 0; i < textContent.items.length; i++) {
+              const item = textContent.items[i];
+              const itemText = item.str;
+              const itemStart = charOffset;
+              const itemEnd = charOffset + itemText.length;
+              
+              // Check if entity falls within this text item
+              if (entity.start_char >= itemStart && entity.start_char < itemEnd) {
+                foundItem = item;
+                itemIndex = i;
+                break;
               }
-            });
-          }
-        });
+              
+              charOffset += itemText.length + 1; // +1 for space between items
+            }
+            
+            if (foundItem) {
+              const transform = foundItem.transform;
+              const x = transform[4];
+              const y = transform[5];
+              const fontSize = Math.abs(transform[0]);
+              
+              // Calculate position within the text item
+              const localOffset = entity.start_char - charOffset + foundItem.str.length;
+              const charWidth = fontSize * 0.6;
+              const entityX = x + (localOffset * charWidth);
+              
+              // Create clean variable name from entity label
+              const variableName = entity.label.replace(/[^A-Z_]/g, '');
+              
+              // Store variable with empty string as default value
+              allVariables[variableName] = '';
+              
+              console.log(`🎯 NLP found entity: "${entity.text}" → ${variableName} at (${entityX}, ${y})`);
+              
+              pagePositions.push({
+                variableName,
+                originalText: foundItem.str,
+                variablePattern: entity.text,
+                fieldText: entity.text,
+                x: entityX,
+                y: y,
+                fontSize,
+                fontName: foundItem.fontName || 'Arial',
+                width: entity.text.length * charWidth,
+                height: fontSize,
+                textItemIndex: itemIndex,
+                entityLabel: entity.label,
+                startChar: entity.start_char,
+                endChar: entity.end_char
+              });
+            }
+          });
+        }
         
         allPositions.set(pageNum, pagePositions);
+        console.log(`Page ${pageNum}: NLP found ${pagePositions.length} editable fields`);
       } catch (error) {
         console.error(`Error extracting variables from page ${pageNum}:`, error);
+        // Fallback to manual detection if NLP fails
+        console.log('Falling back to manual bracket detection...');
+        // Add fallback logic here if needed
       }
     }
 
     setVariablePositions(allPositions);
     
+    console.log('🔍 NLP detected variables:', allVariables);
+    console.log('🔍 Variable positions:', allPositions);
+    
     // Notify parent component about detected variables
     if (onVariablesDetected && Object.keys(allVariables).length > 0) {
+      console.log('📤 Sending detected variables to parent:', allVariables);
       onVariablesDetected(allVariables);
+    }
+  };
+
+  // Helper function to find variable value for a field
+  const findVariableForField = (fieldText, variables) => {
+    // Try direct match first
+    if (variables[fieldText]) return variables[fieldText];
+    
+    // Try common mappings
+    const fieldMappings = {
+      'Candidate Name': 'CANDIDATE_NAME',
+      'Job Title': 'JOB_TITLE', 
+      'Company Name': 'COMPANY_NAME',
+      'Address': 'ADDRESS',
+      'Amount': 'SALARY_AMOUNT',
+      'Start Date': 'START_DATE',
+      'Proposed Start Date': 'START_DATE'
+    };
+    
+    const mappedKey = fieldMappings[fieldText];
+    if (mappedKey && variables[mappedKey]) return variables[mappedKey];
+    
+    // Try case-insensitive search
+    const keys = Object.keys(variables);
+    const match = keys.find(key => 
+      key.toLowerCase() === fieldText.toLowerCase() ||
+      key.toLowerCase().replace(/_/g, ' ') === fieldText.toLowerCase()
+    );
+    
+    return match ? variables[match] : null;
+  };
+
+  // Helper function to validate values
+  const hasValidValue = (value) => {
+    return value !== null && 
+           value !== undefined && 
+           value !== '' && 
+           !String(value).startsWith('[') && 
+           String(value).trim().length > 0;
+  };
+
+  // Custom regex-based text replacement with precise positioning
+  const customTextReplacement = async (page, context, viewport, variables) => {
+    console.log('🔧 customTextReplacement called with:');
+    console.log('  - variables:', variables);
+    console.log('  - variables type:', typeof variables);
+    console.log('  - variables keys:', Object.keys(variables || {}));
+    
+    try {
+      const textContent = await page.getTextContent();
+      console.log('📄 Got text content with', textContent.items.length, 'items');
+      
+      // Define regex patterns for common placeholders
+      const placeholderPatterns = [
+        { regex: /\[Candidate\s*Name\]/gi, variable: 'Candidate Name' },
+        { regex: /\[Job\s*Title\]/gi, variable: 'Job Title' },
+        { regex: /\[Company\s*Name\]/gi, variable: 'Company Name' },
+        { regex: /\[Address\]/gi, variable: 'Address' },
+        { regex: /\[Department\]/gi, variable: 'Department' },
+        { regex: /\[Start\s*Date\]/gi, variable: 'Start Date' },
+        { regex: /\[Proposed\s*Start\s*Date\]/gi, variable: 'Start Date' },
+        { regex: /\[Amount\]/gi, variable: 'Amount' },
+        { regex: /\[Insert\s*Date\]/gi, variable: 'Insert Date' },
+        { regex: /\[Client\s*Customer\s*Name\]/gi, variable: 'Company Name' },
+        { regex: /\[Semi\s*Monthly\]/gi, variable: 'Period' },
+        { regex: /\[Start\s*Time\]/gi, variable: 'Start Time' },
+        { regex: /\[End\s*Time\]/gi, variable: 'End Time' },
+        { regex: /\[Days\s*of\s*Week\]/gi, variable: 'Days of Week' }
+      ];
+
+      console.log('🔍 Starting custom regex replacement...');
+      
+      // Process each text item: draw only the placeholder spans (no full-line clearing)
+      textContent.items.forEach((item, index) => {
+        if (!item.str || !item.str.trim()) return;
+        const originalText = item.str;
+        let composedText = originalText; // final text after replacing placeholders (missing values removed)
+
+        // Prepare drawing context in item space
+        const m = pdfjs.Util.transform(viewport.transform, item.transform);
+        context.save();
+        context.setTransform(m[0], m[1], m[2], m[3], m[4], m[5]);
+        context.transform(1, 0, 0, -1, 0, 0); // unflip Y
+        const fontFamily = getFontFamily(item.fontName);
+        context.font = `1px ${fontFamily}`;
+        context.textBaseline = 'alphabetic';
+
+        // For each known placeholder pattern, clear only that substring and draw replacement
+        let foundAny = false;
+        const baselineNudge = -0.005; // very small upward nudge
+        const pad = 0.003; // minimal padding around glyphs
+
+        placeholderPatterns.forEach(pattern => {
+          pattern.regex.lastIndex = 0;
+          const matches = [...originalText.matchAll(pattern.regex)];
+          if (matches.length === 0) return;
+
+          const value = findVariableForField(pattern.variable, variables);
+          const hasValue = value && hasValidValue(value);
+
+          // Build composed text: replace with value or remove entirely
+          const replacement = hasValue ? String(value) : '';
+          pattern.regex.lastIndex = 0;
+          composedText = composedText.replace(pattern.regex, replacement);
+
+          matches.forEach(() => {
+            // Mark that this run has a placeholder; we will redraw the whole run once below.
+            foundAny = true;
+          });
+        });
+
+        context.restore();
+
+        // If we touched any placeholder in this run, redraw the entire run once to avoid gaps
+        if (foundAny && composedText !== originalText) {
+          const m2 = pdfjs.Util.transform(viewport.transform, item.transform);
+          const padAll = 0.002;
+          const baselineNudgeAll = 0; // align exactly on baseline
+          const fontFamily2 = getFontFamily(item.fontName);
+
+          context.save();
+          context.setTransform(m2[0], m2[1], m2[2], m2[3], m2[4], m2[5]);
+          context.transform(1, 0, 0, -1, 0, 0);
+          context.font = `1px ${fontFamily2}`;
+          context.textBaseline = 'alphabetic';
+
+          const origM = context.measureText(originalText);
+          const compM = context.measureText(composedText);
+          const width = Math.max(origM.width, compM.width);
+          const ascent = compM.actualBoundingBoxAscent || 0.75;
+          const descent = compM.actualBoundingBoxDescent || 0.05;
+          // Erase original run using destination-out so background shows through (no white patch)
+          const prevOp = context.globalCompositeOperation;
+          context.globalCompositeOperation = 'destination-out';
+          context.fillRect(-padAll, -ascent - padAll, width + 2*padAll, (ascent + descent) + 2*padAll);
+          context.globalCompositeOperation = prevOp;
+          context.fillStyle = '#000000';
+          context.fillText(composedText, 0, baselineNudgeAll);
+          context.restore();
+        }
+
+        if (!foundAny && (originalText.includes('[') || originalText.includes(']'))) {
+          console.log(`⚠️ Unmatched bracketed text (spans multiple items?): "${originalText}"`);
+        }
+      });
+      
+      // Second pass: handle placeholders split across multiple items like "[", "Client/Customer", "Name]"
+      const items = textContent.items;
+      for (let i = 0; i < items.length; i++) {
+        const text = items[i].str || '';
+        let searchFrom = 0;
+        while (true) {
+          const openPos = text.indexOf('[', searchFrom);
+          if (openPos === -1) break;
+
+          // If closing bracket exists in same item, it was handled above
+          const closeSame = text.indexOf(']', openPos + 1);
+          if (closeSame !== -1) {
+            searchFrom = openPos + 1;
+            continue;
+          }
+
+          // Accumulate segments until we find a closing bracket
+          let acc = text.substring(openPos);
+          const segs = [{ index: i, start: openPos, end: text.length }];
+          let j = i + 1;
+          let found = false;
+          for (; j < items.length; j++) {
+            const t = items[j].str || '';
+            const endPos = t.indexOf(']');
+            if (endPos !== -1) {
+              segs.push({ index: j, start: 0, end: endPos + 1 });
+              acc += t.substring(0, endPos + 1);
+              found = true;
+              break;
+            } else {
+              segs.push({ index: j, start: 0, end: t.length });
+              acc += t;
+            }
+          }
+
+          if (!found) break; // no closing bracket
+
+          const fieldInside = acc.replace(/^\[/, '').replace(/\]$/, '').trim();
+          const value = findVariableForField(fieldInside, variables);
+          if (!value || !hasValidValue(value)) {
+            searchFrom = openPos + 1;
+            continue;
+          }
+
+          // Clear all contributing segments in their own item space
+          segs.forEach(seg => {
+            const itemSeg = items[seg.index];
+            const mSeg = pdfjs.Util.transform(viewport.transform, itemSeg.transform);
+            const fontFamily = getFontFamily(itemSeg.fontName);
+            const before = (itemSeg.str || '').substring(0, seg.start);
+            const part = (itemSeg.str || '').substring(seg.start, seg.end);
+
+            const ctx = context;
+            ctx.save();
+            ctx.setTransform(mSeg[0], mSeg[1], mSeg[2], mSeg[3], mSeg[4], mSeg[5]);
+            ctx.transform(1, 0, 0, -1, 0, 0); // unflip Y
+            ctx.font = `1px ${fontFamily}`;
+            ctx.textBaseline = 'alphabetic';
+            const beforeW = ctx.measureText(before).width;
+            const partMetrics = ctx.measureText(part);
+            const partW = partMetrics.width;
+            const ascent = partMetrics.actualBoundingBoxAscent || 0.75;
+            const descent = partMetrics.actualBoundingBoxDescent || 0.05;
+            const pad = 0.003;
+            // Erase region so background shows through
+            const prevOp = ctx.globalCompositeOperation;
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillRect(beforeW - pad, -ascent - pad, partW + 2*pad, (ascent + descent) + 2*pad);
+            ctx.globalCompositeOperation = prevOp;
+            ctx.restore();
+          });
+
+          // Draw the replacement value at the starting segment baseline, offset by preceding chars
+          const firstItem = items[i];
+          const mStart = pdfjs.Util.transform(viewport.transform, firstItem.transform);
+          context.save();
+          context.setTransform(mStart[0], mStart[1], mStart[2], mStart[3], mStart[4], mStart[5]);
+          context.transform(1, 0, 0, -1, 0, 0);
+          context.font = `1px ${getFontFamily(firstItem.fontName)}`;
+          context.textBaseline = 'alphabetic';
+          const beforeStart = (firstItem.str || '').substring(0, openPos);
+          const offset = context.measureText(beforeStart).width;
+          const baselineNudge = -0.005;
+          context.fillStyle = '#000000';
+          context.fillText(value, offset, baselineNudge);
+          context.restore();
+
+          searchFrom = openPos + 1;
+          i = j; // skip processed items
+        }
+      }
+      
+    } catch (error) {
+      console.error('Error in custom text replacement:', error);
     }
   };
 
@@ -234,51 +529,34 @@ const EnhancedPDFViewer = React.forwardRef(({
 
       try {
         const page = await pdfDocument.getPage(currentPage);
-        const viewport = page.getViewport({ scale: 2.0 });
+        const viewport = page.getViewport({ scale: 1.5 });
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
         // Set canvas dimensions for high DPI
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        canvas.style.width = `${viewport.width / 2}px`;
-        canvas.style.height = `${viewport.height / 2}px`;
+        // Lines 244-245:
+        canvas.style.width = `${viewport.width / 1.5}px`;
+        canvas.style.height = `${viewport.height / 1.5}px`;
 
-        // Render original PDF
+        // Render original PDF first
         const renderContext = {
           canvasContext: context,
           viewport: viewport
         };
         await page.render(renderContext).promise;
 
-        // Overlay variable substitutions
-        const pageVariables = variablePositions.get(currentPage) || [];
-        pageVariables.forEach(varInfo => {
-          const variableValue = variables[varInfo.variableName];
-          if (variableValue !== undefined && variableValue !== '') {
-            // Clear original text area
-            context.fillStyle = 'white';
-            context.fillRect(
-              varInfo.x - 2,
-              varInfo.y - varInfo.fontSize - 2,
-              varInfo.width + 4,
-              varInfo.fontSize + 4
-            );
+        // Custom regex-based text replacement approach
+        console.log('🚀 About to call customTextReplacement with variables:', variables);
+        console.log('🚀 Variables keys:', Object.keys(variables));
+        console.log('🚀 Variables values:', Object.values(variables));
+        
+        await customTextReplacement(page, context, viewport, variables);
+        
+        console.log('🏁 Finished customTextReplacement');
 
-            // Draw updated text
-            context.fillStyle = 'black';
-            context.font = `${varInfo.fontSize}px ${getFontFamily(varInfo.fontName)}`;
-            context.textBaseline = 'bottom';
-            
-            // Replace variable in original text
-            const updatedText = varInfo.originalText.replace(
-              varInfo.variablePattern,
-              variableValue
-            );
-            
-            context.fillText(updatedText, varInfo.x, varInfo.y);
-          }
-        });
+        console.log(`✅ Rendered page ${currentPage} with overlay replacements`);
 
       } catch (error) {
         console.error('Error rendering page:', error);

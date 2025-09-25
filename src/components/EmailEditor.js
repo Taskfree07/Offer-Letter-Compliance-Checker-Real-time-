@@ -1,3 +1,6 @@
+import { extractTextWithNLP } from '../services/pdfContentExtractor';
+import { syncCompliancePhrases } from '../services/legalDictionary';
+import { ensureComplianceClauses, buildVariablesFromEntities } from '../services/complianceAutoInsert';
 // Full-Featured EmailEditor with Professional Preview and Exact Positioning
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Download, FileText, Settings, AlertCircle, RefreshCw, Shield, Edit3, ArrowLeft, BookOpen } from 'lucide-react';
@@ -6,6 +9,7 @@ import { extractTextFromPDF } from '../services/pdfContentExtractor';
 import ComplianceAnalysis from './compliance/ComplianceAnalysis';
 import { COMPLIANCE_RULES } from './compliance/complianceRules';
 import EnhancedPDFViewer from './EnhancedPDFViewer';
+import EntitiesPanel from './EntitiesPanel';
 import * as pdfjs from 'pdfjs-dist';
 import '../styles/preview.css';
 
@@ -13,7 +17,9 @@ import '../styles/preview.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const EmailEditor = ({ template, onBack }) => {
+  const [templateContent, setTemplateContent] = useState(template?.content || '');
   const [activeTab, setActiveTab] = useState('variables');
+  const [extractedEntities, setExtractedEntities] = useState([]);
   const [variables, setVariables] = useState({});
   const [stateConfig, setStateConfig] = useState({
     selectedState: 'CA',
@@ -71,8 +77,8 @@ const EmailEditor = ({ template, onBack }) => {
     }
 
     // Extract text for compliance analysis from template
-    if (template?.content && sentences.length === 0) {
-      const splitSentences = template.content
+    if (templateContent && sentences.length === 0) {
+      const splitSentences = templateContent
         .split(/[.!?]+/)
         .filter(sentence => sentence.trim().length > 10)
         .map((sentence, index) => ({
@@ -105,7 +111,7 @@ const EmailEditor = ({ template, onBack }) => {
       }
     }
 
-    if (!template.content || !template.content.trim()) {
+    if (!templateContent || !templateContent.trim()) {
       console.log('No content available, skipping preview generation');
       setPreviewPdfUrl(null);
       setPreviewError('No content to preview. Please add content to the template.');
@@ -124,7 +130,7 @@ const EmailEditor = ({ template, onBack }) => {
       }
       
       const pdfBytes = await pdfTemplateService.generatePDF(
-        template.content, 
+        templateContent, 
         variables, 
         stateConfig.stateBlocks, 
         stateConfig.selectedState
@@ -161,7 +167,7 @@ const EmailEditor = ({ template, onBack }) => {
     } finally {
       setIsLoadingPreview(false);
     }
-  }, [templateLoaded, template.content, variables, stateConfig.stateBlocks, stateConfig.selectedState]);
+  }, [templateLoaded, templateContent, variables, stateConfig.stateBlocks, stateConfig.selectedState]);
 
   // Initialize professional PDF template
   const initializeProfessionalTemplate = useCallback(async () => {
@@ -338,6 +344,11 @@ const EmailEditor = ({ template, onBack }) => {
 
   // Generate preview with professional formatting
   useEffect(() => {
+    if (template?.content && typeof template.content === 'string') {
+      setTemplateContent(template.content);
+    }
+  }, [template]);
+  useEffect(() => {
     if (templateLoaded) {
       const timeoutId = setTimeout(generateProfessionalPreview, 1000);
       return () => clearTimeout(timeoutId);
@@ -418,6 +429,27 @@ const EmailEditor = ({ template, onBack }) => {
   }, []);
 
   // Analyze compliance
+  // Sync compliance phrases for the selected state into the backend (EntityRuler)
+// This ensures your LEGAL_POLICY detections match the rules in COMPLIANCE_RULES.
+useEffect(() => {
+  let cancelled = false;
+  (async () => {
+    try {
+      // Example: when selectedState is 'CA', this collects CA flaggedPhrases
+      // and pushes them to the Python API as LEGAL_POLICY patterns.
+      const res = await syncCompliancePhrases(stateConfig.selectedState);
+      if (!cancelled) {
+        console.log('Synced compliance phrases for', stateConfig.selectedState, res);
+      }
+    } catch (e) {
+      if (!cancelled) {
+        console.warn('Failed to sync compliance phrases:', e);
+      }
+    }
+  })();
+  return () => { cancelled = true; };
+}, [stateConfig.selectedState]);
+
   useEffect(() => {
     console.log('Compliance analysis running:', {
       sentencesCount: sentences.length,
@@ -1174,9 +1206,39 @@ const EmailEditor = ({ template, onBack }) => {
       </div>
       
       <div className="tab-content-wrapper">
-        {activeTab === 'variables' && renderVariablesTab()}
-        {activeTab === 'state' && renderStateConfigTab()}
+  {activeTab === 'variables' && (
+    <>
+      {renderVariablesTab()}
+
+      {/* Entities Panel: edit and apply NLP replacements */}
+      <div style={{ marginTop: '16px', borderTop: '1px solid #e2e8f0', paddingTop: '12px' }}>
+      <EntitiesPanel
+  entities={extractedEntities}
+  variables={variables}
+  content={templateContent}
+  onVariablesChange={(updated) => {
+    setVariables(updated);
+    setPreviewMode('generated');                    // ensure we use generated preview
+    setTimeout(() => generateProfessionalPreview(), 300);
+  }}
+  onContentChange={(newContent) => {
+    // For imported PDFs, don't replace content - just update variables
+    console.log('Content change requested, but keeping original PDF structure');
+    // The EnhancedPDFViewer will handle variable overlays automatically
+  
+
+  }}
+  onAfterApply={() => {
+    // Keep the imported PDF and let EnhancedPDFViewer handle variable updates
+    console.log('NLP replacement applied - keeping imported PDF structure');
+    // Variables will automatically update as overlays on the imported PDF
+  }}
+/>
       </div>
+    </>
+  )}
+  {activeTab === 'state' && renderStateConfigTab()}
+</div>
     </div>
   );
 
@@ -1197,6 +1259,8 @@ const EmailEditor = ({ template, onBack }) => {
     // Use a more reliable approach to read the file
     try {
       setIsImportingPdf(true);
+      setPreviewPdfBytes(null);
+      setPreviewPdfUrl(null);
 
       // Method 1: Read as ArrayBuffer directly
       const arrayBuffer = await file.arrayBuffer();
@@ -1277,6 +1341,52 @@ const EmailEditor = ({ template, onBack }) => {
       isPdfImportedRef.current = true;
 
       console.log('State setters called with callbacks and refs set');
+      
+      // NEW: Perform NLP extraction on the imported PDF and auto-insert compliance clauses
+      try {
+        const extraction = await extractTextWithNLP(file, {
+          performNLP: true,
+          extractEntities: true,
+          suggestVariables: true,
+          replaceEntities: false
+        });
+
+        const text = extraction.text || '';
+        const entities = extraction?.nlp?.entities?.entities || [];
+        const suggestions = extraction?.nlp?.variableSuggestions?.suggestions || {};
+        setExtractedEntities(entities);
+
+        // Seed variables from entities and suggestions
+        const initialVars = buildVariablesFromEntities(entities);
+        setVariables(prev => {
+          const merged = { ...prev };
+          Object.entries(initialVars).forEach(([k, v]) => { if (!merged[k] && v) merged[k] = v; });
+          Object.entries(suggestions).forEach(([varName, data]) => {
+            const clean = varName.replace(/^\[|\]$/g, '');
+            if (!merged[clean] && data?.current_value) {
+              merged[clean] = data.current_value;
+            }
+          });
+          return merged;
+        });
+
+        // Auto-insert missing compliance clauses for the selected state
+        const { content: ensuredContent, addedClauses } = ensureComplianceClauses(
+          text,
+          stateConfig.selectedState,
+          { modes: { required: true, warnings: true, info: false } }
+        );
+
+        if (addedClauses?.length) {
+          console.log('Auto-inserted clauses:', addedClauses);
+        }
+
+        // Don't update templateContent - keep original PDF structure
+// Only use NLP for variable detection, not content replacement
+console.log('NLP processing completed - variables detected and seeded');
+      } catch (nlpErr) {
+        console.warn('NLP processing failed; continuing without NLP:', nlpErr);
+      }
 
       // Process compliance analysis asynchronously with a dedicated copy
       setTimeout(async () => {
@@ -1287,6 +1397,7 @@ const EmailEditor = ({ template, onBack }) => {
           console.error('Error in compliance analysis:', error);
         }
       }, 0);
+
       console.log('PDF imported successfully for enhanced viewing', {
         bytesLength: arrayBuffer.byteLength,
         isPdfImported: true
@@ -1298,51 +1409,12 @@ const EmailEditor = ({ template, onBack }) => {
       // Skip the old processing logic when using enhanced viewer
       return;
 
-      // OLD PROCESSING LOGIC (kept for reference)
-      const pdfDocument = await pdfjs.getDocument(arrayBuffer).promise;
-      if (!pdfDocument) {
-        console.error('Failed to load PDF document.');
-        alert('Failed to load PDF document. Please try again.');
-        return;
-      }
-
-      let pdfText = '';
-
-      for (let i = 1; i <= pdfDocument.numPages; i++) {
-        const page = await pdfDocument.getPage(i);
-        const textContent = await pdfDocument.getPage(i).getTextContent();
-        const pageText = textContent.items.map(item => item.str).join(' ');
-        pdfText += pageText + '\n';
-      }
-
-      // Update template content and states
-      const splitSentences = pdfText
-        .split(/(?<=[.!?])\s+/)
-        .filter(s => s.trim().length > 0)
-        .map((text, index) => ({
-          id: `sentence-${index}`,
-          text: text.trim(),
-          section: determineSectionNumber(text)
-        }));
-
-      const extractVariables = (content) => {
-        const variableMatches = content.match(/\[([^\]]+)\]/g);
-        if (!variableMatches) return {};
-
-        const extractedVars = {};
-        variableMatches.forEach(match => {
-          let varName = match.slice(1, -1).trim();
-          if (varName) extractedVars[varName] = '';
-        });
-        return extractedVars;
-      };
-
-      setSentences(splitSentences);
-      setVariables(extractVariables(pdfText));
-      template.content = pdfText;
-
-      console.log('Offer letter imported successfully');
-      alert('Offer letter imported successfully!');
+      // OLD PROCESSING LOGIC (removed)
+      // The previous synchronous text extraction using pdfDocument has been
+      // superseded by extractTextWithNLP() and EnhancedPDFViewer. The legacy
+      // code referenced an undefined pdfDocument in this scope and caused
+      // ESLint errors. If you need the old flow, retrieve a pdfjs document
+      // instance locally and reintroduce guarded logic here.
     } catch (error) {
       console.error('Error processing PDF file:', error.message, error.stack);
       alert('Failed to process PDF file: ' + error.message);

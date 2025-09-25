@@ -1,0 +1,8 @@
+flask
+flask-cors
+spacy
+gunicorn
+python-dotenv
+
+# Note: After installing requirements, run:
+# python -m spacy download en_core_web_sm
