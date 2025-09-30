@@ -651,6 +651,11 @@
   background-color: #f8fafc;
 }
 
+.variable-row:hover .variable-value-input,
+.variable-row:hover .variable-name-input {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .variable-name-cell {
   flex: 0 0 200px;
   padding-right: 16px;
@@ -658,13 +663,21 @@
 
 .variable-name-input {
   width: 100%;
-  padding: 8px 0;
-  border: none;
+  padding: 6px 8px;
+  border: 1px solid transparent;
   font-size: 14px;
   font-weight: 500;
   color: #374151;
   background: transparent;
   outline: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.variable-name-input:focus {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
 .variable-separator {
@@ -682,17 +695,30 @@
 
 .variable-value-input {
   width: 100%;
-  padding: 8px 0;
-  border: none;
+  padding: 6px 8px;
+  border: 1px solid transparent;
   font-size: 14px;
   color: #374151;
   background: transparent;
   outline: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  /* Prevent descender overflow in variables panel too */
+  line-height: 1.4;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
-.variable-actions-cell {
-  flex: 0 0 30px;
-  text-align: center;
+.variable-value-input:focus {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.variable-value-input:hover:not(:focus) {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn-remove-variable {
@@ -1854,6 +1880,149 @@ select:focus {
 }
 
 /* Print styles */
+/* PDF Variable Input Overlays - Wrap Text Only, No Boxes - HIGHEST SPECIFICITY */
+.pdf-preview-container input[type="text"],
+.pdf-viewport input[type="text"],
+.document-view input[type="text"],
+.canvas-container input[type="text"],
+.pdf-preview-container input,
+.pdf-viewport input,
+.document-view input,
+.canvas-container input,
+input.auto-resize-input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: all 0.2s ease !important;
+  
+  /* Critical: Prevent box extending below baseline for descenders */
+  vertical-align: baseline !important;
+  line-height: 1 !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  
+  /* Make input wrap exactly around text - no boxes */
+  display: inline !important;
+  width: auto !important;
+  min-width: 1ch !important;
+  max-width: 300px !important;
+  
+  /* Override any inherited box model */
+  box-sizing: content-box !important;
+  
+  /* Ensure text alignment */
+  text-align: left !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+.pdf-preview-container input:focus,
+.pdf-viewport input:focus,
+.document-view input:focus,
+.canvas-container input:focus {
+  /* Subtle underline instead of box */
+  border-bottom: 1px solid rgba(59, 130, 246, 0.5) !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+  box-shadow: none !important;
+}
+
+.pdf-preview-container input:hover:not(:focus),
+.pdf-viewport input:hover:not(:focus),
+.document-view input:hover:not(:focus),
+.canvas-container input:hover:not(:focus) {
+  /* Very subtle highlight on hover */
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure text inputs match document text exactly */
+.pdf-preview-container input[type="text"],
+.pdf-viewport input[type="text"],
+.document-view input[type="text"],
+.canvas-container input[type="text"] {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-decoration: inherit !important;
+  
+  /* Critical: Match text baseline and prevent descender overflow */
+  line-height: 1 !important;
+  vertical-align: baseline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  
+  /* Auto-resize to content */
+  resize: none !important;
+  overflow: visible !important;
+}
+
+/* Auto-resizing input that grows with content */
+.auto-resize-input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: inherit !important;
+  vertical-align: baseline !important;
+  
+  /* Make it grow with content */
+  min-width: 1ch;
+  width: auto;
+  max-width: 100%;
+}
+
+.auto-resize-input:focus {
+  border-bottom: 1px solid rgba(59, 130, 246, 0.5) !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+}
+
+/* NUCLEAR OPTION - Override ALL inputs in PDF areas */
+.enhanced-pdf-viewer input,
+.enhanced-pdf-viewer input[type="text"],
+.pdf-canvas-enhanced ~ * input,
+.email-preview input,
+.email-preview input[type="text"] {
+  all: unset !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  vertical-align: baseline !important;
+  line-height: 1 !important;
+  height: auto !important;
+  width: auto !important;
+  min-width: 1ch !important;
+  max-width: 300px !important;
+  display: inline !important;
+  box-sizing: content-box !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+.enhanced-pdf-viewer input:focus,
+.enhanced-pdf-viewer input[type="text"]:focus,
+.pdf-canvas-enhanced ~ * input:focus,
+.email-preview input:focus,
+.email-preview input[type="text"]:focus {
+  border-bottom: 1px solid rgba(59, 130, 246, 0.5) !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+}
+
 @media print {
   .editor-panel,
   .editor-header,
@@ -1872,7 +2041,6 @@ select:focus {
   
   .document-view {
     box-shadow: none !important;
-    border: none !important;
     padding: 0 !important;
   }
   
@@ -1881,16 +2049,46 @@ select:focus {
     background: white !important;
   }
   
-  .document-text {
-    background: white !important;
-    padding: 20px !important;
+  /* PDF Variable Input Overlays - Prevent White Boxes */
+  .pdf-preview-container input,
+  .pdf-viewport input,
+  .document-view input,
+  .canvas-container input {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 2px !important;
+    transition: all 0.2s ease !important;
   }
-}
 
-@media (max-width: 768px) {
-  .split-view {
-    grid-template-columns: 1fr;
-    height: auto;
+  .pdf-preview-container input:focus,
+  .pdf-viewport input:focus,
+  .document-view input:focus,
+  .canvas-container input:focus {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  .pdf-preview-container input:hover:not(:focus),
+  .pdf-viewport input:hover:not(:focus),
+  .document-view input:hover:not(:focus),
+  .canvas-container input:hover:not(:focus) {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Ensure text inputs blend with document background */
+  .pdf-preview-container input[type="text"],
+  .pdf-viewport input[type="text"],
+  .document-view input[type="text"],
+  .canvas-container input[type="text"] {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+    padding: 2px 4px !important;
   }
   
   .template-grid {

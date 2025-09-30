@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import nlpService from '../services/nlpService';
+import { detectFieldsEnhanced } from '../services/fieldExtractor';
 
 export default function EntitiesPanel({
   entities = [],
@@ -23,6 +24,69 @@ export default function EntitiesPanel({
 
   const handleVarEdit = (name, value) => {
     onVariablesChange({ ...variables, [name]: value });
+  };
+
+  const applyRegexFieldDetection = async () => {
+    try {
+      setIsApplying(true);
+      
+      // Use enhanced detection with GLiNER + regex fallback
+      const result = await detectFieldsEnhanced(content || '', {
+        useGLiNER: false, // Temporarily disable GLiNER due to disk space issue
+        useRegex: true,
+        mergeResults: true,
+        confidenceThreshold: 0.3
+      });
+
+      if (!result.variables || Object.keys(result.variables).length === 0) {
+        alert('No field name/value pairs detected using GLiNER or regex patterns. Try importing a PDF with clear field data.');
+        return;
+      }
+
+      // Merge without overwriting user-entered values
+      const merged = { ...variables };
+      Object.entries(result.variables).forEach(([key, val]) => {
+        const v = typeof val === 'string' ? val.trim() : '';
+        if (!v) return;
+        if (!merged[key] || String(merged[key]).trim() === '') {
+          merged[key] = v;
+        }
+      });
+
+      onVariablesChange(merged);
+      
+      // Enhanced logging with method info
+      console.log('Enhanced field detection completed:', {
+        methods: result.methods,
+        variables: result.variables,
+        matches: result.matches,
+        confidence: result.confidence,
+        stats: result.stats
+      });
+      
+      // Show success message with method info
+      const methodsUsed = result.methods.join(' + ') || 'Regex';
+      const confidence = Math.round(result.confidence * 100);
+      let message = `Successfully detected ${Object.keys(result.variables).length} fields using ${methodsUsed}`;
+      
+      if (confidence > 0) {
+        message += ` (${confidence}% confidence)`;
+      }
+      
+      // Add warnings if any
+      if (result.warnings && result.warnings.length > 0) {
+        message += `\n\nNote: ${result.warnings.join(', ')}`;
+      }
+      
+      alert(message);
+      
+      onAfterApply();
+    } catch (e) {
+      console.error('Enhanced field detection failed:', e);
+      alert('Field detection failed: ' + e.message);
+    } finally {
+      setIsApplying(false);
+    }
   };
 
   const applyNLPReplacement = async () => {
@@ -57,9 +121,14 @@ export default function EntitiesPanel({
     <div style={{ padding: '12px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3 style={{ margin: 0 }}>Detected Entities</h3>
-        <button className="btn btn-primary" disabled={isApplying} onClick={applyNLPReplacement}>
-          {isApplying ? 'Applying...' : 'Replace in Template (NLP)'}
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button className="btn btn-secondary" disabled={isApplying} onClick={applyRegexFieldDetection}>
+            {isApplying ? 'Detecting...' : 'Detect Fields (Regex)'}
+          </button>
+          <button className="btn btn-primary" disabled={isApplying} onClick={applyNLPReplacement}>
+            {isApplying ? 'Applying...' : 'Replace in Template (NLP)'}
+          </button>
+        </div>
       </div>
 
       {Object.keys(grouped).length === 0 && (

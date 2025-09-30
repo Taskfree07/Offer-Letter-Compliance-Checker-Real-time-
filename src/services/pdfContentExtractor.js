@@ -1,6 +1,8 @@
 import pdfjs from '../utils/pdfWorker';
 import nlpService from './nlpService';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+
 export async function extractTextFromPDF(file) {
   try {
     const arrayBuffer = await file.arrayBuffer();
@@ -133,44 +135,79 @@ export async function analyzeExtractedText(text) {
  */
 export async function generateTemplateFromPDF(file, entityMappings = null) {
   try {
-    // Extract text with NLP
-    const extractionResult = await extractTextWithNLP(file, {
-      performNLP: true,
-      replaceEntities: true
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Call backend for structured HTML conversion
+    const response = await fetch(`${API_BASE_URL}/api/pdf-to-html`, {
+      method: 'POST',
+      body: formData
     });
 
-    if (!extractionResult.nlp.processingSuccess) {
-      throw new Error('NLP processing failed');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `Backend error: ${response.statusText}`);
     }
 
-    // Get processed text with variables
-    let processedText = extractionResult.text;
-    let variablesUsed = {};
+    const result = await response.json();
+    
+    if (!result.success) {
+      throw new Error(result.error || 'Failed to generate HTML from PDF');
+    }
 
-    if (extractionResult.nlp.processedText) {
-      processedText = extractionResult.nlp.processedText;
-      variablesUsed = extractionResult.nlp.variablesUsed || {};
-    } else {
-      // Fallback: perform entity replacement
-      const replacementResult = await nlpService.replaceEntitiesWithVariables(
-        extractionResult.text, 
-        entityMappings
-      );
-      processedText = replacementResult.processed_text;
-      variablesUsed = replacementResult.variables_used;
+    const conversionData = result.data;
+    const templateHtml = conversionData.html;
+    let variables = conversionData.variables || {};
+    let entities = [];
+
+    // Extract text from HTML for NLP if needed and NLP is available
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = templateHtml;
+    const extractedText = (tempDiv.textContent || tempDiv.innerText || '').trim();
+
+    // Run NLP on extracted text for additional processing if NLP service available
+    if (nlpService.isServiceAvailable()) {
+      const extractionResult = await extractTextWithNLP(file, {
+        performNLP: true,
+        extractEntities: true,
+        suggestVariables: true,
+        replaceEntities: false
+      });
+
+      entities = extractionResult.nlp?.entities || [];
+      
+      // Merge variables from backend and NLP suggestions
+      if (extractionResult.nlp?.variableSuggestions) {
+        Object.entries(extractionResult.nlp.variableSuggestions).forEach(([varName, suggestionData]) => {
+          const cleanName = varName.replace(/^\[|\]$/g, '').trim();
+          if (cleanName && !variables[cleanName]) {
+            variables[cleanName] = suggestionData.current_value || '';
+          }
+        });
+      }
+
+      // If entity replacement requested, process the extracted text
+      if (entityMappings) {
+        const replacementResult = await nlpService.replaceEntitiesWithVariables(extractedText, entityMappings);
+        // We keep the HTML structure, but could update variable placeholders if needed
+      }
     }
 
     return {
-      originalText: extractionResult.text,
-      templateText: processedText,
-      variables: variablesUsed,
-      entities: extractionResult.nlp.entities,
-      suggestions: extractionResult.nlp.variableSuggestions,
+      originalText: extractedText,
+      templateHtml: templateHtml,
+      templateText: extractedText,  // Fallback for legacy code
+      variables: variables,
+      entities: entities,
+      suggestions: {}, // Use backend variables primarily; NLP suggestions merged into variables
       metadata: {
         filename: file.name,
         fileSize: file.size,
         processedAt: new Date().toISOString(),
-        nlpProcessingSuccess: true
+        htmlGenerated: true,
+        pageCount: conversionData.metadata?.page_count || 0,
+        totalVariables: Object.keys(variables).length,
+        nlpUsed: nlpService.isServiceAvailable()
       }
     };
     

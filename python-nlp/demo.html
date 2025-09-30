@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Editor Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 100vh;
+        }
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow: auto;
+        }
+        .panel h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            background-color: #ecf0f1;
+            border-color: #2980b9;
+        }
+        .upload-area.dragover {
+            background-color: #e8f4fd;
+            border-color: #2980b9;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .variable-editor {
+            margin-top: 20px;
+        }
+        .variable-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .variable-item label {
+            display: block;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        .variable-item input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .variable-item input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        .preview-area {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            min-height: 400px;
+            background: white;
+            overflow: auto;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel: Upload and Variable Editor -->
+        <div class="panel">
+            <h2>📄 Import Offer Letter</h2>
+            
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <div>
+                    <strong>Click to upload PDF</strong><br>
+                    or drag and drop your offer letter here
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" />
+            </div>
+            
+            <button class="btn" id="uploadBtn" disabled>Generate Preview</button>
+            
+            <div id="variableEditor" class="variable-editor" style="display: none;">
+                <h3>📝 Edit Variables</h3>
+                <div id="variableList"></div>
+                <button class="btn" id="updatePreviewBtn">Update Preview</button>
+            </div>
+            
+            <div id="messages"></div>
+        </div>
+        
+        <!-- Right Panel: Professional Offer Letter Preview -->
+        <div class="panel">
+            <h2>📋 Professional Offer Letter Preview</h2>
+            <div id="previewArea" class="preview-area">
+                <div class="loading">
+                    Upload a PDF to see the preview here with editable variables
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadArea = document.querySelector('.upload-area');
+        const previewArea = document.getElementById('previewArea');
+        const variableEditor = document.getElementById('variableEditor');
+        const variableList = document.getElementById('variableList');
+        const updatePreviewBtn = document.getElementById('updatePreviewBtn');
+        const messages = document.getElementById('messages');
+        
+        let currentFile = null;
+        let currentVariables = {};
+        let currentHtml = '';
+        
+        // File input handling
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadBtn.addEventListener('click', generatePreview);
+        updatePreviewBtn.addEventListener('click', updatePreview);
+        
+        // Drag and drop handling
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type === 'application/pdf') {
+                fileInput.files = files;
+                handleFileSelect();
+            }
+        });
+        
+        function handleFileSelect() {
+            const file = fileInput.files[0];
+            if (file && file.type === 'application/pdf') {
+                currentFile = file;
+                uploadBtn.disabled = false;
+                uploadArea.innerHTML = `<strong>✓ ${file.name}</strong><br>Ready to generate preview`;
+                showMessage('PDF file selected successfully!', 'success');
+            } else {
+                showMessage('Please select a valid PDF file.', 'error');
+            }
+        }
+        
+        async function generatePreview() {
+            if (!currentFile) return;
+            
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Generating...';
+            previewArea.innerHTML = '<div class="loading">Generating HTML preview...</div>';
+            
+            try {
+                const formData = new FormData();
+                formData.append('file', currentFile);
+                
+                const response = await fetch('http://127.0.0.1:5000/api/enhanced-pdf-preview', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentHtml = result.html;
+                    currentVariables = result.variables;
+                    
+                    // Display the HTML preview
+                    previewArea.innerHTML = result.html;
+                    
+                    // Create variable editor
+                    createVariableEditor(result.variables);
+                    
+                    showMessage(`Preview generated successfully! Found ${Object.keys(result.variables).length} editable variables.`, 'success');
+                } else {
+                    throw new Error(result.error || 'Failed to generate preview');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage(`Error: ${error.message}`, 'error');
+                previewArea.innerHTML = '<div class="loading">Failed to generate preview</div>';
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Generate Preview';
+            }
+        }
+        
+        function createVariableEditor(variables) {
+            variableList.innerHTML = '';
+            
+            Object.entries(variables).forEach(([varName, varData]) => {
+                const item = document.createElement('div');
+                item.className = 'variable-item';
+                
+                const fieldTitle = varData.field_title || varName.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                const suggestedValue = varData.suggested_value || varData.original_text || '';
+                
+                item.innerHTML = `
+                    <label for="var_${varName}">Field Title: ${fieldTitle}</label>
+                    <input type="text" id="var_${varName}" data-var="${varName}" 
+                           value="${suggestedValue}" 
+                           placeholder="Enter ${fieldTitle}">
+                `;
+                
+                const input = item.querySelector('input');
+                input.addEventListener('input', () => {
+                    updateVariableInPreview(varName, input.value);
+                });
+                
+                variableList.appendChild(item);
+            });
+            
+            variableEditor.style.display = 'block';
+        }
+        
+        function updateVariableInPreview(varName, newValue) {
+            // Update all instances of this variable in the preview
+            const variableSpans = previewArea.querySelectorAll(`[data-var="${varName}"]`);
+            variableSpans.forEach(span => {
+                span.textContent = newValue || span.getAttribute('data-original');
+            });
+        }
+        
+        async function updatePreview() {
+            const variables = {};
+            
+            // Collect all variable values
+            variableList.querySelectorAll('input').forEach(input => {
+                const varName = input.getAttribute('data-var');
+                variables[varName] = input.value;
+            });
+            
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/update-html-variables', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        html: currentHtml,
+                        variables: variables
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    previewArea.innerHTML = result.html;
+                    showMessage('Preview updated successfully!', 'success');
+                } else {
+                    throw new Error(result.error || 'Failed to update preview');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage(`Error updating preview: ${error.message}`, 'error');
+            }
+        }
+        
+        function showMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type;
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

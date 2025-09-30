@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as pdfjs from 'pdfjs-dist';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { setupPdfVariableInputs, cleanupPdfVariableInputs, applyCleanTextWrapping } from '../utils/inputAutoResize';
 
 // Configure PDF.js worker - use a more reliable approach
 try {
@@ -383,35 +384,9 @@ const EnhancedPDFViewer = React.forwardRef(({
 
         context.restore();
 
-        // If we touched any placeholder in this run, redraw the entire run once to avoid gaps
-        if (foundAny && composedText !== originalText) {
-          const m2 = pdfjs.Util.transform(viewport.transform, item.transform);
-          const padAll = 0.002;
-          const baselineNudgeAll = 0; // align exactly on baseline
-          const fontFamily2 = getFontFamily(item.fontName);
+        // Note: No rectangle clearing. We punch out only glyphs above to avoid descender overlap.
 
-          context.save();
-          context.setTransform(m2[0], m2[1], m2[2], m2[3], m2[4], m2[5]);
-          context.transform(1, 0, 0, -1, 0, 0);
-          context.font = `1px ${fontFamily2}`;
-          context.textBaseline = 'alphabetic';
-
-          const origM = context.measureText(originalText);
-          const compM = context.measureText(composedText);
-          const width = Math.max(origM.width, compM.width);
-          const ascent = compM.actualBoundingBoxAscent || 0.75;
-          const descent = compM.actualBoundingBoxDescent || 0.05;
-          // Erase original run using destination-out so background shows through (no white patch)
-          const prevOp = context.globalCompositeOperation;
-          context.globalCompositeOperation = 'destination-out';
-          context.fillRect(-padAll, -ascent - padAll, width + 2*padAll, (ascent + descent) + 2*padAll);
-          context.globalCompositeOperation = prevOp;
-          context.fillStyle = '#000000';
-          context.fillText(composedText, 0, baselineNudgeAll);
-          context.restore();
-        }
-
-        if (!foundAny && (originalText.includes('[') || originalText.includes(']'))) {
+        if (originalText.includes('[') || originalText.includes(']')) {
           console.log(`⚠️ Unmatched bracketed text (spans multiple items?): "${originalText}"`);
         }
       });
@@ -460,7 +435,7 @@ const EnhancedPDFViewer = React.forwardRef(({
             continue;
           }
 
-          // Clear all contributing segments in their own item space
+          // Clear all contributing segments precisely by punching out glyphs
           segs.forEach(seg => {
             const itemSeg = items[seg.index];
             const mSeg = pdfjs.Util.transform(viewport.transform, itemSeg.transform);
@@ -475,15 +450,12 @@ const EnhancedPDFViewer = React.forwardRef(({
             ctx.font = `1px ${fontFamily}`;
             ctx.textBaseline = 'alphabetic';
             const beforeW = ctx.measureText(before).width;
-            const partMetrics = ctx.measureText(part);
-            const partW = partMetrics.width;
-            const ascent = partMetrics.actualBoundingBoxAscent || 0.75;
-            const descent = partMetrics.actualBoundingBoxDescent || 0.05;
-            const pad = 0.003;
-            // Erase region so background shows through
+
+            // Punch out only the glyphs of this segment
             const prevOp = ctx.globalCompositeOperation;
             ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillRect(beforeW - pad, -ascent - pad, partW + 2*pad, (ascent + descent) + 2*pad);
+            ctx.fillStyle = '#000';
+            ctx.fillText(part, beforeW, 0);
             ctx.globalCompositeOperation = prevOp;
             ctx.restore();
           });
@@ -498,9 +470,9 @@ const EnhancedPDFViewer = React.forwardRef(({
           context.textBaseline = 'alphabetic';
           const beforeStart = (firstItem.str || '').substring(0, openPos);
           const offset = context.measureText(beforeStart).width;
-          const baselineNudge = -0.005;
+          const baselineNudge2 = -0.005;
           context.fillStyle = '#000000';
-          context.fillText(value, offset, baselineNudge);
+          context.fillText(value, offset, baselineNudge2);
           context.restore();
 
           searchFrom = openPos + 1;
@@ -564,13 +536,30 @@ const EnhancedPDFViewer = React.forwardRef(({
     };
 
     renderPage();
-  }, [pdfDocument, currentPage, variables, variablePositions]);
+  }, [pdfDocument, currentPage, variables, canvasRef]);
 
-  // Map PDF font names to web-safe fonts
+  // Setup clean text wrapping for variable inputs
+  useEffect(() => {
+    const setupInputs = () => {
+      // Wait for inputs to be rendered
+      setTimeout(() => {
+        const inputs = document.querySelectorAll('.pdf-viewport input, .document-view input');
+        inputs.forEach(input => {
+          applyCleanTextWrapping(input);
+        });
+      }, 100);
+    };
+
+    setupInputs();
+    
+    // Cleanup on unmount
+    return () => {
+      cleanupPdfVariableInputs();
+    };
+  }, [variables]);
+
   const getFontFamily = (pdfFontName) => {
     const fontMap = {
-      'Times': 'Times, serif',
-      'TimesRoman': 'Times, serif',
       'Times-Roman': 'Times, serif',
       'Times-Bold': 'Times, serif',
       'Times-Italic': 'Times, serif',

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test DOCX Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f0f0f0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Test Word Document Upload</h1>
+    
+    <div>
+        <h3>Step 1: Check Backend Health</h3>
+        <button onclick="checkHealth()">Check Backend</button>
+        <div id="healthResult" class="result" style="display:none;"></div>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <h3>Step 2: Upload Word Document</h3>
+        <input type="file" id="fileInput" accept=".docx" />
+        <button onclick="uploadFile()">Upload & Extract Variables</button>
+        <div id="uploadResult" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        async function checkHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Checking...';
+            
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/docx-health');
+                const data = await response.json();
+                
+                if (data.available) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Backend is ready!<br>Message: ${data.message}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `❌ Service not available<br>Message: ${data.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Connection failed: ${error.message}<br>Make sure Flask server is running on port 5000`;
+            }
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const resultDiv = document.getElementById('uploadResult');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a .docx file first');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            
+            if (!file.name.toLowerCase().endsWith('.docx')) {
+                alert('Please select a Word document (.docx file)');
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Uploading and extracting variables...';
+            resultDiv.className = 'result';
+
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const response = await fetch('http://127.0.0.1:5000/api/docx-extract-variables', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `Server error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'result success';
+                    let html = `✅ Success!<br><br>`;
+                    html += `<strong>Found ${result.data.metadata.total_variables} variables:</strong><br>`;
+                    html += `<ul style="margin-top: 10px;">`;
+                    
+                    Object.entries(result.data.variables).forEach(([varName, varData]) => {
+                        html += `<li><strong>${varName}</strong> (appears ${varData.occurrences} time(s))</li>`;
+                    });
+                    
+                    html += `</ul>`;
+                    html += `<br><strong>Document Info:</strong><br>`;
+                    html += `- Paragraphs: ${result.data.metadata.paragraph_count}<br>`;
+                    html += `- Tables: ${result.data.metadata.table_count}<br>`;
+                    
+                    resultDiv.innerHTML = html;
+                } else {
+                    throw new Error(result.error || 'Unknown error');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Upload failed: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

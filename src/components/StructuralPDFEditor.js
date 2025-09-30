@@ -195,11 +195,17 @@ const StructuralPDFEditor = () => {
             fontSize: textEl.fontSize,
             fontFamily: textEl.fontFamily,
             fill: 'black',
-            backgroundColor: 'rgba(255, 255, 0, 0.1)', // Slight yellow highlight
-            borderColor: 'blue',
-            cornerColor: 'blue',
+            // Make textbox fully transparent to avoid any background box overlap
+            backgroundColor: 'transparent',
+            textBackgroundColor: '',
+            // Hide borders by default to prevent visual boxes
+            borderColor: 'transparent',
+            strokeWidth: 0,
+            cornerColor: '#3b82f6',
             cornerSize: 6,
-            transparentCorners: false,
+            transparentCorners: true,
+            padding: 0,
+            lineHeight: 1.0,
             width: textEl.width,
             textAlign: 'left',
             id: textEl.id

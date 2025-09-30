@@ -1,16 +1,19 @@
-import { extractTextWithNLP } from '../services/pdfContentExtractor';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { extractTextWithNLP, generateTemplateFromPDF } from '../services/pdfContentExtractor';
 import { syncCompliancePhrases } from '../services/legalDictionary';
 import { ensureComplianceClauses, buildVariablesFromEntities } from '../services/complianceAutoInsert';
 // Full-Featured EmailEditor with Professional Preview and Exact Positioning
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Download, FileText, Settings, AlertCircle, RefreshCw, Shield, Edit3, ArrowLeft, BookOpen } from 'lucide-react';
+import { Download, FileText, Settings, AlertCircle, RefreshCw, Shield, Edit3, ArrowLeft, BookOpen, CheckCircle } from 'lucide-react';
 import pdfTemplateService from '../services/pdfTemplateService';
-import { extractTextFromPDF } from '../services/pdfContentExtractor';
 import ComplianceAnalysis from './compliance/ComplianceAnalysis';
 import { COMPLIANCE_RULES } from './compliance/complianceRules';
 import EnhancedPDFViewer from './EnhancedPDFViewer';
+import DynamicPDFViewer from './DynamicPDFViewer';
 import EntitiesPanel from './EntitiesPanel';
+import enhancedPdfService from '../services/enhancedPdfService';
+import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
 import * as pdfjs from 'pdfjs-dist';
+import mammoth from 'mammoth';
 import '../styles/preview.css';
 
 // Configure PDF.js worker
@@ -18,6 +21,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const EmailEditor = ({ template, onBack }) => {
   const [templateContent, setTemplateContent] = useState(template?.content || '');
+  const [extractedPdfText, setExtractedPdfText] = useState('');
   const [activeTab, setActiveTab] = useState('variables');
   const [extractedEntities, setExtractedEntities] = useState([]);
   const [variables, setVariables] = useState({});
@@ -40,10 +44,16 @@ const EmailEditor = ({ template, onBack }) => {
   const [importedPdfBytes, setImportedPdfBytes] = useState(null);
   const [isPdfImported, setIsPdfImported] = useState(false);
   const [isImportingPdf, setIsImportingPdf] = useState(false);
+  // Word document states
+  const [docxHtmlContent, setDocxHtmlContent] = useState('');
+  const [docxPages, setDocxPages] = useState([]);
+  const [currentDocxPage, setCurrentDocxPage] = useState(1);
   // Use refs to store PDF data to avoid async state issues
   const importedPdfBytesRef = useRef(null);
   const isPdfImportedRef = useRef(false);
   const [pdfImportKey, setPdfImportKey] = useState(0);
+  const htmlEditTimerRef = useRef(null);
+  const editableRef = useRef(null);
 
   // Compliance system states
   const [complianceFlags, setComplianceFlags] = useState({});
@@ -54,6 +64,10 @@ const EmailEditor = ({ template, onBack }) => {
   // Variables UX enhancements
   const [showFlaggedOnly, setShowFlaggedOnly] = useState(false);
   const [variableSearch, setVariableSearch] = useState('');
+  
+  // Enhanced PDF processing state
+  const [enhancedPdfProcessed, setEnhancedPdfProcessed] = useState(false);
+  const [enhancedPdfStats, setEnhancedPdfStats] = useState({ totalVariables: 0, glinerSuggestions: 0 });
 
   // Use ref to store current URL for cleanup without causing re-renders
   const currentPreviewUrlRef = useRef(null);
@@ -70,9 +84,95 @@ const EmailEditor = ({ template, onBack }) => {
   ];
 
   // Professional PDF generation with enhanced error handling
+  // Normalize various entity shapes from NLP to a canonical array of { label, text, ... }
+  const normalizeEntities = (input) => {
+    if (!input) return [];
+    if (Array.isArray(input)) return input;
+    if (typeof input === 'object') {
+      // If nested container with .entities array
+      if (Array.isArray(input.entities)) return input.entities;
+      const out = [];
+      Object.entries(input).forEach(([key, val]) => {
+        if (Array.isArray(val)) {
+          val.forEach(item => {
+            if (!item) return;
+            if (typeof item === 'string') out.push({ label: key, text: item });
+            else if (typeof item === 'object') out.push({ label: item.label || key, ...item });
+          });
+        } else if (typeof val === 'string') {
+          out.push({ label: key, text: val });
+        }
+      });
+      return out;
+    }
+    return [];
+  };
+  const generateLivePdfPreview = useCallback(async (htmlContent) => {
+    if (!htmlContent) return;
+    
+    try {
+      console.log('Generating live PDF preview from HTML...');
+      setIsLoadingPreview(true);
+      setPreviewError(null);
+
+      // Clean up previous URL
+      if (currentPreviewUrlRef.current) {
+        URL.revokeObjectURL(currentPreviewUrlRef.current);
+        currentPreviewUrlRef.current = null;
+      }
+
+      const response = await fetch('http://127.0.0.1:5000/api/html-to-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          html: htmlContent,
+          variables: variables
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Backend preview generation failed');
+      }
+
+      const pdfBytes = await response.arrayBuffer();
+
+      // Set PDF bytes for preview
+      setPreviewPdfBytes(new Uint8Array(pdfBytes));
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      currentPreviewUrlRef.current = url;
+      setPreviewPdfUrl(url);
+
+      // Set page info
+      const pdfDoc = await pdfjs.getDocument({ data: pdfBytes }).promise;
+      const numPages = pdfDoc.numPages || 1;
+      pdfDocumentRef.current = pdfDoc;
+      setTotalPages(numPages);
+      setCurrentPage(1);
+
+      console.log('Live PDF preview generated successfully');
+    } catch (error) {
+      console.error('Live PDF preview error:', error);
+      setPreviewError(`Preview generation failed: ${error.message}. Ensure backend is running on port 5000.`);
+      setPreviewPdfUrl(null);
+    } finally {
+      setIsLoadingPreview(false);
+    }
+  }, [variables]);
+
   const generateProfessionalPreview = useCallback(async () => {
     if (!templateLoaded) {
       console.log('Template not loaded yet, skipping preview generation');
+      return;
+    }
+
+    // If in HTML edit mode, use live preview
+    if (previewMode === 'html-edit') {
+      const currentHtml = editableRef.current ? editableRef.current.innerHTML : templateContent;
+      await generateLivePdfPreview(currentHtml);
       return;
     }
 
@@ -94,7 +194,11 @@ const EmailEditor = ({ template, onBack }) => {
     // If user prefers exact-fidelity original PDF preview, render uploaded bytes directly
     if (previewMode === 'original' && uploadedPdfBytes) {
       try {
-        const pdfDoc = await pdfjs.getDocument({ data: uploadedPdfBytes }).promise;
+        // Always pass a fresh copy to pdf.js to avoid ArrayBuffer detachment issues
+        const dataCopy = uploadedPdfBytes instanceof Uint8Array
+          ? uploadedPdfBytes.slice()
+          : new Uint8Array(uploadedPdfBytes).slice();
+        const pdfDoc = await pdfjs.getDocument({ data: dataCopy }).promise;
         pdfDocumentRef.current = pdfDoc;
         const numPages = pdfDoc.numPages || 1;
         setTotalPages(numPages);
@@ -167,7 +271,24 @@ const EmailEditor = ({ template, onBack }) => {
     } finally {
       setIsLoadingPreview(false);
     }
-  }, [templateLoaded, templateContent, variables, stateConfig.stateBlocks, stateConfig.selectedState]);
+  }, [templateLoaded, templateContent, variables, stateConfig.stateBlocks, stateConfig.selectedState, previewMode, uploadedPdfBytes, generateLivePdfPreview]);
+
+  // Enable aggressive input monitoring to fix white box issues
+  useEffect(() => {
+    enableInputMonitoring();
+    
+    return () => {
+      disableInputMonitoring();
+    };
+  }, []);
+
+  // Keep refs in sync with state for reliability
+  useEffect(() => {
+    if (importedPdfBytes && importedPdfBytes.byteLength > 0) {
+      importedPdfBytesRef.current = importedPdfBytes;
+    }
+    isPdfImportedRef.current = isPdfImported;
+  }, [importedPdfBytes, isPdfImported]);
 
   // Initialize professional PDF template
   const initializeProfessionalTemplate = useCallback(async () => {
@@ -280,6 +401,89 @@ const EmailEditor = ({ template, onBack }) => {
     a.download = `compliance-report-${stateConfig.selectedState}-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleComplianceRulesUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      // Extract text from the uploaded PDF
+      const extraction = await extractTextWithNLP(file, {
+        performNLP: true,
+        extractEntities: true,
+        suggestVariables: false,
+        replaceEntities: false
+      });
+
+      const text = extraction.text || '';
+      if (!text.trim()) {
+        alert('Could not extract text from the PDF. Please try a different file.');
+        return;
+      }
+
+      // Parse compliance rules from the extracted text
+      const parsedRules = parseComplianceRulesFromText(text);
+      
+      if (Object.keys(parsedRules).length === 0) {
+        alert('No compliance rules detected in the PDF. Please ensure the document contains clear rule definitions.');
+        return;
+      }
+
+      // Set the extracted rules as JSON for preview
+      setNewRuleData(JSON.stringify(parsedRules, null, 2));
+      
+      console.log('Extracted compliance rules from PDF:', parsedRules);
+    } catch (error) {
+      console.error('Error processing compliance rules PDF:', error);
+      alert('Failed to process PDF: ' + error.message);
+    }
+  };
+
+  const parseComplianceRulesFromText = (text) => {
+    const rules = {};
+    
+    // Split text into sections/paragraphs
+    const sections = text.split(/\n\s*\n/).filter(section => section.trim().length > 50);
+    
+    sections.forEach((section, index) => {
+      const lines = section.split('\n').map(line => line.trim()).filter(line => line);
+      
+      // Look for rule patterns
+      const rulePatterns = [
+        /must\s+(?:not\s+)?(.+)/gi,
+        /shall\s+(?:not\s+)?(.+)/gi,
+        /required\s+to\s+(.+)/gi,
+        /prohibited\s+from\s+(.+)/gi,
+        /mandatory\s+(.+)/gi,
+        /violation\s+of\s+(.+)/gi,
+        /failure\s+to\s+(.+)/gi
+      ];
+
+      lines.forEach(line => {
+        rulePatterns.forEach(pattern => {
+          const matches = [...line.matchAll(pattern)];
+          matches.forEach(match => {
+            const ruleText = match[1]?.trim();
+            if (ruleText && ruleText.length > 10) {
+              const ruleName = `rule_${Object.keys(rules).length + 1}`;
+              const severity = line.toLowerCase().includes('prohibited') || 
+                            line.toLowerCase().includes('violation') || 
+                            line.toLowerCase().includes('must not') ? 'error' : 'warning';
+              
+              rules[ruleName] = {
+                severity,
+                message: ruleText,
+                lawReference: `Extracted from compliance document section ${index + 1}`,
+                flaggedPhrases: [ruleText.toLowerCase()]
+              };
+            }
+          });
+        });
+      });
+    });
+
+    return rules;
   };
 
   const handleAddRule = () => {
@@ -499,11 +703,59 @@ useEffect(() => {
   const handleDownloadPDF = async () => {
     try {
       setIsGenerating(true);
+
+      // Check if we have an imported Word document
+      if (window.originalDocxFile) {
+        // Download Word document with replaced variables
+        const formData = new FormData();
+        formData.append('file', window.originalDocxFile);
+        formData.append('variables', JSON.stringify(variables));
+
+        const response = await fetch('http://127.0.0.1:5000/api/docx-replace-variables', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Download generation failed');
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Edited_Offer_Letter.docx';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        setIsGenerating(false);
+        return;
+      }
+
+      // Fallback to PDF generation for templates
       let bytesToDownload = null;
-      
-      if (isPdfImported && enhancedPdfViewerRef.current) {
+      let downloadName = 'Offer_Letter.pdf';
+
+      if (previewMode === 'html-edit' && editableRef.current) {
+        const currentHtml = editableRef.current.innerHTML;
+        const response = await fetch('http://127.0.0.1:5000/api/html-to-pdf', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ html: currentHtml, variables })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Download generation failed');
+        }
+
+        bytesToDownload = await response.arrayBuffer();
+        downloadName = 'Edited_Document.pdf';
+      } else if (isPdfImported && enhancedPdfViewerRef.current) {
         // Export enhanced PDF with variable updates
         bytesToDownload = await enhancedPdfViewerRef.current.exportPDF();
+        downloadName = 'Updated_Offer_Letter.pdf';
       } else if (template && template.content) {
         // Generate from template
         bytesToDownload = await pdfTemplateService.generatePDF(
@@ -512,8 +764,9 @@ useEffect(() => {
           stateConfig.stateBlocks,
           stateConfig.selectedState
         );
+        downloadName = 'Offer_Letter.pdf';
       } else {
-        alert('No content available to generate PDF.');
+        alert('No content available to download.');
         setIsGenerating(false);
         return;
       }
@@ -522,25 +775,36 @@ useEffect(() => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = isPdfImported ? 'Updated_Offer_Letter.pdf' : 'Offer_Letter.pdf';
+      a.download = downloadName;
       a.click();
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Failed to download PDF: ' + error.message);
+      console.error('Error downloading document:', error);
+      alert('Failed to download document: ' + error.message + '. Ensure backend is running on port 5000.');
     } finally {
       setIsGenerating(false);
     }
   };
 
   const handleVariableChange = (varName, value) => {
-    setVariables(prev => ({ ...prev, [varName]: value }));
-    // Debounce preview refresh for a smoother HR workflow
+    const updatedVars = { ...variables, [varName]: value };
+    setVariables(updatedVars);
+
+    // Update editable HTML spans
+    if (previewMode === 'html-edit' && editableRef.current) {
+      updateEditableVariables();
+    }
+
+    // Debounce preview refresh
     if (variableChangeTimerRef.current) {
       clearTimeout(variableChangeTimerRef.current);
     }
     variableChangeTimerRef.current = setTimeout(() => {
-      generateProfessionalPreview();
+      if (previewMode === 'html-edit' && editableRef.current) {
+        generateLivePdfPreview(editableRef.current.innerHTML);
+      } else {
+        generateProfessionalPreview();
+      }
     }, 400);
   };
 
@@ -740,7 +1004,7 @@ useEffect(() => {
             ) : (
               <>
                 <Download size={16} />
-                Download PDF
+                {previewMode === 'docx-preview' ? 'Download Document' : 'Download PDF'}
               </>
             )}
           </button>
@@ -782,10 +1046,178 @@ useEffect(() => {
                 {isImportingPdf ? 'Processing PDF structure and extracting variables...' : 'Applying professional formatting and padding...'}
               </p>
             </div>
+          ) : previewMode === 'docx-preview' && window.docxPreviewUrl ? (
+            <div className="pdf-viewport" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <div style={{
+                padding: '24px',
+                background: '#ffffff',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                marginBottom: '16px',
+                textAlign: 'center'
+              }}>
+                <FileText size={64} style={{ color: '#2563eb', marginBottom: '16px' }} />
+                <h3 style={{ margin: '0 0 12px 0', color: '#1e293b' }}>Word Document Loaded</h3>
+                <p style={{ margin: '0 0 20px 0', color: '#64748b', fontSize: '14px' }}>
+                  Your document structure is preserved. Edit variables in the right panel.
+                </p>
+                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <a 
+                    href={window.docxPreviewUrl} 
+                    download="original_document.docx"
+                    className="btn btn-secondary"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <Download size={16} />
+                    Download Original
+                  </a>
+                  <button 
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = window.docxPreviewUrl;
+                      link.target = '_blank';
+                      link.click();
+                    }}
+                    className="btn btn-secondary"
+                  >
+                    <FileText size={16} />
+                    Open in Word
+                  </button>
+                </div>
+              </div>
+              
+              <div style={{
+                flex: 1,
+                padding: '24px',
+                background: '#f5f5f5',
+                borderRadius: '8px',
+                overflow: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+              }}>
+                {/* Page Navigation */}
+                {docxPages.length > 1 && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px',
+                    marginBottom: '16px',
+                    padding: '12px 24px',
+                    background: '#ffffff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  }}>
+                    <button
+                      onClick={() => setCurrentDocxPage(prev => Math.max(1, prev - 1))}
+                      disabled={currentDocxPage === 1}
+                      style={{
+                        padding: '8px 12px',
+                        border: 'none',
+                        background: currentDocxPage === 1 ? '#e5e7eb' : '#3b82f6',
+                        color: currentDocxPage === 1 ? '#9ca3af' : '#ffffff',
+                        borderRadius: '6px',
+                        cursor: currentDocxPage === 1 ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}
+                    >
+                      ← Previous
+                    </button>
+                    <span style={{ fontSize: '14px', fontWeight: '500', color: '#374151' }}>
+                      Page {currentDocxPage} of {docxPages.length}
+                    </span>
+                    <button
+                      onClick={() => setCurrentDocxPage(prev => Math.min(docxPages.length, prev + 1))}
+                      disabled={currentDocxPage === docxPages.length}
+                      style={{
+                        padding: '8px 12px',
+                        border: 'none',
+                        background: currentDocxPage === docxPages.length ? '#e5e7eb' : '#3b82f6',
+                        color: currentDocxPage === docxPages.length ? '#9ca3af' : '#ffffff',
+                        borderRadius: '6px',
+                        cursor: currentDocxPage === docxPages.length ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}
+                    >
+                      Next →
+                    </button>
+                  </div>
+                )}
+                
+                {/* Document Page */}
+                <div style={{
+                  width: '8.5in',
+                  minHeight: '11in',
+                  background: '#ffffff',
+                  padding: '1in',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  borderRadius: '4px',
+                  marginBottom: '24px'
+                }}>
+                  {(() => {
+                    // Use HTML content from Mammoth if available, otherwise fall back to plain text
+                    let displayContent = docxHtmlContent || templateContent;
+                    
+                    // Replace all variable patterns with live values
+                    Object.entries(variables).forEach(([varName, varValue]) => {
+                      // Escape special regex characters in variable name
+                      const escapedVarName = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                      
+                      // Replace [VARIABLE_NAME] pattern
+                      const bracketPattern = new RegExp(`\\[${escapedVarName}\\]`, 'g');
+                      const curlyPattern = new RegExp(`\\{${escapedVarName}\\}`, 'g');
+                      const anglePattern = new RegExp(`<<${escapedVarName}>>`, 'g');
+                      
+                      // Highlight the replaced value
+                      const highlightedValue = varValue 
+                        ? `<span style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 3px 8px; border-radius: 4px; font-weight: 600; color: #92400e; border: 1px solid #fbbf24; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">${varValue}</span>`
+                        : `<span style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); padding: 3px 8px; border-radius: 4px; color: #991b1b; border: 1px solid #f87171; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">[${varName}]</span>`;
+                      
+                      displayContent = displayContent.replace(bracketPattern, highlightedValue);
+                      displayContent = displayContent.replace(curlyPattern, highlightedValue);
+                      displayContent = displayContent.replace(anglePattern, highlightedValue);
+                    });
+                    
+                    return (
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: displayContent }}
+                        style={{
+                          fontFamily: docxHtmlContent ? 'inherit' : 'Georgia, serif',
+                          lineHeight: '1.6',
+                          whiteSpace: docxHtmlContent ? 'normal' : 'pre-wrap'
+                        }}
+                      />
+                    );
+                  })()}
+                </div>
+              </div>
+              
+              <div style={{
+                marginTop: '16px',
+                padding: '16px',
+                background: '#f0f9ff',
+                border: '1px solid #0ea5e9',
+                borderRadius: '6px',
+                fontSize: '14px',
+                color: '#0369a1'
+              }}>
+                <strong>📝 How to use:</strong>
+                <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
+                  <li>Edit variable values in the <strong>Variables panel</strong> on the right</li>
+                  <li><strong>Watch live updates</strong> in the preview as you type! 🎉</li>
+                  <li>Click <strong>"Download PDF"</strong> button to get your edited .docx file</li>
+                  <li>All formatting, tables, and structure are preserved in the download</li>
+                </ul>
+              </div>
+            </div>
           ) : isPdfImported || isPdfImportedRef.current ? (
             <div className="pdf-viewport">
               {/* Enhanced PDF viewer with real-time variable updates */}
-              {console.log('Rendering EnhancedPDFViewer with:', {
+              {console.log('Rendering DynamicPDFViewer with:', {
                 importedPdfBytes: !!importedPdfBytes,
                 importedPdfBytesLength: importedPdfBytes?.byteLength || 0,
                 importedPdfBytesRef: !!importedPdfBytesRef.current,
@@ -794,11 +1226,13 @@ useEffect(() => {
                 isPdfImportedRef: isPdfImportedRef.current,
                 variablesCount: Object.keys(variables).length
               })}
-              {(importedPdfBytes && importedPdfBytes.byteLength > 0) || (importedPdfBytesRef.current && importedPdfBytesRef.current.byteLength > 0) ? (
-                <EnhancedPDFViewer
+              {((importedPdfBytes && importedPdfBytes.byteLength > 0) 
+                || (importedPdfBytesRef.current && importedPdfBytesRef.current.byteLength > 0)
+                || (uploadedPdfBytes && uploadedPdfBytes.byteLength > 0)) ? (
+                <DynamicPDFViewer
                   key={`pdf-viewer-${pdfImportKey}`}
                   ref={enhancedPdfViewerRef}
-                  pdfBytes={importedPdfBytes || importedPdfBytesRef.current}
+                  pdfBytes={importedPdfBytes || importedPdfBytesRef.current || uploadedPdfBytes}
                   variables={variables}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}
@@ -808,7 +1242,7 @@ useEffect(() => {
                 <div className="pdf-placeholder">
                   <p>PDF imported but bytes not available</p>
                   <p style={{ fontSize: '12px', color: '#666' }}>
-                    Debug: isPdfImported={isPdfImported.toString()}, isPdfImportedRef={isPdfImportedRef.current.toString()}, hasBytes={!!importedPdfBytes}, hasBytesRef={!!importedPdfBytesRef.current}
+                    Debug: isPdfImported={isPdfImported.toString()}, isPdfImportedRef={isPdfImportedRef.current.toString()}, hasBytes={!!importedPdfBytes}, hasBytesRef={!!importedPdfBytesRef.current}, uploadedHasBytes={!!uploadedPdfBytes}
                   </p>
                 </div>
               )}
@@ -832,64 +1266,29 @@ useEffect(() => {
         
         {/* Compliance Analysis Panel */}
         <div style={{ padding: '20px', maxHeight: '400px', overflowY: 'auto', borderTop: '1px solid #e2e8f0' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ marginBottom: '16px' }}>
             <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
               <Shield size={18} />
-              Legal Compliance Analysis ({sentences.length} sentences analyzed):
+              Legal Compliance Analysis ({sentences.length} sentences analyzed)
             </h4>
             
-            {sentences.length > 0 && (
-              <div style={{ display: 'flex', gap: '8px', fontSize: '12px' }}>
-                <span style={{
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  backgroundColor: '#f8d7da',
-                  color: '#721c24',
-                  fontWeight: 'bold'
-                }}>
-                  {Object.values(complianceFlags).flat().filter(f => f.severity === 'error').length} Errors
-                </span>
-                <span style={{
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  backgroundColor: '#fff3cd',
-                  color: '#856404',
-                  fontWeight: 'bold'
-                }}>
-                  {Object.values(complianceFlags).flat().filter(f => f.severity === 'warning').length} Warnings
-                </span>
-                <span style={{
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  backgroundColor: '#d1ecf1',
-                  color: '#0c5460',
-                  fontWeight: 'bold'
-                }}>
-                  State: {stateConfig.selectedState}
-                </span>
-              </div>
-            )}
           </div>
           
-          {sentences.length === 0 && (
+          {Object.keys(complianceFlags).length === 0 && (
             <div style={{
               padding: '16px',
-              backgroundColor: '#f8f9fa',
+              backgroundColor: '#d4edda',
+              border: '1px solid #c3e6cb',
+              color: '#155724',
               borderRadius: '8px',
-              border: '1px solid #dee2e6',
-              textAlign: 'center',
-              color: '#6c757d'
+              textAlign: 'center'
             }}>
-              <p>No content available for compliance analysis.</p>
-              <p style={{ fontSize: '14px', marginTop: '8px' }}>
-                {isPdfImported ? 
-                  'Import a PDF or add template content to analyze compliance.' :
-                  'Add template content or import a PDF to analyze compliance.'
-                }
-              </p>
+              <p style={{ margin: 0 }}>✅ No compliance issues detected</p>
             </div>
           )}
-          {sentences.map((sentence) => (
+          {sentences
+            .filter(sentence => complianceFlags[sentence.id])
+            .map((sentence) => (
             <div key={sentence.id} style={{ marginBottom: '16px' }}>
               <div style={{
                 padding: '12px',
@@ -923,7 +1322,7 @@ useEffect(() => {
                 </span>
               </div>
               
-              {complianceFlags[sentence.id] && complianceFlags[sentence.id].map((flag, idx) => (
+              {complianceFlags[sentence.id].map((flag, idx) => (
                 <div key={idx} style={{
                   backgroundColor: flag.severity === 'error' ? '#f8d7da' : '#fff3cd',
                   padding: '12px',
@@ -980,6 +1379,64 @@ useEffect(() => {
     </div>
   );
 
+  // Update editable spans with current variable values
+  const updateEditableVariables = useCallback(() => {
+    if (!editableRef.current) return;
+
+    const editable = editableRef.current;
+    const spans = editable.querySelectorAll('span[data-var]');
+    spans.forEach(span => {
+      const varName = span.getAttribute('data-var');
+      const value = variables[varName] || `[${varName}]`;
+      span.textContent = value;
+    });
+  }, [variables]);
+
+  // Editable HTML editor overlay for template editing
+  // Show this when previewMode is 'html-edit'
+  const renderHtmlEditor = () => {
+    if (previewMode !== 'html-edit') return null;
+
+    return (
+      <div className="email-preview html-edit-mode" style={{ padding: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <FileText size={18} />
+            <strong>Editable Offer Letter (HTML) - Live Preview Below</strong>
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button className="btn btn-secondary" onClick={() => { setPreviewMode('generated'); generateProfessionalPreview(); }}>
+              Switch to Template Mode
+            </button>
+            <button className="btn btn-primary" onClick={handleDownloadPDF}>
+              Download PDF
+            </button>
+          </div>
+        </div>
+
+        <div style={{ border: '1px solid #e2e8f0', borderRadius: '6px', padding: '12px', minHeight: '280px', background: '#fff' }}>
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            className="html-editable-area"
+            ref={editableRef}
+            style={{ outline: 'none', minHeight: '240px' }}
+            onInput={(e) => {
+              const newHtml = e.currentTarget.innerHTML;
+              setTemplateContent(newHtml);
+
+              if (htmlEditTimerRef.current) clearTimeout(htmlEditTimerRef.current);
+              htmlEditTimerRef.current = setTimeout(() => {
+                generateLivePdfPreview(newHtml);
+              }, 500);
+            }}
+            dangerouslySetInnerHTML={{ __html: templateContent }}
+          />
+        </div>
+      </div>
+    );
+  };
+
   const renderVariablesTab = () => {
     const search = (variableSearch || '').toLowerCase();
     const entries = Object.entries(variables || {})
@@ -1021,7 +1478,6 @@ useEffect(() => {
                   value={key}
                   readOnly
                   className="variable-name-input"
-                  style={{ padding: '8px' }}
                 />
                 <div style={{ display: 'flex', gap: '8px', marginTop: '6px', alignItems: 'center' }}>
                   <span style={{ fontSize: '12px', color: '#64748b' }}>{variableMeta[key]?.occurrences || 0} use(s)</span>
@@ -1038,7 +1494,6 @@ useEffect(() => {
                 onChange={(e) => handleVariableChange(key, e.target.value)}
                 className="variable-value-input"
                 placeholder={`Enter ${key}...`}
-                style={{ padding: '8px' }}
               />
             </div>
           ))}
@@ -1091,29 +1546,67 @@ useEffect(() => {
         
         {showRulesManager && (
           <div style={{ backgroundColor: '#fff', border: '1px solid #dee2e6', borderRadius: '6px', padding: '15px' }}>
-            <h4>Add New Compliance Rules for {stateConfig.selectedState}:</h4>
-            <textarea
-              value={newRuleData}
-              onChange={(e) => setNewRuleData(e.target.value)}
-              placeholder={`{
-  "newRuleName": {
-    "severity": "error",
-    "message": "Description of the rule",
-    "lawReference": "Legal citation",
-    "flaggedPhrases": ["phrase1", "phrase2"]
-  }
-}`}
-              rows={10}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ced4da',
-                borderRadius: '4px',
-                fontFamily: 'monospace',
-                fontSize: '13px',
-                marginBottom: '10px'
-              }}
-            />
+            <h4>Add New Compliance Rules for {stateConfig.selectedState}</h4>
+            <p style={{ color: '#6c757d', fontSize: '14px', marginBottom: '16px' }}>
+              Upload a PDF document containing compliance rules, legal requirements, or regulatory guidelines. 
+              The system will automatically extract and create rules from the content.
+            </p>
+            <div style={{ 
+              border: '2px dashed #dee2e6', 
+              borderRadius: '8px', 
+              padding: '24px', 
+              textAlign: 'center',
+              marginBottom: '16px',
+              backgroundColor: '#f8f9fa'
+            }}>
+              <FileText size={32} style={{ color: '#6c757d', marginBottom: '8px' }} />
+              <p style={{ margin: '0 0 12px 0', fontWeight: '500' }}>
+                Upload Compliance Rules PDF
+              </p>
+              <p style={{ margin: '0 0 16px 0', fontSize: '14px', color: '#6c757d' }}>
+                Drag and drop a PDF file here, or click to browse
+              </p>
+              <input
+                type="file"
+                id="complianceRulesInput"
+                accept=".pdf"
+                style={{ display: 'none' }}
+                onChange={handleComplianceRulesUpload}
+              />
+              <button 
+                className="btn btn-primary"
+                onClick={() => document.getElementById('complianceRulesInput').click()}
+              >
+                <FileText size={16} style={{ marginRight: '8px' }} />
+                Choose PDF File
+              </button>
+            </div>
+
+            {newRuleData && (
+              <div style={{ 
+                backgroundColor: '#e8f5e8', 
+                border: '1px solid #c3e6cb', 
+                borderRadius: '6px', 
+                padding: '12px',
+                marginBottom: '16px'
+              }}>
+                <h6 style={{ margin: '0 0 8px 0', color: '#155724' }}>
+                  📄 Extracted Rules Preview:
+                </h6>
+                <div style={{ 
+                  maxHeight: '200px', 
+                  overflowY: 'auto', 
+                  fontSize: '13px',
+                  backgroundColor: '#fff',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  border: '1px solid #c3e6cb'
+                }}>
+                  <pre>{newRuleData}</pre>
+                </div>
+              </div>
+            )}
+
             
             <div style={{ display: 'flex', gap: '10px' }}>
               <button 
@@ -1121,10 +1614,14 @@ useEffect(() => {
                 className="btn btn-primary"
                 disabled={!newRuleData.trim()}
               >
-                Save Rule
+                <Shield size={16} style={{ marginRight: '8px' }} />
+                Save Extracted Rules
               </button>
               <button 
-                onClick={() => setShowRulesManager(false)} 
+                onClick={() => {
+                  setShowRulesManager(false);
+                  setNewRuleData('');
+                }} 
                 className="btn btn-secondary"
               >
                 Cancel
@@ -1196,7 +1693,7 @@ useEffect(() => {
         <input
           type="file"
           id="offerLetterInput"
-          accept=".pdf"
+          accept=".docx"
           style={{ display: 'none' }}
           onChange={(e) => {
             console.log('File input onChange triggered', e.target.files);
@@ -1208,6 +1705,84 @@ useEffect(() => {
       <div className="tab-content-wrapper">
   {activeTab === 'variables' && (
     <>
+      {/* Enhanced PDF Processing Status */}
+      {enhancedPdfProcessed && (
+        <div style={{ 
+          background: '#f0f9ff', 
+          border: '1px solid #0ea5e9', 
+          borderRadius: '6px', 
+          padding: '12px', 
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
+          <div>
+            <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
+              Enhanced PDF Processing Complete
+            </div>
+            <div style={{ fontSize: '12px', color: '#0369a1' }}>
+              {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {renderVariablesTab()}
+
+      {/* Controls for variables tab */}
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
+        <input
+          type="text"
+          value={variableSearch}
+          onChange={(e) => setVariableSearch(e.target.value)}
+          placeholder="Search variables..."
+          style={{ flex: '1', padding: '8px 10px', border: '1px solid #ced4da', borderRadius: '6px' }}
+        />
+        <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#374151' }}>
+          <input
+            type="checkbox"
+            checked={showFlaggedOnly}
+            onChange={(e) => setShowFlaggedOnly(e.target.checked)}
+          />
+          Show variables in flagged sections only
+        </label>
+        {previewMode === 'html-edit' && (
+          <button 
+            className="btn btn-secondary" 
+            onClick={rescanVariables}
+            style={{ padding: '8px 12px', borderRadius: '6px' }}
+          >
+            Rescan Variables
+          </button>
+        )}
+      </div>
+
+      {/* Enhanced PDF Processing Status */}
+      {enhancedPdfProcessed && (
+        <div style={{ 
+          background: '#f0f9ff', 
+          border: '1px solid #0ea5e9', 
+          borderRadius: '6px', 
+          padding: '12px', 
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
+          <div>
+            <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
+              Enhanced PDF Processing Complete
+            </div>
+            <div style={{ fontSize: '12px', color: '#0369a1' }}>
+              {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
+            </div>
+          </div>
+        </div>
+      )}
+      
       {renderVariablesTab()}
 
       {/* Entities Panel: edit and apply NLP replacements */}
@@ -1215,23 +1790,30 @@ useEffect(() => {
       <EntitiesPanel
   entities={extractedEntities}
   variables={variables}
-  content={templateContent}
+  content={isPdfImported ? extractedPdfText : (editableRef.current ? editableRef.current.innerHTML : templateContent)}
   onVariablesChange={(updated) => {
     setVariables(updated);
-    setPreviewMode('generated');                    // ensure we use generated preview
-    setTimeout(() => generateProfessionalPreview(), 300);
+    if (previewMode === 'html-edit') updateEditableVariables();
+    setTimeout(() => {
+      if (previewMode === 'html-edit' && editableRef.current) {
+        generateLivePdfPreview(editableRef.current.innerHTML);
+      } else {
+        generateProfessionalPreview();
+      }
+    }, 300);
   }}
   onContentChange={(newContent) => {
-    // For imported PDFs, don't replace content - just update variables
-    console.log('Content change requested, but keeping original PDF structure');
-    // The EnhancedPDFViewer will handle variable overlays automatically
-  
-
+    if (previewMode === 'html-edit') {
+      setTemplateContent(newContent);
+      generateLivePdfPreview(newContent);
+    }
   }}
   onAfterApply={() => {
-    // Keep the imported PDF and let EnhancedPDFViewer handle variable updates
-    console.log('NLP replacement applied - keeping imported PDF structure');
-    // Variables will automatically update as overlays on the imported PDF
+    console.log('NLP replacement applied');
+    if (previewMode === 'html-edit') {
+      updateEditableVariables();
+      generateLivePdfPreview(editableRef.current?.innerHTML);
+    }
   }}
 />
       </div>
@@ -1241,6 +1823,31 @@ useEffect(() => {
 </div>
     </div>
   );
+
+  const rescanVariables = useCallback(() => {
+    if (!editableRef.current) {
+      alert('Editable area not available');
+      return;
+    }
+
+    const spans = editableRef.current.querySelectorAll('span[data-var]');
+    const newVars = {};
+    spans.forEach(span => {
+      const varName = span.getAttribute('data-var');
+      if (varName && !variables[varName]) {
+        newVars[varName] = '';
+      }
+    });
+
+    if (Object.keys(newVars).length > 0) {
+      setVariables(prev => ({ ...prev, ...newVars }));
+      console.log(`Added ${Object.keys(newVars).length} new variables from HTML`);
+      alert(`Added ${Object.keys(newVars).length} new variables!`);
+      generateLivePdfPreview(editableRef.current.innerHTML);
+    } else {
+      alert('No new variables found.');
+    }
+  }, [variables]);
 
   async function handleOfferLetterImport(event) {
     console.log('handleOfferLetterImport called');
@@ -1256,168 +1863,84 @@ useEffect(() => {
       type: file.type
     });
 
-    // Use a more reliable approach to read the file
+    // Check if it's a Word document
+    if (!file.name.toLowerCase().endsWith('.docx')) {
+      alert('Please upload a Word document (.docx file)');
+      return;
+    }
+
     try {
       setIsImportingPdf(true);
-      setPreviewPdfBytes(null);
-      setPreviewPdfUrl(null);
+      setPreviewError(null);
 
-      // Method 1: Read as ArrayBuffer directly
-      const arrayBuffer = await file.arrayBuffer();
+      // Extract variables from Word document
+      const formData = new FormData();
+      formData.append('file', file);
 
-      if (!arrayBuffer) {
-        console.error('Failed to read file as ArrayBuffer.');
-        alert('Failed to read file. Please try again.');
-        setIsImportingPdf(false);
-        return;
+      const response = await fetch('http://127.0.0.1:5000/api/docx-extract-variables', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server error: ${response.statusText}`);
       }
 
-      // Validate the ArrayBuffer
-      if (!(arrayBuffer instanceof ArrayBuffer)) {
-        console.error('Not an ArrayBuffer:', typeof arrayBuffer);
-        alert('Invalid file format. Please try again.');
-        setIsImportingPdf(false);
-        return;
-      }
-
-      if (arrayBuffer.byteLength === 0) {
-        console.error('Empty ArrayBuffer');
-        alert('File appears to be empty. Please try again.');
-        setIsImportingPdf(false);
-        return;
-      }
-
-      // Check if it looks like a PDF (starts with %PDF)
-      const firstBytes = new Uint8Array(arrayBuffer.slice(0, 4));
-      const pdfSignature = String.fromCharCode(...firstBytes);
-      console.log('File signature:', pdfSignature);
-
-      if (!pdfSignature.startsWith('%PDF')) {
-        console.error('Not a PDF file, signature:', pdfSignature);
-        alert('Selected file does not appear to be a PDF. Please select a valid PDF file.');
-        setIsImportingPdf(false);
-        return;
-      }
-
-      console.log('Processing PDF buffer immediately:', {
-        byteLength: arrayBuffer.byteLength,
-        isArrayBuffer: arrayBuffer instanceof ArrayBuffer
-      });
-
-      // Create a master byte array copy to preserve data between operations
-      const masterBytes = new Uint8Array(arrayBuffer.byteLength);
-      masterBytes.set(new Uint8Array(arrayBuffer));
-
-      console.log('Created master byte array copy:', {
-        originalLength: arrayBuffer.byteLength,
-        masterLength: masterBytes.byteLength
-      });
-
-      // Clone master bytes for specific workflows to avoid buffer detachment
-      const viewerBytes = masterBytes.slice();
-      const complianceBytes = masterBytes.slice();
-
-      // Persist master bytes in state for rendering/export flows
-      setImportedPdfBytes(() => {
-        console.log('Setting importedPdfBytes to masterBytes');
-        return masterBytes;
-      });
-      setIsPdfImported(() => {
-        console.log('Setting isPdfImported to true');
-        return true;
-      });
-      setCurrentPage(() => {
-        console.log('Setting currentPage to 1');
-        return 1;
-      });
-      setPdfImportKey(prev => {
-        const newKey = prev + 1;
-        console.log('Setting pdfImportKey to:', newKey);
-        return newKey;
-      });
-
-      // Also set refs for immediate access
-      importedPdfBytesRef.current = masterBytes;
-      isPdfImportedRef.current = true;
-
-      console.log('State setters called with callbacks and refs set');
+      const result = await response.json();
       
-      // NEW: Perform NLP extraction on the imported PDF and auto-insert compliance clauses
-      try {
-        const extraction = await extractTextWithNLP(file, {
-          performNLP: true,
-          extractEntities: true,
-          suggestVariables: true,
-          replaceEntities: false
-        });
-
-        const text = extraction.text || '';
-        const entities = extraction?.nlp?.entities?.entities || [];
-        const suggestions = extraction?.nlp?.variableSuggestions?.suggestions || {};
-        setExtractedEntities(entities);
-
-        // Seed variables from entities and suggestions
-        const initialVars = buildVariablesFromEntities(entities);
-        setVariables(prev => {
-          const merged = { ...prev };
-          Object.entries(initialVars).forEach(([k, v]) => { if (!merged[k] && v) merged[k] = v; });
-          Object.entries(suggestions).forEach(([varName, data]) => {
-            const clean = varName.replace(/^\[|\]$/g, '');
-            if (!merged[clean] && data?.current_value) {
-              merged[clean] = data.current_value;
-            }
-          });
-          return merged;
-        });
-
-        // Auto-insert missing compliance clauses for the selected state
-        const { content: ensuredContent, addedClauses } = ensureComplianceClauses(
-          text,
-          stateConfig.selectedState,
-          { modes: { required: true, warnings: true, info: false } }
-        );
-
-        if (addedClauses?.length) {
-          console.log('Auto-inserted clauses:', addedClauses);
-        }
-
-        // Don't update templateContent - keep original PDF structure
-// Only use NLP for variable detection, not content replacement
-console.log('NLP processing completed - variables detected and seeded');
-      } catch (nlpErr) {
-        console.warn('NLP processing failed; continuing without NLP:', nlpErr);
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to extract variables from Word document');
       }
 
-      // Process compliance analysis asynchronously with a dedicated copy
-      setTimeout(async () => {
-        try {
-          await extractTextForCompliance(complianceBytes.buffer.slice(0));
-          console.log('Compliance analysis completed');
-        } catch (error) {
-          console.error('Error in compliance analysis:', error);
-        }
-      }, 0);
+      // Store the original file for later download
+      window.originalDocxFile = file;
 
-      console.log('PDF imported successfully for enhanced viewing', {
-        bytesLength: arrayBuffer.byteLength,
-        isPdfImported: true
+      // Convert Word document to HTML using Mammoth for rich preview
+      const arrayBuffer = await file.arrayBuffer();
+      const mammothResult = await mammoth.convertToHtml({ arrayBuffer });
+      const htmlContent = mammothResult.value;
+      
+      // Store HTML content
+      setDocxHtmlContent(htmlContent);
+      
+      // Create a blob URL for the Word document
+      const docxBlob = new Blob([arrayBuffer], { 
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
       });
-      alert('PDF imported successfully! Variables will be detected automatically.');
+      const docxUrl = URL.createObjectURL(docxBlob);
+      window.docxPreviewUrl = docxUrl;
 
+      // Set template content as text (for variable detection)
+      const documentText = result.data.text || '';
+      setTemplateContent(documentText);
+      setTemplateLoaded(true);
+      setPreviewMode('docx-preview'); // New mode for Word document preview
+      
+      // Split content into pages (approximate based on height)
+      setDocxPages([htmlContent]); // For now, single page - we'll add pagination later
+      setCurrentDocxPage(1);
+
+      // Extract variables from the result
+      const extractedVars = {};
+      Object.entries(result.data.variables || {}).forEach(([varName, varData]) => {
+        extractedVars[varName] = varData.suggested_value || '';
+      });
+      
+      setVariables(extractedVars);
+
+      // Set metadata
+      const metadata = result.data.metadata || {};
+      console.log('Document metadata:', metadata);
+
+      // Give user feedback
+      alert(`Word document imported successfully! Found ${Object.keys(extractedVars).length} variables. Edit them in the Variables panel on the right.`);
       setIsImportingPdf(false);
-
-      // Skip the old processing logic when using enhanced viewer
-      return;
-
-      // OLD PROCESSING LOGIC (removed)
-      // The previous synchronous text extraction using pdfDocument has been
-      // superseded by extractTextWithNLP() and EnhancedPDFViewer. The legacy
-      // code referenced an undefined pdfDocument in this scope and caused
-      // ESLint errors. If you need the old flow, retrieve a pdfjs document
-      // instance locally and reintroduce guarded logic here.
+      
     } catch (error) {
-      console.error('Error processing PDF file:', error.message, error.stack);
-      alert('Failed to process PDF file: ' + error.message);
+      console.error('Error importing Word document:', error);
+      setPreviewError(`Failed to import Word document: ${error.message}. Ensure backend is running on port 5000.`);
+      alert('Failed to import Word document: ' + error.message);
       setIsImportingPdf(false);
     }
   }
@@ -1448,7 +1971,7 @@ console.log('NLP processing completed - variables detected and seeded');
       </div>
 
       <div className="split-view">
-        {renderProfessionalPreview()}
+        {previewMode === 'html-edit' ? renderHtmlEditor() : renderProfessionalPreview()}
         {renderEditorPanel()}
       </div>
     </div>
