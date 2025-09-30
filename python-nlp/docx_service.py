@@ -30,6 +30,15 @@ class DocxService:
             re.compile(r'\{([^}]+)\}'),   # Curly braces {Variable Name}
             re.compile(r'<<([^>]+)>>'),   # Double angle brackets <<Variable Name>>
         ]
+        
+        # Specific field names to detect as editable sections
+        self.section_field_names = [
+            "Confidentiality and Intellectual Property",
+            "Pre-Employment Conditions",
+            "Employment Agreement",
+            "Compliance with Policies",
+            "Governing Law and Dispute Resolution"
+        ]
     
     def extract_variables_from_docx(self, docx_bytes: bytes) -> Dict[str, Any]:
         """
@@ -56,13 +65,43 @@ class DocxService:
             # Extract all text
             full_text = []
             variables = {}
+            section_contents = {}  # Store content for each section
+            current_section = None
+            section_start_index = -1
             
             # Process paragraphs
-            for para in doc.paragraphs:
-                text = para.text
-                full_text.append(text)
+            for idx, para in enumerate(doc.paragraphs):
+                text = para.text.strip()
+                full_text.append(para.text)
                 
-                # Find variables in paragraph
+                # Check if this paragraph is one of our section headings
+                for section_name in self.section_field_names:
+                    if section_name.lower() in text.lower() and len(text) < 200:  # Likely a heading
+                        # Save previous section content if exists
+                        if current_section and section_start_index >= 0:
+                            section_contents[current_section] = {
+                                "start_index": section_start_index,
+                                "end_index": idx - 1
+                            }
+                        
+                        # Start new section
+                        current_section = section_name
+                        section_start_index = idx
+                        
+                        # Add as a variable
+                        if section_name not in variables:
+                            variables[section_name] = {
+                                "name": section_name,
+                                "original_text": text,
+                                "occurrences": 0,
+                                "suggested_value": "",
+                                "type": "section_heading",
+                                "is_section": True
+                            }
+                        variables[section_name]["occurrences"] += 1
+                        break
+                
+                # Find bracketed variables in paragraph
                 for pattern in self.bracket_patterns:
                     matches = pattern.finditer(text)
                     for match in matches:
@@ -74,9 +113,27 @@ class DocxService:
                                 "name": var_name,
                                 "original_text": full_match,
                                 "occurrences": 0,
-                                "suggested_value": ""
+                                "suggested_value": "",
+                                "type": "bracketed_variable"
                             }
                         variables[var_name]["occurrences"] += 1
+            
+            # Save last section if exists
+            if current_section and section_start_index >= 0:
+                section_contents[current_section] = {
+                    "start_index": section_start_index,
+                    "end_index": len(doc.paragraphs) - 1
+                }
+            
+            # Extract content for each section
+            for section_name, indices in section_contents.items():
+                content_lines = []
+                for i in range(indices["start_index"] + 1, min(indices["end_index"] + 1, len(doc.paragraphs))):
+                    content_lines.append(doc.paragraphs[i].text)
+                
+                if section_name in variables:
+                    variables[section_name]["content"] = "\n".join(content_lines).strip()
+                    variables[section_name]["suggested_value"] = "\n".join(content_lines).strip()
             
             # Process tables
             for table in doc.tables:
@@ -139,7 +196,67 @@ class DocxService:
             # Load document from bytes
             doc = Document(BytesIO(docx_bytes))
             
-            # Replace in paragraphs
+            # Track section headings and their content for replacement
+            section_paragraphs = {}
+            current_section = None
+            section_start_idx = -1
+            
+            # First pass: identify section headings and their content ranges
+            for idx, para in enumerate(doc.paragraphs):
+                text = para.text.strip()
+                
+                # Check if this is a section heading we're tracking
+                for section_name in self.section_field_names:
+                    if section_name.lower() in text.lower() and len(text) < 200:
+                        # Save previous section range
+                        if current_section and section_start_idx >= 0:
+                            section_paragraphs[current_section] = {
+                                "heading_idx": section_start_idx,
+                                "content_start": section_start_idx + 1,
+                                "content_end": idx - 1
+                            }
+                        
+                        current_section = section_name
+                        section_start_idx = idx
+                        break
+            
+            # Save last section
+            if current_section and section_start_idx >= 0:
+                section_paragraphs[current_section] = {
+                    "heading_idx": section_start_idx,
+                    "content_start": section_start_idx + 1,
+                    "content_end": len(doc.paragraphs) - 1
+                }
+            
+            # Second pass: Replace section content if provided in variables
+            paragraphs_to_delete = set()
+            for section_name, indices in section_paragraphs.items():
+                if section_name in variables and variables[section_name]:
+                    new_content = variables[section_name]
+                    
+                    # Mark old content paragraphs for deletion
+                    for i in range(indices["content_start"], indices["content_end"] + 1):
+                        if i < len(doc.paragraphs):
+                            paragraphs_to_delete.add(i)
+                    
+                    # Insert new content after heading
+                    heading_para = doc.paragraphs[indices["heading_idx"]]
+                    new_lines = new_content.split('\n')
+                    
+                    # Add new paragraphs after the heading
+                    for line in new_lines:
+                        if line.strip():
+                            new_para = heading_para.insert_paragraph_before(line)
+                            # Move it after the heading
+                            heading_para._element.addnext(new_para._element)
+            
+            # Delete old content paragraphs (in reverse to maintain indices)
+            for idx in sorted(paragraphs_to_delete, reverse=True):
+                if idx < len(doc.paragraphs):
+                    p = doc.paragraphs[idx]._element
+                    p.getparent().remove(p)
+            
+            # Third pass: Replace bracketed variables in remaining paragraphs
             for para in doc.paragraphs:
                 for run in para.runs:
                     text = run.text

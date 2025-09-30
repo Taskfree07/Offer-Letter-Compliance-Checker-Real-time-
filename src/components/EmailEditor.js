@@ -1162,8 +1162,49 @@ useEffect(() => {
                     // Use HTML content from Mammoth if available, otherwise fall back to plain text
                     let displayContent = docxHtmlContent || templateContent;
                     
-                    // Replace all variable patterns with live values
+                    // Section field names to detect
+                    const sectionFields = [
+                      "Confidentiality and Intellectual Property",
+                      "Pre-Employment Conditions",
+                      "Employment Agreement",
+                      "Compliance with Policies",
+                      "Governing Law and Dispute Resolution"
+                    ];
+                    
+                    // Replace section content (heading + content below it)
+                    sectionFields.forEach(sectionName => {
+                      if (variables[sectionName]) {
+                        const newContent = variables[sectionName];
+                        
+                        // Create a regex to find the section heading and capture content until next heading or end
+                        // This matches the heading and everything after it until we hit another heading or end
+                        const sectionPattern = new RegExp(
+                          `(<[^>]*>)?${sectionName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(<\\/[^>]*>)?([\\s\\S]*?)(?=(<h[1-6]|<p><strong>|$))`,
+                          'gi'
+                        );
+                        
+                        if (newContent && newContent.trim()) {
+                          // Format the new content with highlighting
+                          const formattedContent = newContent
+                            .split('\n')
+                            .map(line => line.trim())
+                            .filter(line => line)
+                            .map(line => `<p style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 8px 12px; margin: 4px 0; border-radius: 4px; border-left: 4px solid #fbbf24;">${line}</p>`)
+                            .join('');
+                          
+                          displayContent = displayContent.replace(
+                            sectionPattern,
+                            `$1${sectionName}$2<div style="margin: 12px 0; padding: 12px; background: #fffbeb; border-radius: 6px; border: 2px dashed #fbbf24;">${formattedContent}</div>`
+                          );
+                        }
+                      }
+                    });
+                    
+                    // Replace bracketed variables with live values
                     Object.entries(variables).forEach(([varName, varValue]) => {
+                      // Skip section fields as they're already handled
+                      if (sectionFields.includes(varName)) return;
+                      
                       // Escape special regex characters in variable name
                       const escapedVarName = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                       
@@ -1470,33 +1511,84 @@ useEffect(() => {
               <p>No variables match your filter.</p>
             </div>
           )}
-          {entries.map(([key, value]) => (
-            <div key={key} className="variable-row" style={{ alignItems: 'flex-start' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', flex: '0 0 220px', marginRight: '10px' }}>
-                <input
-                  type="text"
-                  value={key}
-                  readOnly
-                  className="variable-name-input"
-                />
-                <div style={{ display: 'flex', gap: '8px', marginTop: '6px', alignItems: 'center' }}>
-                  <span style={{ fontSize: '12px', color: '#64748b' }}>{variableMeta[key]?.occurrences || 0} use(s)</span>
-                  {variableMeta[key]?.flaggedOccurrences > 0 && (
-                    <span style={{ fontSize: '11px', background: '#fef3c7', color: '#92400e', padding: '2px 6px', borderRadius: '999px' }}>
-                      {variableMeta[key].flaggedOccurrences} in issues
-                    </span>
+          {entries.map(([key, value]) => {
+            // Check if this is a section field (multi-line content)
+            const isSection = key.includes('Confidentiality') || 
+                            key.includes('Pre-Employment') || 
+                            key.includes('Employment Agreement') || 
+                            key.includes('Compliance with Policies') || 
+                            key.includes('Governing Law');
+            
+            return (
+              <div key={key} className="variable-row" style={{ alignItems: 'flex-start', flexDirection: isSection ? 'column' : 'row' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: isSection ? '1' : '0 0 220px', marginRight: isSection ? '0' : '10px', width: isSection ? '100%' : 'auto' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px',
+                    padding: '8px 12px',
+                    background: isSection ? 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' : 'transparent',
+                    borderRadius: isSection ? '6px' : '0',
+                    marginBottom: isSection ? '8px' : '0'
+                  }}>
+                    {isSection && <FileText size={16} style={{ color: '#ffffff' }} />}
+                    <input
+                      type="text"
+                      value={key}
+                      readOnly
+                      className="variable-name-input"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: isSection ? '#ffffff' : 'inherit',
+                        fontWeight: isSection ? '600' : 'normal',
+                        fontSize: isSection ? '14px' : 'inherit',
+                        padding: '0'
+                      }}
+                    />
+                  </div>
+                  {!isSection && (
+                    <div style={{ display: 'flex', gap: '8px', marginTop: '6px', alignItems: 'center' }}>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>{variableMeta[key]?.occurrences || 0} use(s)</span>
+                      {variableMeta[key]?.flaggedOccurrences > 0 && (
+                        <span style={{ fontSize: '11px', background: '#fef3c7', color: '#92400e', padding: '2px 6px', borderRadius: '999px' }}>
+                          {variableMeta[key].flaggedOccurrences} in issues
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
+                {isSection ? (
+                  <textarea
+                    value={value || ''}
+                    onChange={(e) => handleVariableChange(key, e.target.value)}
+                    className="variable-value-input"
+                    placeholder={`Enter content for ${key}...`}
+                    rows={6}
+                    style={{
+                      width: '100%',
+                      minHeight: '150px',
+                      padding: '12px',
+                      border: '2px solid #e5e7eb',
+                      borderRadius: '6px',
+                      fontFamily: 'inherit',
+                      fontSize: '13px',
+                      lineHeight: '1.6',
+                      resize: 'vertical'
+                    }}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleVariableChange(key, e.target.value)}
+                    className="variable-value-input"
+                    placeholder={`Enter ${key}...`}
+                  />
+                )}
               </div>
-              <input
-                type="text"
-                value={value}
-                onChange={(e) => handleVariableChange(key, e.target.value)}
-                className="variable-value-input"
-                placeholder={`Enter ${key}...`}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );
