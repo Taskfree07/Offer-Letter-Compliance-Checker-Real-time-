@@ -700,13 +700,11 @@ useEffect(() => {
     setComplianceFlags(newFlags);
   }, [sentences, stateConfig.selectedState, currentRules]);
 
-  const handleDownloadPDF = async () => {
+  const handleDownloadDOCX = async () => {
     try {
       setIsGenerating(true);
 
-      // Check if we have an imported Word document
       if (window.originalDocxFile) {
-        // Download Word document with replaced variables
         const formData = new FormData();
         formData.append('file', window.originalDocxFile);
         formData.append('variables', JSON.stringify(variables));
@@ -726,6 +724,57 @@ useEffect(() => {
         const a = document.createElement('a');
         a.href = url;
         a.download = 'Edited_Offer_Letter.docx';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        setIsGenerating(false);
+        return;
+      }
+
+      alert('No document loaded. Please import a Word document first.');
+      setIsGenerating(false);
+    } catch (error) {
+      console.error('Error downloading DOCX:', error);
+      alert('Failed to download document: ' + error.message);
+      setIsGenerating(false);
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    try {
+      setIsGenerating(true);
+
+      // Check if we have an imported Word document
+      if (window.originalDocxFile) {
+        // Download as PDF with replaced variables
+        const formData = new FormData();
+        formData.append('file', window.originalDocxFile);
+        formData.append('variables', JSON.stringify(variables));
+
+        const response = await fetch('http://127.0.0.1:5000/api/docx-to-pdf', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          
+          // Show helpful error message
+          if (errorData.message && errorData.message.includes('LibreOffice')) {
+            alert('PDF conversion requires LibreOffice.\n\nPlease either:\n1. Download as Word (.docx) instead, or\n2. Install LibreOffice from: https://www.libreoffice.org/download/');
+          } else {
+            throw new Error(errorData.error || 'PDF generation failed');
+          }
+          
+          setIsGenerating(false);
+          return;
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Offer_Letter.pdf';
         a.click();
         URL.revokeObjectURL(url);
         
@@ -983,31 +1032,87 @@ useEffect(() => {
             <Shield size={16} />
             Compliance Report
           </button>
-          <button 
-            className="btn btn-primary" 
-            onClick={handleDownloadPDF}
-            disabled={isGenerating || !templateLoaded}
-          >
-            {isGenerating ? (
-              <>
-                <div className="spinner" style={{
-                  width: '16px',
-                  height: '16px',
-                  border: '2px solid #ffffff',
-                  borderTop: '2px solid transparent',
-                  borderRadius: '50%',
-                  animation: 'spin 1s linear infinite',
-                  marginRight: '8px'
-                }}></div>
-                Generating...
-              </>
-            ) : (
-              <>
-                <Download size={16} />
-                {previewMode === 'docx-preview' ? 'Download Document' : 'Download PDF'}
-              </>
-            )}
-          </button>
+          {previewMode === 'docx-preview' && window.originalDocxFile ? (
+            <>
+              <button 
+                className="btn btn-secondary" 
+                onClick={handleDownloadDOCX}
+                disabled={isGenerating || !templateLoaded}
+                style={{ marginRight: '8px' }}
+              >
+                {isGenerating ? (
+                  <>
+                    <div className="spinner" style={{
+                      width: '16px',
+                      height: '16px',
+                      border: '2px solid #ffffff',
+                      borderTop: '2px solid transparent',
+                      borderRadius: '50%',
+                      animation: 'spin 1s linear infinite',
+                      marginRight: '8px'
+                    }}></div>
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Download size={16} />
+                    Download as Word
+                  </>
+                )}
+              </button>
+              <button 
+                className="btn btn-primary" 
+                onClick={handleDownloadPDF}
+                disabled={isGenerating || !templateLoaded}
+              >
+                {isGenerating ? (
+                  <>
+                    <div className="spinner" style={{
+                      width: '16px',
+                      height: '16px',
+                      border: '2px solid #ffffff',
+                      borderTop: '2px solid transparent',
+                      borderRadius: '50%',
+                      animation: 'spin 1s linear infinite',
+                      marginRight: '8px'
+                    }}></div>
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Download size={16} />
+                    Download as PDF
+                  </>
+                )}
+              </button>
+            </>
+          ) : (
+            <button 
+              className="btn btn-primary" 
+              onClick={handleDownloadPDF}
+              disabled={isGenerating || !templateLoaded}
+            >
+              {isGenerating ? (
+                <>
+                  <div className="spinner" style={{
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid #ffffff',
+                    borderTop: '2px solid transparent',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    marginRight: '8px'
+                  }}></div>
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <Download size={16} />
+                  Download PDF
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
       
@@ -1151,16 +1256,19 @@ useEffect(() => {
                 {/* Document Page */}
                 <div style={{
                   width: '8.5in',
-                  minHeight: '11in',
+                  height: '11in',
                   background: '#ffffff',
                   padding: '1in',
                   boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                   borderRadius: '4px',
-                  marginBottom: '24px'
+                  marginBottom: '24px',
+                  overflow: 'hidden',
+                  position: 'relative'
                 }}>
                   {(() => {
-                    // Use HTML content from Mammoth if available, otherwise fall back to plain text
-                    let displayContent = docxHtmlContent || templateContent;
+                    // Get current page content
+                    const currentPageContent = docxPages[currentDocxPage - 1] || docxHtmlContent || templateContent;
+                    let displayContent = currentPageContent;
                     
                     // Section field names to detect
                     const sectionFields = [
@@ -1234,6 +1342,21 @@ useEffect(() => {
                       />
                     );
                   })()}
+                  
+                  {/* Page number indicator at bottom */}
+                  {docxPages.length > 1 && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '0.5in',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      fontSize: '10px',
+                      color: '#9ca3af',
+                      fontFamily: 'monospace'
+                    }}>
+                      Page {currentDocxPage} of {docxPages.length}
+                    </div>
+                  )}
                 </div>
               </div>
               
@@ -1250,7 +1373,8 @@ useEffect(() => {
                 <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
                   <li>Edit variable values in the <strong>Variables panel</strong> on the right</li>
                   <li><strong>Watch live updates</strong> in the preview as you type! 🎉</li>
-                  <li>Click <strong>"Download PDF"</strong> button to get your edited .docx file</li>
+                  <li>Use <strong>Previous/Next</strong> buttons to navigate pages</li>
+                  <li>Click <strong>"Download Document"</strong> button to get your edited .docx file</li>
                   <li>All formatting, tables, and structure are preserved in the download</li>
                 </ul>
               </div>
@@ -1916,6 +2040,44 @@ useEffect(() => {
     </div>
   );
 
+  // Function to split HTML content into pages
+  const splitHtmlIntoPages = (htmlContent) => {
+    // Split by explicit page breaks first
+    let pages = htmlContent.split(/<div[^>]*style="[^"]*page-break-after:\s*always[^"]*"[^>]*>/gi);
+    
+    // If no explicit page breaks, split by approximate content length
+    if (pages.length === 1) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlContent;
+      const elements = Array.from(tempDiv.children);
+      
+      pages = [];
+      let currentPage = '';
+      let currentHeight = 0;
+      const maxHeight = 1056; // Approximate height for 11 inches at 96 DPI
+      
+      elements.forEach((element) => {
+        const elementHtml = element.outerHTML;
+        const estimatedHeight = elementHtml.length / 5; // Rough estimate
+        
+        if (currentHeight + estimatedHeight > maxHeight && currentPage) {
+          pages.push(currentPage);
+          currentPage = elementHtml;
+          currentHeight = estimatedHeight;
+        } else {
+          currentPage += elementHtml;
+          currentHeight += estimatedHeight;
+        }
+      });
+      
+      if (currentPage) {
+        pages.push(currentPage);
+      }
+    }
+    
+    return pages.length > 0 ? pages : [htmlContent];
+  };
+
   const rescanVariables = useCallback(() => {
     if (!editableRef.current) {
       alert('Editable area not available');
@@ -2009,8 +2171,9 @@ useEffect(() => {
       setTemplateLoaded(true);
       setPreviewMode('docx-preview'); // New mode for Word document preview
       
-      // Split content into pages (approximate based on height)
-      setDocxPages([htmlContent]); // For now, single page - we'll add pagination later
+      // Split content into pages based on page breaks or approximate height
+      const pages = splitHtmlIntoPages(htmlContent);
+      setDocxPages(pages);
       setCurrentDocxPage(1);
 
       // Extract variables from the result

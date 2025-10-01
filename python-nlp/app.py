@@ -977,6 +977,107 @@ def docx_health():
         "message": "Word document service ready" if DOCX_AVAILABLE else "python-docx not installed"
     })
 
+@app.route('/api/docx-to-pdf', methods=['POST'])
+def docx_to_pdf_endpoint():
+    """Convert Word document with replaced variables to PDF"""
+    try:
+        if not DOCX_AVAILABLE:
+            return jsonify({
+                "error": "Word document service not available",
+                "message": "python-docx not installed"
+            }), 503
+        
+        if 'file' not in request.files:
+            return jsonify({"error": "No file provided"}), 400
+        
+        file = request.files['file']
+        variables_json = request.form.get('variables', '{}')
+        
+        try:
+            variables = json.loads(variables_json)
+        except json.JSONDecodeError:
+            return jsonify({"error": "Invalid variables JSON"}), 400
+        
+        # Read document bytes
+        docx_bytes = file.read()
+        
+        # Replace variables
+        modified_docx_bytes = replace_docx_variables(docx_bytes, variables)
+        
+        # Convert to PDF using LibreOffice
+        try:
+            pdf_bytes = convert_docx_to_pdf_libreoffice(modified_docx_bytes)
+            
+            # Return the PDF
+            response = make_response(pdf_bytes)
+            response.headers['Content-Type'] = 'application/pdf'
+            response.headers['Content-Disposition'] = 'attachment; filename=offer_letter.pdf'
+            response.headers['Content-Length'] = len(pdf_bytes)
+            
+            return response
+            
+        except Exception as conv_error:
+            logger.error(f"PDF conversion failed: {conv_error}")
+            return jsonify({
+                "error": "PDF conversion failed",
+                "message": "LibreOffice not installed or conversion error. Download as .docx instead.",
+                "details": str(conv_error)
+            }), 500
+        
+    except Exception as e:
+        logger.error(f"Error in docx_to_pdf_endpoint: {e}")
+        return jsonify({
+            "error": "Failed to process document",
+            "message": str(e)
+        }), 500
+
+def convert_docx_to_pdf_libreoffice(docx_bytes: bytes) -> bytes:
+    """Convert DOCX to PDF using LibreOffice for perfect formatting"""
+    import subprocess
+    import tempfile
+    import os
+    
+    # Create temporary files
+    with tempfile.NamedTemporaryFile(suffix='.docx', delete=False) as docx_temp:
+        docx_temp.write(docx_bytes)
+        docx_path = docx_temp.name
+    
+    pdf_path = docx_path.replace('.docx', '.pdf')
+    temp_dir = os.path.dirname(docx_path)
+    
+    try:
+        # Convert using LibreOffice
+        result = subprocess.run([
+            'soffice',
+            '--headless',
+            '--convert-to', 'pdf',
+            '--outdir', temp_dir,
+            docx_path
+        ], check=True, capture_output=True, timeout=30)
+        
+        # Check if PDF was created
+        if not os.path.exists(pdf_path):
+            raise Exception("PDF file was not created")
+        
+        # Read PDF bytes
+        with open(pdf_path, 'rb') as pdf_file:
+            pdf_bytes = pdf_file.read()
+        
+        return pdf_bytes
+        
+    except subprocess.TimeoutExpired:
+        raise Exception("PDF conversion timed out (>30s)")
+    except FileNotFoundError:
+        raise Exception("LibreOffice not found. Please install LibreOffice: https://www.libreoffice.org/download/")
+    except subprocess.CalledProcessError as e:
+        raise Exception(f"LibreOffice conversion failed: {e.stderr.decode() if e.stderr else 'Unknown error'}")
+    finally:
+        # Clean up temporary files
+        if os.path.exists(docx_path):
+            os.remove(docx_path)
+        if os.path.exists(pdf_path):
+            os.remove(pdf_path)
+
 if __name__ == '__main__':
     # Always run on port 5000 to match frontend expectations
     port = 5000

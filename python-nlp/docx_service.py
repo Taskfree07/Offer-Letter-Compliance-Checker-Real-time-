@@ -258,46 +258,58 @@ class DocxService:
             
             # Third pass: Replace bracketed variables in remaining paragraphs
             for para in doc.paragraphs:
-                for run in para.runs:
-                    text = run.text
-                    modified = False
-                    
-                    # Replace each variable pattern
-                    for pattern in self.bracket_patterns:
-                        matches = list(pattern.finditer(text))
-                        if matches:
-                            for match in reversed(matches):  # Reverse to maintain positions
-                                var_name = match.group(1).strip()
-                                if var_name in variables and variables[var_name]:
-                                    # Replace the bracketed variable with its value
-                                    start, end = match.span()
-                                    text = text[:start] + variables[var_name] + text[end:]
-                                    modified = True
-                    
-                    if modified:
-                        run.text = text
+                # Combine all runs in paragraph to handle split variables
+                full_text = ''.join([run.text for run in para.runs])
+                modified_text = full_text
+                
+                # Replace each variable pattern
+                for pattern in self.bracket_patterns:
+                    matches = list(pattern.finditer(modified_text))
+                    if matches:
+                        for match in reversed(matches):  # Reverse to maintain positions
+                            var_name = match.group(1).strip()
+                            if var_name in variables and variables[var_name]:
+                                # Replace the bracketed variable with its value
+                                start, end = match.span()
+                                modified_text = modified_text[:start] + variables[var_name] + modified_text[end:]
+                
+                # If text was modified, update the paragraph
+                if modified_text != full_text:
+                    # Clear all runs and add new text
+                    for run in para.runs:
+                        run.text = ''
+                    if para.runs:
+                        para.runs[0].text = modified_text
+                    else:
+                        para.add_run(modified_text)
             
             # Replace in tables
             for table in doc.tables:
                 for row in table.rows:
                     for cell in row.cells:
                         for para in cell.paragraphs:
-                            for run in para.runs:
-                                text = run.text
-                                modified = False
-                                
-                                for pattern in self.bracket_patterns:
-                                    matches = list(pattern.finditer(text))
-                                    if matches:
-                                        for match in reversed(matches):
-                                            var_name = match.group(1).strip()
-                                            if var_name in variables and variables[var_name]:
-                                                start, end = match.span()
-                                                text = text[:start] + variables[var_name] + text[end:]
-                                                modified = True
-                                
-                                if modified:
-                                    run.text = text
+                            # Combine all runs in cell paragraph
+                            full_text = ''.join([run.text for run in para.runs])
+                            modified_text = full_text
+                            
+                            # Replace each variable pattern
+                            for pattern in self.bracket_patterns:
+                                matches = list(pattern.finditer(modified_text))
+                                if matches:
+                                    for match in reversed(matches):
+                                        var_name = match.group(1).strip()
+                                        if var_name in variables and variables[var_name]:
+                                            start, end = match.span()
+                                            modified_text = modified_text[:start] + variables[var_name] + modified_text[end:]
+                            
+                            # If text was modified, update the paragraph
+                            if modified_text != full_text:
+                                for run in para.runs:
+                                    run.text = ''
+                                if para.runs:
+                                    para.runs[0].text = modified_text
+                                else:
+                                    para.add_run(modified_text)
             
             # Save to bytes
             output = BytesIO()
