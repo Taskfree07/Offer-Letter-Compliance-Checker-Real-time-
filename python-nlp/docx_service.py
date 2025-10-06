@@ -228,33 +228,50 @@ class DocxService:
                     "content_end": len(doc.paragraphs) - 1
                 }
             
-            # Second pass: Replace section content if provided in variables
+            # Second pass: Replace section content ONLY if user provided new content
             paragraphs_to_delete = set()
+            new_paragraphs_data = []  # Store new paragraphs to add
+            
             for section_name, indices in section_paragraphs.items():
-                if section_name in variables and variables[section_name]:
-                    new_content = variables[section_name]
+                # Only replace if user provided new content AND it's different from original
+                if section_name in variables and variables[section_name] and variables[section_name].strip():
+                    new_content = variables[section_name].strip()
                     
-                    # Mark old content paragraphs for deletion
-                    for i in range(indices["content_start"], indices["content_end"] + 1):
-                        if i < len(doc.paragraphs):
-                            paragraphs_to_delete.add(i)
+                    # Get original content to compare
+                    original_content_lines = []
+                    for i in range(indices["content_start"], min(indices["content_end"] + 1, len(doc.paragraphs))):
+                        original_content_lines.append(doc.paragraphs[i].text)
+                    original_content = '\n'.join(original_content_lines).strip()
                     
-                    # Insert new content after heading
-                    heading_para = doc.paragraphs[indices["heading_idx"]]
-                    new_lines = new_content.split('\n')
-                    
-                    # Add new paragraphs after the heading
-                    for line in new_lines:
-                        if line.strip():
-                            new_para = heading_para.insert_paragraph_before(line)
-                            # Move it after the heading
-                            heading_para._element.addnext(new_para._element)
+                    # Only replace if content actually changed
+                    if new_content != original_content:
+                        # Mark old content paragraphs for deletion
+                        for i in range(indices["content_start"], indices["content_end"] + 1):
+                            if i < len(doc.paragraphs):
+                                paragraphs_to_delete.add(i)
+                        
+                        # Store new content to add after deletion
+                        new_paragraphs_data.append({
+                            'heading_idx': indices["heading_idx"],
+                            'content': new_content
+                        })
             
             # Delete old content paragraphs (in reverse to maintain indices)
             for idx in sorted(paragraphs_to_delete, reverse=True):
                 if idx < len(doc.paragraphs):
                     p = doc.paragraphs[idx]._element
                     p.getparent().remove(p)
+            
+            # Add new section content
+            for data in new_paragraphs_data:
+                heading_para = doc.paragraphs[data['heading_idx']]
+                new_lines = data['content'].split('\n')
+                
+                # Add new paragraphs after the heading
+                for line in reversed(new_lines):  # Reverse to maintain order
+                    if line.strip():
+                        new_para = heading_para.insert_paragraph_before(line)
+                        heading_para._element.addnext(new_para._element)
             
             # Third pass: Replace bracketed variables in remaining paragraphs
             for para in doc.paragraphs:
