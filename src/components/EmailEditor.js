@@ -54,6 +54,7 @@ const EmailEditor = ({ template, onBack }) => {
   const [pdfImportKey, setPdfImportKey] = useState(0);
   const htmlEditTimerRef = useRef(null);
   const editableRef = useRef(null);
+  const docxPreviewContainerRef = useRef(null);
 
   // Compliance system states
   const [complianceFlags, setComplianceFlags] = useState({});
@@ -489,21 +490,33 @@ const EmailEditor = ({ template, onBack }) => {
   const handleAddRule = () => {
     try {
       const parsedRule = JSON.parse(newRuleData);
-      
+
       const updatedRules = { ...currentRules };
       if (!updatedRules[stateConfig.selectedState]) {
-        updatedRules[stateConfig.selectedState] = { 
+        updatedRules[stateConfig.selectedState] = {
           state: stateConfig.selectedState,
-          rules: {} 
+          rules: {},
+          lastUpdated: new Date().toISOString().split('T')[0]
         };
       }
-      
-      Object.assign(updatedRules[stateConfig.selectedState].rules, parsedRule);
+
+      // Merge new rules with existing ones
+      updatedRules[stateConfig.selectedState].rules = {
+        ...updatedRules[stateConfig.selectedState].rules,
+        ...parsedRule
+      };
+
+      updatedRules[stateConfig.selectedState].lastUpdated = new Date().toISOString().split('T')[0];
+
       setCurrentRules(updatedRules);
       setNewRuleData('');
-      
-      alert(`Successfully added rule(s) for ${stateConfig.selectedState}!`);
+
+      const ruleCount = Object.keys(parsedRule).length;
+      console.log(`✅ Added ${ruleCount} compliance rule(s) for ${stateConfig.selectedState}`, parsedRule);
+
+      alert(`Successfully added ${ruleCount} rule(s) for ${stateConfig.selectedState}! Check the Compliance tab to see detected issues.`);
     } catch (error) {
+      console.error('Error parsing rule data:', error);
       alert('Invalid JSON format. Please check the rule format.');
     }
   };
@@ -655,13 +668,16 @@ useEffect(() => {
 }, [stateConfig.selectedState]);
 
   useEffect(() => {
-    console.log('Compliance analysis running:', {
+    console.log('🔍 Compliance analysis running:', {
       sentencesCount: sentences.length,
       selectedState: stateConfig.selectedState,
-      hasRules: !!currentRules[stateConfig.selectedState]
+      hasRules: !!currentRules[stateConfig.selectedState],
+      rulesCount: Object.keys(currentRules[stateConfig.selectedState]?.rules || {}).length
     });
-    
+
     const newFlags = {};
+    let matchCount = 0;
+
     sentences.forEach(sentence => {
       const stateRules = currentRules[stateConfig.selectedState]?.rules || {};
       const lowerText = sentence.text.toLowerCase();
@@ -669,18 +685,28 @@ useEffect(() => {
 
       Object.keys(stateRules).forEach(ruleKey => {
         const rule = stateRules[ruleKey];
-        if (rule.flaggedPhrases) {
-          const hasMatch = rule.flaggedPhrases.some(phrase => 
+        if (rule.flaggedPhrases && Array.isArray(rule.flaggedPhrases)) {
+          const matchedPhrases = rule.flaggedPhrases.filter(phrase =>
             lowerText.includes(phrase.toLowerCase())
           );
-          if (hasMatch) {
-            flags.push({ 
-              type: ruleKey, 
-              severity: rule.severity, 
+
+          if (matchedPhrases.length > 0) {
+            matchCount++;
+            console.log(`🚩 Match found in sentence ${sentence.id}:`, {
+              rule: ruleKey,
+              severity: rule.severity,
+              matchedPhrases,
+              sentencePreview: sentence.text.substring(0, 100)
+            });
+
+            flags.push({
+              type: ruleKey,
+              severity: rule.severity,
               message: rule.message,
               suggestion: rule.suggestion,
               alternativeLanguage: rule.alternativeLanguage,
-              lawReference: rule.lawReference
+              lawReference: rule.lawReference,
+              matchedPhrases: matchedPhrases
             });
           }
         }
@@ -690,13 +716,23 @@ useEffect(() => {
         newFlags[sentence.id] = flags;
       }
     });
-    
-    console.log('Compliance analysis completed:', {
-      totalFlags: Object.keys(newFlags).length,
+
+    console.log('✅ Compliance analysis completed:', {
+      totalSentences: sentences.length,
+      flaggedSentences: Object.keys(newFlags).length,
+      totalMatches: matchCount,
       errorCount: Object.values(newFlags).flat().filter(f => f.severity === 'error').length,
-      warningCount: Object.values(newFlags).flat().filter(f => f.severity === 'warning').length
+      warningCount: Object.values(newFlags).flat().filter(f => f.severity === 'warning').length,
+      infoCount: Object.values(newFlags).flat().filter(f => f.severity === 'info').length
     });
-    
+
+    // Log first few sentences for debugging
+    if (sentences.length > 0) {
+      console.log('📝 Sample sentences for debugging:',
+        sentences.slice(0, 3).map(s => ({ id: s.id, text: s.text.substring(0, 100) }))
+      );
+    }
+
     setComplianceFlags(newFlags);
   }, [sentences, stateConfig.selectedState, currentRules]);
 
@@ -1018,77 +1054,47 @@ useEffect(() => {
 
   const renderProfessionalPreview = () => (
     <div className="email-preview">
-      <div className="preview-header">
-        <div className="preview-title">
-          <FileText size={20} />
-          <span>Professional Offer Letter Preview</span>
-        </div>
-        <div className="preview-actions">
-          <button 
+      <div className="preview-header-clean">
+        <div className="preview-actions-clean">
+          <button
             className="btn btn-secondary"
-            onClick={generateComplianceReport}
-            style={{ marginRight: '8px' }}
+            onClick={() => {
+              document.getElementById('offerLetterInput').click();
+            }}
+            style={{ marginRight: '12px' }}
           >
-            <Shield size={16} />
-            Compliance Report
+            <FileText size={18} />
+            Import Offer Letter
           </button>
           {previewMode === 'docx-preview' && window.originalDocxFile ? (
-            <>
-              <button 
-                className="btn btn-secondary" 
-                onClick={handleDownloadDOCX}
-                disabled={isGenerating || !templateLoaded}
-                style={{ marginRight: '8px' }}
-              >
-                {isGenerating ? (
-                  <>
-                    <div className="spinner" style={{
-                      width: '16px',
-                      height: '16px',
-                      border: '2px solid #ffffff',
-                      borderTop: '2px solid transparent',
-                      borderRadius: '50%',
-                      animation: 'spin 1s linear infinite',
-                      marginRight: '8px'
-                    }}></div>
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <Download size={16} />
-                    Download as Word
-                  </>
-                )}
-              </button>
-              <button 
-                className="btn btn-primary" 
-                onClick={handleDownloadPDF}
-                disabled={isGenerating || !templateLoaded}
-              >
-                {isGenerating ? (
-                  <>
-                    <div className="spinner" style={{
-                      width: '16px',
-                      height: '16px',
-                      border: '2px solid #ffffff',
-                      borderTop: '2px solid transparent',
-                      borderRadius: '50%',
-                      animation: 'spin 1s linear infinite',
-                      marginRight: '8px'
-                    }}></div>
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <Download size={16} />
-                    Download as PDF
-                  </>
-                )}
-              </button>
-            </>
+            <button
+              className="btn btn-primary btn-download-clean"
+              onClick={handleDownloadDOCX}
+              disabled={isGenerating || !templateLoaded}
+            >
+              {isGenerating ? (
+                <>
+                  <div className="spinner" style={{
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid #ffffff',
+                    borderTop: '2px solid transparent',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    marginRight: '8px'
+                  }}></div>
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <Download size={18} />
+                  Download as Word
+                </>
+              )}
+            </button>
           ) : (
-            <button 
-              className="btn btn-primary" 
+            <button
+              className="btn btn-primary btn-download-clean"
               onClick={handleDownloadPDF}
               disabled={isGenerating || !templateLoaded}
             >
@@ -1107,19 +1113,14 @@ useEffect(() => {
                 </>
               ) : (
                 <>
-                  <Download size={16} />
-                  Download PDF
+                  <Download size={18} />
+                  Download as Word
                 </>
               )}
             </button>
           )}
         </div>
       </div>
-      
-      <ComplianceSummaryPanel 
-        summary={getComplianceSummary()} 
-        selectedState={stateConfig.selectedState} 
-      />
       
       <div className="document-view">
         <div className="pdf-preview-container">
@@ -1154,44 +1155,6 @@ useEffect(() => {
           ) : previewMode === 'docx-preview' && window.docxPreviewUrl ? (
             <div className="pdf-viewport" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div style={{
-                padding: '24px',
-                background: '#ffffff',
-                borderRadius: '8px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                marginBottom: '16px',
-                textAlign: 'center'
-              }}>
-                <FileText size={64} style={{ color: '#2563eb', marginBottom: '16px' }} />
-                <h3 style={{ margin: '0 0 12px 0', color: '#1e293b' }}>Word Document Loaded</h3>
-                <p style={{ margin: '0 0 20px 0', color: '#64748b', fontSize: '14px' }}>
-                  Your document structure is preserved. Edit variables in the right panel.
-                </p>
-                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  <a 
-                    href={window.docxPreviewUrl} 
-                    download="original_document.docx"
-                    className="btn btn-secondary"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <Download size={16} />
-                    Download Original
-                  </a>
-                  <button 
-                    onClick={() => {
-                      const link = document.createElement('a');
-                      link.href = window.docxPreviewUrl;
-                      link.target = '_blank';
-                      link.click();
-                    }}
-                    className="btn btn-secondary"
-                  >
-                    <FileText size={16} />
-                    Open in Word
-                  </button>
-                </div>
-              </div>
-              
-              <div style={{
                 flex: 1,
                 padding: '24px',
                 background: '#f5f5f5',
@@ -1211,65 +1174,64 @@ useEffect(() => {
                     padding: '12px 24px',
                     background: '#ffffff',
                     borderRadius: '8px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    position: 'sticky',
+                    top: '0',
+                    zIndex: 10
                   }}>
                     <button
                       onClick={() => setCurrentDocxPage(prev => Math.max(1, prev - 1))}
                       disabled={currentDocxPage === 1}
+                      className="btn btn-secondary"
                       style={{
-                        padding: '8px 12px',
-                        border: 'none',
-                        background: currentDocxPage === 1 ? '#e5e7eb' : '#3b82f6',
-                        color: currentDocxPage === 1 ? '#9ca3af' : '#ffffff',
-                        borderRadius: '6px',
-                        cursor: currentDocxPage === 1 ? 'not-allowed' : 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px'
+                        padding: '8px 16px',
+                        opacity: currentDocxPage === 1 ? 0.5 : 1,
+                        cursor: currentDocxPage === 1 ? 'not-allowed' : 'pointer'
                       }}
                     >
                       ← Previous
                     </button>
-                    <span style={{ fontSize: '14px', fontWeight: '500', color: '#374151' }}>
+                    <span style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
                       Page {currentDocxPage} of {docxPages.length}
                     </span>
                     <button
                       onClick={() => setCurrentDocxPage(prev => Math.min(docxPages.length, prev + 1))}
                       disabled={currentDocxPage === docxPages.length}
+                      className="btn btn-secondary"
                       style={{
-                        padding: '8px 12px',
-                        border: 'none',
-                        background: currentDocxPage === docxPages.length ? '#e5e7eb' : '#3b82f6',
-                        color: currentDocxPage === docxPages.length ? '#9ca3af' : '#ffffff',
-                        borderRadius: '6px',
-                        cursor: currentDocxPage === docxPages.length ? 'not-allowed' : 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px'
+                        padding: '8px 16px',
+                        opacity: currentDocxPage === docxPages.length ? 0.5 : 1,
+                        cursor: currentDocxPage === docxPages.length ? 'not-allowed' : 'pointer'
                       }}
                     >
                       Next →
                     </button>
                   </div>
                 )}
-                
-                {/* Document Page */}
-                <div style={{
-                  width: '8.5in',
-                  height: '11in',
-                  background: '#ffffff',
-                  padding: '1in',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                  borderRadius: '4px',
-                  marginBottom: '24px',
-                  overflow: 'hidden',
-                  position: 'relative'
-                }}>
+
+                {/* Document Page with Real-time Variable Updates */}
+                <div
+                  ref={docxPreviewContainerRef}
+                  className="word-document-page"
+                  style={{
+                    width: '8.5in',
+                    minHeight: '11in',
+                    background: '#ffffff',
+                    padding: '1in',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    borderRadius: '4px',
+                    marginBottom: '24px',
+                    position: 'relative',
+                    fontFamily: 'Calibri, Arial, sans-serif',
+                    fontSize: '11pt',
+                    lineHeight: '1.5',
+                    color: '#000000'
+                  }}>
                   {(() => {
                     // Get current page content
                     const currentPageContent = docxPages[currentDocxPage - 1] || docxHtmlContent || templateContent;
                     let displayContent = currentPageContent;
-                    
+
                     // Section field names to detect
                     const sectionFields = [
                       "Confidentiality and Intellectual Property",
@@ -1278,72 +1240,56 @@ useEffect(() => {
                       "Compliance with Policies",
                       "Governing Law and Dispute Resolution"
                     ];
-                    
-                    // Replace section content (heading + content below it)
+
+                    // Replace section content
                     sectionFields.forEach(sectionName => {
                       if (variables[sectionName]) {
                         const newContent = variables[sectionName];
-                        
-                        // Create a regex to find the section heading and capture content until next heading or end
-                        // This matches the heading and everything after it until we hit another heading or end
                         const sectionPattern = new RegExp(
                           `(<[^>]*>)?${sectionName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(<\\/[^>]*>)?([\\s\\S]*?)(?=(<h[1-6]|<p><strong>|$))`,
                           'gi'
                         );
-                        
+
                         if (newContent && newContent.trim()) {
-                          // Format the new content with highlighting
                           const formattedContent = newContent
                             .split('\n')
                             .map(line => line.trim())
                             .filter(line => line)
-                            .map(line => `<p style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 8px 12px; margin: 4px 0; border-radius: 4px; border-left: 4px solid #fbbf24;">${line}</p>`)
+                            .map(line => `<p style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 6px 10px; margin: 4px 0; border-radius: 3px; border-left: 3px solid #fbbf24; line-height: 1.5;">${line}</p>`)
                             .join('');
-                          
+
                           displayContent = displayContent.replace(
                             sectionPattern,
-                            `$1${sectionName}$2<div style="margin: 12px 0; padding: 12px; background: #fffbeb; border-radius: 6px; border: 2px dashed #fbbf24;">${formattedContent}</div>`
+                            `$1${sectionName}$2<div style="margin: 10px 0; padding: 10px; background: #fffbeb; border-radius: 4px; border: 1px dashed #fbbf24;">${formattedContent}</div>`
                           );
                         }
                       }
                     });
-                    
+
                     // Replace bracketed variables with live values
                     Object.entries(variables).forEach(([varName, varValue]) => {
-                      // Skip section fields as they're already handled
                       if (sectionFields.includes(varName)) return;
-                      
-                      // Escape special regex characters in variable name
+
                       const escapedVarName = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                      
-                      // Replace [VARIABLE_NAME] pattern
                       const bracketPattern = new RegExp(`\\[${escapedVarName}\\]`, 'g');
                       const curlyPattern = new RegExp(`\\{${escapedVarName}\\}`, 'g');
                       const anglePattern = new RegExp(`<<${escapedVarName}>>`, 'g');
-                      
-                      // Highlight the replaced value
-                      const highlightedValue = varValue 
-                        ? `<span style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 3px 8px; border-radius: 4px; font-weight: 600; color: #92400e; border: 1px solid #fbbf24; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">${varValue}</span>`
-                        : `<span style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); padding: 3px 8px; border-radius: 4px; color: #991b1b; border: 1px solid #f87171; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">[${varName}]</span>`;
-                      
+
+                      const highlightedValue = varValue
+                        ? `<mark style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 2px 6px; border-radius: 3px; font-weight: 600; color: #92400e; border: 1px solid #fbbf24;">${varValue}</mark>`
+                        : `<mark style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); padding: 2px 6px; border-radius: 3px; color: #991b1b; border: 1px solid #f87171; font-weight: 500;">[${varName}]</mark>`;
+
                       displayContent = displayContent.replace(bracketPattern, highlightedValue);
                       displayContent = displayContent.replace(curlyPattern, highlightedValue);
                       displayContent = displayContent.replace(anglePattern, highlightedValue);
                     });
-                    
+
                     return (
-                      <div 
-                        dangerouslySetInnerHTML={{ __html: displayContent }}
-                        style={{
-                          fontFamily: docxHtmlContent ? 'inherit' : 'Georgia, serif',
-                          lineHeight: '1.6',
-                          whiteSpace: docxHtmlContent ? 'normal' : 'pre-wrap'
-                        }}
-                      />
+                      <div dangerouslySetInnerHTML={{ __html: displayContent }} />
                     );
                   })()}
-                  
-                  {/* Page number indicator at bottom */}
+
+                  {/* Page number indicator */}
                   {docxPages.length > 1 && (
                     <div style={{
                       position: 'absolute',
@@ -1352,32 +1298,15 @@ useEffect(() => {
                       transform: 'translateX(-50%)',
                       fontSize: '10px',
                       color: '#9ca3af',
-                      fontFamily: 'monospace'
+                      fontFamily: 'Arial, sans-serif'
                     }}>
                       Page {currentDocxPage} of {docxPages.length}
                     </div>
                   )}
                 </div>
               </div>
-              
-              <div style={{
-                marginTop: '16px',
-                padding: '16px',
-                background: '#f0f9ff',
-                border: '1px solid #0ea5e9',
-                borderRadius: '6px',
-                fontSize: '14px',
-                color: '#0369a1'
-              }}>
-                <strong>📝 How to use:</strong>
-                <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
-                  <li>Edit variable values in the <strong>Variables panel</strong> on the right</li>
-                  <li><strong>Watch live updates</strong> in the preview as you type! 🎉</li>
-                  <li>Use <strong>Previous/Next</strong> buttons to navigate pages</li>
-                  <li>Click <strong>"Download Document"</strong> button to get your edited .docx file</li>
-                  <li>All formatting, tables, and structure are preserved in the download</li>
-                </ul>
-              </div>
+
+              {/* Instructions */}
             </div>
           ) : isPdfImported || isPdfImportedRef.current ? (
             <div className="pdf-viewport">
@@ -1427,118 +1356,6 @@ useEffect(() => {
               </p>
             </div>
           )}
-        </div>
-        
-        {/* Compliance Analysis Panel */}
-        <div style={{ padding: '20px', maxHeight: '400px', overflowY: 'auto', borderTop: '1px solid #e2e8f0' }}>
-          <div style={{ marginBottom: '16px' }}>
-            <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-              <Shield size={18} />
-              Legal Compliance Analysis ({sentences.length} sentences analyzed)
-            </h4>
-            
-          </div>
-          
-          {Object.keys(complianceFlags).length === 0 && (
-            <div style={{
-              padding: '16px',
-              backgroundColor: '#d4edda',
-              border: '1px solid #c3e6cb',
-              color: '#155724',
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-              <p style={{ margin: 0 }}>✅ No compliance issues detected</p>
-            </div>
-          )}
-          {sentences
-            .filter(sentence => complianceFlags[sentence.id])
-            .map((sentence) => (
-            <div key={sentence.id} style={{ marginBottom: '16px' }}>
-              <div style={{
-                padding: '12px',
-                borderRadius: '8px',
-                backgroundColor: complianceFlags[sentence.id] ? 
-                  (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffebee' : '#fff3e0') : 
-                  '#f8f9fa',
-                border: '1px solid #e0e0e0',
-                borderLeft: complianceFlags[sentence.id] ? 
-                  `4px solid ${complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#dc3545' : '#ffc107'}` : 
-                  '4px solid #6c757d'
-              }}>
-                <strong style={{
-                  backgroundColor: '#6c757d',
-                  color: 'white',
-                  padding: '3px 8px',
-                  borderRadius: '4px',
-                  fontSize: '12px',
-                  marginRight: '12px'
-                }}>
-                  §{sentence.section}
-                </strong>
-                <span style={{
-                  backgroundColor: complianceFlags[sentence.id] ? 
-                    (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffcdd2' : '#fff8e1') : 
-                    'transparent',
-                  padding: complianceFlags[sentence.id] ? '3px 6px' : '0',
-                  borderRadius: '3px'
-                }}>
-                  {sentence.text}
-                </span>
-              </div>
-              
-              {complianceFlags[sentence.id].map((flag, idx) => (
-                <div key={idx} style={{
-                  backgroundColor: flag.severity === 'error' ? '#f8d7da' : '#fff3cd',
-                  padding: '12px',
-                  margin: '8px 0 8px 24px',
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  borderLeft: `3px solid ${flag.severity === 'error' ? '#dc3545' : '#ffc107'}`
-                }}>
-                  <div style={{ fontWeight: 'bold', marginBottom: '6px' }}>
-                    {flag.severity === 'error' ? 'ERROR' : 'WARNING'} - {flag.type.toUpperCase()}
-                  </div>
-                  <div style={{ marginBottom: '8px' }}>{flag.message}</div>
-                  
-                  {flag.lawReference && (
-                    <div style={{ 
-                      backgroundColor: '#e9ecef', 
-                      padding: '8px', 
-                      borderRadius: '4px',
-                      fontSize: '13px',
-                      marginBottom: '6px'
-                    }}>
-                      <strong>Legal Reference:</strong> {flag.lawReference}
-                    </div>
-                  )}
-                  
-                  {flag.suggestion && (
-                    <div style={{ 
-                      backgroundColor: '#d4edda', 
-                      padding: '8px', 
-                      borderRadius: '4px',
-                      fontSize: '13px',
-                      marginBottom: '6px'
-                    }}>
-                      <strong>Suggestion:</strong> {flag.suggestion}
-                    </div>
-                  )}
-                  
-                  {flag.alternativeLanguage && (
-                    <div style={{ 
-                      backgroundColor: '#d1ecf1', 
-                      padding: '8px', 
-                      borderRadius: '4px',
-                      fontSize: '13px'
-                    }}>
-                      <strong>Alternative:</strong> "{flag.alternativeLanguage}"
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -1720,12 +1537,123 @@ useEffect(() => {
 
   const renderStateConfigTab = () => (
     <div className="tab-content">
+      {/* Compliance Analysis Panel */}
+      <div style={{ padding: '20px', maxHeight: '600px', overflowY: 'auto', borderBottom: '1px solid #e2e8f0', marginBottom: '20px' }}>
+        <div style={{ marginBottom: '16px' }}>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+            <Shield size={20} />
+            Legal Compliance Analysis ({sentences.length} sentences analyzed)
+          </h3>
+        </div>
+
+        {Object.keys(complianceFlags).length === 0 && (
+          <div style={{
+            padding: '16px',
+            backgroundColor: '#d4edda',
+            border: '1px solid #c3e6cb',
+            color: '#155724',
+            borderRadius: '8px',
+            textAlign: 'center'
+          }}>
+            <p style={{ margin: 0 }}>✅ No compliance issues detected</p>
+          </div>
+        )}
+        {sentences
+          .filter(sentence => complianceFlags[sentence.id])
+          .map((sentence) => (
+          <div key={sentence.id} style={{ marginBottom: '16px' }}>
+            <div style={{
+              padding: '12px',
+              borderRadius: '8px',
+              backgroundColor: complianceFlags[sentence.id] ?
+                (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffebee' : '#fff3e0') :
+                '#f8f9fa',
+              border: '1px solid #e0e0e0',
+              borderLeft: complianceFlags[sentence.id] ?
+                `4px solid ${complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#dc3545' : '#ffc107'}` :
+                '4px solid #6c757d'
+            }}>
+              <strong style={{
+                backgroundColor: '#6c757d',
+                color: 'white',
+                padding: '3px 8px',
+                borderRadius: '4px',
+                fontSize: '12px',
+                marginRight: '12px'
+              }}>
+                §{sentence.section}
+              </strong>
+              <span style={{
+                backgroundColor: complianceFlags[sentence.id] ?
+                  (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffcdd2' : '#fff8e1') :
+                  'transparent',
+                padding: complianceFlags[sentence.id] ? '3px 6px' : '0',
+                borderRadius: '3px'
+              }}>
+                {sentence.text}
+              </span>
+            </div>
+
+            {complianceFlags[sentence.id].map((flag, idx) => (
+              <div key={idx} style={{
+                backgroundColor: flag.severity === 'error' ? '#f8d7da' : '#fff3cd',
+                padding: '12px',
+                margin: '8px 0 8px 24px',
+                borderRadius: '6px',
+                fontSize: '14px',
+                borderLeft: `3px solid ${flag.severity === 'error' ? '#dc3545' : '#ffc107'}`
+              }}>
+                <div style={{ fontWeight: 'bold', marginBottom: '6px' }}>
+                  {flag.severity === 'error' ? '🚨 ERROR' : '⚠️ WARNING'} - {flag.type.toUpperCase()}
+                </div>
+                <div style={{ marginBottom: '8px' }}>{flag.message}</div>
+
+                {flag.lawReference && (
+                  <div style={{
+                    backgroundColor: '#e9ecef',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    marginBottom: '6px'
+                  }}>
+                    <strong>Legal Reference:</strong> {flag.lawReference}
+                  </div>
+                )}
+
+                {flag.suggestion && (
+                  <div style={{
+                    backgroundColor: '#d4edda',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    marginBottom: '6px'
+                  }}>
+                    <strong>Suggestion:</strong> {flag.suggestion}
+                  </div>
+                )}
+
+                {flag.alternativeLanguage && (
+                  <div style={{
+                    backgroundColor: '#d1ecf1',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    fontSize: '13px'
+                  }}>
+                    <strong>Alternative:</strong> "{flag.alternativeLanguage}"
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
       <div style={{ padding: '20px', backgroundColor: '#f8f9fa', borderRadius: '8px', margin: '10px 0' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
             <Shield size={20} /> Legal Compliance Configuration
           </h3>
-          <button 
+          <button
             className="btn btn-secondary"
             onClick={() => setShowRulesManager(!showRulesManager)}
           >
@@ -1883,40 +1811,31 @@ useEffect(() => {
       </div>
       
       <div className="tab-navigation">
-        <button 
+        <button
           className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
           onClick={() => setActiveTab('variables')}
         >
           <Settings size={16} />
           Variables
         </button>
-        <button 
+        <button
           className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
           onClick={() => setActiveTab('state')}
         >
           <Shield size={16} />
           Compliance
         </button>
-        <button
-          className={`tab-button`}
-          onClick={() => {
-            document.getElementById('offerLetterInput').click();
-          }}
-        >
-          <FileText size={16} />
-          Import Offer Letter
-        </button>
-        <input
-          type="file"
-          id="offerLetterInput"
-          accept=".docx"
-          style={{ display: 'none' }}
-          onChange={(e) => {
-            console.log('File input onChange triggered', e.target.files);
-            handleOfferLetterImport(e);
-          }}
-        />
       </div>
+      <input
+        type="file"
+        id="offerLetterInput"
+        accept=".docx"
+        style={{ display: 'none' }}
+        onChange={(e) => {
+          console.log('File input onChange triggered', e.target.files);
+          handleOfferLetterImport(e);
+        }}
+      />
       
       <div className="tab-content-wrapper">
   {activeTab === 'variables' && (
@@ -2142,7 +2061,7 @@ useEffect(() => {
       }
 
       const result = await response.json();
-      
+
       if (!result.success) {
         throw new Error(result.error || 'Failed to extract variables from Word document');
       }
@@ -2150,28 +2069,43 @@ useEffect(() => {
       // Store the original file for later download
       window.originalDocxFile = file;
 
-      // Convert Word document to HTML using Mammoth for rich preview
+      // Read file as array buffer
       const arrayBuffer = await file.arrayBuffer();
+
+      // Convert Word document to HTML using Mammoth for editable preview
       const mammothResult = await mammoth.convertToHtml({ arrayBuffer });
       const htmlContent = mammothResult.value;
-      
+
       // Store HTML content
       setDocxHtmlContent(htmlContent);
-      
+
       // Create a blob URL for the Word document
-      const docxBlob = new Blob([arrayBuffer], { 
-        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
+      const docxBlob = new Blob([arrayBuffer], {
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       });
       const docxUrl = URL.createObjectURL(docxBlob);
       window.docxPreviewUrl = docxUrl;
 
-      // Set template content as text (for variable detection)
+      // Set template content as text (for variable detection and compliance)
       const documentText = result.data.text || '';
       setTemplateContent(documentText);
       setTemplateLoaded(true);
-      setPreviewMode('docx-preview'); // New mode for Word document preview
-      
-      // Split content into pages based on page breaks or approximate height
+      setPreviewMode('docx-preview');
+
+      // Extract and analyze sentences for compliance
+      const splitSentences = documentText
+        .split(/[.!?]+/)
+        .filter(sentence => sentence.trim().length > 10)
+        .map((sentence, index) => ({
+          id: `sentence_${index}`,
+          text: sentence.trim(),
+          section: Math.floor(index / 3) + 1
+        }));
+
+      setSentences(splitSentences);
+      console.log('📄 Document text extracted for compliance:', splitSentences.length, 'sentences');
+
+      // Split content into pages
       const pages = splitHtmlIntoPages(htmlContent);
       setDocxPages(pages);
       setCurrentDocxPage(1);
@@ -2181,7 +2115,7 @@ useEffect(() => {
       Object.entries(result.data.variables || {}).forEach(([varName, varData]) => {
         extractedVars[varName] = varData.suggested_value || '';
       });
-      
+
       setVariables(extractedVars);
 
       // Set metadata
@@ -2191,7 +2125,7 @@ useEffect(() => {
       // Give user feedback
       alert(`Word document imported successfully! Found ${Object.keys(extractedVars).length} variables. Edit them in the Variables panel on the right.`);
       setIsImportingPdf(false);
-      
+
     } catch (error) {
       console.error('Error importing Word document:', error);
       setPreviewError(`Failed to import Word document: ${error.message}. Ensure backend is running on port 5000.`);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, FileText, Pen, Download, Settings, Users, BarChart3, Shield, Clock, Search } from 'lucide-react';
+import { Plus, FileText, Pen, Download, BarChart3, Shield, Clock, Search, Bell, Settings, ChevronDown, Globe } from 'lucide-react';
 import TemplateModal from './TemplateModal';
 
 const HomeScreen = ({ onTemplateSelect, onPDFGenerate }) => {
@@ -82,10 +82,6 @@ Best regards,
     setShowAddModal(false);
   };
 
-  const handleTemplateClick = (template) => {
-    onTemplateSelect(template);
-  };
-
   const filteredTemplates = templates.filter(template => {
     const matchesSearch = template.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          template.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -113,67 +109,56 @@ Best regards,
 
   return (
     <div className="home-screen">
-      {/* Professional Header */}
+      {/* Enterprise Header */}
       <div className="header">
         <div className="header-content">
           <div className="header-left">
-            <div className="logo-section">
-              <div className="logo">HR Portal</div>
-              <div className="header-subtitle">Document Management System</div>
+            <div className="company-brand">
+              <div className="brand-logo">
+                <div className="company-name-text">TECHGENE</div>
+              </div>
+              <div className="brand-info">
+                <div className="product-name">HR Document Management</div>
+              </div>
             </div>
+            <div className="nav-separator"></div>
+            <nav className="main-navigation">
+              <button className="nav-item active">
+                <FileText size={16} />
+                Templates
+              </button>
+              <button className="nav-item">
+                <BarChart3 size={16} />
+                Analytics
+              </button>
+              <button className="nav-item">
+                <Shield size={16} />
+                Compliance
+              </button>
+            </nav>
           </div>
           <div className="header-right">
-            <div className="user-info">
+            <div className="header-actions">
+              <button className="action-btn">
+                <Bell size={18} />
+                <span className="notification-badge">3</span>
+              </button>
+              <button className="action-btn">
+                <Settings size={18} />
+              </button>
+              <button className="action-btn">
+                <Globe size={18} />
+              </button>
+            </div>
+            <div className="user-profile">
               <div className="user-details">
-                <span className="user-name">HR Administrator</span>
-                <span className="user-role">Document Manager</span>
+                <span className="user-name">Sarah Johnson</span>
+                <span className="user-role">HR Operations Manager</span>
+                <span className="user-org">North America • HR Division</span>
               </div>
               <div className="user-avatar">
-                <Users size={18} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Dashboard Stats */}
-      <div className="dashboard-stats">
-        <div className="container">
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-icon">
-                <FileText size={24} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">{templates.length}</div>
-                <div className="stat-label">Active Templates</div>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">
-                <BarChart3 size={24} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">{templates.reduce((sum, t) => sum + t.usage, 0)}</div>
-                <div className="stat-label">Documents Generated</div>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">
-                <Shield size={24} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">{templates.filter(t => t.compliance === 'verified').length}</div>
-                <div className="stat-label">Compliance Verified</div>
-              </div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">
-                <Clock size={24} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">98%</div>
-                <div className="stat-label">System Uptime</div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
+                <ChevronDown size={14} className="dropdown-arrow" />
               </div>
             </div>
           </div>
@@ -235,15 +220,21 @@ Best regards,
                 className="template-card"
               >
                 <div className="template-header">
-                  <div className="template-icon">
-                    <FileText size={20} />
+                  <div className="template-icon-wrapper">
+                    <div className="template-icon">
+                      <FileText size={24} />
+                    </div>
+                    <div className="template-category">
+                      {template.category.charAt(0).toUpperCase() + template.category.slice(1)}
+                    </div>
                   </div>
                   <div className="template-meta">
                     <div 
                       className="compliance-badge"
                       style={{ 
-                        backgroundColor: getComplianceColor(template.compliance) + '20',
-                        color: getComplianceColor(template.compliance)
+                        backgroundColor: getComplianceColor(template.compliance) + '15',
+                        color: getComplianceColor(template.compliance),
+                        border: `1px solid ${getComplianceColor(template.compliance)}30`
                       }}
                     >
                       <Shield size={12} />
@@ -255,32 +246,45 @@ Best regards,
                 <div className="template-content">
                   <h3 className="template-title">{template.title}</h3>
                   <p className="template-description">{template.description}</p>
+                  <div className="template-preview">
+                    "{template.preview}"
+                  </div>
                 </div>
 
                 <div className="template-stats">
                   <div className="stat-item">
-                    <span className="stat-label">Used</span>
-                    <span className="stat-value">{template.usage}x</span>
+                    <div className="stat-icon">
+                      <BarChart3 size={14} />
+                    </div>
+                    <div className="stat-details">
+                      <span className="stat-value">{template.usage}</span>
+                      <span className="stat-label">Uses</span>
+                    </div>
                   </div>
                   <div className="stat-item">
-                    <span className="stat-label">Modified</span>
-                    <span className="stat-value">{template.lastModified}</span>
+                    <div className="stat-icon">
+                      <Clock size={14} />
+                    </div>
+                    <div className="stat-details">
+                      <span className="stat-value">{template.lastModified}</span>
+                      <span className="stat-label">Modified</span>
+                    </div>
                   </div>
                 </div>
 
                 <div className="template-actions">
                   <button 
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-template"
                     onClick={() => onTemplateSelect(template)}
                   >
-                    <Pen size={14} />
+                    <Pen size={16} />
                     Edit Template
                   </button>
                   <button 
-                    className="btn btn-secondary btn-sm"
+                    className="btn btn-secondary btn-template"
                     onClick={() => onPDFGenerate && onPDFGenerate(template)}
                   >
-                    <Download size={14} />
+                    <Download size={16} />
                     Generate
                   </button>
                 </div>
@@ -316,141 +320,277 @@ Best regards,
       <style jsx>{`
         .home-screen {
           min-height: 100vh;
-          background-color: #f8fafc;
+          background-color: #F8F9FA;
         }
 
-        /* Professional Header */
+        /* Enterprise Header */
         .header {
-          background: white;
-          border-bottom: 1px solid #e2e8f0;
-          padding: 16px 0;
+          background: #1e3a5f;
+          border-bottom: none;
+          padding: 0;
+          box-shadow: none;
+          position: relative;
+        }
+
+        .header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: #0055A4;
         }
 
         .header-content {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 0 24px;
+          padding: 0 32px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          height: 64px;
         }
 
         .header-left {
           display: flex;
           align-items: center;
+          gap: 32px;
         }
 
-        .logo-section {
+        .company-brand {
           display: flex;
           flex-direction: column;
+          align-items: flex-start;
+          gap: 2px;
         }
 
-        .logo {
+        .brand-logo {
+          height: auto;
+          background: transparent;
+          border-radius: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-bottom: 0;
+          min-width: 150px;
+          padding: 0;
+        }
+
+        .company-name-text {
+          font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #FFFFFF;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          line-height: 1;
+          text-align: left;
+        }
+
+        .company-logo-img {
+          height: 30px;
+          width: auto;
+          object-fit: contain;
+          max-width: 150px;
+          display: block;
+        }
+
+        .brand-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .company-name {
           font-size: 20px;
           font-weight: 700;
-          color: #1e293b;
-          margin-bottom: 2px;
+          color: white;
+          line-height: 1.2;
+          letter-spacing: -0.25px;
         }
 
-        .header-subtitle {
-          font-size: 12px;
-          color: #64748b;
+        .product-name {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.75);
           font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          text-align: left;
+          margin-top: 0;
+          white-space: nowrap;
+          font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .nav-separator {
+          width: 1px;
+          height: 32px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 0 8px;
+        }
+
+        .main-navigation {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          border-radius: 8px;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 14px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          position: relative;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+        }
+
+        .nav-item:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-item.active {
+          background: rgba(255, 255, 255, 0.15);
+          color: #FFFFFF;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-item.active::before {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 4px;
+          height: 4px;
+          background: #1E70C1;
+          border-radius: 50%;
         }
 
         .header-right {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 24px;
         }
 
-        .user-info {
+        .header-actions {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 8px 16px;
-          background: #f8fafc;
+        }
+
+        .action-btn {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 8px;
-          border: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+          background: rgba(255, 255, 255, 0.15);
+          color: rgba(255, 255, 255, 0.9);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .notification-badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          width: 18px;
+          height: 18px;
+          background: #ef4444;
+          color: white;
+          border-radius: 50%;
+          font-size: 10px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #1e3a5f;
+        }
+
+        .user-profile {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 8px 16px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .user-profile:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.2);
         }
 
         .user-details {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+          gap: 2px;
         }
 
         .user-name {
           font-size: 14px;
           font-weight: 600;
-          color: #1e293b;
+          color: #FFFFFF;
+          line-height: 1;
         }
 
         .user-role {
           font-size: 12px;
-          color: #64748b;
-        }
-
-        .user-avatar {
-          width: 32px;
-          height: 32px;
-          background: #3b82f6;
-          border-radius: 6px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-        }
-
-        /* Dashboard Stats */
-        .dashboard-stats {
-          background: white;
-          border-bottom: 1px solid #e2e8f0;
-          padding: 20px 0;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 20px;
-        }
-
-        .stat-card {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 16px;
-          background: #f8fafc;
-          border-radius: 8px;
-          border: 1px solid #e2e8f0;
-        }
-
-        .stat-icon {
-          width: 48px;
-          height: 48px;
-          background: #3b82f6;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-        }
-
-        .stat-content {
-          flex: 1;
-        }
-
-        .stat-number {
-          font-size: 24px;
-          font-weight: 700;
-          color: #1e293b;
+          color: rgba(255, 255, 255, 0.7);
+          font-weight: 500;
           line-height: 1;
         }
 
-        .stat-label {
-          font-size: 14px;
+        .user-org {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 400;
+          line-height: 1;
+        }
+
+        .user-avatar {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .user-avatar img {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          border: 2px solid rgba(0, 85, 164, 0.2);
+        }
+
+        .dropdown-arrow {
           color: #64748b;
-          margin-top: 4px;
+          transition: transform 0.2s ease;
+        }
+
+        .user-profile:hover .dropdown-arrow {
+          transform: rotate(180deg);
         }
 
         /* Main Content */
@@ -470,7 +610,7 @@ Best regards,
         .page-title {
           font-size: 28px;
           font-weight: 700;
-          color: #1e293b;
+          color: #333333;
           margin-bottom: 8px;
         }
 
@@ -517,7 +657,7 @@ Best regards,
 
         .search-input:focus {
           outline: none;
-          border-color: #3b82f6;
+          border-color: #1E70C1;
           background: white;
         }
 
@@ -543,13 +683,13 @@ Best regards,
         }
 
         .filter-btn:hover {
-          border-color: #3b82f6;
-          color: #3b82f6;
+          border-color: #1E70C1;
+          color: #0055A4;
         }
 
         .filter-btn.active {
-          background: #3b82f6;
-          border-color: #3b82f6;
+          background: #0055A4;
+          border-color: #0055A4;
           color: white;
         }
 
@@ -568,122 +708,219 @@ Best regards,
         /* Template Grid */
         .template-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-          gap: 24px;
+          grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+          gap: 28px;
         }
 
         .template-card {
           background: white;
-          border-radius: 12px;
+          border-radius: 16px;
           border: 1px solid #e2e8f0;
-          padding: 24px;
-          transition: all 0.2s ease;
+          padding: 0;
+          transition: all 0.3s ease;
           cursor: pointer;
           overflow: hidden;
           word-wrap: break-word;
           display: flex;
           flex-direction: column;
           height: fit-content;
+          position: relative;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .template-card:hover {
-          border-color: #3b82f6;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-          transform: translateY(-1px);
+          border-color: #1E70C1;
+          box-shadow: 0 8px 25px rgba(0, 85, 164, 0.1);
+          transform: translateY(-2px);
         }
 
         .template-header {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
-          margin-bottom: 16px;
-          flex-shrink: 0;
+          padding: 24px 24px 16px 24px;
+          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+          border-bottom: 1px solid #f1f5f9;
+        }
+
+        .template-icon-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
 
         .template-icon {
-          width: 40px;
-          height: 40px;
-          background: #f1f5f9;
-          border-radius: 8px;
+          width: 48px;
+          height: 48px;
+          background: linear-gradient(135deg, #0055A4 0%, #1E70C1 100%);
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #3b82f6;
-          flex-shrink: 0;
+          color: white;
+          margin-bottom: 8px;
+          box-shadow: 0 4px 12px rgba(0, 85, 164, 0.25);
+        }
+
+        .template-category {
+          font-size: 12px;
+          font-weight: 600;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .compliance-badge {
           display: flex;
           align-items: center;
-          gap: 4px;
-          padding: 4px 8px;
-          border-radius: 4px;
+          gap: 6px;
+          padding: 6px 12px;
+          border-radius: 20px;
           font-size: 12px;
-          font-weight: 500;
-          flex-shrink: 0;
+          font-weight: 600;
           white-space: nowrap;
+          text-transform: uppercase;
+          letter-spacing: 0.25px;
         }
 
         .template-content {
-          margin-bottom: 20px;
+          padding: 24px;
           flex-grow: 1;
           overflow: hidden;
         }
 
         .template-title {
-          font-size: 18px;
-          font-weight: 600;
-          color: #1e293b;
-          margin-bottom: 8px;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          word-wrap: break-word;
-        }
-
-        .template-description {
-          font-size: 14px;
-          color: #64748b;
-          line-height: 1.5;
+          font-size: 20px;
+          font-weight: 700;
+          color: #2C2C2C;
+          margin-bottom: 12px;
+          line-height: 1.3;
           overflow: hidden;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
-          word-wrap: break-word;
-          hyphens: auto;
+        }
+
+        .template-description {
+          font-size: 15px;
+          color: #64748b;
+          line-height: 1.6;
+          margin-bottom: 16px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .template-preview {
+          font-size: 13px;
+          color: #94a3b8;
+          font-style: italic;
+          line-height: 1.5;
+          padding: 12px;
+          background: #f8fafc;
+          border-radius: 8px;
+          border-left: 3px solid #e2e8f0;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
 
         .template-stats {
           display: flex;
-          gap: 20px;
-          margin-bottom: 20px;
-          padding: 12px 0;
+          gap: 24px;
+          padding: 20px 24px;
+          background: #fafbfc;
           border-top: 1px solid #f1f5f9;
-          border-bottom: 1px solid #f1f5f9;
         }
 
         .stat-item {
           display: flex;
-          flex-direction: column;
-          gap: 2px;
+          align-items: center;
+          gap: 10px;
         }
 
-        .stat-item .stat-label {
+        .stat-icon {
+          width: 32px;
+          height: 32px;
+          background: white;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #64748b;
+          border: 1px solid #e2e8f0;
+        }
+
+        .stat-details {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .stat-value {
+          font-size: 16px;
+          color: #333333;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        .stat-label {
           font-size: 12px;
           color: #64748b;
           font-weight: 500;
-        }
-
-        .stat-item .stat-value {
-          font-size: 14px;
-          color: #1e293b;
-          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .template-actions {
           display: flex;
+          gap: 0;
+          border-top: 1px solid #f1f5f9;
+        }
+
+        .btn-template {
+          padding: 16px 20px;
+          border-radius: 0;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: none;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
           gap: 8px;
+          flex: 1;
+          justify-content: center;
+          position: relative;
+        }
+
+        .btn-template:first-child {
+          border-bottom-left-radius: 16px;
+        }
+
+        .btn-template:last-child {
+          border-bottom-right-radius: 16px;
+          border-left: 1px solid #f1f5f9;
+        }
+
+        .btn-primary.btn-template {
+          background: #3b82f6;
+          color: white;
+        }
+
+        .btn-primary.btn-template:hover {
+          background: #2563eb;
+        }
+
+        .btn-secondary.btn-template {
+          background: white;
+          color: #64748b;
+        }
+
+        .btn-secondary.btn-template:hover {
+          background: #F8F9FA;
+          color: #0055A4;
         }
 
         .btn {
@@ -707,12 +944,12 @@ Best regards,
         }
 
         .btn-primary {
-          background: #3b82f6;
+          background: #0055A4;
           color: white;
         }
 
         .btn-primary:hover {
-          background: #2563eb;
+          background: #1E70C1;
         }
 
         .btn-secondary {
@@ -729,49 +966,60 @@ Best regards,
         /* Add Template Card */
         .add-template-card {
           border: 2px dashed #cbd5e1;
-          background: #f8fafc;
+          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 280px;
+          min-height: 320px;
+          position: relative;
+          overflow: visible;
         }
 
         .add-template-card:hover {
-          border-color: #3b82f6;
-          background: #f0f9ff;
+          border-color: #1E70C1;
+          background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 85, 164, 0.1);
         }
 
         .add-template-content {
           text-align: center;
+          padding: 40px 20px;
         }
 
         .add-template-icon {
-          width: 64px;
-          height: 64px;
-          background: #e2e8f0;
-          border-radius: 12px;
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+          border-radius: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 16px auto;
+          margin: 0 auto 20px auto;
           color: #64748b;
+          transition: all 0.3s ease;
         }
 
         .add-template-card:hover .add-template-icon {
-          background: #3b82f6;
+          background: linear-gradient(135deg, #0055A4 0%, #1E70C1 100%);
           color: white;
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 85, 164, 0.25);
         }
 
         .add-template-title {
-          font-size: 18px;
-          font-weight: 600;
-          color: #1e293b;
-          margin-bottom: 8px;
+          font-size: 20px;
+          font-weight: 700;
+          color: #2C2C2C;
+          margin-bottom: 12px;
         }
 
         .add-template-description {
-          font-size: 14px;
+          font-size: 15px;
           color: #64748b;
+          line-height: 1.6;
+          max-width: 280px;
+          margin: 0 auto;
         }
 
         @media (max-width: 768px) {
@@ -794,10 +1042,6 @@ Best regards,
 
           .template-grid {
             grid-template-columns: 1fr;
-          }
-
-          .stats-grid {
-            grid-template-columns: 1fr 1fr;
           }
         }
       `}</style>
