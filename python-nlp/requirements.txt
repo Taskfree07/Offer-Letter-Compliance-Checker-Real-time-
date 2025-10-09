@@ -12,6 +12,7 @@ borb
 weasyprint
 beautifulsoup4
 python-docx
+requests
 
 # Note: After installing requirements, run:
 # python -m spacy download en_core_web_sm

@@ -1,7 +1,29 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)"
+      "Bash(curl -s http://127.0.0.1:5000/api/docx-health)",
+      "Bash(curl -X POST http://127.0.0.1:5000/api/docx-to-html -F \"file=@test.docx\")",
+      "Bash(curl:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(python:*)",
+      "Bash(timeout:*)",
+      "Bash(move PREVIEW_FIX_SUMMARY.md docs/setup-guides/)",
+      "Bash(move RESTART_BACKEND.md docs/setup-guides/)",
+      "Bash(move CKEDITOR_INTEGRATION.md docs/setup-guides/)",
+      "Bash(move EXACT_PAGE_LAYOUT.md docs/setup-guides/)",
+      "Bash(move TEST_INSTRUCTIONS.md docs/setup-guides/)",
+      "Bash(git restore:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker system prune:*)",
+      "Bash(docker:*)",
+      "Bash(ipconfig)",
+      "Bash(docker-compose:*)",
+      "Bash(docker-compose up:*)",
+      "Read(//c/Users/Adil Akhtar/OneDrive/Pictures/Screenshots/**)",
+      "Bash(dir:*)",
+      "Bash(tasklist)"
     ],
     "deny": [],
     "ask": []

@@ -94,7 +94,7 @@
 
 .split-view {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 65fr 35fr;
   gap: 24px;
   height: calc(100vh - 80px);
   padding: 20px;

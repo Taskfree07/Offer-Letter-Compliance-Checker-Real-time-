@@ -1,0 +1,22 @@
+services:
+  onlyoffice-documentserver:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice-docs
+    ports:
+      - "8080:80"
+    environment:
+      - JWT_ENABLED=false
+      - WOPI_ENABLED=false
+      - USE_UNAUTHORIZED_STORAGE=true
+      - ALLOW_PRIVATE_IP_ADDRESS=true
+      - ALLOW_META_IP_ADDRESS=true
+    volumes:
+      - onlyoffice_data:/var/www/onlyoffice/Data
+      - onlyoffice_logs:/var/log/onlyoffice
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  onlyoffice_data:
+  onlyoffice_logs:

@@ -1,7 +1,10 @@
 import os
 import logging
 import json
-from flask import Flask, request, jsonify, make_response
+import hashlib
+import time
+from datetime import datetime
+from flask import Flask, request, jsonify, make_response, send_file
 from flask_cors import CORS
 from typing import Dict, Any
 import traceback
@@ -53,6 +56,14 @@ except Exception as e:
     docx_service = None
 # Initialize Flask app
 app = Flask(__name__)
+
+# ONLYOFFICE Configuration
+ONLYOFFICE_SERVER_URL = os.environ.get('ONLYOFFICE_SERVER_URL', 'http://localhost:8080')
+UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', './uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Store for document sessions (in production, use Redis or database)
+document_sessions = {}
 
 # Enable CORS for all routes (allows JavaScript frontend to access the API)
 # Allow common dev ports 3000/3001 on localhost and 127.0.0.1, and handle preflight (OPTIONS)
@@ -1078,12 +1089,249 @@ def convert_docx_to_pdf_libreoffice(docx_bytes: bytes) -> bytes:
         if os.path.exists(pdf_path):
             os.remove(pdf_path)
 
+# ====== ONLYOFFICE Integration Endpoints ======
+
+@app.route('/api/onlyoffice/upload', methods=['POST'])
+def upload_document_onlyoffice():
+    """Upload document for ONLYOFFICE editing"""
+    try:
+        if 'file' not in request.files:
+            return jsonify({"error": "No file provided"}), 400
+
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({"error": "No file selected"}), 400
+
+        if not file.filename.lower().endswith('.docx'):
+            return jsonify({"error": "Only .docx files are supported"}), 400
+
+        # Generate unique document ID
+        timestamp = str(int(time.time() * 1000))
+        doc_id = hashlib.md5(f"{file.filename}{timestamp}".encode()).hexdigest()
+
+        # Read document bytes first
+        docx_bytes = file.read()
+
+        # Extract variables using existing service (with GLiNER enrichment)
+        variables = {}
+        variables_metadata = {}
+        if DOCX_AVAILABLE:
+            var_result = extract_docx_variables(docx_bytes)
+            if var_result.get("success"):
+                variables = var_result.get("variables", {})
+                variables_metadata = variables  # For Content Controls conversion
+                logger.info(f"Extracted {len(variables)} variables from document (GLiNER enabled: {var_result.get('gliner_enabled', False)})")
+
+        # Convert bracketed variables to Content Controls (protected fields)
+        # This prevents users from deleting [Variable_Name] placeholders
+        if DOCX_AVAILABLE and docx_service:
+            logger.info("Converting bracketed variables to Content Controls for protection...")
+            docx_bytes = docx_service.convert_variables_to_content_controls(docx_bytes, variables_metadata)
+
+        # Save processed file
+        file_path = os.path.join(UPLOAD_FOLDER, f"{doc_id}.docx")
+        with open(file_path, 'wb') as f:
+            f.write(docx_bytes)
+
+        # Store session info
+        document_sessions[doc_id] = {
+            "filename": file.filename,
+            "file_path": file_path,
+            "created_at": datetime.now().isoformat(),
+            "variables": variables,
+            "modified": False
+        }
+
+        return jsonify({
+            "success": True,
+            "document_id": doc_id,
+            "filename": file.filename,
+            "variables": variables,
+            "message": f"Document uploaded successfully"
+        })
+
+    except Exception as e:
+        logger.error(f"Error uploading document: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/onlyoffice/config/<doc_id>', methods=['GET'])
+def get_onlyoffice_config(doc_id):
+    """Generate ONLYOFFICE editor configuration"""
+    try:
+        if doc_id not in document_sessions:
+            return jsonify({"error": "Document not found"}), 404
+
+        session = document_sessions[doc_id]
+
+        # ONLYOFFICE configuration
+        # Use actual machine IP for Docker to reach Flask API
+        # host.docker.internal may resolve to IPv6 which causes issues
+        import socket
+        try:
+            # Get the machine's local network IP
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            host_ip = s.getsockname()[0]
+            s.close()
+            flask_host = f"{host_ip}:5000"
+        except Exception:
+            # Fallback to host.docker.internal
+            flask_host = "host.docker.internal:5000"
+
+        logger.info(f"ONLYOFFICE will use Flask host: {flask_host}")
+
+        config = {
+            "document": {
+                "fileType": "docx",
+                "key": doc_id,
+                "title": session["filename"],
+                "url": f"http://{flask_host}/api/onlyoffice/download/{doc_id}",
+                "permissions": {
+                    "edit": True,
+                    "download": True,
+                    "review": True
+                }
+            },
+            "documentType": "word",
+            "editorConfig": {
+                "callbackUrl": f"http://{flask_host}/api/onlyoffice/callback/{doc_id}",
+                "customization": {
+                    "autosave": True,
+                    "forcesave": True
+                }
+            }
+        }
+
+        return jsonify({
+            "success": True,
+            "config": config,
+            "documentServerUrl": ONLYOFFICE_SERVER_URL
+        })
+
+    except Exception as e:
+        logger.error(f"Error generating config: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/onlyoffice/download/<doc_id>', methods=['GET'])
+def download_document_onlyoffice(doc_id):
+    """Serve document file for ONLYOFFICE"""
+    try:
+        if doc_id not in document_sessions:
+            return jsonify({"error": "Document not found"}), 404
+
+        session = document_sessions[doc_id]
+        return send_file(
+            session["file_path"],
+            mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            as_attachment=False
+        )
+
+    except Exception as e:
+        logger.error(f"Error downloading document: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/onlyoffice/callback/<doc_id>', methods=['POST'])
+def onlyoffice_callback(doc_id):
+    """Handle ONLYOFFICE save callback"""
+    try:
+        if doc_id not in document_sessions:
+            return jsonify({"error": 0})
+
+        data = request.get_json()
+        status = data.get('status')
+
+        # Status: 2 = ready for saving, 6 = saving
+        if status == 2 or status == 6:
+            download_url = data.get('url')
+            if download_url:
+                import requests
+                response = requests.get(download_url)
+                if response.status_code == 200:
+                    session = document_sessions[doc_id]
+                    with open(session["file_path"], 'wb') as f:
+                        f.write(response.content)
+
+                    # Re-extract variables from updated document
+                    if DOCX_AVAILABLE:
+                        var_result = extract_docx_variables(response.content)
+                        if var_result.get("success"):
+                            session["variables"] = var_result.get("variables", {})
+
+                    session["modified"] = True
+                    logger.info(f"Document {doc_id} saved successfully")
+
+        return jsonify({"error": 0})
+
+    except Exception as e:
+        logger.error(f"Error in callback: {e}")
+        return jsonify({"error": 1})
+
+@app.route('/api/onlyoffice/variables/<doc_id>', methods=['GET'])
+def get_document_variables_onlyoffice(doc_id):
+    """Get current variables from document"""
+    try:
+        if doc_id not in document_sessions:
+            return jsonify({"error": "Document not found"}), 404
+
+        session = document_sessions[doc_id]
+        return jsonify({
+            "success": True,
+            "variables": session.get("variables", {}),
+            "modified": session.get("modified", False)
+        })
+
+    except Exception as e:
+        logger.error(f"Error getting variables: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/onlyoffice/update-variables/<doc_id>', methods=['POST'])
+def update_document_variables_onlyoffice(doc_id):
+    """Update variables in document while preserving formatting"""
+    try:
+        if doc_id not in document_sessions:
+            return jsonify({"error": "Document not found"}), 404
+
+        if not DOCX_AVAILABLE:
+            return jsonify({"error": "DOCX service not available"}), 503
+
+        session = document_sessions[doc_id]
+        data = request.get_json()
+        variables = data.get('variables', {})
+
+        # Read current document
+        with open(session["file_path"], 'rb') as f:
+            docx_bytes = f.read()
+
+        # Replace variables while preserving formatting
+        modified_bytes = replace_docx_variables(docx_bytes, variables)
+
+        # Save modified document
+        with open(session["file_path"], 'wb') as f:
+            f.write(modified_bytes)
+
+        # Re-extract variables
+        var_result = extract_docx_variables(modified_bytes)
+        if var_result.get("success"):
+            session["variables"] = var_result.get("variables", {})
+
+        session["modified"] = True
+
+        return jsonify({
+            "success": True,
+            "variables": session["variables"],
+            "message": "Variables updated successfully. Reload the document to see changes."
+        })
+
+    except Exception as e:
+        logger.error(f"Error updating variables: {e}")
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     # Always run on port 5000 to match frontend expectations
     port = 5000
 
-    # Get host from environment variable or default to localhost
-    host = os.environ.get('HOST', '127.0.0.1')
+    # Get host from environment variable or default to 0.0.0.0 for Docker connectivity
+    host = os.environ.get('HOST', '0.0.0.0')
 
     # Get debug mode from environment variable
     debug = os.environ.get('DEBUG', 'False').lower() == 'true'

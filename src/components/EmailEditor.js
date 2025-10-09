@@ -10,10 +10,11 @@ import { COMPLIANCE_RULES } from './compliance/complianceRules';
 import EnhancedPDFViewer from './EnhancedPDFViewer';
 import DynamicPDFViewer from './DynamicPDFViewer';
 import EntitiesPanel from './EntitiesPanel';
+import WordDocumentEditor from './WordDocumentEditor';
+import OnlyOfficeViewer from './OnlyOfficeViewer';
 import enhancedPdfService from '../services/enhancedPdfService';
 import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
 import * as pdfjs from 'pdfjs-dist';
-import mammoth from 'mammoth';
 import '../styles/preview.css';
 
 // Configure PDF.js worker
@@ -48,6 +49,9 @@ const EmailEditor = ({ template, onBack }) => {
   const [docxHtmlContent, setDocxHtmlContent] = useState('');
   const [docxPages, setDocxPages] = useState([]);
   const [currentDocxPage, setCurrentDocxPage] = useState(1);
+  // ONLYOFFICE states
+  const [onlyofficeDocId, setOnlyofficeDocId] = useState(null);
+  const [useOnlyOffice, setUseOnlyOffice] = useState(false);
   // Use refs to store PDF data to avoid async state issues
   const importedPdfBytesRef = useRef(null);
   const isPdfImportedRef = useRef(false);
@@ -55,6 +59,7 @@ const EmailEditor = ({ template, onBack }) => {
   const htmlEditTimerRef = useRef(null);
   const editableRef = useRef(null);
   const docxPreviewContainerRef = useRef(null);
+  const onlyofficeViewerRef = useRef(null);
 
   // Compliance system states
   const [complianceFlags, setComplianceFlags] = useState({});
@@ -871,9 +876,46 @@ useEffect(() => {
     }
   };
 
-  const handleVariableChange = (varName, value) => {
+  const handleVariableChange = async (varName, value) => {
     const updatedVars = { ...variables, [varName]: value };
     setVariables(updatedVars);
+
+    // If in ONLYOFFICE mode, update the document in real-time
+    if (previewMode === 'onlyoffice' && onlyofficeDocId) {
+      try {
+        // Step 1: Update backend document file
+        const response = await fetch(`http://localhost:5000/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            variables: updatedVars
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          console.log('✅ Variables updated in backend document');
+
+          // Step 2: Update ONLYOFFICE viewer in real-time (no reload!)
+          if (onlyofficeViewerRef.current && onlyofficeViewerRef.current.updateVariable) {
+            // Use the real-time update API
+            onlyofficeViewerRef.current.updateVariable(varName, value);
+          } else {
+            // Fallback: reload if API not available
+            console.log('⚠️ Real-time API not available, reloading document');
+            if (onlyofficeViewerRef.current && onlyofficeViewerRef.current.reloadDocument) {
+              setTimeout(() => {
+                onlyofficeViewerRef.current.reloadDocument();
+              }, 500);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error updating ONLYOFFICE variables:', error);
+      }
+    }
 
     // Update editable HTML spans
     if (previewMode === 'html-edit' && editableRef.current) {
@@ -1152,161 +1194,59 @@ useEffect(() => {
                 {isImportingPdf ? 'Processing PDF structure and extracting variables...' : 'Applying professional formatting and padding...'}
               </p>
             </div>
-          ) : previewMode === 'docx-preview' && window.docxPreviewUrl ? (
+          ) : previewMode === 'onlyoffice' && onlyofficeDocId ? (
+            <div style={{ width: '100%', height: '100%', minHeight: '800px', display: 'flex', flexDirection: 'column' }}>
+              <OnlyOfficeViewer
+                ref={onlyofficeViewerRef}
+                documentId={onlyofficeDocId}
+                onSave={() => {
+                  console.log('Document saved in ONLYOFFICE');
+                }}
+                onVariablesUpdate={(vars) => {
+                  console.log('Variables updated from ONLYOFFICE:', vars);
+
+                  // Handle both array and object formats
+                  const updatedVars = {};
+
+                  if (Array.isArray(vars)) {
+                    // Array format: [{ variable: 'name', value: 'value' }, ...]
+                    vars.forEach(v => {
+                      updatedVars[v.variable] = v.value || '';
+                    });
+                  } else if (typeof vars === 'object' && vars !== null) {
+                    // Object format: { varName: { name: 'varName', value: 'value', ... }, ... }
+                    Object.entries(vars).forEach(([varName, varData]) => {
+                      if (typeof varData === 'object' && varData !== null) {
+                        updatedVars[varName] = varData.suggested_value || varData.value || '';
+                      } else {
+                        updatedVars[varName] = varData || '';
+                      }
+                    });
+                  }
+
+                  setVariables(updatedVars);
+                }}
+              />
+            </div>
+          ) : previewMode === 'docx-preview' && docxHtmlContent ? (
             <div className="pdf-viewport" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div style={{
                 flex: 1,
                 padding: '24px',
                 background: '#f5f5f5',
                 borderRadius: '8px',
-                overflow: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
+                overflow: 'auto'
               }}>
-                {/* Page Navigation */}
-                {docxPages.length > 1 && (
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px',
-                    marginBottom: '16px',
-                    padding: '12px 24px',
-                    background: '#ffffff',
-                    borderRadius: '8px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                    position: 'sticky',
-                    top: '0',
-                    zIndex: 10
-                  }}>
-                    <button
-                      onClick={() => setCurrentDocxPage(prev => Math.max(1, prev - 1))}
-                      disabled={currentDocxPage === 1}
-                      className="btn btn-secondary"
-                      style={{
-                        padding: '8px 16px',
-                        opacity: currentDocxPage === 1 ? 0.5 : 1,
-                        cursor: currentDocxPage === 1 ? 'not-allowed' : 'pointer'
-                      }}
-                    >
-                      ← Previous
-                    </button>
-                    <span style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
-                      Page {currentDocxPage} of {docxPages.length}
-                    </span>
-                    <button
-                      onClick={() => setCurrentDocxPage(prev => Math.min(docxPages.length, prev + 1))}
-                      disabled={currentDocxPage === docxPages.length}
-                      className="btn btn-secondary"
-                      style={{
-                        padding: '8px 16px',
-                        opacity: currentDocxPage === docxPages.length ? 0.5 : 1,
-                        cursor: currentDocxPage === docxPages.length ? 'not-allowed' : 'pointer'
-                      }}
-                    >
-                      Next →
-                    </button>
-                  </div>
-                )}
-
-                {/* Document Page with Real-time Variable Updates */}
-                <div
-                  ref={docxPreviewContainerRef}
-                  className="word-document-page"
-                  style={{
-                    width: '8.5in',
-                    minHeight: '11in',
-                    background: '#ffffff',
-                    padding: '1in',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                    borderRadius: '4px',
-                    marginBottom: '24px',
-                    position: 'relative',
-                    fontFamily: 'Calibri, Arial, sans-serif',
-                    fontSize: '11pt',
-                    lineHeight: '1.5',
-                    color: '#000000'
-                  }}>
-                  {(() => {
-                    // Get current page content
-                    const currentPageContent = docxPages[currentDocxPage - 1] || docxHtmlContent || templateContent;
-                    let displayContent = currentPageContent;
-
-                    // Section field names to detect
-                    const sectionFields = [
-                      "Confidentiality and Intellectual Property",
-                      "Pre-Employment Conditions",
-                      "Employment Agreement",
-                      "Compliance with Policies",
-                      "Governing Law and Dispute Resolution"
-                    ];
-
-                    // Replace section content
-                    sectionFields.forEach(sectionName => {
-                      if (variables[sectionName]) {
-                        const newContent = variables[sectionName];
-                        const sectionPattern = new RegExp(
-                          `(<[^>]*>)?${sectionName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(<\\/[^>]*>)?([\\s\\S]*?)(?=(<h[1-6]|<p><strong>|$))`,
-                          'gi'
-                        );
-
-                        if (newContent && newContent.trim()) {
-                          const formattedContent = newContent
-                            .split('\n')
-                            .map(line => line.trim())
-                            .filter(line => line)
-                            .map(line => `<p style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 6px 10px; margin: 4px 0; border-radius: 3px; border-left: 3px solid #fbbf24; line-height: 1.5;">${line}</p>`)
-                            .join('');
-
-                          displayContent = displayContent.replace(
-                            sectionPattern,
-                            `$1${sectionName}$2<div style="margin: 10px 0; padding: 10px; background: #fffbeb; border-radius: 4px; border: 1px dashed #fbbf24;">${formattedContent}</div>`
-                          );
-                        }
-                      }
-                    });
-
-                    // Replace bracketed variables with live values
-                    Object.entries(variables).forEach(([varName, varValue]) => {
-                      if (sectionFields.includes(varName)) return;
-
-                      const escapedVarName = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                      const bracketPattern = new RegExp(`\\[${escapedVarName}\\]`, 'g');
-                      const curlyPattern = new RegExp(`\\{${escapedVarName}\\}`, 'g');
-                      const anglePattern = new RegExp(`<<${escapedVarName}>>`, 'g');
-
-                      const highlightedValue = varValue
-                        ? `<mark style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 2px 6px; border-radius: 3px; font-weight: 600; color: #92400e; border: 1px solid #fbbf24;">${varValue}</mark>`
-                        : `<mark style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); padding: 2px 6px; border-radius: 3px; color: #991b1b; border: 1px solid #f87171; font-weight: 500;">[${varName}]</mark>`;
-
-                      displayContent = displayContent.replace(bracketPattern, highlightedValue);
-                      displayContent = displayContent.replace(curlyPattern, highlightedValue);
-                      displayContent = displayContent.replace(anglePattern, highlightedValue);
-                    });
-
-                    return (
-                      <div dangerouslySetInnerHTML={{ __html: displayContent }} />
-                    );
-                  })()}
-
-                  {/* Page number indicator */}
-                  {docxPages.length > 1 && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '0.5in',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      fontSize: '10px',
-                      color: '#9ca3af',
-                      fontFamily: 'Arial, sans-serif'
-                    }}>
-                      Page {currentDocxPage} of {docxPages.length}
-                    </div>
-                  )}
-                </div>
+                {/* CKEditor with Mammoth HTML */}
+                <WordDocumentEditor
+                  htmlContent={docxHtmlContent}
+                  variables={variables}
+                  onVariableChange={(varName, value) => {
+                    setVariables(prev => ({ ...prev, [varName]: value }));
+                  }}
+                  readOnly={false}
+                />
               </div>
-
-              {/* Instructions */}
             </div>
           ) : isPdfImported || isPdfImportedRef.current ? (
             <div className="pdf-viewport">
@@ -2046,51 +1986,53 @@ useEffect(() => {
       setIsImportingPdf(true);
       setPreviewError(null);
 
-      // Extract variables from Word document
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await fetch('http://127.0.0.1:5000/api/docx-extract-variables', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Server error: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || 'Failed to extract variables from Word document');
-      }
-
       // Store the original file for later download
       window.originalDocxFile = file;
 
-      // Read file as array buffer
-      const arrayBuffer = await file.arrayBuffer();
+      // Create separate FormData objects for each endpoint
+      const formData1 = new FormData();
+      formData1.append('file', file);
 
-      // Convert Word document to HTML using Mammoth for editable preview
-      const mammothResult = await mammoth.convertToHtml({ arrayBuffer });
-      const htmlContent = mammothResult.value;
+      const formData2 = new FormData();
+      formData2.append('file', file);
 
-      // Store HTML content
-      setDocxHtmlContent(htmlContent);
+      // Call only the necessary endpoints for ONLYOFFICE workflow
+      const [variablesResponse, onlyofficeResponse] = await Promise.all([
+        fetch('http://127.0.0.1:5000/api/docx-extract-variables', {
+          method: 'POST',
+          body: formData1
+        }),
+        fetch('http://127.0.0.1:5000/api/onlyoffice/upload', {
+          method: 'POST',
+          body: formData2
+        })
+      ]);
 
-      // Create a blob URL for the Word document
-      const docxBlob = new Blob([arrayBuffer], {
-        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      });
-      const docxUrl = URL.createObjectURL(docxBlob);
-      window.docxPreviewUrl = docxUrl;
+      // Check responses
+      if (!variablesResponse.ok) {
+        const varError = await variablesResponse.json().catch(() => ({}));
+        const errorMsg = `Variables API (${variablesResponse.status}): ${varError.error || varError.message || 'Unknown error'}`;
+        throw new Error(errorMsg);
+      }
+
+      const variablesResult = await variablesResponse.json();
+      const onlyofficeResult = await onlyofficeResponse.json();
+
+      if (!variablesResult.success) {
+        throw new Error(variablesResult.error || 'Failed to process Word document');
+      }
+
+      // Store ONLYOFFICE document ID if successful
+      if (onlyofficeResult.success && onlyofficeResult.document_id) {
+        setOnlyofficeDocId(onlyofficeResult.document_id);
+        console.log('✅ ONLYOFFICE document uploaded:', onlyofficeResult.document_id);
+      }
 
       // Set template content as text (for variable detection and compliance)
-      const documentText = result.data.text || '';
+      const documentText = variablesResult.data.text || '';
       setTemplateContent(documentText);
       setTemplateLoaded(true);
-      setPreviewMode('docx-preview');
+      setPreviewMode('onlyoffice');
 
       // Extract and analyze sentences for compliance
       const splitSentences = documentText
@@ -2105,21 +2047,16 @@ useEffect(() => {
       setSentences(splitSentences);
       console.log('📄 Document text extracted for compliance:', splitSentences.length, 'sentences');
 
-      // Split content into pages
-      const pages = splitHtmlIntoPages(htmlContent);
-      setDocxPages(pages);
-      setCurrentDocxPage(1);
-
       // Extract variables from the result
       const extractedVars = {};
-      Object.entries(result.data.variables || {}).forEach(([varName, varData]) => {
+      Object.entries(variablesResult.data.variables || {}).forEach(([varName, varData]) => {
         extractedVars[varName] = varData.suggested_value || '';
       });
 
       setVariables(extractedVars);
 
       // Set metadata
-      const metadata = result.data.metadata || {};
+      const metadata = variablesResult.data.metadata || {};
       console.log('Document metadata:', metadata);
 
       // Give user feedback
