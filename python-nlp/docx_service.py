@@ -602,16 +602,24 @@ class DocxService:
                             # Check each entity type
                             for entity_type, entity_list in entities_by_type.items():
                                 for entity in entity_list:
-                                    entity_text = entity.get("text", "").lower()
+                                    # Ensure entity is a dictionary
+                                    if isinstance(entity, str):
+                                        entity_text = entity.lower()
+                                        entity_dict = {"text": entity, "score": 0}
+                                    elif isinstance(entity, dict):
+                                        entity_text = entity.get("text", "").lower()
+                                        entity_dict = entity
+                                    else:
+                                        continue
 
                                     # If entity text appears near the variable name
                                     if entity_text and (entity_text in var_name_lower or var_name_lower in entity_text):
                                         var_data["entity_type"] = entity_type
-                                        var_data["gliner_confidence"] = entity.get("score", 0)
+                                        var_data["gliner_confidence"] = entity_dict.get("score", 0)
 
                                         # Suggest the detected entity as value if not already set
                                         if not var_data.get("suggested_value"):
-                                            var_data["suggested_value"] = entity.get("text", "")
+                                            var_data["suggested_value"] = entity_dict.get("text", "")
                                         break
 
                             # Infer entity type from variable name if not detected

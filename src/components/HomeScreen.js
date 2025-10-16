@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus, FileText, Pen, Download, BarChart3, Shield, Clock, Search, Bell, Settings, ChevronDown, Globe } from 'lucide-react';
 import TemplateModal from './TemplateModal';
 
-const HomeScreen = ({ onTemplateSelect, onPDFGenerate }) => {
+const HomeScreen = () => {
+  const navigate = useNavigate();
   const [showAddModal, setShowAddModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -273,16 +275,27 @@ Best regards,
                 </div>
 
                 <div className="template-actions">
-                  <button 
+                  <button
                     className="btn btn-primary btn-template"
-                    onClick={() => onTemplateSelect(template)}
+                    onClick={() => {
+                      // Special handling for Offer Letter template
+                      if (template.id === 1) {
+                        navigate('/offer-letter');
+                      } else {
+                        // For other templates, you can add routing later
+                        alert('Editor for other templates coming soon!');
+                      }
+                    }}
                   >
                     <Pen size={16} />
                     Edit Template
                   </button>
-                  <button 
+                  <button
                     className="btn btn-secondary btn-template"
-                    onClick={() => onPDFGenerate && onPDFGenerate(template)}
+                    onClick={() => {
+                      // For now, just show an alert
+                      alert('PDF generation coming soon!');
+                    }}
                   >
                     <Download size={16} />
                     Generate

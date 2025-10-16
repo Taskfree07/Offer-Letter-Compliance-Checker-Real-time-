@@ -60,10 +60,98 @@ app = Flask(__name__)
 # ONLYOFFICE Configuration
 ONLYOFFICE_SERVER_URL = os.environ.get('ONLYOFFICE_SERVER_URL', 'http://localhost:8080')
 UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', './uploads')
+SESSIONS_FOLDER = os.path.join(UPLOAD_FOLDER, 'sessions')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(SESSIONS_FOLDER, exist_ok=True)
 
-# Store for document sessions (in production, use Redis or database)
+# Store for document sessions (persistent on disk using JSON files)
 document_sessions = {}
+
+def load_session(doc_id):
+    """Load session data from disk"""
+    session_file = os.path.join(SESSIONS_FOLDER, f"{doc_id}.json")
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading session {doc_id}: {e}")
+    return None
+
+def save_session(doc_id, session_data):
+    """Save session data to disk"""
+    session_file = os.path.join(SESSIONS_FOLDER, f"{doc_id}.json")
+    try:
+        with open(session_file, 'w', encoding='utf-8') as f:
+            json.dump(session_data, f, indent=2)
+        logger.info(f"Session {doc_id} saved to disk")
+    except Exception as e:
+        logger.error(f"Error saving session {doc_id}: {e}")
+
+def get_session(doc_id):
+    """Get session from memory or load from disk"""
+    if doc_id in document_sessions:
+        return document_sessions[doc_id]
+
+    # Try loading from disk
+    session = load_session(doc_id)
+    if session:
+        # Normalize the file path (handle relative paths and mixed separators)
+        file_path = session.get('file_path', '')
+        if file_path:
+            # Convert to absolute path if relative
+            if not os.path.isabs(file_path):
+                file_path = os.path.abspath(file_path)
+
+            # Normalize path separators
+            file_path = os.path.normpath(file_path)
+
+            # Update session with normalized path
+            session['file_path'] = file_path
+
+            logger.info(f"Checking file existence: {file_path}")
+
+            # Verify the file still exists
+            if os.path.exists(file_path):
+                document_sessions[doc_id] = session
+                logger.info(f"Session {doc_id} restored from disk (file verified)")
+                return session
+            else:
+                logger.warning(f"Session {doc_id} found but file is missing at: {file_path}")
+    return None
+
+# Load all existing sessions on startup
+def load_all_sessions():
+    """Load all existing sessions from disk on startup"""
+    if not os.path.exists(SESSIONS_FOLDER):
+        return
+
+    count = 0
+    for filename in os.listdir(SESSIONS_FOLDER):
+        if filename.endswith('.json'):
+            doc_id = filename[:-5]  # Remove .json extension
+            session = load_session(doc_id)
+            if session:
+                # Normalize the file path
+                file_path = session.get('file_path', '')
+                if file_path:
+                    # Convert to absolute path if relative
+                    if not os.path.isabs(file_path):
+                        file_path = os.path.abspath(file_path)
+                    # Normalize path separators
+                    file_path = os.path.normpath(file_path)
+                    session['file_path'] = file_path
+
+                    if os.path.exists(file_path):
+                        document_sessions[doc_id] = session
+                        count += 1
+                        logger.info(f"Loaded session {doc_id}: {file_path}")
+
+    if count > 0:
+        logger.info(f"✅ Loaded {count} existing document sessions from disk")
+
+# Load sessions on startup
+load_all_sessions()
 
 # Enable CORS for all routes (allows JavaScript frontend to access the API)
 # Allow common dev ports 3000/3001 on localhost and 127.0.0.1, and handle preflight (OPTIONS)
@@ -89,6 +177,8 @@ ALLOWED_ORIGINS = {
     "http://0.0.0.0:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3001",
+    # Add IP address for local network access
+    "http://192.168.1.18:3000",
 }
 
 @app.after_request
@@ -1134,13 +1224,15 @@ def upload_document_onlyoffice():
             f.write(docx_bytes)
 
         # Store session info
-        document_sessions[doc_id] = {
+        session_data = {
             "filename": file.filename,
             "file_path": file_path,
             "created_at": datetime.now().isoformat(),
             "variables": variables,
             "modified": False
         }
+        document_sessions[doc_id] = session_data
+        save_session(doc_id, session_data)
 
         return jsonify({
             "success": True,
@@ -1158,10 +1250,9 @@ def upload_document_onlyoffice():
 def get_onlyoffice_config(doc_id):
     """Generate ONLYOFFICE editor configuration"""
     try:
-        if doc_id not in document_sessions:
+        session = get_session(doc_id)
+        if not session:
             return jsonify({"error": "Document not found"}), 404
-
-        session = document_sessions[doc_id]
 
         # ONLYOFFICE configuration
         # Use actual machine IP for Docker to reach Flask API
@@ -1216,10 +1307,9 @@ def get_onlyoffice_config(doc_id):
 def download_document_onlyoffice(doc_id):
     """Serve document file for ONLYOFFICE"""
     try:
-        if doc_id not in document_sessions:
+        session = get_session(doc_id)
+        if not session:
             return jsonify({"error": "Document not found"}), 404
-
-        session = document_sessions[doc_id]
         return send_file(
             session["file_path"],
             mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -1234,7 +1324,8 @@ def download_document_onlyoffice(doc_id):
 def onlyoffice_callback(doc_id):
     """Handle ONLYOFFICE save callback"""
     try:
-        if doc_id not in document_sessions:
+        session = get_session(doc_id)
+        if not session:
             return jsonify({"error": 0})
 
         data = request.get_json()
@@ -1247,7 +1338,6 @@ def onlyoffice_callback(doc_id):
                 import requests
                 response = requests.get(download_url)
                 if response.status_code == 200:
-                    session = document_sessions[doc_id]
                     with open(session["file_path"], 'wb') as f:
                         f.write(response.content)
 
@@ -1258,6 +1348,8 @@ def onlyoffice_callback(doc_id):
                             session["variables"] = var_result.get("variables", {})
 
                     session["modified"] = True
+                    document_sessions[doc_id] = session
+                    save_session(doc_id, session)
                     logger.info(f"Document {doc_id} saved successfully")
 
         return jsonify({"error": 0})
@@ -1270,10 +1362,9 @@ def onlyoffice_callback(doc_id):
 def get_document_variables_onlyoffice(doc_id):
     """Get current variables from document"""
     try:
-        if doc_id not in document_sessions:
+        session = get_session(doc_id)
+        if not session:
             return jsonify({"error": "Document not found"}), 404
-
-        session = document_sessions[doc_id]
         return jsonify({
             "success": True,
             "variables": session.get("variables", {}),
@@ -1288,13 +1379,13 @@ def get_document_variables_onlyoffice(doc_id):
 def update_document_variables_onlyoffice(doc_id):
     """Update variables in document while preserving formatting"""
     try:
-        if doc_id not in document_sessions:
+        session = get_session(doc_id)
+        if not session:
             return jsonify({"error": "Document not found"}), 404
 
         if not DOCX_AVAILABLE:
             return jsonify({"error": "DOCX service not available"}), 503
 
-        session = document_sessions[doc_id]
         data = request.get_json()
         variables = data.get('variables', {})
 
@@ -1315,6 +1406,8 @@ def update_document_variables_onlyoffice(doc_id):
             session["variables"] = var_result.get("variables", {})
 
         session["modified"] = True
+        document_sessions[doc_id] = session
+        save_session(doc_id, session)
 
         return jsonify({
             "success": True,

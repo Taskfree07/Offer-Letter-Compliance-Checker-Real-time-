@@ -1,42 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomeScreen from './components/HomeScreen';
-import EmailEditor from './components/EmailEditor';
+import OfferLetterPage from './components/OfferLetterPage';
 import './App.css';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home');
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
-
-  const handleTemplateSelect = (template) => {
-    setSelectedTemplate(template);
-    setCurrentView('editor');
-  };
-
-  const handlePDFGenerate = (template) => {
-    setSelectedTemplate(template);
-    setCurrentView('editor');
-  };
-
-  const handleBackToHome = () => {
-    setCurrentView('home');
-    setSelectedTemplate(null);
-  };
-
   return (
-    <div className="App">
-      {currentView === 'home' && (
-        <HomeScreen 
-          onTemplateSelect={handleTemplateSelect}
-          onPDFGenerate={handlePDFGenerate}
-        />
-      )}
-      {currentView === 'editor' && selectedTemplate && (
-        <EmailEditor 
-          template={selectedTemplate} 
-          onBack={handleBackToHome}
-        />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/offer-letter" element={<OfferLetterPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

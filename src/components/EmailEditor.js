@@ -884,7 +884,7 @@ useEffect(() => {
     if (previewMode === 'onlyoffice' && onlyofficeDocId) {
       try {
         // Step 1: Update backend document file
-        const response = await fetch(`http://localhost:5000/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
+        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -1094,113 +1094,95 @@ useEffect(() => {
     );
   };
 
+  // Function to handle document removal
+  const handleRemoveDocument = useCallback(() => {
+    if (window.confirm('Are you sure you want to remove the imported document? This action cannot be undone.')) {
+      // Clear all document-related state
+      setOnlyofficeDocId(null);
+      setPreviewMode('generated');
+      setPreviewError(null);
+      setTemplateContent(template?.content || '');
+      setVariables({});
+      setSentences([]);
+      window.originalDocxFile = null;
+
+      // Reset the file input
+      const fileInput = document.getElementById('offerLetterInput');
+      if (fileInput) {
+        fileInput.value = '';
+      }
+
+      console.log('✅ Document removed successfully');
+      alert('Document removed successfully. You can now import a new document.');
+    }
+  }, [template]);
+
   const renderProfessionalPreview = () => (
     <div className="email-preview">
-      <div className="preview-header-clean">
-        <div className="preview-actions-clean">
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              document.getElementById('offerLetterInput').click();
-            }}
-            style={{ marginRight: '12px' }}
-          >
-            <FileText size={18} />
-            Import Offer Letter
-          </button>
-          {previewMode === 'docx-preview' && window.originalDocxFile ? (
-            <button
-              className="btn btn-primary btn-download-clean"
-              onClick={handleDownloadDOCX}
-              disabled={isGenerating || !templateLoaded}
-            >
-              {isGenerating ? (
-                <>
-                  <div className="spinner" style={{
-                    width: '16px',
-                    height: '16px',
-                    border: '2px solid #ffffff',
-                    borderTop: '2px solid transparent',
-                    borderRadius: '50%',
-                    animation: 'spin 1s linear infinite',
-                    marginRight: '8px'
-                  }}></div>
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Download size={18} />
-                  Download as Word
-                </>
-              )}
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary btn-download-clean"
-              onClick={handleDownloadPDF}
-              disabled={isGenerating || !templateLoaded}
-            >
-              {isGenerating ? (
-                <>
-                  <div className="spinner" style={{
-                    width: '16px',
-                    height: '16px',
-                    border: '2px solid #ffffff',
-                    borderTop: '2px solid transparent',
-                    borderRadius: '50%',
-                    animation: 'spin 1s linear infinite',
-                    marginRight: '8px'
-                  }}></div>
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Download size={18} />
-                  Download as Word
-                </>
-              )}
-            </button>
-          )}
-        </div>
-      </div>
-      
       <div className="document-view">
         <div className="pdf-preview-container">
-          {previewError ? (
+          {!onlyofficeDocId && !isLoadingPreview && !isImportingPdf && !previewError ? (
+            <div className="import-placeholder">
+              <FileText size={64} style={{ color: '#94a3b8', marginBottom: '24px' }} />
+              <button
+                className="btn-import-document"
+                onClick={() => {
+                  document.getElementById('offerLetterInput').click();
+                }}
+              >
+                <FileText size={20} />
+                Import Document
+              </button>
+              <p style={{ marginTop: '16px', fontSize: '14px', color: '#64748b' }}>
+                Upload a Word document to get started
+              </p>
+            </div>
+          ) : previewError ? (
             <div className="preview-error">
-              <FileText size={48} />
-              <h3>Preview Error</h3>
-              <p>{previewError}</p>
-              <div style={{ marginTop: '16px', display: 'flex', gap: '12px' }}>
-                <button onClick={handleRefreshPreview} className="btn btn-primary">
+              <AlertCircle size={48} style={{ color: '#dc2626', marginBottom: '16px' }} />
+              <h3>Connection Issue</h3>
+              <p style={{ whiteSpace: 'pre-wrap' }}>{previewError}</p>
+              <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
+                <button
+                  onClick={() => {
+                    setPreviewError(null);
+                    document.getElementById('offerLetterInput').click();
+                  }}
+                  className="btn-import-document"
+                >
+                  <FileText size={20} />
+                  Import New Document
+                </button>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="btn btn-secondary"
+                  style={{ fontSize: '14px' }}
+                >
                   <RefreshCw size={16} />
-                  Retry
+                  Reload Page
                 </button>
-                <button onClick={() => window.location.reload()} className="btn btn-secondary">
-                  Refresh Page
-                </button>
-                {previewPdfUrl && (
-                  <a href={previewPdfUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
-                    Open in New Tab
-                  </a>
-                )}
               </div>
             </div>
           ) : isLoadingPreview || isImportingPdf ? (
             <div className="pdf-loading">
               <div className="spinner"></div>
-              <p>{isImportingPdf ? 'Importing PDF...' : 'Generating professional PDF preview...'}</p>
+              <p>{isImportingPdf ? 'Importing document...' : 'Loading preview...'}</p>
               <p style={{ fontSize: '14px', opacity: 0.7, marginTop: '8px' }}>
-                {isImportingPdf ? 'Processing PDF structure and extracting variables...' : 'Applying professional formatting and padding...'}
+                {isImportingPdf ? 'Processing document and extracting variables...' : 'Please wait...'}
               </p>
             </div>
           ) : previewMode === 'onlyoffice' && onlyofficeDocId ? (
-            <div style={{ width: '100%', height: '100%', minHeight: '800px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <OnlyOfficeViewer
                 ref={onlyofficeViewerRef}
                 documentId={onlyofficeDocId}
                 onSave={() => {
                   console.log('Document saved in ONLYOFFICE');
+                }}
+                onSessionExpired={() => {
+                  console.log('⚠️ ONLYOFFICE session may have expired, but keeping document ID');
+                  // Don't clear the document ID - let user manually remove if needed
+                  // The session is persistent on disk, so it should reload
                 }}
                 onVariablesUpdate={(vars) => {
                   console.log('Variables updated from ONLYOFFICE:', vars);
@@ -1403,11 +1385,11 @@ useEffect(() => {
             return (
               <div key={key} className="variable-row" style={{ alignItems: 'flex-start', flexDirection: isSection ? 'column' : 'row' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', flex: isSection ? '1' : '0 0 220px', marginRight: isSection ? '0' : '10px', width: isSection ? '100%' : 'auto' }}>
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     gap: '8px',
-                    padding: '8px 12px',
+                    padding: isSection ? '8px 12px' : '0',
                     background: isSection ? 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' : 'transparent',
                     borderRadius: isSection ? '6px' : '0',
                     marginBottom: isSection ? '8px' : '0'
@@ -1428,17 +1410,8 @@ useEffect(() => {
                       }}
                     />
                   </div>
-                  {!isSection && (
-                    <div style={{ display: 'flex', gap: '8px', marginTop: '6px', alignItems: 'center' }}>
-                      <span style={{ fontSize: '12px', color: '#64748b' }}>{variableMeta[key]?.occurrences || 0} use(s)</span>
-                      {variableMeta[key]?.flaggedOccurrences > 0 && (
-                        <span style={{ fontSize: '11px', background: '#fef3c7', color: '#92400e', padding: '2px 6px', borderRadius: '999px' }}>
-                          {variableMeta[key].flaggedOccurrences} in issues
-                        </span>
-                      )}
-                    </div>
-                  )}
                 </div>
+                <div className="variable-separator"></div>
                 {isSection ? (
                   <textarea
                     value={value || ''}
@@ -1449,13 +1422,15 @@ useEffect(() => {
                     style={{
                       width: '100%',
                       minHeight: '150px',
-                      padding: '12px',
-                      border: '2px solid #e5e7eb',
-                      borderRadius: '6px',
+                      padding: '0',
+                      border: 'none',
+                      borderRadius: '0',
                       fontFamily: 'inherit',
                       fontSize: '13px',
                       lineHeight: '1.6',
-                      resize: 'vertical'
+                      resize: 'vertical',
+                      background: 'transparent',
+                      outline: 'none'
                     }}
                   />
                 ) : (
@@ -1748,6 +1723,31 @@ useEffect(() => {
     <div className="editor-panel">
       <div className="panel-header">
         <h3 className="panel-title">Template Editor</h3>
+        {onlyofficeDocId && (
+          <button
+            onClick={handleRemoveDocument}
+            className="btn btn-secondary"
+            style={{
+              padding: '6px 12px',
+              fontSize: '13px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: '#dc2626',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#b91c1c'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#dc2626'}
+            title="Remove the imported document"
+          >
+            <AlertCircle size={16} />
+            Remove Document
+          </button>
+        )}
       </div>
       
       <div className="tab-navigation">
@@ -2015,6 +2015,12 @@ useEffect(() => {
         throw new Error(errorMsg);
       }
 
+      if (!onlyofficeResponse.ok) {
+        const onlyofficeError = await onlyofficeResponse.json().catch(() => ({}));
+        const errorMsg = `ONLYOFFICE Upload (${onlyofficeResponse.status}): ${onlyofficeError.error || onlyofficeError.message || 'Unknown error'}`;
+        throw new Error(errorMsg);
+      }
+
       const variablesResult = await variablesResponse.json();
       const onlyofficeResult = await onlyofficeResponse.json();
 
@@ -2022,17 +2028,23 @@ useEffect(() => {
         throw new Error(variablesResult.error || 'Failed to process Word document');
       }
 
-      // Store ONLYOFFICE document ID if successful
-      if (onlyofficeResult.success && onlyofficeResult.document_id) {
-        setOnlyofficeDocId(onlyofficeResult.document_id);
+      if (!onlyofficeResult.success) {
+        throw new Error(onlyofficeResult.error || 'Failed to upload to ONLYOFFICE');
+      }
+
+      // Store ONLYOFFICE document ID only if successful
+      if (onlyofficeResult.document_id) {
         console.log('✅ ONLYOFFICE document uploaded:', onlyofficeResult.document_id);
+        setOnlyofficeDocId(onlyofficeResult.document_id);
+        setPreviewMode('onlyoffice');
+      } else {
+        throw new Error('ONLYOFFICE upload did not return a document ID');
       }
 
       // Set template content as text (for variable detection and compliance)
       const documentText = variablesResult.data.text || '';
       setTemplateContent(documentText);
       setTemplateLoaded(true);
-      setPreviewMode('onlyoffice');
 
       // Extract and analyze sentences for compliance
       const splitSentences = documentText
@@ -2073,29 +2085,6 @@ useEffect(() => {
 
   return (
     <div className="email-editor">
-      <div className="editor-header">
-        <div className="editor-header-content">
-          <button className="btn btn-secondary" onClick={onBack}>
-            <ArrowLeft size={16} />
-            Back to Templates
-          </button>
-          <h1 className="editor-title">{template.title}</h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px', color: '#64748b' }}>
-            {templateLoaded ? (
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#059669' }}>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#059669' }}></div>
-                Professional Template Loaded
-              </span>
-            ) : (
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#dc2626' }}>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#dc2626' }}></div>
-                Template Loading...
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-
       <div className="split-view">
         {previewMode === 'html-edit' ? renderHtmlEditor() : renderProfessionalPreview()}
         {renderEditorPanel()}

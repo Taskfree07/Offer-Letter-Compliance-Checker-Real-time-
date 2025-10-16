@@ -23,7 +23,9 @@
       "Bash(docker-compose up:*)",
       "Read(//c/Users/Adil Akhtar/OneDrive/Pictures/Screenshots/**)",
       "Bash(dir:*)",
-      "Bash(tasklist)"
+      "Bash(tasklist)",
+      "Bash(npm install:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

@@ -95,3 +95,18 @@ jspm_packages/
 
 # TernJS port file
 .tern-port
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Uploaded documents and sessions
+python-nlp/uploads/*.docx
+python-nlp/uploads/sessions/*.json
+
+# Keep the directories but ignore contents
+!python-nlp/uploads/.gitkeep
+!python-nlp/uploads/sessions/.gitkeep

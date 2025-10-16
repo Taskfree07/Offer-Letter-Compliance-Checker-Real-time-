@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
 
-const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, ref) => {
+const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, onSessionExpired }, ref) => {
   const [config, setConfig] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,7 +50,6 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
     editorDiv.id = 'onlyoffice-editor-container';
     editorDiv.style.width = '100%';
     editorDiv.style.height = '100%';
-    editorDiv.style.minHeight = '600px';
     containerRef.current.appendChild(editorDiv);
     editorRef.current = editorDiv;
 
@@ -73,21 +72,57 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
   }, []);
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 3;
+
     const loadConfig = async () => {
       try {
         console.log('📄 Loading ONLYOFFICE config for document:', documentId);
-        const response = await fetch(`http://localhost:5000/api/onlyoffice/config/${documentId}`);
-        const data = await response.json();
+        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/config/${documentId}`);
 
+        // Check if it's a 404 first (document not found)
+        if (response.status === 404) {
+          console.warn('⚠️ Document session not found (404). Session may have expired or backend was restarted.');
+
+          // Notify parent component
+          if (onSessionExpired) {
+            onSessionExpired();
+          }
+
+          // Show a more helpful error message
+          const expiredError = 'Document session not found.\n\nThe document is no longer available on the server.\nThis can happen if:\n• The backend was restarted\n• The session expired\n\nPlease use the "Remove Document" button and import your document again.';
+          throw new Error(expiredError);
+        }
+
+        // Check if response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Backend returned non-JSON response. Check if Flask backend is running on port 5000.');
+        }
+
+        const data = await response.json();
         console.log('✅ Config received:', data);
 
         if (!data.success) {
+          // Check if error message indicates "not found"
+          if (data.error && data.error.includes('not found')) {
+            console.warn('⚠️ Document session not found on backend. Session may have expired or backend was restarted.');
+
+            // Notify parent component but don't show error yet
+            if (onSessionExpired) {
+              onSessionExpired();
+            }
+
+            // Show a more helpful error message
+            const expiredError = 'Document session not found.\n\nThe document is no longer available on the server.\nThis can happen if:\n• The backend was restarted\n• The session expired\n\nPlease use the "Remove Document" button and import your document again.';
+            throw new Error(expiredError);
+          }
           throw new Error(data.error || 'Failed to load configuration');
         }
 
         setConfig(data);
 
-        // Load ONLYOFFICE API script
+        // Load ONLYOFFICE API script with retry logic
         if (!window.DocsAPI) {
           console.log('📥 Loading ONLYOFFICE API script from:', `${data.documentServerUrl}/web-apps/apps/api/documents/api.js`);
           const script = document.createElement('script');
@@ -99,7 +134,21 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
           };
           script.onerror = (e) => {
             console.error('❌ Failed to load ONLYOFFICE API script:', e);
-            setError('Failed to load ONLYOFFICE. Make sure Docker is running: docker-compose up -d');
+
+            // Retry if ONLYOFFICE might still be starting up
+            if (retryCount < maxRetries) {
+              retryCount++;
+              console.log(`⏳ Retrying in 3 seconds... (Attempt ${retryCount}/${maxRetries})`);
+              setTimeout(() => {
+                // Remove failed script
+                if (script.parentNode) {
+                  script.parentNode.removeChild(script);
+                }
+                loadConfig();
+              }, 3000);
+            } else {
+              setError('ONLYOFFICE Document Server is not responding. Please ensure Docker is running:\n\n1. Run: docker-compose up -d\n2. Wait 1-2 minutes for ONLYOFFICE to fully start\n3. Check http://localhost:8080 is accessible\n4. Refresh this page');
+            }
           };
           document.body.appendChild(script);
         } else {
@@ -108,7 +157,13 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
         }
       } catch (err) {
         console.error('❌ Config error:', err);
-        setError(err.message);
+
+        // Better error message for common issues
+        if (err.message.includes('JSON')) {
+          setError('Backend connection error. Make sure:\n\n1. Flask backend is running: python python-nlp/app.py\n2. Backend is accessible at http://localhost:5000\n3. No firewall is blocking the connection');
+        } else {
+          setError(err.message);
+        }
         setLoading(false);
       }
     };
@@ -194,7 +249,7 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
 
     const fetchVariables = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/onlyoffice/variables/${documentId}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/variables/${documentId}`);
         const data = await response.json();
         if (data.success && onVariablesUpdate) {
           onVariablesUpdate(data.variables);
@@ -209,6 +264,13 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
     }
   }, [documentId, reloadKey]);
 
+  // Use useEffect to call onSessionExpired when error occurs (outside render cycle)
+  useEffect(() => {
+    if (error && onSessionExpired) {
+      onSessionExpired();
+    }
+  }, [error, onSessionExpired]);
+
   if (error) {
     return (
       <div style={{
@@ -216,20 +278,36 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        backgroundColor: '#fff3f3',
-        color: '#d32f2f',
-        padding: '20px'
+        backgroundColor: '#fef2f2',
+        color: '#dc2626',
+        padding: '40px'
       }}>
-        <div style={{ textAlign: 'center', maxWidth: '500px' }}>
-          <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '12px' }}>
-            Error Loading Editor
+        <div style={{ textAlign: 'center', maxWidth: '600px' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚠️</div>
+          <div style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: '#991b1b' }}>
+            Document Session Issue
           </div>
-          <div style={{ fontSize: '14px', marginBottom: '16px' }}>{error}</div>
-          <div style={{ fontSize: '12px', color: '#666', backgroundColor: '#f5f5f5', padding: '12px', borderRadius: '4px', textAlign: 'left' }}>
-            <strong>Setup Instructions:</strong><br/>
-            1. Run: <code>docker-compose up -d</code><br/>
-            2. Wait for ONLYOFFICE to start (http://localhost:8080)<br/>
-            3. Reload this page
+          <div style={{
+            fontSize: '14px',
+            marginBottom: '20px',
+            color: '#7f1d1d',
+            lineHeight: '1.6',
+            whiteSpace: 'pre-wrap',
+            textAlign: 'left',
+            backgroundColor: '#fee2e2',
+            padding: '16px',
+            borderRadius: '8px',
+            border: '1px solid #fca5a5'
+          }}>
+            {error}
+          </div>
+          <div style={{
+            fontSize: '13px',
+            color: '#7f1d1d',
+            fontWeight: '500',
+            marginTop: '16px'
+          }}>
+            💡 Tip: Use the "Remove Document" button in the Template Editor panel (right side) to clear this document and start fresh.
           </div>
         </div>
       </div>
@@ -239,7 +317,7 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate }, 
   return (
     <div
       ref={containerRef}
-      style={{ width: '100%', height: '100%', minHeight: '800px', position: 'relative' }}
+      style={{ width: '100%', height: '100%', position: 'relative' }}
     >
       {loading && (
         <div style={{
