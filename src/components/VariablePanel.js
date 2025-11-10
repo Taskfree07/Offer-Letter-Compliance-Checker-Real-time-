@@ -98,6 +98,31 @@ const VariablePanel = memo(({
     };
   });
 
+  // Filter out unwanted variables (section content, long text blocks)
+  const excludedPatterns = [
+    'Governing Law and Dispute Resolution',
+    'Acknowledgment and Acceptance',
+    'Health, Vision, Dental',
+    'I9, W4, ID proof',
+    'Pre-Employment Conditions',
+    'insurances',
+    'retirement plan',
+    'DD form'
+  ];
+
+  const filteredVariables = variablesList.filter(variable => {
+    // Exclude if name or value contains excluded patterns
+    const nameMatch = excludedPatterns.some(pattern => 
+      variable.name.includes(pattern) || 
+      variable.displayName.includes(pattern)
+    );
+    
+    // Exclude if value is too long (likely a paragraph/section content)
+    const isTooLong = variable.value && variable.value.length > 200;
+    
+    return !nameMatch && !isTooLong;
+  });
+
   // Sort variables in logical order
   const sortOrder = [
     'Candidate Name', 'Name', 'Address', 'Insert Date', 'Date',
@@ -106,7 +131,7 @@ const VariablePanel = memo(({
     'Authorized Signatory', 'Name & Designation', 'Company Address'
   ];
 
-  const sortedVariables = [...variablesList].sort((a, b) => {
+  const sortedVariables = [...filteredVariables].sort((a, b) => {
     const aIndex = sortOrder.findIndex(s => a.name.includes(s) || a.displayName.includes(s));
     const bIndex = sortOrder.findIndex(s => b.name.includes(s) || b.displayName.includes(s));
     
@@ -167,10 +192,11 @@ const VariablePanel = memo(({
                     style={{
                       flex: 1,
                       padding: '5px 8px',
-                      border: '1px solid #ddd',
-                      borderRadius: '3px',
+                      border: 'none',
+                      outline: 'none',
                       fontSize: '13px',
-                      fontFamily: 'inherit'
+                      fontFamily: 'inherit',
+                      backgroundColor: 'transparent'
                     }}
                   />
                 </div>
