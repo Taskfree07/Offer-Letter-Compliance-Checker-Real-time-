@@ -1,7 +1,7 @@
 // GLiNER service for advanced entity extraction from PDFs
 // Interfaces with Python GLiNER backend for flexible NER
 
-const API_BASE_URL = 'http://127.0.0.1:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
 
 class GLiNERService {
   constructor() {
@@ -278,3 +278,5 @@ export {
   glinerService,
   GLiNERService
 };
+
+

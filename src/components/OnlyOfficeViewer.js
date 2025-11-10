@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef, memo } from 'react';
 
-const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, onSessionExpired }, ref) => {
-  const [config, setConfig] = useState(null);
+const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesUpdate, onSessionExpired, onEditorReady }, ref) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
@@ -17,40 +16,66 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
       setReloadKey(prev => prev + 1);
     },
     updateVariable: (varName, newValue) => {
-      console.log(`📝 Updating variable [${varName}] to "${newValue}" in real-time`);
-
-      // Use ONLYOFFICE JavaScript API to update the document
-      if (docEditorRef.current && window.Asc) {
-        try {
-          // Call connector to update text in document
-          docEditorRef.current.serviceCommand('setMailMergeRecipients', {
-            [varName]: newValue
-          });
-
-          console.log(`✅ Variable [${varName}] updated successfully`);
-        } catch (err) {
-          console.warn('Direct API update failed, using document replacement:', err);
-
-          // Fallback: trigger backend update and reload
-          setReloadKey(prev => prev + 1);
-        }
-      } else {
-        console.log('⚠️ ONLYOFFICE API not ready, will reload document');
-        setReloadKey(prev => prev + 1);
-      }
+      updateVariableInDocument(varName, newValue);
+    },
+    replaceAllVariables: (variablesObj) => {
+      replaceAllVariablesInDocument(variablesObj);
+    },
+    isEditorReady: () => {
+      return docEditorRef.current !== null && !loading;
     }
   }));
+
+  const updateVariableInDocument = async (varName, newValue) => {
+    // This method is now a placeholder - the actual replacement happens on backend
+    // when replaceAllVariablesInDocument is called
+    console.log(`📝 Queuing variable [${varName}] to be replaced with "${newValue}"`);
+    return true;
+  };
+
+  const replaceAllVariablesInDocument = async (variablesObj) => {
+    if (!docEditorRef.current || loading) {
+      console.warn('Editor not ready for bulk variable replacement');
+      throw new Error('Editor not ready');
+    }
+
+    try {
+      console.log('🔄 Replacing all variables in document...', variablesObj);
+
+      // The backend has already updated the variables in the document file
+      // Now we need to reload the document to show the changes
+
+      // Force ONLYOFFICE to reload the document
+      console.log('🔄 Requesting document reload...');
+
+      // Small delay to ensure backend has finished writing
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Reload the document by triggering a re-initialization
+      setLoading(true);
+      setReloadKey(prev => prev + 1);
+
+      console.log('✅ Document reload triggered - changes should appear shortly');
+      return true;
+    } catch (error) {
+      console.error('❌ Error reloading document:', error);
+      throw error;
+    }
+  };
 
   // Create editor container dynamically to avoid React DOM conflicts
   useEffect(() => {
     if (!containerRef.current) return;
+
+    // Store the container reference for cleanup
+    const container = containerRef.current;
 
     // Create a div that React won't manage
     const editorDiv = document.createElement('div');
     editorDiv.id = 'onlyoffice-editor-container';
     editorDiv.style.width = '100%';
     editorDiv.style.height = '100%';
-    containerRef.current.appendChild(editorDiv);
+    container.appendChild(editorDiv);
     editorRef.current = editorDiv;
 
     return () => {
@@ -64,8 +89,8 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
         }
       }
       // Then remove the container
-      if (containerRef.current && editorDiv.parentNode === containerRef.current) {
-        containerRef.current.removeChild(editorDiv);
+      if (container && editorDiv.parentNode === container) {
+        container.removeChild(editorDiv);
       }
       editorRef.current = null;
     };
@@ -78,7 +103,8 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
     const loadConfig = async () => {
       try {
         console.log('📄 Loading ONLYOFFICE config for document:', documentId);
-        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/config/${documentId}`);
+        const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+        const response = await fetch(`${apiBaseUrl}/api/onlyoffice/config/${documentId}`);
 
         // Check if it's a 404 first (document not found)
         if (response.status === 404) {
@@ -120,8 +146,6 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
           throw new Error(data.error || 'Failed to load configuration');
         }
 
-        setConfig(data);
-
         // Load ONLYOFFICE API script with retry logic
         if (!window.DocsAPI) {
           console.log('📥 Loading ONLYOFFICE API script from:', `${data.documentServerUrl}/web-apps/apps/api/documents/api.js`);
@@ -147,7 +171,7 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
                 loadConfig();
               }, 3000);
             } else {
-              setError('ONLYOFFICE Document Server is not responding. Please ensure Docker is running:\n\n1. Run: docker-compose up -d\n2. Wait 1-2 minutes for ONLYOFFICE to fully start\n3. Check http://localhost:8080 is accessible\n4. Refresh this page');
+              setError('ONLYOFFICE Document Server is not responding.\n\nTroubleshooting steps:\n1. Check if Docker is running: docker ps\n2. Restart ONLYOFFICE: docker-compose restart onlyoffice-documentserver\n3. Wait 1-2 minutes for ONLYOFFICE to fully start\n4. Verify http://localhost:8080 is accessible\n5. Clear browser cache and refresh this page\n\nNote: "Failed to fetch" errors for SVG icons are usually harmless and can be ignored.');
             }
           };
           document.body.appendChild(script);
@@ -192,8 +216,14 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
         console.log('🗑️ Destroying previous editor instance');
         try {
           docEditorRef.current.destroyEditor();
+          docEditorRef.current = null;
         } catch (e) {
           console.warn('Could not destroy previous editor:', e);
+        }
+
+        // Also clear the container to force a complete reload
+        if (editorRef.current) {
+          editorRef.current.innerHTML = '';
         }
       }
 
@@ -205,6 +235,13 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
           onDocumentReady: () => {
             console.log('✅ ONLYOFFICE Document Ready');
             setLoading(false);
+
+            // Notify parent that editor is ready
+            if (onEditorReady) {
+              onEditorReady();
+            }
+
+            // Initial variables fetch on document ready
             fetchVariables();
 
             // Store reference to window for variable updates
@@ -216,14 +253,35 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
           onDocumentStateChange: (event) => {
             if (event.data) {
               console.log('📝 Document changed by user');
-              fetchVariables();
+              // Removed automatic variable fetching to prevent excessive updates
+              // fetchVariables(); 
               if (onSave) onSave();
             }
           },
           onError: (event) => {
             console.error('❌ ONLYOFFICE Editor error:', event);
+            
+            // Handle specific error types
+            if (event && event.data) {
+              const errorData = event.data;
+              console.log('Error details:', errorData);
+              
+              // Don't show error for minor issues like missing source maps
+              if (errorData.type === 'warning' || 
+                  (errorData.message && errorData.message.includes('socket.io.min.js.map')) ||
+                  (errorData.message && errorData.message.includes('Failed to fetch') && 
+                   errorData.message.includes('svg'))) {
+                console.log('Ignoring non-critical ONLYOFFICE warning:', errorData);
+                return;
+              }
+            }
+            
             setError(`Editor error: ${JSON.stringify(event)}`);
             setLoading(false);
+          },
+          onWarning: (event) => {
+            console.warn('⚠️ ONLYOFFICE Warning (ignored):', event);
+            // Don't treat warnings as errors
           },
           onRequestCompareFile: () => {
             console.log('Compare file requested');
@@ -249,20 +307,39 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
 
     const fetchVariables = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/variables/${documentId}`);
+        console.log('🔍 Fetching variables for document:', documentId);
+
+        // Call the real-time extraction endpoint
+        const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+        const response = await fetch(`${apiBaseUrl}/api/onlyoffice/extract-realtime/${documentId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
         const data = await response.json();
+
         if (data.success && onVariablesUpdate) {
+          console.log('✅ Variables extracted in real-time:', {
+            count: data.total_variables,
+            method: data.extraction_method,
+            glinerEnabled: data.gliner_enabled
+          });
+
           onVariablesUpdate(data.variables);
+        } else {
+          console.warn('⚠️ Variable extraction returned no success:', data);
         }
       } catch (err) {
-        console.error('Error fetching variables:', err);
+        console.error('❌ Error fetching variables:', err);
       }
     };
 
     if (documentId) {
       loadConfig();
     }
-  }, [documentId, reloadKey]);
+  }, [documentId, reloadKey, onSave, onSessionExpired, onVariablesUpdate, onEditorReady]);
 
   // Use useEffect to call onSessionExpired when error occurs (outside render cycle)
   useEffect(() => {
@@ -356,6 +433,11 @@ const OnlyOfficeViewer = forwardRef(({ documentId, onSave, onVariablesUpdate, on
   );
 });
 
-OnlyOfficeViewer.displayName = 'OnlyOfficeViewer';
+OnlyOfficeViewerComponent.displayName = 'OnlyOfficeViewerComponent';
+
+// Wrap with memo to prevent unnecessary re-renders
+const OnlyOfficeViewer = memo(OnlyOfficeViewerComponent);
 
 export default OnlyOfficeViewer;
+
+

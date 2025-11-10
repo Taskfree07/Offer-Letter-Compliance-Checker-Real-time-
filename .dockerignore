@@ -1,0 +1,75 @@
+# Node modules
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Build artifacts
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Test files
+test_*.py
+*_test.py
+
+# Uploads (will be mounted as volume)
+python-nlp/uploads/
+uploads/
+
+# Python environment and caches
+python-nlp/myenv/
+python-nlp/.venv/
+python-nlp/venv/
+python-nlp/env/
+python-nlp/ENV/
+python-nlp/__pycache__/
+python-nlp/*.pyc
+**/__pycache__/
+**/*.pyc
+
+# Large model files that should be downloaded at runtime
+python-nlp/models/
+python-nlp/.cache/
+
+# Optional AI services (not needed for core ONLYOFFICE functionality)
+python-nlp/gliner_service.py
+python-nlp/enhanced_pdf_service.py
+python-nlp/test_gliner.py
+python-nlp/test_enhanced_pdf.py
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Other
+.claude/
+docker-compose.yml
+Dockerfile*

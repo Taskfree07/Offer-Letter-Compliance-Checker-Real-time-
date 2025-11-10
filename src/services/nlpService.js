@@ -4,7 +4,7 @@
  */
 
 class NLPService {
-  constructor(baseUrl = 'http://127.0.0.1:5000') {
+  constructor(baseUrl = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000') {
     this.baseUrl = baseUrl;
     this.isAvailable = false;
     this.checkServiceAvailability();
@@ -357,3 +357,5 @@ class NLPService {
 const nlpService = new NLPService();
 
 export default nlpService;
+
+

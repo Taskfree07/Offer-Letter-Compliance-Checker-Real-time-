@@ -1,0 +1,40 @@
+{
+  "name": "Form Data Extractor",
+  "nameLocale": {
+    "en": "Form Data Extractor",
+    "es": "Extractor de Datos de Formulario"
+  },
+  "guid": "asc.{12345678-1234-1234-1234-123456789ABC}",
+  "version": "1.0.0",
+  "variations": [
+    {
+      "description": "Extract and manipulate form data using NLP",
+      "descriptionLocale": {
+        "en": "Extract and manipulate form data using NLP",
+        "es": "Extraer y manipular datos de formulario usando NLP"
+      },
+      "url": "index.html",
+      "icons": [
+        "icon.png",
+        "icon@2x.png"
+      ],
+      "isViewer": false,
+      "EditorsSupport": [
+        "word"
+      ],
+      "isVisual": true,
+      "isModal": false,
+      "isInsideMode": false,
+      "initDataType": "none",
+      "initData": "",
+      "isUpdateOleOnResize": false,
+      "buttons": [
+        {
+          "text": "Extract Form Data",
+          "primary": true
+        }
+      ],
+      "size": [400, 600]
+    }
+  ]
+}

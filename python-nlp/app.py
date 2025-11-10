@@ -54,11 +54,24 @@ except Exception as e:
     extract_docx_variables = None
     replace_docx_variables = None
     docx_service = None
+
+# DocxTPL template service imports (for live rendering)
+try:
+    from docxtpl_service import extract_template_variables, render_docx_template_live, docxtpl_service
+    DOCXTPL_AVAILABLE = True
+    logger.info("✅ DocxTPL template service loaded successfully")
+except Exception as e:
+    logger.error(f"DocxTPL service not available: {e}")
+    DOCXTPL_AVAILABLE = False
+    extract_template_variables = None
+    render_docx_template_live = None
+    docxtpl_service = None
 # Initialize Flask app
 app = Flask(__name__)
 
 # ONLYOFFICE Configuration
 ONLYOFFICE_SERVER_URL = os.environ.get('ONLYOFFICE_SERVER_URL', 'http://localhost:8080')
+BACKEND_BASE_URL = os.environ.get('BACKEND_BASE_URL', 'http://localhost:5000')
 UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', './uploads')
 SESSIONS_FOLDER = os.path.join(UPLOAD_FOLDER, 'sessions')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -163,6 +176,7 @@ CORS(app, resources={
             "http://0.0.0.0:3000",
             "http://localhost:3001",
             "http://127.0.0.1:3001",
+            "https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io",
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
@@ -177,6 +191,7 @@ ALLOWED_ORIGINS = {
     "http://0.0.0.0:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3001",
+    "https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io",
     # Add IP address for local network access
     "http://192.168.1.18:3000",
 }
@@ -1218,15 +1233,22 @@ def upload_document_onlyoffice():
             logger.info("Converting bracketed variables to Content Controls for protection...")
             docx_bytes = docx_service.convert_variables_to_content_controls(docx_bytes, variables_metadata)
 
-        # Save processed file
+        # Save processed file (this is the working copy)
         file_path = os.path.join(UPLOAD_FOLDER, f"{doc_id}.docx")
         with open(file_path, 'wb') as f:
             f.write(docx_bytes)
+
+        # ALSO save original template (for docxtpl rendering)
+        template_path = os.path.join(UPLOAD_FOLDER, f"{doc_id}_template.docx")
+        with open(template_path, 'wb') as f:
+            f.write(docx_bytes)
+        logger.info(f"💾 Saved original template to: {template_path}")
 
         # Store session info
         session_data = {
             "filename": file.filename,
             "file_path": file_path,
+            "template_path": template_path,  # Original template for rendering
             "created_at": datetime.now().isoformat(),
             "variables": variables,
             "modified": False
@@ -1254,29 +1276,30 @@ def get_onlyoffice_config(doc_id):
         if not session:
             return jsonify({"error": "Document not found"}), 404
 
-        # ONLYOFFICE configuration
-        # Use actual machine IP for Docker to reach Flask API
-        # host.docker.internal may resolve to IPv6 which causes issues
-        import socket
-        try:
-            # Get the machine's local network IP
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            host_ip = s.getsockname()[0]
-            s.close()
-            flask_host = f"{host_ip}:5000"
-        except Exception:
-            # Fallback to host.docker.internal
-            flask_host = "host.docker.internal:5000"
+        # Use BACKEND_BASE_URL for production (Azure) or fallback to localhost for dev
+        backend_url = BACKEND_BASE_URL
 
-        logger.info(f"ONLYOFFICE will use Flask host: {flask_host}")
+        logger.info(f"ONLYOFFICE will use backend: {backend_url}")
+
+        # Generate a unique key that changes when document is modified
+        # This forces ONLYOFFICE to fetch the updated file instead of using cache
+        base_key = doc_id
+        last_modified = session.get("last_modified", session.get("created_at", ""))
+        timestamp_clean = last_modified.replace(':', '').replace('.', '').replace('-', '').replace('T', '')
+        document_key = f"{base_key}_{timestamp_clean}"
+
+        # Also add timestamp to download URL to bust ALL caches
+        download_url = f"{backend_url}/api/onlyoffice/download/{doc_id}?t={timestamp_clean}"
+
+        logger.info(f"📋 Generated document key: {document_key}")
+        logger.info(f"📥 Download URL: {download_url}")
 
         config = {
             "document": {
                 "fileType": "docx",
-                "key": doc_id,
+                "key": document_key,  # Use modified timestamp in key to bust cache
                 "title": session["filename"],
-                "url": f"http://{flask_host}/api/onlyoffice/download/{doc_id}",
+                "url": download_url,  # Add timestamp parameter
                 "permissions": {
                     "edit": True,
                     "download": True,
@@ -1285,7 +1308,7 @@ def get_onlyoffice_config(doc_id):
             },
             "documentType": "word",
             "editorConfig": {
-                "callbackUrl": f"http://{flask_host}/api/onlyoffice/callback/{doc_id}",
+                "callbackUrl": f"{backend_url}/api/onlyoffice/callback/{doc_id}",
                 "customization": {
                     "autosave": True,
                     "forcesave": True
@@ -1377,7 +1400,273 @@ def get_document_variables_onlyoffice(doc_id):
 
 @app.route('/api/onlyoffice/update-variables/<doc_id>', methods=['POST'])
 def update_document_variables_onlyoffice(doc_id):
-    """Update variables in document while preserving formatting"""
+    """Update variables in document using LIVE docxtpl rendering"""
+    try:
+        session = get_session(doc_id)
+        if not session:
+            logger.error(f"❌ Session not found for doc_id: {doc_id}")
+            return jsonify({"error": "Document not found"}), 404
+
+        if not DOCXTPL_AVAILABLE:
+            logger.error("❌ DocxTPL service not available")
+            return jsonify({"error": "DocxTPL service not available"}), 503
+
+        data = request.get_json()
+        variables = data.get('variables', {})
+
+        logger.info(f"🎨 LIVE RENDERING for document {doc_id}")
+        logger.info(f"📝 Variables to render: {list(variables.keys())}")
+
+        # Read original template (with [Variable] or {{Variable}} syntax)
+        template_path = session.get("template_path", session["file_path"])
+        with open(template_path, 'rb') as f:
+            template_bytes = f.read()
+
+        logger.info(f"📄 Read template from: {template_path} ({len(template_bytes)} bytes)")
+
+        # Convert variable format to simple strings (docxtpl expects plain values)
+        # IMPORTANT: Sanitize keys to match the converted variable names in template
+        render_context = {}
+        for key, value in variables.items():
+            # Sanitize key name (same as in docxtpl_service)
+            sanitized_key = docxtpl_service.sanitize_variable_name(key)
+
+            # Handle both string values and dict values
+            if isinstance(value, dict):
+                render_context[sanitized_key] = value.get('value', '') or value.get('suggested_value', '')
+            else:
+                render_context[sanitized_key] = value or ''
+
+        logger.info(f"🎨 Render context: {render_context}")
+        logger.info(f"🔑 Variable name mapping: {dict(zip(variables.keys(), render_context.keys()))}")
+
+        # LIVE RENDER using docxtpl - this shows changes immediately!
+        rendered_bytes = render_docx_template_live(template_bytes, render_context)
+        logger.info(f"✅ Template rendered LIVE, new size: {len(rendered_bytes)} bytes")
+
+        # Save rendered document
+        with open(session["file_path"], 'wb') as f:
+            f.write(rendered_bytes)
+        logger.info(f"💾 Saved rendered document to: {session['file_path']}")
+
+        # Extract variables from rendered document
+        var_result = extract_template_variables(rendered_bytes)
+        if var_result.get("success"):
+            session["variables"] = var_result.get("variables", {})
+            logger.info(f"🔍 Extracted {len(session['variables'])} remaining variables")
+
+        session["modified"] = True
+        session["last_modified"] = datetime.now().isoformat()
+        document_sessions[doc_id] = session
+        save_session(doc_id, session)
+
+        logger.info(f"✅ Successfully rendered document {doc_id} with docxtpl")
+
+        return jsonify({
+            "success": True,
+            "variables": session["variables"],
+            "replacements_made": len(variables),
+            "method": "docxtpl_live_rendering",
+            "message": "Variables rendered successfully. Document will reload automatically."
+        })
+
+    except Exception as e:
+        logger.error(f"❌ Error rendering template: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/onlyoffice/extract-realtime/<doc_id>', methods=['POST'])
+def extract_realtime_variables(doc_id):
+    """
+    Real-time extraction endpoint - extracts variables from document using GLiNER
+    This is called automatically when document is loaded, without refresh
+    """
+    try:
+        session = get_session(doc_id)
+        if not session:
+            return jsonify({"error": "Document not found"}), 404
+
+        if not DOCX_AVAILABLE:
+            return jsonify({"error": "DOCX service not available"}), 503
+
+        # Read current document
+        with open(session["file_path"], 'rb') as f:
+            docx_bytes = f.read()
+
+        # Extract variables with GLiNER enrichment
+        var_result = extract_docx_variables(docx_bytes)
+
+        if not var_result.get("success"):
+            return jsonify({
+                "success": False,
+                "error": var_result.get("error", "Extraction failed")
+            }), 500
+
+        # Update session with fresh variables
+        variables = var_result.get("variables", {})
+        session["variables"] = variables
+        document_sessions[doc_id] = session
+        save_session(doc_id, session)
+
+        logger.info(f"🔍 Real-time extraction for {doc_id}: {len(variables)} variables found (GLiNER: {var_result.get('gliner_enabled', False)})")
+
+        return jsonify({
+            "success": True,
+            "variables": variables,
+            "gliner_enabled": var_result.get('gliner_enabled', False),
+            "extraction_method": "GLiNER + Regex" if var_result.get('gliner_enabled') else "Regex",
+            "total_variables": len(variables),
+            "message": f"Extracted {len(variables)} variables in real-time"
+        })
+
+    except Exception as e:
+        logger.error(f"Error in real-time extraction: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+# ====== ONLYOFFICE Form Data API Endpoints ======
+
+@app.route('/api/onlyoffice/extract-forms/<doc_id>', methods=['POST'])
+def extract_forms_onlyoffice(doc_id):
+    """
+    Extract form fields from ONLYOFFICE document using getFormsData
+    This endpoint would be called from a custom ONLYOFFICE plugin
+    For now, we extract bracketed fields from the document
+    """
+    try:
+        session = get_session(doc_id)
+        if not session:
+            return jsonify({"error": "Document not found"}), 404
+
+        if not DOCX_AVAILABLE:
+            return jsonify({"error": "DOCX service not available"}), 503
+
+        # Read current document
+        with open(session["file_path"], 'rb') as f:
+            docx_bytes = f.read()
+
+        # Extract variables (these are our form fields)
+        var_result = extract_docx_variables(docx_bytes)
+
+        if not var_result.get("success"):
+            return jsonify({
+                "success": False,
+                "error": var_result.get("error", "Extraction failed")
+            }), 500
+
+        # Convert variables to form field format
+        variables = var_result.get("variables", {})
+        fields = []
+        for key, var_data in variables.items():
+            field = {
+                "key": key,
+                "name": key,
+                "type": "text",  # Default to text for now
+                "value": var_data.get("suggested_value", "") if isinstance(var_data, dict) else "",
+                "original_value": var_data.get("suggested_value", "") if isinstance(var_data, dict) else ""
+            }
+            fields.append(field)
+
+        logger.info(f"📋 Extracted {len(fields)} form fields from document {doc_id}")
+
+        return jsonify({
+            "success": True,
+            "fields": fields,
+            "count": len(fields),
+            "message": f"Extracted {len(fields)} form fields"
+        })
+
+    except Exception as e:
+        logger.error(f"Error extracting forms: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/analyze-form-fields', methods=['POST'])
+def analyze_form_fields():
+    """
+    Analyze form fields using NLP to provide better suggestions
+    This is called after extracting form data
+    """
+    try:
+        data = request.get_json()
+        if not data or 'fields' not in data:
+            return jsonify({"error": "fields array required"}), 400
+
+        fields = data['fields']
+        analyzed_fields = []
+
+        for field in fields:
+            field_name = field.get('key') or field.get('name', '')
+            field_value = field.get('value', '')
+            field_type = field.get('type', 'text')
+
+            # Analyze field name with NLP to categorize it
+            nlp_category = None
+            suggested_value = field_value
+
+            if nlp_service:
+                # Extract entities from field name to understand what it represents
+                name_analysis = nlp_service.extract_entities(field_name)
+                entities = name_analysis.get('entities', [])
+
+                if entities:
+                    # Use first entity label as category
+                    nlp_category = entities[0].get('label', None)
+
+                # If we have GLiNER, use it for better field understanding
+                if GLINER_AVAILABLE and field_value:
+                    try:
+                        gliner_result = extract_entities_with_gliner(
+                            f"{field_name}: {field_value}",
+                            entity_type="offer_letter"
+                        )
+                        if gliner_result.get('entities'):
+                            # Use GLiNER suggestion if available
+                            suggested_value = gliner_result['entities'][0].get('text', field_value)
+                    except Exception as e:
+                        logger.warning(f"GLiNER analysis failed for field {field_name}: {e}")
+
+            analyzed_field = {
+                "key": field_name,
+                "name": field_name,
+                "type": field_type,
+                "original_value": field_value,
+                "suggested_value": suggested_value,
+                "nlp_category": nlp_category
+            }
+            analyzed_fields.append(analyzed_field)
+
+        logger.info(f"🔬 Analyzed {len(analyzed_fields)} form fields with NLP")
+
+        return jsonify({
+            "success": True,
+            "analyzed_fields": analyzed_fields,
+            "count": len(analyzed_fields),
+            "gliner_enabled": GLINER_AVAILABLE,
+            "message": f"Analyzed {len(analyzed_fields)} fields"
+        })
+
+    except Exception as e:
+        logger.error(f"Error analyzing form fields: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/onlyoffice/update-forms/<doc_id>', methods=['POST'])
+def update_forms_onlyoffice(doc_id):
+    """
+    Update form fields in ONLYOFFICE document using setFormsData
+    This endpoint would communicate with a custom ONLYOFFICE plugin
+    For now, we replace variables in the document
+    """
     try:
         session = get_session(doc_id)
         if not session:
@@ -1387,37 +1676,51 @@ def update_document_variables_onlyoffice(doc_id):
             return jsonify({"error": "DOCX service not available"}), 503
 
         data = request.get_json()
-        variables = data.get('variables', {})
+        fields = data.get('fields', [])
+
+        if not fields:
+            return jsonify({"error": "No fields provided"}), 400
+
+        # Convert fields to variables format
+        variables = {}
+        for field in fields:
+            key = field.get('key') or field.get('name')
+            value = field.get('suggested_value') or field.get('value', '')
+            if key:
+                variables[key] = value
 
         # Read current document
         with open(session["file_path"], 'rb') as f:
             docx_bytes = f.read()
 
-        # Replace variables while preserving formatting
+        # Replace variables in document
         modified_bytes = replace_docx_variables(docx_bytes, variables)
 
         # Save modified document
         with open(session["file_path"], 'wb') as f:
             f.write(modified_bytes)
 
-        # Re-extract variables
-        var_result = extract_docx_variables(modified_bytes)
-        if var_result.get("success"):
-            session["variables"] = var_result.get("variables", {})
-
+        # Update session
+        session["variables"] = variables
         session["modified"] = True
         document_sessions[doc_id] = session
         save_session(doc_id, session)
 
+        logger.info(f"✅ Updated {len(variables)} form fields in document {doc_id}")
+
         return jsonify({
             "success": True,
-            "variables": session["variables"],
-            "message": "Variables updated successfully. Reload the document to see changes."
+            "updated_count": len(variables),
+            "message": f"Updated {len(variables)} form fields successfully. Reload to see changes."
         })
 
     except Exception as e:
-        logger.error(f"Error updating variables: {e}")
-        return jsonify({"error": str(e)}), 500
+        logger.error(f"Error updating forms: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
 
 if __name__ == '__main__':
     # Always run on port 5000 to match frontend expectations

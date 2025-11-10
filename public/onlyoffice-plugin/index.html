@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Data Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+        #status {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        #formDataDisplay {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Form Data Extractor & NLP Analyzer</h3>
+        <p>Extract form fields and analyze with NLP to populate the Variable Panel.</p>
+
+        <div>
+            <button id="extractBtn" onclick="extractFormData()">Extract Form Data</button>
+            <button id="analyzeBtn" onclick="analyzeWithNLP()" disabled>Analyze with NLP</button>
+            <button id="updateBtn" onclick="updateFormData()" disabled>Update Forms</button>
+        </div>
+
+        <div id="status" style="display: none;"></div>
+        <div id="formDataDisplay"></div>
+    </div>
+
+    <script>
+        let extractedData = null;
+        let nlpAnalyzedData = null;
+
+        (function(window, undefined) {
+            window.Asc.plugin.init = function() {
+                console.log('Form Data Extractor plugin initialized');
+                showStatus('Plugin ready. Click "Extract Form Data" to begin.', 'info');
+            };
+
+            window.extractFormData = function() {
+                showStatus('Extracting form data...', 'info');
+
+                window.Asc.plugin.executeMethod("GetFormsData", [], function(data) {
+                    if (data && data.length > 0) {
+                        extractedData = data;
+
+                        // Format the data for display
+                        let displayHtml = '<strong>Extracted Form Fields:</strong><br><br>';
+                        data.forEach((field, index) => {
+                            displayHtml += `<div style="margin-bottom: 8px;">
+                                <strong>${index + 1}. ${field.key || field.name || 'Field ' + index}</strong><br>
+                                Type: ${field.type || 'unknown'}<br>
+                                Value: ${field.value || '(empty)'}<br>
+                            </div>`;
+                        });
+
+                        document.getElementById('formDataDisplay').innerHTML = displayHtml;
+                        document.getElementById('analyzeBtn').disabled = false;
+
+                        showStatus(`Successfully extracted ${data.length} form fields!`, 'success');
+
+                        // Send data to parent window (React app)
+                        sendToParentWindow('formDataExtracted', {
+                            fields: data,
+                            count: data.length
+                        });
+                    } else {
+                        showStatus('No form fields found in the document.', 'error');
+                        document.getElementById('formDataDisplay').innerHTML = '<em>No forms detected. Make sure your document contains form fields.</em>';
+                    }
+                });
+            };
+
+            window.analyzeWithNLP = function() {
+                if (!extractedData) {
+                    showStatus('Please extract form data first.', 'error');
+                    return;
+                }
+
+                showStatus('Analyzing with NLP backend...', 'info');
+                document.getElementById('analyzeBtn').disabled = true;
+
+                // Send to NLP backend for analysis
+                fetch('http://127.0.0.1:5000/api/analyze-form-fields', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fields: extractedData
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        nlpAnalyzedData = data.analyzed_fields;
+
+                        // Update display with NLP results
+                        let displayHtml = '<strong>NLP Analysis Results:</strong><br><br>';
+                        nlpAnalyzedData.forEach((field, index) => {
+                            displayHtml += `<div style="margin-bottom: 12px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                                <strong>${index + 1}. ${field.key || field.name}</strong><br>
+                                Type: ${field.type}<br>
+                                Original: ${field.original_value || '(empty)'}<br>
+                                Suggested: <strong style="color: #0369a1;">${field.suggested_value || '(no suggestion)'}</strong><br>
+                                ${field.nlp_category ? `Category: ${field.nlp_category}<br>` : ''}
+                            </div>`;
+                        });
+
+                        document.getElementById('formDataDisplay').innerHTML = displayHtml;
+                        document.getElementById('updateBtn').disabled = false;
+                        document.getElementById('analyzeBtn').disabled = false;
+
+                        showStatus(`NLP analysis complete! ${nlpAnalyzedData.length} fields analyzed.`, 'success');
+
+                        // Send to parent window for Variable Panel display
+                        sendToParentWindow('nlpAnalysisComplete', {
+                            fields: nlpAnalyzedData,
+                            count: nlpAnalyzedData.length
+                        });
+                    } else {
+                        showStatus('NLP analysis failed: ' + (data.error || 'Unknown error'), 'error');
+                        document.getElementById('analyzeBtn').disabled = false;
+                    }
+                })
+                .catch(error => {
+                    showStatus('Error connecting to NLP backend: ' + error.message, 'error');
+                    document.getElementById('analyzeBtn').disabled = false;
+                });
+            };
+
+            window.updateFormData = function() {
+                if (!nlpAnalyzedData) {
+                    showStatus('Please analyze with NLP first.', 'error');
+                    return;
+                }
+
+                showStatus('Updating form fields in document...', 'info');
+                document.getElementById('updateBtn').disabled = true;
+
+                // Prepare data for SetFormsData
+                const formsToUpdate = nlpAnalyzedData.map(field => ({
+                    key: field.key || field.name,
+                    value: field.suggested_value || field.original_value || ''
+                }));
+
+                window.Asc.plugin.executeMethod("SetFormsData", [formsToUpdate], function(result) {
+                    showStatus(`Successfully updated ${formsToUpdate.length} form fields!`, 'success');
+                    document.getElementById('updateBtn').disabled = false;
+
+                    // Notify parent window
+                    sendToParentWindow('formsUpdated', {
+                        count: formsToUpdate.length
+                    });
+                });
+            };
+
+            // Helper function to send messages to parent window
+            function sendToParentWindow(eventType, data) {
+                if (window.parent) {
+                    window.parent.postMessage({
+                        type: 'onlyoffice-plugin-message',
+                        eventType: eventType,
+                        data: data
+                    }, '*');
+                }
+            }
+
+            // Helper function to show status messages
+            function showStatus(message, type) {
+                const statusDiv = document.getElementById('status');
+                statusDiv.textContent = message;
+                statusDiv.className = type;
+                statusDiv.style.display = 'block';
+            }
+
+            window.Asc.plugin.button = function(id) {
+                if (id === 0) {
+                    extractFormData();
+                } else {
+                    this.executeCommand("close", "");
+                }
+            };
+
+        })(window, undefined);
+    </script>
+</body>
+</html>

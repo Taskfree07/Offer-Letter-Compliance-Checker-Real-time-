@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { extractTextWithNLP, generateTemplateFromPDF } from '../services/pdfContentExtractor';
 import { syncCompliancePhrases } from '../services/legalDictionary';
 import { ensureComplianceClauses, buildVariablesFromEntities } from '../services/complianceAutoInsert';
+import { API_BASE_URL } from '../config/constants';
 // Full-Featured EmailEditor with Professional Preview and Exact Positioning
 import { Download, FileText, Settings, AlertCircle, RefreshCw, Shield, Edit3, ArrowLeft, BookOpen, CheckCircle } from 'lucide-react';
 import pdfTemplateService from '../services/pdfTemplateService';
@@ -12,6 +13,8 @@ import DynamicPDFViewer from './DynamicPDFViewer';
 import EntitiesPanel from './EntitiesPanel';
 import WordDocumentEditor from './WordDocumentEditor';
 import OnlyOfficeViewer from './OnlyOfficeViewer';
+import VariablePanel from './VariablePanel';
+import FormExtraction from './FormExtraction';
 import enhancedPdfService from '../services/enhancedPdfService';
 import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
 import * as pdfjs from 'pdfjs-dist';
@@ -60,6 +63,53 @@ const EmailEditor = ({ template, onBack }) => {
   const editableRef = useRef(null);
   const docxPreviewContainerRef = useRef(null);
   const onlyofficeViewerRef = useRef(null);
+
+  // Memoize the callback to prevent re-renders
+  const handleVariablesExtracted = useCallback((extractedVars) => {
+    setVariables(extractedVars);
+    setActiveTab('variables'); // Auto-switch to variables tab
+  }, []);
+
+  // Memoize isEditorReady check to prevent re-renders
+  const [isEditorReady, setIsEditorReady] = useState(false);
+
+  // Handle editor ready callback from OnlyOfficeViewer
+  const handleEditorReady = useCallback(() => {
+    setIsEditorReady(true);
+  }, []);
+
+  // Memoize all OnlyOffice callbacks to prevent re-renders
+  const handleOnlyOfficeSave = useCallback(() => {
+    console.log('Document saved in ONLYOFFICE');
+  }, []);
+
+  const handleOnlyOfficeSessionExpired = useCallback(() => {
+    console.log('⚠️ ONLYOFFICE session may have expired, but keeping document ID');
+    setIsEditorReady(false);
+  }, []);
+
+  const handleOnlyOfficeVariablesUpdate = useCallback((vars) => {
+    console.log('Variables updated from ONLYOFFICE:', vars);
+
+    // Handle both array and object formats
+    const updatedVars = {};
+
+    if (Array.isArray(vars)) {
+      vars.forEach(v => {
+        updatedVars[v.variable] = v.value || '';
+      });
+    } else if (typeof vars === 'object' && vars !== null) {
+      Object.entries(vars).forEach(([varName, varData]) => {
+        if (typeof varData === 'object' && varData !== null) {
+          updatedVars[varName] = varData.suggested_value || varData.value || '';
+        } else {
+          updatedVars[varName] = varData || '';
+        }
+      });
+    }
+
+    setVariables(updatedVars);
+  }, []);
 
   // Compliance system states
   const [complianceFlags, setComplianceFlags] = useState({});
@@ -127,7 +177,7 @@ const EmailEditor = ({ template, onBack }) => {
         currentPreviewUrlRef.current = null;
       }
 
-      const response = await fetch('http://127.0.0.1:5000/api/html-to-pdf', {
+      const response = await fetch(`${API_BASE_URL}/api/html-to-pdf`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -750,7 +800,7 @@ useEffect(() => {
         formData.append('file', window.originalDocxFile);
         formData.append('variables', JSON.stringify(variables));
 
-        const response = await fetch('http://127.0.0.1:5000/api/docx-replace-variables', {
+        const response = await fetch(`${API_BASE_URL}/api/docx-replace-variables`, {
           method: 'POST',
           body: formData
         });
@@ -792,7 +842,7 @@ useEffect(() => {
         formData.append('file', window.originalDocxFile);
         formData.append('variables', JSON.stringify(variables));
 
-        const response = await fetch('http://127.0.0.1:5000/api/docx-to-pdf', {
+        const response = await fetch(`${API_BASE_URL}/api/docx-to-pdf`, {
           method: 'POST',
           body: formData
         });
@@ -829,7 +879,7 @@ useEffect(() => {
 
       if (previewMode === 'html-edit' && editableRef.current) {
         const currentHtml = editableRef.current.innerHTML;
-        const response = await fetch('http://127.0.0.1:5000/api/html-to-pdf', {
+        const response = await fetch(`${API_BASE_URL}/api/html-to-pdf`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ html: currentHtml, variables })
@@ -876,64 +926,72 @@ useEffect(() => {
     }
   };
 
+  // Removed real-time variable updates - now only updates when "Replace in Template" is clicked
   const handleVariableChange = async (varName, value) => {
+    // Only update local state for UI feedback - no real-time ONLYOFFICE updates
     const updatedVars = { ...variables, [varName]: value };
     setVariables(updatedVars);
-
-    // If in ONLYOFFICE mode, update the document in real-time
-    if (previewMode === 'onlyoffice' && onlyofficeDocId) {
-      try {
-        // Step 1: Update backend document file
-        const response = await fetch(`http://127.0.0.1:5000/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            variables: updatedVars
-          })
-        });
-
-        const result = await response.json();
-        if (result.success) {
-          console.log('✅ Variables updated in backend document');
-
-          // Step 2: Update ONLYOFFICE viewer in real-time (no reload!)
-          if (onlyofficeViewerRef.current && onlyofficeViewerRef.current.updateVariable) {
-            // Use the real-time update API
-            onlyofficeViewerRef.current.updateVariable(varName, value);
-          } else {
-            // Fallback: reload if API not available
-            console.log('⚠️ Real-time API not available, reloading document');
-            if (onlyofficeViewerRef.current && onlyofficeViewerRef.current.reloadDocument) {
-              setTimeout(() => {
-                onlyofficeViewerRef.current.reloadDocument();
-              }, 500);
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error updating ONLYOFFICE variables:', error);
-      }
-    }
-
-    // Update editable HTML spans
+    
+    // All ONLYOFFICE updates now happen only in handleReplaceInTemplate
+    console.log(`📝 Variable [${varName}] updated locally, will apply on Replace click`);
+    
+    // Update editable HTML spans (for HTML edit mode only)
     if (previewMode === 'html-edit' && editableRef.current) {
       updateEditableVariables();
     }
 
-    // Debounce preview refresh
+    // Debounce preview refresh (only for non-OnlyOffice modes)
     if (variableChangeTimerRef.current) {
       clearTimeout(variableChangeTimerRef.current);
     }
     variableChangeTimerRef.current = setTimeout(() => {
       if (previewMode === 'html-edit' && editableRef.current) {
         generateLivePdfPreview(editableRef.current.innerHTML);
-      } else {
+      } else if (previewMode !== 'onlyoffice') {
+        // Only regenerate preview if NOT in OnlyOffice mode
         generateProfessionalPreview();
       }
     }, 400);
   };
+
+  const handleReplaceInTemplate = useCallback(async (updatedVariables) => {
+    if (!onlyofficeViewerRef.current || previewMode !== 'onlyoffice') {
+      throw new Error('ONLYOFFICE editor not available');
+    }
+
+    try {
+      console.log('🔄 Step 1: Updating variables on backend...', updatedVariables);
+
+      // Step 1: Update backend with new variables
+      const response = await fetch(`${API_BASE_URL}/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ variables: updatedVariables }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to update variables on server');
+      }
+
+      const result = await response.json();
+      console.log('✅ Backend updated successfully:', result);
+
+      // Step 2: Reload the ONLYOFFICE editor to show changes
+      console.log('🔄 Step 2: Reloading document in editor...');
+      await onlyofficeViewerRef.current.replaceAllVariables(updatedVariables);
+
+      // Step 3: Update local state
+      setVariables(updatedVariables);
+
+      console.log('✅ Variables successfully replaced in template');
+    } catch (error) {
+      console.error('❌ Error replacing variables:', error);
+      throw error;
+    }
+  }, [onlyofficeDocId, previewMode]);
 
   const handleStateChange = (state) => {
     setStateConfig(prev => ({ ...prev, selectedState: state }));
@@ -1176,38 +1234,10 @@ useEffect(() => {
               <OnlyOfficeViewer
                 ref={onlyofficeViewerRef}
                 documentId={onlyofficeDocId}
-                onSave={() => {
-                  console.log('Document saved in ONLYOFFICE');
-                }}
-                onSessionExpired={() => {
-                  console.log('⚠️ ONLYOFFICE session may have expired, but keeping document ID');
-                  // Don't clear the document ID - let user manually remove if needed
-                  // The session is persistent on disk, so it should reload
-                }}
-                onVariablesUpdate={(vars) => {
-                  console.log('Variables updated from ONLYOFFICE:', vars);
-
-                  // Handle both array and object formats
-                  const updatedVars = {};
-
-                  if (Array.isArray(vars)) {
-                    // Array format: [{ variable: 'name', value: 'value' }, ...]
-                    vars.forEach(v => {
-                      updatedVars[v.variable] = v.value || '';
-                    });
-                  } else if (typeof vars === 'object' && vars !== null) {
-                    // Object format: { varName: { name: 'varName', value: 'value', ... }, ... }
-                    Object.entries(vars).forEach(([varName, varData]) => {
-                      if (typeof varData === 'object' && varData !== null) {
-                        updatedVars[varName] = varData.suggested_value || varData.value || '';
-                      } else {
-                        updatedVars[varName] = varData || '';
-                      }
-                    });
-                  }
-
-                  setVariables(updatedVars);
-                }}
+                onEditorReady={handleEditorReady}
+                onSave={handleOnlyOfficeSave}
+                onSessionExpired={handleOnlyOfficeSessionExpired}
+                onVariablesUpdate={handleOnlyOfficeVariablesUpdate}
               />
             </div>
           ) : previewMode === 'docx-preview' && docxHtmlContent ? (
@@ -1750,152 +1780,176 @@ useEffect(() => {
         )}
       </div>
       
-      <div className="tab-navigation">
-        <button
-          className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
-          onClick={() => setActiveTab('variables')}
-        >
-          <Settings size={16} />
-          Variables
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
-          onClick={() => setActiveTab('state')}
-        >
-          <Shield size={16} />
-          Compliance
-        </button>
-      </div>
-      <input
-        type="file"
-        id="offerLetterInput"
-        accept=".docx"
-        style={{ display: 'none' }}
-        onChange={(e) => {
-          console.log('File input onChange triggered', e.target.files);
-          handleOfferLetterImport(e);
-        }}
-      />
-      
-      <div className="tab-content-wrapper">
-  {activeTab === 'variables' && (
-    <>
-      {/* Enhanced PDF Processing Status */}
-      {enhancedPdfProcessed && (
-        <div style={{ 
-          background: '#f0f9ff', 
-          border: '1px solid #0ea5e9', 
-          borderRadius: '6px', 
-          padding: '12px', 
-          marginBottom: '16px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
-          <div>
-            <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
-              Enhanced PDF Processing Complete
+      {/* Show Variable Panel when in ONLYOFFICE mode with tabs */}
+      {previewMode === 'onlyoffice' && onlyofficeDocId ? (
+        <>
+          <div className="tab-navigation">
+            <button
+              className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
+              onClick={() => setActiveTab('variables')}
+            >
+              <Settings size={16} />
+              Variables
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'extraction' ? 'active' : ''}`}
+              onClick={() => setActiveTab('extraction')}
+            >
+              <Edit3 size={16} />
+              Extract
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
+              onClick={() => setActiveTab('state')}
+            >
+              <Shield size={16} />
+              Compliance
+            </button>
+          </div>
+          <div className="tab-content-wrapper">
+            <div style={{ display: activeTab === 'variables' ? 'block' : 'none', height: '100%' }}>
+              <VariablePanel
+                variables={variables}
+                onReplaceInTemplate={handleReplaceInTemplate}
+                isEditorReady={isEditorReady}
+              />
             </div>
-            <div style={{ fontSize: '12px', color: '#0369a1' }}>
-              {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
+            <div style={{ display: activeTab === 'extraction' ? 'block' : 'none', height: '100%' }}>
+              <FormExtraction
+                documentId={onlyofficeDocId}
+                onVariablesExtracted={handleVariablesExtracted}
+                editorRef={onlyofficeViewerRef}
+              />
+            </div>
+            <div style={{ display: activeTab === 'state' ? 'block' : 'none', height: '100%' }}>
+              {renderStateConfigTab()}
             </div>
           </div>
-        </div>
-      )}
-      
-      {renderVariablesTab()}
-
-      {/* Controls for variables tab */}
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
-        <input
-          type="text"
-          value={variableSearch}
-          onChange={(e) => setVariableSearch(e.target.value)}
-          placeholder="Search variables..."
-          style={{ flex: '1', padding: '8px 10px', border: '1px solid #ced4da', borderRadius: '6px' }}
-        />
-        <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#374151' }}>
+        </>
+      ) : (
+        <>
+          <div className="tab-navigation">
+            <button
+              className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
+              onClick={() => setActiveTab('variables')}
+            >
+              <Settings size={16} />
+              Variables
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
+              onClick={() => setActiveTab('state')}
+            >
+              <Shield size={16} />
+              Compliance
+            </button>
+          </div>
           <input
-            type="checkbox"
-            checked={showFlaggedOnly}
-            onChange={(e) => setShowFlaggedOnly(e.target.checked)}
+            type="file"
+            id="offerLetterInput"
+            accept=".docx"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              console.log('File input onChange triggered', e.target.files);
+              handleOfferLetterImport(e);
+            }}
           />
-          Show variables in flagged sections only
-        </label>
-        {previewMode === 'html-edit' && (
-          <button 
-            className="btn btn-secondary" 
-            onClick={rescanVariables}
-            style={{ padding: '8px 12px', borderRadius: '6px' }}
-          >
-            Rescan Variables
-          </button>
-        )}
-      </div>
+          
+          <div className="tab-content-wrapper">
+            {activeTab === 'variables' && (
+              <>
+                {/* Enhanced PDF Processing Status */}
+                {enhancedPdfProcessed && (
+                  <div style={{ 
+                    background: '#f0f9ff', 
+                    border: '1px solid #0ea5e9', 
+                    borderRadius: '6px', 
+                    padding: '12px', 
+                    marginBottom: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}>
+                    <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
+                    <div>
+                      <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
+                        Enhanced PDF Processing Complete
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#0369a1' }}>
+                        {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {renderVariablesTab()}
 
-      {/* Enhanced PDF Processing Status */}
-      {enhancedPdfProcessed && (
-        <div style={{ 
-          background: '#f0f9ff', 
-          border: '1px solid #0ea5e9', 
-          borderRadius: '6px', 
-          padding: '12px', 
-          marginBottom: '16px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
-          <div>
-            <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
-              Enhanced PDF Processing Complete
-            </div>
-            <div style={{ fontSize: '12px', color: '#0369a1' }}>
-              {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
-            </div>
+                {/* Controls for variables tab */}
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
+                  <input
+                    type="text"
+                    value={variableSearch}
+                    onChange={(e) => setVariableSearch(e.target.value)}
+                    placeholder="Search variables..."
+                    style={{ flex: '1', padding: '8px 10px', border: '1px solid #ced4da', borderRadius: '6px' }}
+                  />
+                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#374151' }}>
+                    <input
+                      type="checkbox"
+                      checked={showFlaggedOnly}
+                      onChange={(e) => setShowFlaggedOnly(e.target.checked)}
+                    />
+                    Show variables in flagged sections only
+                  </label>
+                  {previewMode === 'html-edit' && (
+                    <button 
+                      className="btn btn-secondary" 
+                      onClick={rescanVariables}
+                      style={{ padding: '8px 12px', borderRadius: '6px' }}
+                    >
+                      Rescan Variables
+                    </button>
+                  )}
+                </div>
+
+                {/* Entities Panel: edit and apply NLP replacements */}
+                <div style={{ marginTop: '16px', borderTop: '1px solid #e2e8f0', paddingTop: '12px' }}>
+                <EntitiesPanel
+                  entities={extractedEntities}
+                  variables={variables}
+                  content={isPdfImported ? extractedPdfText : (editableRef.current ? editableRef.current.innerHTML : templateContent)}
+                  onVariablesChange={(updated) => {
+                    setVariables(updated);
+                    if (previewMode === 'html-edit') updateEditableVariables();
+                    setTimeout(() => {
+                      if (previewMode === 'html-edit' && editableRef.current) {
+                        generateLivePdfPreview(editableRef.current.innerHTML);
+                      } else {
+                        generateProfessionalPreview();
+                      }
+                    }, 300);
+                  }}
+                  onContentChange={(newContent) => {
+                    if (previewMode === 'html-edit') {
+                      setTemplateContent(newContent);
+                      generateLivePdfPreview(newContent);
+                    }
+                  }}
+                  onAfterApply={() => {
+                    console.log('NLP replacement applied');
+                    if (previewMode === 'html-edit') {
+                      updateEditableVariables();
+                      generateLivePdfPreview(editableRef.current?.innerHTML);
+                    }
+                  }}
+                />
+                </div>
+              </>
+            )}
+            {activeTab === 'state' && renderStateConfigTab()}
           </div>
-        </div>
+        </>
       )}
-      
-      {renderVariablesTab()}
-
-      {/* Entities Panel: edit and apply NLP replacements */}
-      <div style={{ marginTop: '16px', borderTop: '1px solid #e2e8f0', paddingTop: '12px' }}>
-      <EntitiesPanel
-  entities={extractedEntities}
-  variables={variables}
-  content={isPdfImported ? extractedPdfText : (editableRef.current ? editableRef.current.innerHTML : templateContent)}
-  onVariablesChange={(updated) => {
-    setVariables(updated);
-    if (previewMode === 'html-edit') updateEditableVariables();
-    setTimeout(() => {
-      if (previewMode === 'html-edit' && editableRef.current) {
-        generateLivePdfPreview(editableRef.current.innerHTML);
-      } else {
-        generateProfessionalPreview();
-      }
-    }, 300);
-  }}
-  onContentChange={(newContent) => {
-    if (previewMode === 'html-edit') {
-      setTemplateContent(newContent);
-      generateLivePdfPreview(newContent);
-    }
-  }}
-  onAfterApply={() => {
-    console.log('NLP replacement applied');
-    if (previewMode === 'html-edit') {
-      updateEditableVariables();
-      generateLivePdfPreview(editableRef.current?.innerHTML);
-    }
-  }}
-/>
-      </div>
-    </>
-  )}
-  {activeTab === 'state' && renderStateConfigTab()}
-</div>
     </div>
   );
 
@@ -1998,11 +2052,11 @@ useEffect(() => {
 
       // Call only the necessary endpoints for ONLYOFFICE workflow
       const [variablesResponse, onlyofficeResponse] = await Promise.all([
-        fetch('http://127.0.0.1:5000/api/docx-extract-variables', {
+        fetch(`${API_BASE_URL}/api/docx-extract-variables`, {
           method: 'POST',
           body: formData1
         }),
-        fetch('http://127.0.0.1:5000/api/onlyoffice/upload', {
+        fetch(`${API_BASE_URL}/api/onlyoffice/upload`, {
           method: 'POST',
           body: formData2
         })
@@ -2094,3 +2148,4 @@ useEffect(() => {
 };
 
 export default EmailEditor;
+

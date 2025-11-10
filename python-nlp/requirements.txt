@@ -3,16 +3,11 @@ flask-cors
 spacy
 gunicorn
 python-dotenv
-PyPDF2
-gliner
-PyMuPDF
-pdfplumber
-layoutparser[paddlepaddle]
-borb
-weasyprint
-beautifulsoup4
 python-docx
 requests
-
-# Note: After installing requirements, run:
-# python -m spacy download en_core_web_sm
+docxtpl
+PyPDF2  # Basic PDF support (lightweight, needed by pdf_service)
+# gliner  # Heavy AI model - excluded from production
+# PyMuPDF  # PDF library - excluded from production  
+# pdfplumber  # PDF library - excluded from production
+# weasyprint  # HTML to PDF - excluded from production

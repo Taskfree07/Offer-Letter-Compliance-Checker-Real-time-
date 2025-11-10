@@ -110,3 +110,9 @@ python-nlp/uploads/sessions/*.json
 # Keep the directories but ignore contents
 !python-nlp/uploads/.gitkeep
 !python-nlp/uploads/sessions/.gitkeep
+
+# Sensitive files
+.claude/settings.local.json
+.env.production
+__pycache__/
+*.pyc
