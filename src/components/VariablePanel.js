@@ -98,6 +98,24 @@ const VariablePanel = memo(({
     };
   });
 
+  // Sort variables in logical order
+  const sortOrder = [
+    'Candidate Name', 'Name', 'Address', 'Insert Date', 'Date',
+    'Company Name', 'Job Title', 'Client/Customer Name', 'Client',
+    'Proposed Start Date', 'Start Date', 'Amount', 'Salary',
+    'Authorized Signatory', 'Name & Designation', 'Company Address'
+  ];
+
+  const sortedVariables = [...variablesList].sort((a, b) => {
+    const aIndex = sortOrder.findIndex(s => a.name.includes(s) || a.displayName.includes(s));
+    const bIndex = sortOrder.findIndex(s => b.name.includes(s) || b.displayName.includes(s));
+    
+    if (aIndex === -1 && bIndex === -1) return a.name.localeCompare(b.name);
+    if (aIndex === -1) return 1;
+    if (bIndex === -1) return -1;
+    return aIndex - bIndex;
+  });
+
   return (
     <div style={{ padding: '15px', height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
@@ -112,70 +130,50 @@ const VariablePanel = memo(({
 
       {/* Variables List */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
-        {variablesList.length === 0 ? (
+        {sortedVariables.length === 0 ? (
           <div style={{ textAlign: 'center', color: '#6c757d', padding: '20px' }}>
             <p>No variables detected</p>
           </div>
         ) : (
           <div>
-            {variablesList.map((variable, index) => (
+            {sortedVariables.map((variable, index) => (
               <div
                 key={variable.name}
                 style={{
-                  marginBottom: '12px',
-                  paddingBottom: '12px',
-                  borderBottom: index < variablesList.length - 1 ? '1px solid #eee' : 'none'
+                  marginBottom: '10px',
+                  paddingBottom: '10px',
+                  borderBottom: index < sortedVariables.length - 1 ? '1px solid #eee' : 'none'
                 }}
               >
-                {/* Display label or variable name */}
-                <div style={{ 
-                  fontSize: '12px', 
-                  color: '#666',
-                  marginBottom: '4px',
-                  fontWeight: '500'
-                }}>
-                  {variable.fieldLabel ? (
-                    <>
-                      <span style={{ color: '#007bff' }}>{variable.fieldLabel}</span>
-                      <span style={{ fontSize: '11px', color: '#999', marginLeft: '6px' }}>
-                        ({variable.name})
-                      </span>
-                    </>
-                  ) : (
-                    <span>{variable.name}</span>
-                  )}
-                  {variable.type === 'labeled_field' && (
-                    <span style={{
-                      fontSize: '10px',
-                      backgroundColor: '#e3f2fd',
-                      color: '#1976d2',
-                      padding: '2px 6px',
-                      borderRadius: '3px',
-                      marginLeft: '6px'
-                    }}>
-                      Field
-                    </span>
-                  )}
-                </div>
-
-                {/* Input field */}
-                <input
-                  type="text"
-                  value={variable.value}
-                  onChange={(e) => handleVariableEdit(variable.name, e.target.value)}
-                  placeholder={variable.fieldLabel ? `Enter ${variable.fieldLabel.toLowerCase()}` : `Enter ${variable.name}`}
-                  style={{
-                    width: '100%',
-                    padding: '8px 10px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
+                {/* Variable Name | Input (old style with line separator) */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{
                     fontSize: '13px',
                     fontFamily: 'inherit',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = '#007bff'}
-                  onBlur={(e) => e.target.style.borderColor = '#ddd'}
-                />
+                    minWidth: '150px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    fontWeight: '500'
+                  }}>
+                    {variable.fieldLabel || variable.name}
+                  </span>
+                  <span style={{ color: '#ccc', fontSize: '16px' }}>|</span>
+                  <input
+                    type="text"
+                    value={variable.value}
+                    onChange={(e) => handleVariableEdit(variable.name, e.target.value)}
+                    placeholder={`Enter ${(variable.fieldLabel || variable.name).toLowerCase()}`}
+                    style={{
+                      flex: 1,
+                      padding: '5px 8px',
+                      border: '1px solid #ddd',
+                      borderRadius: '3px',
+                      fontSize: '13px',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>
