@@ -72,6 +72,9 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
       }, script);
 
       console.log('✅ Content Controls updated - variables preserved!');
+      
+      // DO NOT reload or refetch - the variables are still there!
+      // The Content Controls now show the new values but keep their structure
       return true;
 
     } catch (error) {
@@ -96,12 +99,9 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
         const result = await response.json();
         console.log('✅ Backend updated:', result);
 
-        // Minimal reload to show changes
-        await new Promise(resolve => setTimeout(resolve, 300));
-        setLoading(true);
-        setReloadKey(prev => prev + 1);
-
-        console.log('✅ Document refreshed with preserved variables');
+        // DO NOT reload - backend updated the document file but we don't need to reload
+        // The Content Controls are already updated and variables should persist
+        console.log('✅ Document updated without reload - variables preserved');
         return true;
 
       } catch (fallbackError) {

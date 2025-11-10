@@ -108,7 +108,9 @@ const EmailEditor = ({ template, onBack }) => {
       });
     }
 
-    setVariables(updatedVars);
+    // Merge with existing variables instead of replacing them
+    // This preserves variables that were already there
+    setVariables(prev => ({ ...prev, ...updatedVars }));
   }, []);
 
   // Compliance system states

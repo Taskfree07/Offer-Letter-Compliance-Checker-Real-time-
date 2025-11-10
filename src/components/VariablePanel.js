@@ -10,8 +10,16 @@ const VariablePanel = memo(({
   const [hasChanges, setHasChanges] = useState(false);
 
   useEffect(() => {
-    setLocalVariables(variables || {});
-    setHasChanges(false);
+    // Only update localVariables if incoming variables have different keys
+    // or if localVariables is empty (initial load)
+    const incomingKeys = Object.keys(variables || {}).sort().join(',');
+    const localKeys = Object.keys(localVariables).sort().join(',');
+    
+    // If keys are the same, don't reset - user might be editing
+    if (incomingKeys !== localKeys || Object.keys(localVariables).length === 0) {
+      setLocalVariables(variables || {});
+      setHasChanges(false);
+    }
   }, [variables]);
 
   const handleVariableEdit = (varName, newValue) => {
