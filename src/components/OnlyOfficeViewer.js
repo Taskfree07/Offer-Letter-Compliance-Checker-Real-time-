@@ -40,26 +40,74 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     }
 
     try {
-      console.log('🔄 Replacing all variables in document...', variablesObj);
+      console.log('🔄 Updating Content Controls to preserve variable structure...', variablesObj);
 
-      // The backend has already updated the variables in the document file
-      // Now we need to reload the document to show the changes
+      // Build a script to update Content Controls (not replace text)
+      // This preserves the variable placeholders while showing values
+      let script = 'var oDocument = Api.GetDocument();\n';
+      script += 'var aContentControls = oDocument.GetAllContentControls();\n';
+      script += 'for (var i = 0; i < aContentControls.length; i++) {\n';
+      script += '  var oCC = aContentControls[i];\n';
+      script += '  var sTag = oCC.GetTag();\n';
 
-      // Force ONLYOFFICE to reload the document
-      console.log('🔄 Requesting document reload...');
+      for (const [varName, varValue] of Object.entries(variablesObj)) {
+        const sanitizedValue = (varValue || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        const sanitizedVarName = varName.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 
-      // Small delay to ensure backend has finished writing
-      await new Promise(resolve => setTimeout(resolve, 500));
+        script += `  if (sTag === "${sanitizedVarName}") {\n`;
+        script += `    oCC.SetPlaceholderText("${sanitizedValue}");\n`;
+        script += `  }\n`;
+      }
 
-      // Reload the document by triggering a re-initialization
-      setLoading(true);
-      setReloadKey(prev => prev + 1);
+      script += '}\n';
 
-      console.log('✅ Document reload triggered - changes should appear shortly');
+      console.log('📝 Executing Content Control update script');
+
+      // Execute the script using callCommand
+      const connector = docEditorRef.current.createConnector();
+
+      await connector.callCommand(function() {
+        // eslint-disable-next-line no-eval
+        eval(arguments[0]);
+      }, script);
+
+      console.log('✅ Content Controls updated - variables preserved!');
       return true;
+
     } catch (error) {
-      console.error('❌ Error reloading document:', error);
-      throw error;
+      console.error('❌ Content Control update failed, using backend update...', error);
+
+      // Fallback: Use backend to update the document properly
+      try {
+        const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+        const response = await fetch(`${apiBaseUrl}/api/onlyoffice/update-variables/${documentId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ variables: variablesObj }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Backend update failed');
+        }
+
+        const result = await response.json();
+        console.log('✅ Backend updated:', result);
+
+        // Minimal reload to show changes
+        await new Promise(resolve => setTimeout(resolve, 300));
+        setLoading(true);
+        setReloadKey(prev => prev + 1);
+
+        console.log('✅ Document refreshed with preserved variables');
+        return true;
+
+      } catch (fallbackError) {
+        console.error('❌ Both methods failed:', fallbackError);
+        throw new Error('Failed to update variables: ' + fallbackError.message);
+      }
     }
   };
 

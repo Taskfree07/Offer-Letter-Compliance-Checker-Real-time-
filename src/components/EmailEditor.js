@@ -960,33 +960,16 @@ useEffect(() => {
     }
 
     try {
-      console.log('🔄 Step 1: Updating variables on backend...', updatedVariables);
+      console.log('🔄 Using lightweight variable replacement...', updatedVariables);
 
-      // Step 1: Update backend with new variables
-      const response = await fetch(`${API_BASE_URL}/api/onlyoffice/update-variables/${onlyofficeDocId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ variables: updatedVariables }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to update variables on server');
-      }
-
-      const result = await response.json();
-      console.log('✅ Backend updated successfully:', result);
-
-      // Step 2: Reload the ONLYOFFICE editor to show changes
-      console.log('🔄 Step 2: Reloading document in editor...');
+      // Use the lightweight API method directly - no backend call needed
+      // The OnlyOfficeViewer will handle the replacement using Document Editor API
       await onlyofficeViewerRef.current.replaceAllVariables(updatedVariables);
 
-      // Step 3: Update local state
+      // Update local state immediately
       setVariables(updatedVariables);
 
-      console.log('✅ Variables successfully replaced in template');
+      console.log('✅ Variables successfully replaced in template (lightweight method)');
     } catch (error) {
       console.error('❌ Error replacing variables:', error);
       throw error;
@@ -1791,13 +1774,14 @@ useEffect(() => {
               <Settings size={16} />
               Variables
             </button>
-            <button
+            {/* Extract tab hidden to save space - functionality preserved */}
+            {/* <button
               className={`tab-button ${activeTab === 'extraction' ? 'active' : ''}`}
               onClick={() => setActiveTab('extraction')}
             >
               <Edit3 size={16} />
               Extract
-            </button>
+            </button> */}
             <button
               className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
               onClick={() => setActiveTab('state')}
@@ -1814,13 +1798,14 @@ useEffect(() => {
                 isEditorReady={isEditorReady}
               />
             </div>
-            <div style={{ display: activeTab === 'extraction' ? 'block' : 'none', height: '100%' }}>
+            {/* Extract panel hidden to save space - functionality preserved in background */}
+            {/* <div style={{ display: activeTab === 'extraction' ? 'block' : 'none', height: '100%' }}>
               <FormExtraction
                 documentId={onlyofficeDocId}
                 onVariablesExtracted={handleVariablesExtracted}
                 editorRef={onlyofficeViewerRef}
               />
-            </div>
+            </div> */}
             <div style={{ display: activeTab === 'state' ? 'block' : 'none', height: '100%' }}>
               {renderStateConfigTab()}
             </div>

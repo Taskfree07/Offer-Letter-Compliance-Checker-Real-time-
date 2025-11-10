@@ -44,21 +44,36 @@ const VariablePanel = memo(({
         }
       });
 
-      console.log('🔄 Starting variable replacement:', simpleVariables);
+      console.log('🔄 Starting lightweight variable replacement:', simpleVariables);
 
       if (onReplaceInTemplate) {
-        // Show loading state
-        const originalButton = document.activeElement;
-
+        // Call the lightweight replacement method
         await onReplaceInTemplate(simpleVariables);
 
+        // Mark changes as saved
         setHasChanges(false);
-        alert('✅ Variables replaced successfully!\n\nThe document is reloading to show your changes.');
+
+        // Success notification - lightweight, no reload needed
+        console.log('✅ Variables replaced successfully using lightweight method!');
+        alert('✅ Variables replaced successfully!\n\nYour changes are now visible in the document.');
       }
 
     } catch (error) {
       console.error('❌ Error replacing variables:', error);
-      alert(`Error replacing variables:\n\n${error.message}\n\nPlease check the console for more details.`);
+
+      // Provide helpful error message
+      let errorMessage = 'Error replacing variables:\n\n';
+
+      if (error.message.includes('not available') || error.message.includes('not ready')) {
+        errorMessage += 'The editor is not ready yet. Please wait a moment and try again.';
+      } else if (error.message.includes('Backend')) {
+        errorMessage += 'Backend connection error. Make sure the backend server is running.\n\n';
+        errorMessage += 'Details: ' + error.message;
+      } else {
+        errorMessage += error.message + '\n\nPlease check the console for more details.';
+      }
+
+      alert(errorMessage);
     }
   };
 

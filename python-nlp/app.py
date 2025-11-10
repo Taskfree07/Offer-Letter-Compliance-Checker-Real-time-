@@ -71,7 +71,9 @@ app = Flask(__name__)
 
 # ONLYOFFICE Configuration
 ONLYOFFICE_SERVER_URL = os.environ.get('ONLYOFFICE_SERVER_URL', 'http://localhost:8080')
-BACKEND_BASE_URL = os.environ.get('BACKEND_BASE_URL', 'http://localhost:5000')
+# Use local network IP for Docker to reach host machine (more reliable than host.docker.internal)
+# This allows ONLYOFFICE in Docker to access the Flask backend on the host
+BACKEND_BASE_URL = os.environ.get('BACKEND_BASE_URL', 'http://192.168.1.34:5000')
 UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', './uploads')
 SESSIONS_FOLDER = os.path.join(UPLOAD_FOLDER, 'sessions')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
