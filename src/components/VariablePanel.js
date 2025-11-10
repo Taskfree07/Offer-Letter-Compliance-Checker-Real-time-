@@ -85,11 +85,18 @@ const VariablePanel = memo(({
     }
   };
 
-  // Convert variables to simple array
-  const variablesList = Object.entries(localVariables).map(([name, data]) => ({
-    name,
-    value: typeof data === 'object' ? (data.value || '') : (data || '')
-  }));
+  // Convert variables to simple array with additional metadata
+  const variablesList = Object.entries(localVariables).map(([name, data]) => {
+    const varData = typeof data === 'object' ? data : { value: data || '' };
+    
+    return {
+      name,
+      value: varData.value || '',
+      type: varData.type || 'bracketed_variable',
+      fieldLabel: varData.field_label || varData.fieldLabel || null,
+      displayName: varData.field_label || varData.fieldLabel || name
+    };
+  });
 
   return (
     <div style={{ padding: '15px', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -115,38 +122,60 @@ const VariablePanel = memo(({
               <div
                 key={variable.name}
                 style={{
-                  marginBottom: '10px',
-                  paddingBottom: '10px',
+                  marginBottom: '12px',
+                  paddingBottom: '12px',
                   borderBottom: index < variablesList.length - 1 ? '1px solid #eee' : 'none'
                 }}
               >
-                {/* Variable Name | Input */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{
-                    fontSize: '13px',
-                    fontFamily: 'monospace',
-                    minWidth: '150px',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap'
-                  }}>
-                    {variable.name}
-                  </span>
-                  <span style={{ color: '#ccc' }}>|</span>
-                  <input
-                    type="text"
-                    value={variable.value}
-                    onChange={(e) => handleVariableEdit(variable.name, e.target.value)}
-                    style={{
-                      flex: 1,
-                      padding: '5px 8px',
-                      border: '1px solid #ddd',
+                {/* Display label or variable name */}
+                <div style={{ 
+                  fontSize: '12px', 
+                  color: '#666',
+                  marginBottom: '4px',
+                  fontWeight: '500'
+                }}>
+                  {variable.fieldLabel ? (
+                    <>
+                      <span style={{ color: '#007bff' }}>{variable.fieldLabel}</span>
+                      <span style={{ fontSize: '11px', color: '#999', marginLeft: '6px' }}>
+                        ({variable.name})
+                      </span>
+                    </>
+                  ) : (
+                    <span>{variable.name}</span>
+                  )}
+                  {variable.type === 'labeled_field' && (
+                    <span style={{
+                      fontSize: '10px',
+                      backgroundColor: '#e3f2fd',
+                      color: '#1976d2',
+                      padding: '2px 6px',
                       borderRadius: '3px',
-                      fontSize: '13px',
-                      fontFamily: 'inherit'
-                    }}
-                  />
+                      marginLeft: '6px'
+                    }}>
+                      Field
+                    </span>
+                  )}
                 </div>
+
+                {/* Input field */}
+                <input
+                  type="text"
+                  value={variable.value}
+                  onChange={(e) => handleVariableEdit(variable.name, e.target.value)}
+                  placeholder={variable.fieldLabel ? `Enter ${variable.fieldLabel.toLowerCase()}` : `Enter ${variable.name}`}
+                  style={{
+                    width: '100%',
+                    padding: '8px 10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    fontFamily: 'inherit',
+                    transition: 'border-color 0.2s',
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#007bff'}
+                  onBlur={(e) => e.target.style.borderColor = '#ddd'}
+                />
               </div>
             ))}
           </div>

@@ -529,14 +529,38 @@ class DocxService:
                         var_name = match.group(1).strip()
                         full_match = match.group(0)
                         
+                        # Check if this variable is part of a "Label: [Value]" pattern
+                        # Extract context before the bracket
+                        start_pos = match.start()
+                        context_before = text[:start_pos].strip()
+                        
+                        # Check if line ends with colon (indicating a label)
+                        is_labeled_field = False
+                        field_label = None
+                        
+                        if context_before and context_before.endswith(':'):
+                            # This is a labeled field like "Job Title: [Job Title]"
+                            is_labeled_field = True
+                            # Extract the label (text before colon)
+                            field_label = context_before.rsplit(':', 1)[0].strip()
+                            if field_label.startswith('•'):
+                                field_label = field_label[1:].strip()
+                        
                         if var_name not in variables:
                             variables[var_name] = {
                                 "name": var_name,
                                 "original_text": full_match,
                                 "occurrences": 0,
                                 "suggested_value": "",
-                                "type": "bracketed_variable"
+                                "type": "labeled_field" if is_labeled_field else "bracketed_variable",
+                                "field_label": field_label if is_labeled_field else None
                             }
+                        else:
+                            # Update type if this occurrence has a label
+                            if is_labeled_field and field_label:
+                                variables[var_name]["type"] = "labeled_field"
+                                variables[var_name]["field_label"] = field_label
+                        
                         variables[var_name]["occurrences"] += 1
             
             # Save last section if exists
