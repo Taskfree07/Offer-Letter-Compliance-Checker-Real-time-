@@ -4,6 +4,7 @@ import './VariablePanel.css';
 const VariablePanel = memo(({
   variables,
   onReplaceInTemplate,
+  onHighlightVariable,
   isEditorReady = false
 }) => {
   const [localVariables, setLocalVariables] = useState({});
@@ -172,15 +173,21 @@ const VariablePanel = memo(({
               >
                 {/* Variable Name | Input (old style with line separator) */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{
-                    fontSize: '13px',
-                    fontFamily: 'inherit',
-                    minWidth: '150px',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    fontWeight: '500'
-                  }}>
+                  <span 
+                    onClick={() => onHighlightVariable && onHighlightVariable(variable.name)}
+                    style={{
+                      fontSize: '13px',
+                      fontFamily: 'inherit',
+                      minWidth: '150px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      fontWeight: '500',
+                      cursor: onHighlightVariable ? 'pointer' : 'default',
+                      color: onHighlightVariable ? '#007bff' : 'inherit'
+                    }}
+                    title={onHighlightVariable ? 'Click to highlight in document' : ''}
+                  >
                     {variable.fieldLabel || variable.name}
                   </span>
                   <span style={{ color: '#ccc', fontSize: '16px' }}>|</span>

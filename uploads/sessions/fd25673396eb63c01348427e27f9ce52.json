@@ -1,0 +1,201 @@
+{
+  "filename": "Offer Letter Template.docx",
+  "file_path": "./uploads\\fd25673396eb63c01348427e27f9ce52.docx",
+  "template_path": "./uploads\\fd25673396eb63c01348427e27f9ce52_template.docx",
+  "created_at": "2025-11-10T17:58:03.113392",
+  "variables": {
+    "Insert Date": {
+      "name": "Insert Date",
+      "original_text": "[Insert Date]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "date"
+    },
+    "Candidate Name": {
+      "name": "Candidate Name",
+      "original_text": "[Candidate Name]",
+      "occurrences": 3,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "person"
+    },
+    "Address": {
+      "name": "Address",
+      "original_text": "[Address]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "location"
+    },
+    "Company Name": {
+      "name": "Company Name",
+      "original_text": "[Company Name]",
+      "occurrences": 2,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "person"
+    },
+    "Job Title": {
+      "name": "Job Title",
+      "original_text": "[Job Title]",
+      "occurrences": 2,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "job_title"
+    },
+    "Client/Customer Name": {
+      "name": "Client/Customer Name",
+      "original_text": "[Client/Customer Name]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "person"
+    },
+    "Proposed Start Date": {
+      "name": "Proposed Start Date",
+      "original_text": "[Proposed Start Date]",
+      "occurrences": 1,
+      "suggested_value": "start",
+      "type": "bracketed_variable",
+      "entity_type": "Period",
+      "gliner_confidence": 0
+    },
+    "Amount": {
+      "name": "Amount",
+      "original_text": "[Amount]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "money"
+    },
+    "semi-monthly": {
+      "name": "semi-monthly",
+      "original_text": "[semi-monthly]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "Health, Vision, Dental insurances, retirement plan, etc.": {
+      "name": "Health, Vision, Dental insurances, retirement plan, etc.",
+      "original_text": "[Health, Vision, Dental insurances, retirement plan, etc.]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "Start Time": {
+      "name": "Start Time",
+      "original_text": "[Start Time]",
+      "occurrences": 1,
+      "suggested_value": "start",
+      "type": "bracketed_variable",
+      "entity_type": "Period",
+      "gliner_confidence": 0
+    },
+    "End Time": {
+      "name": "End Time",
+      "original_text": "[End Time]",
+      "occurrences": 1,
+      "suggested_value": "end",
+      "type": "bracketed_variable",
+      "entity_type": "Period",
+      "gliner_confidence": 0
+    },
+    "Days of Week": {
+      "name": "Days of Week",
+      "original_text": "[Days of Week]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "full-time/part-time/contractual": {
+      "name": "full-time/part-time/contractual",
+      "original_text": "[full-time/part-time/contractual]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "Confidentiality and Intellectual Property": {
+      "name": "Confidentiality and Intellectual Property",
+      "original_text": "Confidentiality and Intellectual Property",
+      "occurrences": 1,
+      "suggested_value": "You agree to maintain the confidentiality of all Company information. Any intellectual property,\ninventions, or work created during employment that relates to the Company\u2019s business shall be the exclusive property of the Company. These protections are standard for all employees to safeguard the Company\u2019s business while respecting your contributions.",
+      "type": "section_heading",
+      "is_section": true,
+      "content": "You agree to maintain the confidentiality of all Company information. Any intellectual property,\ninventions, or work created during employment that relates to the Company\u2019s business shall be the exclusive property of the Company. These protections are standard for all employees to safeguard the Company\u2019s business while respecting your contributions."
+    },
+    "Pre-Employment Conditions": {
+      "name": "Pre-Employment Conditions",
+      "original_text": "Pre-Employment Conditions",
+      "occurrences": 1,
+      "suggested_value": "This offer is contingent upon:\nVerification of your employment check.\nCompletion of reference checks, background checks, drug tests, if applicable.\nSubmission of required documents, such as [I9, W4, ID proof, DD form, etc..].\nWe will strive to complete pre-employment checks promptly to ensure a smooth onboarding experience.",
+      "type": "section_heading",
+      "is_section": true,
+      "content": "This offer is contingent upon:\nVerification of your employment check.\nCompletion of reference checks, background checks, drug tests, if applicable.\nSubmission of required documents, such as [I9, W4, ID proof, DD form, etc..].\nWe will strive to complete pre-employment checks promptly to ensure a smooth onboarding experience."
+    },
+    "I9, W4, ID proof, DD form, etc..": {
+      "name": "I9, W4, ID proof, DD form, etc..",
+      "original_text": "[I9, W4, ID proof, DD form, etc..]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "Employment Agreement": {
+      "name": "Employment Agreement",
+      "original_text": "Employment Agreement",
+      "occurrences": 1,
+      "suggested_value": "Your employment is also contingent upon your agreement to our Employment Agreement, which includes confidentiality obligations and restrictions on certain competitive and solicitation activities. You will receive the Employment Agreement for review prior to your start date and may raise any clarifications before signing.",
+      "type": "section_heading",
+      "is_section": true,
+      "content": "Your employment is also contingent upon your agreement to our Employment Agreement, which includes confidentiality obligations and restrictions on certain competitive and solicitation activities. You will receive the Employment Agreement for review prior to your start date and may raise any clarifications before signing."
+    },
+    "Compliance with Policies": {
+      "name": "Compliance with Policies",
+      "original_text": "Compliance with Policies",
+      "occurrences": 1,
+      "suggested_value": "You agree to abide by Company policies and procedures, which may be updated from time to time.",
+      "type": "section_heading",
+      "is_section": true,
+      "content": "You agree to abide by Company policies and procedures, which may be updated from time to time."
+    },
+    "Governing Law and Dispute Resolution": {
+      "name": "Governing Law and Dispute Resolution",
+      "original_text": "Governing Law and Dispute Resolution",
+      "occurrences": 1,
+      "suggested_value": "This Offer Letter and your employment shall be governed by the laws of Texas. Any disputes arising out of or relating to your employment will be resolved using the Model Employment Arbitration Procedures of the American Arbitration Association (\u201cAAA\u201d), which provides a fair and neutral process.\nArbitration will be held in Dallas County, Texas, unless the Company elects to resolve a dispute under Texas state law with exclusive venue in Dallas County, Texas.\nThis ensures a structured resolution process while protecting both your and the Company\u2019s interests.\n\n\nAcknowledgment and Acceptance\nPlease sign and return a copy of this Offer Letter to confirm your acceptance.\n\n\n\n\n\nWe are excited to have you join Techgene Solutions, LLC and look forward to a mutually rewarding relationship.\nSincerely,\n[Authorized Signatory] [Name & Designation] [Company Name] [Company Address]\n\n\nAcknowledgment and Acceptance by Employee\n\nI, [Candidate Name], hereby accept the terms of this Offer Letter and agree to abide by the policies and regulations of Techgene Solutions, LLC, including reviewing and signing the Employment Agreement and any applicable state-specific Addendum.\n\nSignature: \t Date:",
+      "type": "section_heading",
+      "is_section": true,
+      "content": "This Offer Letter and your employment shall be governed by the laws of Texas. Any disputes arising out of or relating to your employment will be resolved using the Model Employment Arbitration Procedures of the American Arbitration Association (\u201cAAA\u201d), which provides a fair and neutral process.\nArbitration will be held in Dallas County, Texas, unless the Company elects to resolve a dispute under Texas state law with exclusive venue in Dallas County, Texas.\nThis ensures a structured resolution process while protecting both your and the Company\u2019s interests.\n\n\nAcknowledgment and Acceptance\nPlease sign and return a copy of this Offer Letter to confirm your acceptance.\n\n\n\n\n\nWe are excited to have you join Techgene Solutions, LLC and look forward to a mutually rewarding relationship.\nSincerely,\n[Authorized Signatory] [Name & Designation] [Company Name] [Company Address]\n\n\nAcknowledgment and Acceptance by Employee\n\nI, [Candidate Name], hereby accept the terms of this Offer Letter and agree to abide by the policies and regulations of Techgene Solutions, LLC, including reviewing and signing the Employment Agreement and any applicable state-specific Addendum.\n\nSignature: \t Date:"
+    },
+    "Authorized Signatory": {
+      "name": "Authorized Signatory",
+      "original_text": "[Authorized Signatory]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "text"
+    },
+    "Name & Designation": {
+      "name": "Name & Designation",
+      "original_text": "[Name & Designation]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "person"
+    },
+    "Company Address": {
+      "name": "Company Address",
+      "original_text": "[Company Address]",
+      "occurrences": 1,
+      "suggested_value": "",
+      "type": "bracketed_variable",
+      "entity_type": "organization"
+    }
+  },
+  "modified": false
+}

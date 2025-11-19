@@ -1,0 +1,26 @@
+﻿================================================
+AZURE DEPLOYMENT UPDATE
+================================================
+
+Update Date: 2025-11-10 18:43:44
+Resource Group: Techgene_group
+
+APPLICATION URLS:
+- Frontend:   https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io
+- Backend:    https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io  
+- ONLYOFFICE: https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io
+
+HEALTH CHECKS:
+- Backend:  https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+- GLiNER:   https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/gliner-health
+- DOCX:     https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/docx-health
+
+FEATURES INCLUDED:
+- Variable extraction and editing
+- Compliance checking
+- GLiNER AI entity extraction
+- OnlyOffice document editing
+- Variable highlighting (click to locate)
+- Real-time preview updates
+
+================================================

@@ -70,10 +70,28 @@ except Exception as e:
 app = Flask(__name__)
 
 # ONLYOFFICE Configuration
-ONLYOFFICE_SERVER_URL = os.environ.get('ONLYOFFICE_SERVER_URL', 'http://localhost:8080')
-# Use local network IP for Docker to reach host machine (more reliable than host.docker.internal)
-# This allows ONLYOFFICE in Docker to access the Flask backend on the host
-BACKEND_BASE_URL = os.environ.get('BACKEND_BASE_URL', 'http://192.168.1.34:5000')
+# OnlyOffice server URL - auto-detects for Azure or uses local default
+def get_onlyoffice_url():
+    """Get OnlyOffice server URL - works for both local and Azure deployment"""
+    env_url = os.environ.get('ONLYOFFICE_SERVER_URL')
+    if env_url:
+        return env_url
+    
+    # Auto-detect Azure Container Apps
+    backend_url = os.environ.get('BACKEND_BASE_URL', '')
+    if 'azurecontainerapps.io' in backend_url:
+        # Replace backend with onlyoffice in the URL
+        onlyoffice_url = backend_url.replace('backend', 'onlyoffice')
+        logger.info(f"🌐 Azure deployment detected, using OnlyOffice: {onlyoffice_url}")
+        return onlyoffice_url
+    
+    # Local development default
+    return 'http://localhost:8080'
+
+ONLYOFFICE_SERVER_URL = get_onlyoffice_url()
+logger.info(f"📄 OnlyOffice Server URL: {ONLYOFFICE_SERVER_URL}")
+
+# Upload folder configuration
 UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', './uploads')
 SESSIONS_FOLDER = os.path.join(UPLOAD_FOLDER, 'sessions')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -81,6 +99,69 @@ os.makedirs(SESSIONS_FOLDER, exist_ok=True)
 
 # Store for document sessions (persistent on disk using JSON files)
 document_sessions = {}
+
+def get_backend_base_url():
+    """
+    Dynamically detect backend base URL from request headers.
+    Works for both local development and production deployment.
+
+    Special handling for Docker:
+    - When OnlyOffice is in Docker and backend is on host, converts localhost to host.docker.internal
+
+    Priority:
+    1. BACKEND_BASE_URL environment variable (if set)
+    2. X-Forwarded-Host + X-Forwarded-Proto headers (for Azure/reverse proxy)
+    3. Host header from request (with Docker localhost conversion)
+    """
+    # Check if explicitly set via environment variable
+    env_backend_url = os.environ.get('BACKEND_BASE_URL')
+    if env_backend_url:
+        logger.info(f"Using BACKEND_BASE_URL from environment: {env_backend_url}")
+        return env_backend_url
+
+    # Try to detect from request headers
+    if request:
+        # Check for reverse proxy headers (Azure Container Apps, etc.)
+        forwarded_proto = request.headers.get('X-Forwarded-Proto', 'http')
+        forwarded_host = request.headers.get('X-Forwarded-Host')
+
+        if forwarded_host:
+            backend_url = f"{forwarded_proto}://{forwarded_host}"
+            logger.info(f"Detected backend URL from X-Forwarded headers: {backend_url}")
+            return backend_url
+
+        # Fallback to Host header
+        host = request.headers.get('Host')
+        if host:
+            # Determine protocol from request
+            proto = 'https' if request.is_secure else 'http'
+
+            # Docker special handling: OnlyOffice in Docker can't reach localhost on host
+            # Convert localhost/127.0.0.1 to host.docker.internal for Docker Desktop (Windows/Mac)
+            # or to host's actual IP
+            if host.startswith('localhost:') or host.startswith('127.0.0.1:') or host == 'localhost' or host == '127.0.0.1':
+                # Check if we're likely being accessed from Docker (OnlyOffice)
+                # User-Agent header might contain "python-requests" from OnlyOffice callbacks
+                user_agent = request.headers.get('User-Agent', '')
+
+                # Use host.docker.internal for Docker Desktop (Windows/Mac)
+                # This is the special DNS name that resolves to the host machine from inside containers
+                docker_host = 'host.docker.internal:5000'
+                backend_url = f"{proto}://{docker_host}"
+                logger.info(f"🐳 Detected localhost access - using Docker host: {backend_url}")
+                logger.info(f"   (Original host was: {host}, User-Agent: {user_agent[:50]})")
+                return backend_url
+
+            # Normal production or non-localhost development
+            backend_url = f"{proto}://{host}"
+            logger.info(f"Detected backend URL from Host header: {backend_url}")
+            return backend_url
+
+    # Final fallback for local development
+    # If no request context, assume Docker and use host.docker.internal
+    fallback_url = 'http://host.docker.internal:5000'
+    logger.warning(f"Could not detect backend URL, using Docker fallback: {fallback_url}")
+    return fallback_url
 
 def load_session(doc_id):
     """Load session data from disk"""
@@ -168,35 +249,41 @@ def load_all_sessions():
 # Load sessions on startup
 load_all_sessions()
 
-# Enable CORS for all routes (allows JavaScript frontend to access the API)
-# Allow common dev ports 3000/3001 on localhost and 127.0.0.1, and handle preflight (OPTIONS)
-CORS(app, resources={
-    r"/*": {
-        "origins": [
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "http://0.0.0.0:3000",
-            "http://localhost:3001",
-            "http://127.0.0.1:3001",
-            "https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io",
-        ],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"],
-        "expose_headers": ["Content-Type"]
-    }
-})
+# Dynamic CORS configuration for Azure deployment
+# Read allowed origins from environment variable or use defaults
+ALLOWED_ORIGINS_STR = os.environ.get('ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000')
+ALLOWED_ORIGINS = set(ALLOWED_ORIGINS_STR.split(','))
 
-# Extra safety: ensure CORS headers on every response and handle preflight
-ALLOWED_ORIGINS = {
+# Always include localhost for local development
+ALLOWED_ORIGINS.update([
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://0.0.0.0:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3001",
-    "https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io",
-    # Add IP address for local network access
-    "http://192.168.1.18:3000",
-}
+])
+
+# Auto-detect Azure Container Apps frontend URL (both http and https)
+backend_host = os.environ.get('BACKEND_BASE_URL', '')
+if 'azurecontainerapps.io' in backend_host:
+    # Extract the base domain and add frontend
+    frontend_url_https = backend_host.replace('backend', 'frontend')
+    frontend_url_http = frontend_url_https.replace('https://', 'http://')
+    ALLOWED_ORIGINS.add(frontend_url_https)
+    ALLOWED_ORIGINS.add(frontend_url_http)
+    logger.info(f"🌐 Azure deployment detected, added frontend URLs: {frontend_url_https}, {frontend_url_http}")
+
+logger.info(f"CORS Allowed Origins: {ALLOWED_ORIGINS}")
+
+# Enable CORS for all routes
+CORS(app, resources={
+    r"/*": {
+        "origins": list(ALLOWED_ORIGINS),
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "expose_headers": ["Content-Type"]
+    }
+})
 
 @app.after_request
 def apply_cors(response):
@@ -1278,10 +1365,12 @@ def get_onlyoffice_config(doc_id):
         if not session:
             return jsonify({"error": "Document not found"}), 404
 
-        # Use BACKEND_BASE_URL for production (Azure) or fallback to localhost for dev
-        backend_url = BACKEND_BASE_URL
+        # Dynamically detect backend URL (works for both local and production)
+        backend_url = get_backend_base_url()
 
-        logger.info(f"ONLYOFFICE will use backend: {backend_url}")
+        logger.info(f"📍 ONLYOFFICE will use backend: {backend_url}")
+        logger.info(f"📍 Request Host: {request.headers.get('Host')}")
+        logger.info(f"📍 X-Forwarded-Host: {request.headers.get('X-Forwarded-Host')}")
 
         # Generate a unique key that changes when document is modified
         # This forces ONLYOFFICE to fetch the updated file instead of using cache
@@ -1313,7 +1402,12 @@ def get_onlyoffice_config(doc_id):
                 "callbackUrl": f"{backend_url}/api/onlyoffice/callback/{doc_id}",
                 "customization": {
                     "autosave": True,
-                    "forcesave": True
+                    "forcesave": True,
+                    "plugins": True  # Enable plugins support for connector API
+                },
+                "plugins": {
+                    "autostart": [],
+                    "pluginsData": []
                 }
             }
         }

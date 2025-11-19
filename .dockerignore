@@ -1,75 +1,101 @@
-# Node modules
+# Node modules (not needed for backend)
 node_modules/
 npm-debug.log*
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-.venv/
-venv/
-ENV/
-env/
-
-# Build artifacts
+package.json
+package-lock.json
+src/
+public/
 build/
-dist/
+
+# Python virtual environments (EXCLUDE - these are huge!)
+**/.venv/
+**/.venv
+**/venv/
+**/venv
+**/myenv/
+**/myenv
+**/ENV/
+**/ENV
+**/env/
+**/env
+.venv/
+.venv
+venv/
+venv
+myenv/
+myenv
+python-nlp/.venv/
+python-nlp/venv/
+python-nlp/myenv/
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.Python
+
+# Git
+.git/
+.gitignore
+.gitattributes
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+.claude/
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Git
-.git/
-.gitignore
+*.log
 
 # Documentation (not needed in container)
 *.md
+!python-nlp/README.md
 docs/
 
-# Test files
+# Test files (not needed in production)
 test_*.py
 *_test.py
+verify_*.py
+check_*.py
 
-# Uploads (will be mounted as volume)
-python-nlp/uploads/
-uploads/
+# IMPORTANT: Make sure service files are included
+!python-nlp/*_service.py
+!python-nlp/gliner_service.py
+!python-nlp/enhanced_pdf_service.py
 
-# Python environment and caches
-python-nlp/myenv/
-python-nlp/.venv/
-python-nlp/venv/
-python-nlp/env/
-python-nlp/ENV/
-python-nlp/__pycache__/
-python-nlp/*.pyc
-**/__pycache__/
-**/*.pyc
+# Deployment scripts (not needed in container)
+*.bat
+*.ps1
+*.sh
+deploy*.py
+update*.py
 
-# Large model files that should be downloaded at runtime
-python-nlp/models/
-python-nlp/.cache/
-
-# Optional AI services (not needed for core ONLYOFFICE functionality)
-python-nlp/gliner_service.py
-python-nlp/enhanced_pdf_service.py
-python-nlp/test_gliner.py
-python-nlp/test_enhanced_pdf.py
-
-# Environment files
-.env
-.env.local
-.env.production
-
-# Other
-.claude/
+# Docker files (not needed inside container)
 docker-compose.yml
 Dockerfile*
+.dockerignore
+
+# Environment files (will be set via container env vars)
+.env*
+
+# Uploads (will be persistent volume in Azure)
+uploads/
+python-nlp/uploads/
+
+# Old templates and PDFs (using default document instead)
+*.pdf
+!public/*.pdf
+Techgene.png
+
+# Restart scripts
+restart_server.*
+RESTART_*.bat
+SETUP.bat
+START*.bat
+STOP.bat
+check-services.bat

@@ -6,6 +6,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements
@@ -20,10 +21,17 @@ RUN python -m spacy download en_core_web_sm
 # Copy application code
 COPY python-nlp/ ./
 
+# GLiNER model will be downloaded on first use (cached in container)
+# This avoids build timeouts and keeps the image build fast
+
 # Create uploads directory for persistent storage
 RUN mkdir -p /app/uploads/sessions
 
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
 EXPOSE 5000
 
-# Use gunicorn for production with 2 workers
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "120", "app:app"]
+# Use gunicorn for production with 2 workers and longer timeout
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "300", "--worker-class", "sync", "app:app"]

@@ -1,5 +1,31 @@
 import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef, memo } from 'react';
 
+// Utility function to get API base URL (works for both local and deployed)
+const getApiBaseUrl = () => {
+  // Priority 1: Environment variable (set in .env or build time)
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+
+  // Priority 2: Detect from current window location
+  // If frontend is on https://myapp.com, backend is likely on same domain
+  if (typeof window !== 'undefined') {
+    const { protocol, hostname, port } = window.location;
+
+    // For production deployments, backend is usually on same host
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      // Production: use same protocol and hostname (backend should be on same domain or use CORS)
+      return `${protocol}//${hostname}`;
+    }
+
+    // For local development, backend is on port 5000
+    return `http://127.0.0.1:5000`;
+  }
+
+  // Fallback for server-side rendering or edge cases
+  return 'http://127.0.0.1:5000';
+};
+
 const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesUpdate, onSessionExpired, onEditorReady }, ref) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,6 +47,9 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     },
     replaceAllVariables: (variablesObj) => {
       replaceAllVariablesInDocument(variablesObj);
+    },
+    highlightVariable: (variableName) => {
+      highlightVariableInDocument(variableName);
     },
     isEditorReady: () => {
       return docEditorRef.current !== null && !loading;
@@ -44,7 +73,7 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
       console.log('🔄 Using backend to update document with variables...', variablesObj);
 
       // Use backend to update the document properly
-      const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+      const apiBaseUrl = getApiBaseUrl();
       const response = await fetch(`${apiBaseUrl}/api/onlyoffice/update-variables/${documentId}`, {
         method: 'POST',
         headers: {
@@ -78,6 +107,96 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     } catch (error) {
       console.error('❌ Variable update failed:', error);
       throw new Error('Failed to update variables: ' + error.message);
+    }
+  };
+
+  const highlightVariableInDocument = async (variableName) => {
+    if (!docEditorRef.current || loading) {
+      console.warn('Editor not ready for highlighting');
+      return;
+    }
+
+    try {
+      console.log('🔍 Highlighting variable:', variableName);
+      
+      // Search for the variable with brackets (e.g., [Name])
+      const searchText = `[${variableName}]`;
+      
+      console.log('🔍 Will search for:', searchText);
+      
+      // Use createConnector to access the Document API
+      if (typeof docEditorRef.current.createConnector === 'function') {
+        console.log('✅ createConnector is available, creating connector...');
+        
+        const connector = docEditorRef.current.createConnector();
+        console.log('✅ Connector created:', connector);
+        
+        // Use callCommand to execute code in the document context
+        connector.callCommand(function(searchTerm) {
+          /* global Api */
+          // This code runs inside OnlyOffice Document Editor
+          var oDocument = Api.GetDocument();
+          
+          // Search for the variable text
+          var aSearch = oDocument.Search(searchTerm);
+          
+          if (aSearch && aSearch.length > 0) {
+            // Clear any existing selection
+            oDocument.RemoveSelection();
+            
+            // Select the first occurrence
+            var oRange = aSearch[0];
+            oRange.Select();
+            
+            // Try to highlight it
+            try {
+              oRange.SetHighlight("yellow");
+            } catch(e) {
+              console.log('⚠️ SetHighlight not available, using selection only');
+            }
+            
+            return { success: true, found: aSearch.length };
+          } else {
+            return { success: false, message: "Variable not found in document" };
+          }
+        }, [searchText], function(result) {
+          if (result && result.success) {
+            console.log('✅ Variable found and highlighted');
+          } else {
+            console.log('❌ Variable not found');
+          }
+        });
+        
+      } else {
+        console.log('⚠️ createConnector not available in embedded mode');
+        
+        // Alternative: Try to find and focus the iframe, then use browser's find functionality
+        const iframe = document.querySelector('iframe[id^="iframeEditor"]');
+        
+        if (iframe && iframe.contentWindow) {
+          console.log('📱 Found OnlyOffice iframe, attempting to trigger find...');
+          
+          // Focus the iframe so the search works within it
+          iframe.contentWindow.focus();
+          
+          // Use the browser's native find API
+          // This will highlight the text without showing the search dialog
+          try {
+            // Try to use the find API if available
+            if (iframe.contentWindow.find) {
+              iframe.contentWindow.find(searchText);
+              console.log('✅ Browser find executed for:', searchText);
+            }
+          } catch (e) {
+            console.log('⚠️ Browser find API not accessible:', e);
+          }
+        } else {
+          console.log('❌ Could not find OnlyOffice iframe');
+        }
+      }
+      
+    } catch (error) {
+      console.error('❌ Error highlighting variable:', error);
     }
   };
 
@@ -121,7 +240,8 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     const loadConfig = async () => {
       try {
         console.log('📄 Loading ONLYOFFICE config for document:', documentId);
-        const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+        const apiBaseUrl = getApiBaseUrl();
+        console.log('📍 Using API base URL:', apiBaseUrl);
         const response = await fetch(`${apiBaseUrl}/api/onlyoffice/config/${documentId}`);
 
         // Check if it's a 404 first (document not found)
@@ -249,10 +369,25 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
         ...data.config,
         width: '100%',
         height: '100%',
+        editorConfig: {
+          ...(data.config.editorConfig || {}),
+          plugins: {
+            autostart: [],
+            pluginsData: []
+          },
+          customization: {
+            ...(data.config.editorConfig?.customization || {}),
+            plugins: true  // Enable plugins support
+          }
+        },
         events: {
           onDocumentReady: () => {
             console.log('✅ ONLYOFFICE Document Ready');
             setLoading(false);
+
+            // Check if createConnector is available now
+            console.log('🔧 Checking createConnector availability:', typeof docEditorRef.current?.createConnector);
+            console.log('🔧 DocEditor methods:', Object.keys(docEditorRef.current || {}));
 
             // Notify parent that editor is ready
             if (onEditorReady) {
@@ -334,7 +469,7 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
         console.log('🔍 Fetching variables for document:', documentId);
 
         // Call the real-time extraction endpoint
-        const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+        const apiBaseUrl = getApiBaseUrl();
         const response = await fetch(`${apiBaseUrl}/api/onlyoffice/extract-realtime/${documentId}`, {
           method: 'POST',
           headers: {

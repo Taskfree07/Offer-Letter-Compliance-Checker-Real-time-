@@ -288,7 +288,7 @@ Best regards,
                     }}
                   >
                     <Pen size={16} />
-                    Edit Template
+                    Edit Offer Letter
                   </button>
                   <button
                     className="btn btn-secondary btn-template"

@@ -732,6 +732,13 @@ useEffect(() => {
       rulesCount: Object.keys(currentRules[stateConfig.selectedState]?.rules || {}).length
     });
 
+    // If no sentences, skip compliance check
+    if (sentences.length === 0) {
+      console.log('⚠️ No sentences available for compliance analysis');
+      setComplianceFlags({});
+      return;
+    }
+
     const newFlags = {};
     let matchCount = 0;
 
@@ -977,6 +984,20 @@ useEffect(() => {
       throw error;
     }
   }, [onlyofficeDocId, previewMode]);
+
+  const handleHighlightVariable = useCallback((variableName) => {
+    if (!onlyofficeViewerRef.current || previewMode !== 'onlyoffice') {
+      console.warn('ONLYOFFICE editor not available for highlighting');
+      return;
+    }
+
+    try {
+      console.log('🔍 Highlighting variable:', variableName);
+      onlyofficeViewerRef.current.highlightVariable(variableName);
+    } catch (error) {
+      console.error('❌ Error highlighting variable:', error);
+    }
+  }, [previewMode]);
 
   const handleStateChange = (state) => {
     setStateConfig(prev => ({ ...prev, selectedState: state }));
@@ -1467,118 +1488,8 @@ useEffect(() => {
 
   const renderStateConfigTab = () => (
     <div className="tab-content">
-      {/* Compliance Analysis Panel */}
-      <div style={{ padding: '20px', maxHeight: '600px', overflowY: 'auto', borderBottom: '1px solid #e2e8f0', marginBottom: '20px' }}>
-        <div style={{ marginBottom: '16px' }}>
-          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-            <Shield size={20} />
-            Legal Compliance Analysis ({sentences.length} sentences analyzed)
-          </h3>
-        </div>
-
-        {Object.keys(complianceFlags).length === 0 && (
-          <div style={{
-            padding: '16px',
-            backgroundColor: '#d4edda',
-            border: '1px solid #c3e6cb',
-            color: '#155724',
-            borderRadius: '8px',
-            textAlign: 'center'
-          }}>
-            <p style={{ margin: 0 }}>✅ No compliance issues detected</p>
-          </div>
-        )}
-        {sentences
-          .filter(sentence => complianceFlags[sentence.id])
-          .map((sentence) => (
-          <div key={sentence.id} style={{ marginBottom: '16px' }}>
-            <div style={{
-              padding: '12px',
-              borderRadius: '8px',
-              backgroundColor: complianceFlags[sentence.id] ?
-                (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffebee' : '#fff3e0') :
-                '#f8f9fa',
-              border: '1px solid #e0e0e0',
-              borderLeft: complianceFlags[sentence.id] ?
-                `4px solid ${complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#dc3545' : '#ffc107'}` :
-                '4px solid #6c757d'
-            }}>
-              <strong style={{
-                backgroundColor: '#6c757d',
-                color: 'white',
-                padding: '3px 8px',
-                borderRadius: '4px',
-                fontSize: '12px',
-                marginRight: '12px'
-              }}>
-                §{sentence.section}
-              </strong>
-              <span style={{
-                backgroundColor: complianceFlags[sentence.id] ?
-                  (complianceFlags[sentence.id].some(f => f.severity === 'error') ? '#ffcdd2' : '#fff8e1') :
-                  'transparent',
-                padding: complianceFlags[sentence.id] ? '3px 6px' : '0',
-                borderRadius: '3px'
-              }}>
-                {sentence.text}
-              </span>
-            </div>
-
-            {complianceFlags[sentence.id].map((flag, idx) => (
-              <div key={idx} style={{
-                backgroundColor: flag.severity === 'error' ? '#f8d7da' : '#fff3cd',
-                padding: '12px',
-                margin: '8px 0 8px 24px',
-                borderRadius: '6px',
-                fontSize: '14px',
-                borderLeft: `3px solid ${flag.severity === 'error' ? '#dc3545' : '#ffc107'}`
-              }}>
-                <div style={{ fontWeight: 'bold', marginBottom: '6px' }}>
-                  {flag.severity === 'error' ? '🚨 ERROR' : '⚠️ WARNING'} - {flag.type.toUpperCase()}
-                </div>
-                <div style={{ marginBottom: '8px' }}>{flag.message}</div>
-
-                {flag.lawReference && (
-                  <div style={{
-                    backgroundColor: '#e9ecef',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    marginBottom: '6px'
-                  }}>
-                    <strong>Legal Reference:</strong> {flag.lawReference}
-                  </div>
-                )}
-
-                {flag.suggestion && (
-                  <div style={{
-                    backgroundColor: '#d4edda',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    marginBottom: '6px'
-                  }}>
-                    <strong>Suggestion:</strong> {flag.suggestion}
-                  </div>
-                )}
-
-                {flag.alternativeLanguage && (
-                  <div style={{
-                    backgroundColor: '#d1ecf1',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    fontSize: '13px'
-                  }}>
-                    <strong>Alternative:</strong> "{flag.alternativeLanguage}"
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div style={{ padding: '20px', backgroundColor: '#f8f9fa', borderRadius: '8px', margin: '10px 0' }}>
+      {/* Legal Compliance Configuration - SHOWN FIRST */}
+      <div style={{ padding: '20px', backgroundColor: '#f8f9fa', borderRadius: '8px', margin: '10px 0', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
             <Shield size={20} /> Legal Compliance Configuration
@@ -1731,6 +1642,110 @@ useEffect(() => {
           </div>
         )}
       </div>
+
+      {/* Compliance Analysis Results - SHOWN SECOND */}
+      <div style={{ marginTop: '20px' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+          <AlertCircle size={20} />
+          Compliance Analysis Results
+        </h3>
+
+        {/* Compliance Summary */}
+        <ComplianceSummaryPanel
+          summary={getComplianceSummary()}
+          selectedState={stateConfig.selectedState}
+        />
+
+        {/* Detailed Flagged Sentences */}
+        {Object.keys(complianceFlags).length > 0 && (
+          <div style={{ marginTop: '16px' }}>
+            <h4 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '12px', color: '#374151' }}>
+              Flagged Sentences ({Object.keys(complianceFlags).length} issues found):
+            </h4>
+            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              {sentences
+                .filter(sentence => complianceFlags[sentence.id])
+                .map(sentence => {
+                  const flags = complianceFlags[sentence.id];
+                  return (
+                    <div
+                      key={sentence.id}
+                      style={{
+                        padding: '12px',
+                        marginBottom: '10px',
+                        backgroundColor: '#fff',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '6px',
+                        borderLeft: `4px solid ${
+                          flags.some(f => f.severity === 'error') ? '#dc2626' :
+                          flags.some(f => f.severity === 'warning') ? '#f59e0b' : '#3b82f6'
+                        }`
+                      }}
+                    >
+                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', lineHeight: '1.5' }}>
+                        {sentence.text}
+                      </div>
+                      {flags.map((flag, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            marginTop: '8px',
+                            padding: '8px',
+                            backgroundColor: flag.severity === 'error' ? '#fef2f2' :
+                              flag.severity === 'warning' ? '#fefce8' : '#eff6ff',
+                            borderRadius: '4px'
+                          }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            marginBottom: '4px'
+                          }}>
+                            <span style={{
+                              fontSize: '11px',
+                              fontWeight: '600',
+                              padding: '2px 6px',
+                              borderRadius: '3px',
+                              backgroundColor: flag.severity === 'error' ? '#dc2626' :
+                                flag.severity === 'warning' ? '#f59e0b' : '#3b82f6',
+                              color: 'white'
+                            }}>
+                              {flag.severity.toUpperCase()}
+                            </span>
+                            <span style={{ fontSize: '12px', fontWeight: '500', color: '#374151' }}>
+                              {flag.type}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
+                            {flag.message}
+                          </div>
+                          {flag.lawReference && (
+                            <div style={{ fontSize: '11px', color: '#9ca3af', fontStyle: 'italic' }}>
+                              Reference: {flag.lawReference}
+                            </div>
+                          )}
+                          {flag.suggestion && (
+                            <div style={{
+                              marginTop: '6px',
+                              padding: '6px',
+                              backgroundColor: '#f9fafb',
+                              borderRadius: '3px',
+                              fontSize: '11px',
+                              color: '#059669'
+                            }}>
+                              <strong>Suggestion:</strong> {flag.suggestion}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 
@@ -1797,6 +1812,7 @@ useEffect(() => {
               <VariablePanel
                 variables={variables}
                 onReplaceInTemplate={handleReplaceInTemplate}
+                onHighlightVariable={handleHighlightVariable}
                 isEditorReady={isEditorReady}
               />
             </div>
@@ -2002,6 +2018,199 @@ useEffect(() => {
       alert('No new variables found.');
     }
   }, [variables]);
+
+  // Auto-load default document on mount
+  const loadDefaultDocument = useCallback(async (showSuccessMessage = false) => {
+    try {
+      console.log('📄 Auto-loading default document: Main Offer Letter.docx');
+      setIsImportingPdf(true);
+      setPreviewError(null);
+
+      // Fetch the default document from public folder
+      const response = await fetch('/Main Offer Letter.docx');
+      if (!response.ok) {
+        throw new Error('Default document not found in public folder');
+      }
+
+      const blob = await response.blob();
+      const file = new File([blob], 'Main Offer Letter.docx', {
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      });
+
+      // Store the original file for later download
+      window.originalDocxFile = file;
+
+      // Upload to backend (reuse the same logic as manual import)
+      const formData1 = new FormData();
+      formData1.append('file', file);
+
+      const formData2 = new FormData();
+      formData2.append('file', file);
+
+      // Call only the necessary endpoints for ONLYOFFICE workflow
+      const [variablesResponse, onlyofficeResponse] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/docx-extract-variables`, {
+          method: 'POST',
+          body: formData1
+        }),
+        fetch(`${API_BASE_URL}/api/onlyoffice/upload`, {
+          method: 'POST',
+          body: formData2
+        })
+      ]);
+
+      // Check responses
+      if (!variablesResponse.ok || !onlyofficeResponse.ok) {
+        const varError = await variablesResponse.json().catch(() => ({}));
+        const onlyofficeError = await onlyofficeResponse.json().catch(() => ({}));
+        throw new Error(varError.error || onlyofficeError.error || 'Upload failed');
+      }
+
+      const variablesResult = await variablesResponse.json();
+      const onlyofficeResult = await onlyofficeResponse.json();
+
+      if (!variablesResult.success || !onlyofficeResult.success) {
+        throw new Error('Processing failed');
+      }
+
+      // Store ONLYOFFICE document ID
+      if (onlyofficeResult.document_id) {
+        console.log('✅ Default document uploaded:', onlyofficeResult.document_id);
+        setOnlyofficeDocId(onlyofficeResult.document_id);
+        setPreviewMode('onlyoffice');
+
+        // Save to localStorage for persistence
+        localStorage.setItem('defaultDocumentId', onlyofficeResult.document_id);
+        localStorage.setItem('defaultDocumentTimestamp', Date.now().toString());
+      }
+
+      // Set template content and variables
+      const documentText = variablesResult.data.text || '';
+      setTemplateContent(documentText);
+      setTemplateLoaded(true);
+
+      // Extract and analyze sentences for compliance
+      const splitSentences = documentText
+        .split(/[.!?]+/)
+        .filter(sentence => sentence.trim().length > 10)
+        .map((sentence, index) => ({
+          id: `sentence_${index}`,
+          text: sentence.trim(),
+          section: Math.floor(index / 3) + 1
+        }));
+
+      setSentences(splitSentences);
+
+      // Extract variables
+      const extractedVars = {};
+      Object.entries(variablesResult.data.variables || {}).forEach(([varName, varData]) => {
+        extractedVars[varName] = varData.suggested_value || '';
+      });
+
+      setVariables(extractedVars);
+
+      if (showSuccessMessage) {
+        console.log(`✅ Default document loaded with ${Object.keys(extractedVars).length} variables`);
+      }
+
+      setIsImportingPdf(false);
+      return true;
+
+    } catch (error) {
+      console.error('❌ Error auto-loading default document:', error);
+      setPreviewError(`Failed to load default document: ${error.message}`);
+      setIsImportingPdf(false);
+      return false;
+    }
+  }, []);
+
+  // Auto-load default document on component mount
+  useEffect(() => {
+    const autoLoadDocument = async () => {
+      // Check if there's a saved document ID in localStorage
+      const savedDocId = localStorage.getItem('defaultDocumentId');
+      const savedTimestamp = localStorage.getItem('defaultDocumentTimestamp');
+
+      if (savedDocId) {
+        // Try to restore the session
+        try {
+          console.log('🔄 Attempting to restore document session:', savedDocId);
+          const response = await fetch(`${API_BASE_URL}/api/onlyoffice/config/${savedDocId}`);
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+              // Session exists! Restore it
+              console.log('✅ Session restored successfully');
+              setOnlyofficeDocId(savedDocId);
+              setPreviewMode('onlyoffice');
+
+              // Fetch variables for this document
+              const varsResponse = await fetch(`${API_BASE_URL}/api/onlyoffice/variables/${savedDocId}`);
+              if (varsResponse.ok) {
+                const varsData = await varsResponse.json();
+                if (varsData.success) {
+                  setVariables(varsData.variables || {});
+                }
+              }
+
+              // Fetch document text for compliance analysis
+              try {
+                const textResponse = await fetch(`${API_BASE_URL}/api/onlyoffice/download/${savedDocId}`);
+                if (textResponse.ok) {
+                  const textBlob = await textResponse.blob();
+                  const formData = new FormData();
+                  formData.append('file', textBlob, 'document.docx');
+                  
+                  const extractResponse = await fetch(`${API_BASE_URL}/api/docx-extract-variables`, {
+                    method: 'POST',
+                    body: formData
+                  });
+                  
+                  if (extractResponse.ok) {
+                    const extractData = await extractResponse.json();
+                    if (extractData.success && extractData.data.text) {
+                      const documentText = extractData.data.text;
+                      setTemplateContent(documentText);
+                      setTemplateLoaded(true);
+                      
+                      // Extract and analyze sentences for compliance
+                      const splitSentences = documentText
+                        .split(/[.!?]+/)
+                        .filter(sentence => sentence.trim().length > 10)
+                        .map((sentence, index) => ({
+                          id: `sentence_${index}`,
+                          text: sentence.trim(),
+                          section: Math.floor(index / 3) + 1
+                        }));
+                      
+                      setSentences(splitSentences);
+                      console.log('📄 Document text extracted for compliance:', splitSentences.length, 'sentences');
+                    }
+                  }
+                }
+              } catch (textError) {
+                console.warn('⚠️ Could not extract text for compliance:', textError);
+              }
+
+              return; // Successfully restored
+            }
+          }
+        } catch (error) {
+          console.log('⚠️ Session restoration failed:', error.message);
+        }
+      }
+
+      // No saved session or restoration failed - load default document
+      console.log('📥 Loading default document...');
+      await loadDefaultDocument(false);
+    };
+
+    // Only auto-load if we don't already have a document loaded
+    if (!onlyofficeDocId) {
+      autoLoadDocument();
+    }
+  }, []); // Run only once on mount
 
   async function handleOfferLetterImport(event) {
     console.log('handleOfferLetterImport called');
