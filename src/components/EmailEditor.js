@@ -26,7 +26,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const EmailEditor = ({ template, onBack }) => {
   const [templateContent, setTemplateContent] = useState(template?.content || '');
   const [extractedPdfText, setExtractedPdfText] = useState('');
-  const [activeTab, setActiveTab] = useState('variables');
+  const [activeTab, setActiveTab] = useState('state');
   const [extractedEntities, setExtractedEntities] = useState([]);
   const [variables, setVariables] = useState({});
   const [stateConfig, setStateConfig] = useState({
@@ -1487,45 +1487,116 @@ useEffect(() => {
   };
 
   const renderStateConfigTab = () => (
-    <div className="tab-content">
-      {/* Legal Compliance Configuration - SHOWN FIRST */}
-      <div style={{ padding: '20px', backgroundColor: '#f8f9fa', borderRadius: '8px', margin: '10px 0', marginBottom: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-            <Shield size={20} /> Legal Compliance Configuration
-          </h3>
-          <button
-            className="btn btn-secondary"
-            onClick={() => setShowRulesManager(!showRulesManager)}
+    <div className="tab-content" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Compliance Header with Replace and Reset buttons */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '20px 20px 16px 20px',
+        borderBottom: '1px solid #e2e8f0',
+        backgroundColor: '#fff'
+      }}>
+        <h2 style={{
+          margin: 0,
+          fontSize: '18px',
+          fontWeight: '500',
+          color: '#1e293b',
+          fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+        }}>
+          Compliance
+        </h2>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button style={{
+            width: '150px',
+            height: '36px',
+            padding: '0',
+            fontSize: '14px',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: '500',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
           >
-            <BookOpen size={16} />
-            {showRulesManager ? 'Hide' : 'Manage'} Rules
+            Replace
+          </button>
+          <button style={{
+            width: '150px',
+            height: '36px',
+            padding: '0',
+            fontSize: '14px',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: '500',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
+          >
+            Reset
           </button>
         </div>
+      </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ fontWeight: '600', marginBottom: '8px', display: 'block' }}>
-            Select State for Legal Compliance Check:
-          </label>
-          <select 
-            value={stateConfig.selectedState} 
-            onChange={(e) => handleStateChange(e.target.value)}
-            style={{ 
-              padding: '8px 12px',
-              border: '1px solid #ced4da',
-              borderRadius: '4px',
-              minWidth: '200px'
-            }}
-          >
-            {US_STATES.map(state => (
-              <option key={state.code} value={state.code}>
-                {state.name}
-              </option>
-            ))}
-          </select>
-          
-          <div style={{ marginTop: '8px', color: '#6c757d', fontSize: '0.875rem' }}>
-            Rules Last Updated: {currentRules[stateConfig.selectedState]?.lastUpdated || 'Default'}
+      {/* Scrollable Content Area */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
+        {/* Legal Compliance Configuration */}
+        <div style={{ marginBottom: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '600', margin: 0, color: '#374151' }}>
+              Legal Compliance Configuration
+            </h3>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setShowRulesManager(!showRulesManager)}
+              style={{ padding: '6px 12px', fontSize: '13px' }}
+            >
+              <BookOpen size={14} />
+              {showRulesManager ? 'Hide' : 'Manage'} Rules
+            </button>
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ fontWeight: '500', marginBottom: '8px', display: 'block', fontSize: '14px', color: '#374151' }}>
+              Select state for legal compliance check:
+            </label>
+            <select
+              value={stateConfig.selectedState}
+              onChange={(e) => handleStateChange(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                border: '1px solid #d1d5db',
+                borderRadius: '6px',
+                fontSize: '14px',
+                backgroundColor: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              {US_STATES.map(state => (
+                <option key={state.code} value={state.code}>
+                  {state.name}
+                </option>
+              ))}
+            </select>
+
+            <div style={{ marginTop: '8px', color: '#6b7280', fontSize: '12px' }}>
+              Rules Last Updated: {currentRules[stateConfig.selectedState]?.lastUpdated || 'Default'}
+            </div>
           </div>
         </div>
         
@@ -1641,28 +1712,27 @@ useEffect(() => {
             </div>
           </div>
         )}
-      </div>
 
-      {/* Compliance Analysis Results - SHOWN SECOND */}
-      <div style={{ marginTop: '20px' }}>
-        <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-          <AlertCircle size={20} />
-          Compliance Analysis Results
-        </h3>
+        {/* Compliance Analysis */}
+        <div style={{ marginBottom: '24px', marginTop: '24px' }}>
+          <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '16px', color: '#374151' }}>
+            Compliance Analysis
+          </h3>
 
-        {/* Compliance Summary */}
-        <ComplianceSummaryPanel
-          summary={getComplianceSummary()}
-          selectedState={stateConfig.selectedState}
-        />
+          {/* Compliance Summary */}
+          <ComplianceSummaryPanel
+            summary={getComplianceSummary()}
+            selectedState={stateConfig.selectedState}
+          />
+        </div>
 
-        {/* Detailed Flagged Sentences */}
+        {/* Flagged Sentences */}
         {Object.keys(complianceFlags).length > 0 && (
-          <div style={{ marginTop: '16px' }}>
-            <h4 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '12px', color: '#374151' }}>
-              Flagged Sentences ({Object.keys(complianceFlags).length} issues found):
-            </h4>
-            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          <div style={{ marginBottom: '24px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#374151' }}>
+              Flagged sentences ({Object.keys(complianceFlags).length} issues found):
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {sentences
                 .filter(sentence => complianceFlags[sentence.id])
                 .map(sentence => {
@@ -1671,68 +1741,75 @@ useEffect(() => {
                     <div
                       key={sentence.id}
                       style={{
-                        padding: '12px',
-                        marginBottom: '10px',
+                        padding: '14px',
                         backgroundColor: '#fff',
                         border: '1px solid #e5e7eb',
-                        borderRadius: '6px',
-                        borderLeft: `4px solid ${
+                        borderRadius: '8px',
+                        borderLeft: `3px solid ${
                           flags.some(f => f.severity === 'error') ? '#dc2626' :
                           flags.some(f => f.severity === 'warning') ? '#f59e0b' : '#3b82f6'
-                        }`
+                        }`,
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
                       }}
                     >
-                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', lineHeight: '1.5' }}>
+                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '10px', lineHeight: '1.6' }}>
                         {sentence.text}
                       </div>
                       {flags.map((flag, idx) => (
                         <div
                           key={idx}
                           style={{
-                            marginTop: '8px',
-                            padding: '8px',
+                            marginTop: idx > 0 ? '10px' : '0',
+                            padding: '10px',
                             backgroundColor: flag.severity === 'error' ? '#fef2f2' :
                               flag.severity === 'warning' ? '#fefce8' : '#eff6ff',
-                            borderRadius: '4px'
+                            borderRadius: '6px',
+                            border: `1px solid ${
+                              flag.severity === 'error' ? '#fee2e2' :
+                              flag.severity === 'warning' ? '#fef3c7' : '#dbeafe'
+                            }`
                           }}
                         >
                           <div style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '6px',
-                            marginBottom: '4px'
+                            gap: '8px',
+                            marginBottom: '6px'
                           }}>
                             <span style={{
-                              fontSize: '11px',
-                              fontWeight: '600',
-                              padding: '2px 6px',
-                              borderRadius: '3px',
+                              fontSize: '10px',
+                              fontWeight: '700',
+                              padding: '3px 8px',
+                              borderRadius: '4px',
                               backgroundColor: flag.severity === 'error' ? '#dc2626' :
                                 flag.severity === 'warning' ? '#f59e0b' : '#3b82f6',
-                              color: 'white'
+                              color: 'white',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.5px'
                             }}>
-                              {flag.severity.toUpperCase()}
+                              {flag.severity === 'error' ? 'CRITICAL' : flag.severity.toUpperCase()}
                             </span>
-                            <span style={{ fontSize: '12px', fontWeight: '500', color: '#374151' }}>
+                            <span style={{ fontSize: '13px', fontWeight: '600', color: '#111827' }}>
                               {flag.type}
                             </span>
                           </div>
-                          <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
+                          <div style={{ fontSize: '13px', color: '#374151', marginBottom: '6px', lineHeight: '1.5' }}>
                             {flag.message}
                           </div>
                           {flag.lawReference && (
-                            <div style={{ fontSize: '11px', color: '#9ca3af', fontStyle: 'italic' }}>
+                            <div style={{ fontSize: '11px', color: '#6b7280', fontStyle: 'italic', marginTop: '4px' }}>
                               Reference: {flag.lawReference}
                             </div>
                           )}
                           {flag.suggestion && (
                             <div style={{
-                              marginTop: '6px',
-                              padding: '6px',
-                              backgroundColor: '#f9fafb',
-                              borderRadius: '3px',
-                              fontSize: '11px',
-                              color: '#059669'
+                              marginTop: '8px',
+                              padding: '8px',
+                              backgroundColor: '#ecfdf5',
+                              borderRadius: '4px',
+                              fontSize: '12px',
+                              color: '#047857',
+                              border: '1px solid #d1fae5'
                             }}>
                               <strong>Suggestion:</strong> {flag.suggestion}
                             </div>
@@ -1751,102 +1828,17 @@ useEffect(() => {
 
   const renderEditorPanel = () => (
     <div className="editor-panel">
-      <div className="panel-header">
-        <h3 className="panel-title">Template Editor</h3>
-        {onlyofficeDocId && (
-          <button
-            onClick={handleRemoveDocument}
-            className="btn btn-secondary"
-            style={{
-              padding: '6px 12px',
-              fontSize: '13px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: '#dc2626',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#b91c1c'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#dc2626'}
-            title="Remove the imported document"
-          >
-            <AlertCircle size={16} />
-            Remove Document
-          </button>
-        )}
-      </div>
-      
-      {/* Show Variable Panel when in ONLYOFFICE mode with tabs */}
+      {/* Show Compliance Panel when in ONLYOFFICE mode */}
       {previewMode === 'onlyoffice' && onlyofficeDocId ? (
         <>
-          <div className="tab-navigation">
-            <button
-              className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
-              onClick={() => setActiveTab('variables')}
-            >
-              <Settings size={16} />
-              Variables
-            </button>
-            {/* Extract tab hidden to save space - functionality preserved */}
-            {/* <button
-              className={`tab-button ${activeTab === 'extraction' ? 'active' : ''}`}
-              onClick={() => setActiveTab('extraction')}
-            >
-              <Edit3 size={16} />
-              Extract
-            </button> */}
-            <button
-              className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
-              onClick={() => setActiveTab('state')}
-            >
-              <Shield size={16} />
-              Compliance
-            </button>
-          </div>
-          <div className="tab-content-wrapper">
-            <div style={{ display: activeTab === 'variables' ? 'block' : 'none', height: '100%' }}>
-              <VariablePanel
-                variables={variables}
-                onReplaceInTemplate={handleReplaceInTemplate}
-                onHighlightVariable={handleHighlightVariable}
-                isEditorReady={isEditorReady}
-              />
-            </div>
-            {/* Extract panel hidden to save space - functionality preserved in background */}
-            {/* <div style={{ display: activeTab === 'extraction' ? 'block' : 'none', height: '100%' }}>
-              <FormExtraction
-                documentId={onlyofficeDocId}
-                onVariablesExtracted={handleVariablesExtracted}
-                editorRef={onlyofficeViewerRef}
-              />
-            </div> */}
-            <div style={{ display: activeTab === 'state' ? 'block' : 'none', height: '100%' }}>
+          <div className="tab-content-wrapper" style={{ paddingTop: '0' }}>
+            <div style={{ height: '100%' }}>
               {renderStateConfigTab()}
             </div>
           </div>
         </>
       ) : (
         <>
-          <div className="tab-navigation">
-            <button
-              className={`tab-button ${activeTab === 'variables' ? 'active' : ''}`}
-              onClick={() => setActiveTab('variables')}
-            >
-              <Settings size={16} />
-              Variables
-            </button>
-            <button
-              className={`tab-button ${activeTab === 'state' ? 'active' : ''}`}
-              onClick={() => setActiveTab('state')}
-            >
-              <Shield size={16} />
-              Compliance
-            </button>
-          </div>
           <input
             type="file"
             id="offerLetterInput"
@@ -1857,99 +1849,11 @@ useEffect(() => {
               handleOfferLetterImport(e);
             }}
           />
-          
-          <div className="tab-content-wrapper">
-            {activeTab === 'variables' && (
-              <>
-                {/* Enhanced PDF Processing Status */}
-                {enhancedPdfProcessed && (
-                  <div style={{ 
-                    background: '#f0f9ff', 
-                    border: '1px solid #0ea5e9', 
-                    borderRadius: '6px', 
-                    padding: '12px', 
-                    marginBottom: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}>
-                    <CheckCircle size={16} style={{ color: '#0ea5e9' }} />
-                    <div>
-                      <div style={{ fontWeight: '500', color: '#0c4a6e', fontSize: '14px' }}>
-                        Enhanced PDF Processing Complete
-                      </div>
-                      <div style={{ fontSize: '12px', color: '#0369a1' }}>
-                        {enhancedPdfStats.totalVariables} variables found • {enhancedPdfStats.glinerSuggestions} AI suggestions
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {renderVariablesTab()}
 
-                {/* Controls for variables tab */}
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
-                  <input
-                    type="text"
-                    value={variableSearch}
-                    onChange={(e) => setVariableSearch(e.target.value)}
-                    placeholder="Search variables..."
-                    style={{ flex: '1', padding: '8px 10px', border: '1px solid #ced4da', borderRadius: '6px' }}
-                  />
-                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#374151' }}>
-                    <input
-                      type="checkbox"
-                      checked={showFlaggedOnly}
-                      onChange={(e) => setShowFlaggedOnly(e.target.checked)}
-                    />
-                    Show variables in flagged sections only
-                  </label>
-                  {previewMode === 'html-edit' && (
-                    <button 
-                      className="btn btn-secondary" 
-                      onClick={rescanVariables}
-                      style={{ padding: '8px 12px', borderRadius: '6px' }}
-                    >
-                      Rescan Variables
-                    </button>
-                  )}
-                </div>
-
-                {/* Entities Panel: edit and apply NLP replacements */}
-                <div style={{ marginTop: '16px', borderTop: '1px solid #e2e8f0', paddingTop: '12px' }}>
-                <EntitiesPanel
-                  entities={extractedEntities}
-                  variables={variables}
-                  content={isPdfImported ? extractedPdfText : (editableRef.current ? editableRef.current.innerHTML : templateContent)}
-                  onVariablesChange={(updated) => {
-                    setVariables(updated);
-                    if (previewMode === 'html-edit') updateEditableVariables();
-                    setTimeout(() => {
-                      if (previewMode === 'html-edit' && editableRef.current) {
-                        generateLivePdfPreview(editableRef.current.innerHTML);
-                      } else {
-                        generateProfessionalPreview();
-                      }
-                    }, 300);
-                  }}
-                  onContentChange={(newContent) => {
-                    if (previewMode === 'html-edit') {
-                      setTemplateContent(newContent);
-                      generateLivePdfPreview(newContent);
-                    }
-                  }}
-                  onAfterApply={() => {
-                    console.log('NLP replacement applied');
-                    if (previewMode === 'html-edit') {
-                      updateEditableVariables();
-                      generateLivePdfPreview(editableRef.current?.innerHTML);
-                    }
-                  }}
-                />
-                </div>
-              </>
-            )}
-            {activeTab === 'state' && renderStateConfigTab()}
+          <div className="tab-content-wrapper" style={{ paddingTop: '0' }}>
+            <div style={{ height: '100%' }}>
+              {renderStateConfigTab()}
+            </div>
           </div>
         </>
       )}
@@ -2335,6 +2239,26 @@ useEffect(() => {
 
   return (
     <div className="email-editor">
+      {/* Top Navigation Bar */}
+      <div className="top-navbar">
+        <div className="navbar-content">
+          <div className="navbar-left">
+            <img
+              src="/Button (1).png"
+              alt="Logo"
+              className="navbar-logo"
+            />
+            <span className="navbar-brand">Onboarding Talks</span>
+          </div>
+          <div className="navbar-right">
+            <span className="navbar-username">User_name</span>
+            <div className="navbar-avatar">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="split-view">
         {previewMode === 'html-edit' ? renderHtmlEditor() : renderProfessionalPreview()}
         {renderEditorPanel()}

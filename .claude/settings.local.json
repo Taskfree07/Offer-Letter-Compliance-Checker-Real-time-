@@ -25,7 +25,8 @@
       "Bash(dir:*)",
       "Bash(tasklist)",
       "Bash(npm install:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npm start)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, FileText, Pen, Download, BarChart3, Shield, Clock, Search, Bell, Settings, ChevronDown, Globe } from 'lucide-react';
+import { Plus, FileText, Star, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import TemplateModal from './TemplateModal';
 
 const HomeScreen = () => {
@@ -8,6 +8,9 @@ const HomeScreen = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [activeTab, setActiveTab] = useState('available');
+  const [favorites, setFavorites] = useState([1]); // Store favorite template IDs
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [templates, setTemplates] = useState([
     {
       id: 1,
@@ -84,11 +87,27 @@ Best regards,
     setShowAddModal(false);
   };
 
+  const toggleFavorite = (templateId) => {
+    setFavorites(prev =>
+      prev.includes(templateId)
+        ? prev.filter(id => id !== templateId)
+        : [...prev, templateId]
+    );
+  };
+
+  const handleTemplateClick = (template) => {
+    if (template.id === 1) {
+      navigate('/offer-letter');
+    } else {
+      alert('Editor for other templates coming soon!');
+    }
+  };
+
   const filteredTemplates = templates.filter(template => {
     const matchesSearch = template.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          template.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesTab = activeTab === 'available' || (activeTab === 'favorite' && favorites.includes(template.id));
+    return matchesSearch && matchesTab;
   });
 
   const getComplianceColor = (compliance) => {
@@ -116,53 +135,34 @@ Best regards,
         <div className="header-content">
           <div className="header-left">
             <div className="company-brand">
-              <div className="brand-logo">
-                <div className="company-name-text">TECHGENE</div>
-              </div>
-              <div className="brand-info">
-                <div className="product-name">HR Document Management</div>
-              </div>
+              <img
+                src="/Button (1).png"
+                alt="Logo"
+                className="brand-logo-img"
+              />
+              <span className="brand-name">Onboarding Talks</span>
             </div>
-            <div className="nav-separator"></div>
-            <nav className="main-navigation">
-              <button className="nav-item active">
-                <FileText size={16} />
-                Templates
-              </button>
-              <button className="nav-item">
-                <BarChart3 size={16} />
-                Analytics
-              </button>
-              <button className="nav-item">
-                <Shield size={16} />
-                Compliance
-              </button>
-            </nav>
           </div>
           <div className="header-right">
-            <div className="header-actions">
-              <button className="action-btn">
-                <Bell size={18} />
-                <span className="notification-badge">3</span>
-              </button>
-              <button className="action-btn">
-                <Settings size={18} />
-              </button>
-              <button className="action-btn">
-                <Globe size={18} />
-              </button>
-            </div>
-            <div className="user-profile">
-              <div className="user-details">
-                <span className="user-name">Sarah Johnson</span>
-                <span className="user-role">HR Operations Manager</span>
-                <span className="user-org">North America • HR Division</span>
-              </div>
+            <div className="user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
+              <span className="user-name">User_name</span>
               <div className="user-avatar">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
-                <ChevronDown size={14} className="dropdown-arrow" />
               </div>
             </div>
+            {showUserDropdown && (
+              <div className="user-dropdown">
+                <div className="user-dropdown-header">
+                  <div className="dropdown-avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
+                  </div>
+                  <div className="dropdown-user-info">
+                    <div className="dropdown-user-name">Sarah Johnson</div>
+                    <div className="dropdown-user-email">sarah.johnson@company.com</div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -170,155 +170,98 @@ Best regards,
       <div className="container">
         {/* Page Header */}
         <div className="page-header">
-          <div className="page-title-section">
-            <h1 className="page-title">Document Templates</h1>
-            <p className="page-description">
-              Manage and create professional HR documents with built-in compliance checking
-            </p>
-          </div>
-          <div className="page-actions">
-            <button 
-              className="btn btn-primary"
-              onClick={() => setShowAddModal(true)}
-            >
-              <Plus size={16} />
-              New Template
-            </button>
-          </div>
-        </div>
-
-        {/* Filters and Search */}
-        <div className="filters-section">
-          <div className="search-bar">
-            <Search size={20} className="search-icon" />
+          <h1 className="page-title">Document Templates</h1>
+          <p className="page-description">
+            Manage and Create Professional HR documents with built-in compliance checking
+          </p>
+          <div className="header-search-bar">
+            <Search size={20} className="header-search-icon" />
             <input
               type="text"
-              placeholder="Search templates..."
+              placeholder="Search for Template names here"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
+              className="header-search-input"
             />
-          </div>
-          <div className="category-filters">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                className={`filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                {category.name}
-                <span className="filter-count">{category.count}</span>
-              </button>
-            ))}
           </div>
         </div>
 
-        {/* Templates Grid */}
+        {/* Tabs */}
+        <div className="tabs-section">
+          <button
+            className={`tab-item ${activeTab === 'available' ? 'active' : ''}`}
+            onClick={() => setActiveTab('available')}
+          >
+            Available Templates
+          </button>
+          <button
+            className={`tab-item ${activeTab === 'favorite' ? 'active' : ''}`}
+            onClick={() => setActiveTab('favorite')}
+          >
+            Favorite Templates
+          </button>
+        </div>
+
+        {/* Templates Carousel */}
         <div className="templates-section">
-          <div className="template-grid">
-            {filteredTemplates.map((template) => (
+          <div className="carousel-container">
+            <button className="carousel-arrow carousel-arrow-left">
+              <ChevronLeft size={24} />
+            </button>
+
+            <div className="template-carousel">
+              {/* Add Template Card - First */}
               <div
-                key={template.id}
-                className="template-card"
+                className="template-card add-template-card"
+                onClick={() => setShowAddModal(true)}
               >
-                <div className="template-header">
-                  <div className="template-icon-wrapper">
-                    <div className="template-icon">
-                      <FileText size={24} />
-                    </div>
-                    <div className="template-category">
-                      {template.category.charAt(0).toUpperCase() + template.category.slice(1)}
+                <div className="add-template-content">
+                  <div className="add-template-icon-circle">
+                    <Plus size={40} />
+                  </div>
+                  <p className="add-template-text">Add New Template</p>
+                </div>
+              </div>
+
+              {/* Template Cards */}
+              {filteredTemplates.map((template) => (
+                <div
+                  key={template.id}
+                  className="template-card"
+                  onClick={() => handleTemplateClick(template)}
+                >
+                  <div className="template-preview-content">
+                    <div className="template-document-preview">
+                      <FileText size={48} className="document-icon" />
+                      <div className="preview-text">
+                        {template.preview}
+                      </div>
                     </div>
                   </div>
-                  <div className="template-meta">
-                    <div 
-                      className="compliance-badge"
-                      style={{ 
-                        backgroundColor: getComplianceColor(template.compliance) + '15',
-                        color: getComplianceColor(template.compliance),
-                        border: `1px solid ${getComplianceColor(template.compliance)}30`
+
+                  <div className="template-footer">
+                    <span className="template-name">{template.title}</span>
+                    <button
+                      className="favorite-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(template.id);
                       }}
                     >
-                      <Shield size={12} />
-                      {getComplianceText(template.compliance)}
-                    </div>
+                      <Star
+                        size={20}
+                        fill={favorites.includes(template.id) ? '#FCD34D' : 'none'}
+                        stroke={favorites.includes(template.id) ? '#FCD34D' : '#FFFFFF'}
+                      />
+                    </button>
                   </div>
                 </div>
-                
-                <div className="template-content">
-                  <h3 className="template-title">{template.title}</h3>
-                  <p className="template-description">{template.description}</p>
-                  <div className="template-preview">
-                    "{template.preview}"
-                  </div>
-                </div>
-
-                <div className="template-stats">
-                  <div className="stat-item">
-                    <div className="stat-icon">
-                      <BarChart3 size={14} />
-                    </div>
-                    <div className="stat-details">
-                      <span className="stat-value">{template.usage}</span>
-                      <span className="stat-label">Uses</span>
-                    </div>
-                  </div>
-                  <div className="stat-item">
-                    <div className="stat-icon">
-                      <Clock size={14} />
-                    </div>
-                    <div className="stat-details">
-                      <span className="stat-value">{template.lastModified}</span>
-                      <span className="stat-label">Modified</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="template-actions">
-                  <button
-                    className="btn btn-primary btn-template"
-                    onClick={() => {
-                      // Special handling for Offer Letter template
-                      if (template.id === 1) {
-                        navigate('/offer-letter');
-                      } else {
-                        // For other templates, you can add routing later
-                        alert('Editor for other templates coming soon!');
-                      }
-                    }}
-                  >
-                    <Pen size={16} />
-                    Edit Offer Letter
-                  </button>
-                  <button
-                    className="btn btn-secondary btn-template"
-                    onClick={() => {
-                      // For now, just show an alert
-                      alert('PDF generation coming soon!');
-                    }}
-                  >
-                    <Download size={16} />
-                    Generate
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {/* Add Template Card */}
-            <div
-              className="template-card add-template-card"
-              onClick={() => setShowAddModal(true)}
-            >
-              <div className="add-template-content">
-                <div className="add-template-icon">
-                  <Plus size={32} />
-                </div>
-                <h3 className="add-template-title">Create New Template</h3>
-                <p className="add-template-description">
-                  Build a custom document template for your organization
-                </p>
-              </div>
+              ))}
             </div>
+
+            <button className="carousel-arrow carousel-arrow-right">
+              <ChevronRight size={24} />
+            </button>
           </div>
         </div>
       </div>
@@ -333,418 +276,351 @@ Best regards,
       <style jsx>{`
         .home-screen {
           min-height: 100vh;
-          background-color: #F8F9FA;
+          background-color: #ffffff;
         }
 
         /* Enterprise Header */
         .header {
-          background: #1e3a5f;
-          border-bottom: none;
+          background: #3B82F6;
+          border: none;
           padding: 0;
-          box-shadow: none;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
           position: relative;
-        }
-
-        .header::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: #0055A4;
+          margin-bottom: 48px;
         }
 
         .header-content {
-          max-width: 1400px;
+          width: 100%;
           margin: 0 auto;
-          padding: 0 32px;
-          display: flex;
+          padding: 0 48px;
+          display: grid !important;
+          grid-template-columns: auto 1fr auto;
           align-items: center;
-          justify-content: space-between;
-          height: 64px;
+          height: 80px;
+          max-width: 100%;
         }
 
         .header-left {
           display: flex;
           align-items: center;
-          gap: 32px;
+          gap: 12px;
+          justify-self: start;
         }
 
         .company-brand {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 2px;
-        }
-
-        .brand-logo {
-          height: auto;
-          background: transparent;
-          border-radius: 0;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          margin-bottom: 0;
-          min-width: 150px;
-          padding: 0;
-        }
-
-        .company-name-text {
-          font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-          font-size: 24px;
-          font-weight: 700;
-          color: #FFFFFF;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          line-height: 1;
-          text-align: left;
-        }
-
-        .company-logo-img {
-          height: 30px;
-          width: auto;
-          object-fit: contain;
-          max-width: 150px;
-          display: block;
-        }
-
-        .brand-info {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .company-name {
-          font-size: 20px;
-          font-weight: 700;
-          color: white;
-          line-height: 1.2;
-          letter-spacing: -0.25px;
-        }
-
-        .product-name {
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.75);
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          text-align: left;
-          margin-top: 0;
-          white-space: nowrap;
-          font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        .nav-separator {
-          width: 1px;
-          height: 32px;
-          background: rgba(255, 255, 255, 0.2);
-          margin: 0 8px;
-        }
-
-        .main-navigation {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .nav-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 20px;
-          border-radius: 8px;
-          color: rgba(255, 255, 255, 0.7);
-          font-size: 14px;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.2s ease;
-          position: relative;
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-
-        .nav-item:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.9);
-        }
-
-        .nav-item.active {
-          background: rgba(255, 255, 255, 0.15);
-          color: #FFFFFF;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-item.active::before {
-          content: '';
-          position: absolute;
-          bottom: -16px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 4px;
-          height: 4px;
-          background: #1E70C1;
-          border-radius: 50%;
-        }
-
-        .header-right {
-          display: flex;
-          align-items: center;
-          gap: 24px;
-        }
-
-        .header-actions {
           display: flex;
           align-items: center;
           gap: 12px;
         }
 
-        .action-btn {
-          position: relative;
-          width: 40px;
-          height: 40px;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(255, 255, 255, 0.7);
-          cursor: pointer;
-          transition: all 0.2s ease;
+        .brand-logo-img {
+          height: 50px;
+          width: auto;
+          object-fit: contain;
+          display: block;
         }
 
-        .action-btn:hover {
-          background: rgba(255, 255, 255, 0.15);
-          color: rgba(255, 255, 255, 0.9);
-          border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .notification-badge {
-          position: absolute;
-          top: -6px;
-          right: -6px;
-          width: 18px;
-          height: 18px;
-          background: #ef4444;
-          color: white;
-          border-radius: 50%;
-          font-size: 10px;
+        .brand-name {
+          font-size: 28px;
           font-weight: 600;
-          display: flex;
+          color: #FFFFFF;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .header-right {
+          display: flex !important;
           align-items: center;
-          justify-content: center;
-          border: 2px solid #1e3a5f;
+          position: relative;
+          justify-self: end;
+          grid-column: 3;
         }
 
         .user-profile {
-          display: flex;
+          display: flex !important;
           align-items: center;
-          gap: 16px;
-          padding: 8px 16px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
+          gap: 12px;
           cursor: pointer;
           transition: all 0.2s ease;
+          white-space: nowrap;
         }
 
         .user-profile:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .user-details {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 2px;
+          opacity: 0.9;
         }
 
         .user-name {
           font-size: 14px;
-          font-weight: 600;
-          color: #FFFFFF;
-          line-height: 1;
-        }
-
-        .user-role {
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.7);
           font-weight: 500;
-          line-height: 1;
-        }
-
-        .user-org {
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.6);
-          font-weight: 400;
+          color: #FFFFFF;
           line-height: 1;
         }
 
         .user-avatar {
           display: flex;
           align-items: center;
-          gap: 8px;
         }
 
         .user-avatar img {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          border: 2px solid rgba(0, 85, 164, 0.2);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.25);
         }
 
-        .dropdown-arrow {
+        .user-dropdown {
+          position: absolute;
+          top: calc(100% + 12px);
+          right: 0;
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          min-width: 280px;
+          z-index: 1000;
+          overflow: hidden;
+        }
+
+        .user-dropdown-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: #f8fafc;
+          border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dropdown-avatar img {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: 2px solid #3b82f6;
+        }
+
+        .dropdown-user-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .dropdown-user-name {
+          font-size: 16px;
+          font-weight: 600;
+          color: #1e293b;
+          line-height: 1.2;
+        }
+
+        .dropdown-user-email {
+          font-size: 13px;
           color: #64748b;
-          transition: transform 0.2s ease;
-        }
-
-        .user-profile:hover .dropdown-arrow {
-          transform: rotate(180deg);
+          line-height: 1.2;
         }
 
         /* Main Content */
         .container {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 0 24px;
+          padding: 0 48px;
         }
 
         .page-header {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
-          padding: 32px 0 24px 0;
+          justify-content: center;
+          padding: 0 0 40px 0;
+          text-align: center;
+          gap: 12px;
         }
 
         .page-title {
-          font-size: 28px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 48px;
           font-weight: 700;
-          color: #333333;
-          margin-bottom: 8px;
+          color: #000000;
+          margin: 0;
+          line-height: 1.2;
+          letter-spacing: -0.5px;
+          text-align: center;
         }
 
         .page-description {
-          font-size: 16px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 15px;
+          font-weight: 400;
           color: #64748b;
           margin: 0;
+          line-height: 1.5;
+          text-align: center;
+          max-width: 600px;
         }
 
-        /* Filters */
-        .filters-section {
+        .header-search-bar {
+          position: relative;
+          width: 100%;
+          max-width: 840px;
+          margin-top: 24px;
+          height: 48px;
           display: flex;
           align-items: center;
-          gap: 24px;
-          margin-bottom: 32px;
-          padding: 20px;
-          background: white;
-          border-radius: 12px;
-          border: 1px solid #e2e8f0;
         }
 
-        .search-bar {
-          position: relative;
-          flex: 1;
-          max-width: 400px;
-        }
-
-        .search-icon {
+        .header-search-icon {
           position: absolute;
-          left: 12px;
+          left: 20px;
           top: 50%;
           transform: translateY(-50%);
-          color: #64748b;
+          color: #94a3b8;
+          pointer-events: none;
+          z-index: 2;
         }
 
-        .search-input {
+        .header-search-input {
           width: 100%;
-          padding: 12px 12px 12px 44px;
-          border: 1px solid #d1d5db;
-          border-radius: 8px;
-          font-size: 14px;
-          background: #f8fafc;
-        }
-
-        .search-input:focus {
-          outline: none;
-          border-color: #1E70C1;
-          background: white;
-        }
-
-        .category-filters {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-
-        .filter-btn {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 16px;
+          height: 100%;
+          padding: 0 20px 0 56px !important;
           border: 1px solid #e2e8f0;
           border-radius: 6px;
-          background: white;
-          color: #64748b;
           font-size: 14px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          background: white;
+          outline: none;
+          transition: all 0.2s ease;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          box-sizing: border-box;
+        }
+
+        .header-search-input:focus {
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .header-search-input::placeholder {
+          color: #cbd5e1;
+        }
+
+        /* Tabs */
+        .tabs-section {
+          display: flex;
+          align-items: center;
+          gap: 48px;
+          margin-bottom: 40px;
+          padding: 0;
+          border-bottom: 2px solid #f1f5f9;
+        }
+
+        .tab-item {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 20px;
           font-weight: 500;
+          letter-spacing: -0.2px;
+          background: none;
+          border: none;
+          padding: 0 0 12px 0;
+          cursor: pointer;
+          position: relative;
+          transition: color 0.2s ease;
+          color: #94a3b8;
+          white-space: nowrap;
+        }
+
+        .tab-item:hover {
+          color: #64748b;
+        }
+
+        .tab-item.active {
+          color: #3b82f6;
+        }
+
+        .tab-item.active::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background-color: #3b82f6;
+        }
+
+        /* Carousel Container */
+        .carousel-container {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          max-width: 100%;
+        }
+
+        .carousel-arrow {
+          background: #3b82f6;
+          border: none;
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
           transition: all 0.2s ease;
-        }
-
-        .filter-btn:hover {
-          border-color: #1E70C1;
-          color: #0055A4;
-        }
-
-        .filter-btn.active {
-          background: #0055A4;
-          border-color: #0055A4;
+          flex-shrink: 0;
           color: white;
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
 
-        .filter-count {
-          background: rgba(255, 255, 255, 0.2);
-          padding: 2px 8px;
-          border-radius: 12px;
-          font-size: 12px;
-          font-weight: 600;
+        .carousel-arrow:hover {
+          background: #2563eb;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+          transform: scale(1.05);
         }
 
-        .filter-btn.active .filter-count {
-          background: rgba(255, 255, 255, 0.2);
+        .template-carousel {
+          display: flex;
+          gap: 20px;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          padding: 12px 0 24px 0;
+          flex: 1;
         }
 
-        /* Template Grid */
-        .template-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-          gap: 28px;
+        .template-carousel::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .template-carousel::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 3px;
+        }
+
+        .template-carousel::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+
+        .template-carousel::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
         }
 
         .template-card {
           background: white;
-          border-radius: 16px;
+          border-radius: 8px;
           border: 1px solid #e2e8f0;
-          padding: 0;
+          min-width: 280px;
+          max-width: 280px;
+          height: 380px;
           transition: all 0.3s ease;
           cursor: pointer;
           overflow: hidden;
-          word-wrap: break-word;
           display: flex;
           flex-direction: column;
-          height: fit-content;
-          position: relative;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          padding: 0;
         }
 
         .template-card:hover {
-          border-color: #1E70C1;
-          box-shadow: 0 8px 25px rgba(0, 85, 164, 0.1);
-          transform: translateY(-2px);
+          border-color: #3b82f6;
+          box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+          transform: translateY(-6px);
         }
 
         .template-header {
@@ -979,20 +855,21 @@ Best regards,
         /* Add Template Card */
         .add-template-card {
           border: 2px dashed #cbd5e1;
-          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+          background: #fafbfc;
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 320px;
+          min-height: 380px;
           position: relative;
           overflow: visible;
+          box-shadow: none;
         }
 
         .add-template-card:hover {
-          border-color: #1E70C1;
-          background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(0, 85, 164, 0.1);
+          border-color: #3b82f6;
+          background: #f8fafc;
+          transform: translateY(-6px);
+          box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
         }
 
         .add-template-content {
@@ -1000,24 +877,25 @@ Best regards,
           padding: 40px 20px;
         }
 
-        .add-template-icon {
-          width: 80px;
-          height: 80px;
-          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-          border-radius: 20px;
+        .add-template-icon-circle {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 20px auto;
-          color: #64748b;
+          margin: 0 auto 16px auto;
+          color: #3b82f6;
           transition: all 0.3s ease;
         }
 
-        .add-template-card:hover .add-template-icon {
-          background: linear-gradient(135deg, #0055A4 0%, #1E70C1 100%);
-          color: white;
-          transform: scale(1.05);
-          box-shadow: 0 4px 12px rgba(0, 85, 164, 0.25);
+        .add-template-card:hover .add-template-icon-circle {
+          color: #2563eb;
+          transform: scale(1.1);
+        }
+
+        .add-template-text {
+          font-size: 15px;
+          font-weight: 500;
+          color: #64748b;
+          margin: 0;
         }
 
         .add-template-title {
@@ -1035,26 +913,150 @@ Best regards,
           margin: 0 auto;
         }
 
+        /* Template Preview Content */
+        .template-preview-content {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          background: white;
+        }
+
+        .template-document-preview {
+          width: 100%;
+          height: 100%;
+          background: white;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .document-icon {
+          color: #94a3b8;
+          flex-shrink: 0;
+        }
+
+        .preview-text {
+          font-size: 11px;
+          line-height: 1.4;
+          color: #94a3b8;
+          text-align: left;
+          width: 100%;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 8;
+          -webkit-box-orient: vertical;
+          font-family: 'Courier New', monospace;
+        }
+
+        .template-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 20px;
+          background: #3b82f6;
+          border-top: none;
+          margin: 0;
+          border-radius: 0 0 8px 8px;
+        }
+
+        .template-name {
+          font-size: 14px;
+          font-weight: 600;
+          color: white;
+          margin: 0;
+          text-align: left;
+        }
+
+        .favorite-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s ease;
+        }
+
+        .favorite-btn:hover {
+          transform: scale(1.1);
+        }
+
         @media (max-width: 768px) {
           .header-content {
-            flex-direction: column;
-            gap: 16px;
+            padding: 0 20px;
+            height: 64px;
+          }
+
+          .brand-logo-img {
+            height: 32px;
+          }
+
+          .brand-name {
+            font-size: 20px;
+          }
+
+          .user-avatar img {
+            width: 36px;
+            height: 36px;
+          }
+
+          .user-dropdown {
+            min-width: 260px;
+          }
+
+          .container {
+            padding: 0 20px;
           }
 
           .page-header {
-            flex-direction: column;
-            align-items: flex-start;
+            padding: 0 0 32px 0;
             gap: 16px;
           }
 
-          .filters-section {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 16px;
+          .page-title {
+            font-size: 32px;
           }
 
-          .template-grid {
-            grid-template-columns: 1fr;
+          .page-description {
+            font-size: 14px;
+          }
+
+          .header-search-bar {
+            margin-top: 20px;
+            max-width: 100%;
+          }
+
+          .tabs-section {
+            gap: 32px;
+            margin-bottom: 32px;
+          }
+
+          .tab-item {
+            font-size: 16px;
+          }
+
+          .carousel-container {
+            gap: 12px;
+          }
+
+          .carousel-arrow {
+            width: 36px;
+            height: 36px;
+          }
+
+          .template-card,
+          .add-template-card {
+            min-width: 260px;
+            max-width: 260px;
           }
         }
       `}</style>
