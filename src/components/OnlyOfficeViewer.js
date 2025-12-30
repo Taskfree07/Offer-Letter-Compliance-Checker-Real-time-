@@ -1,30 +1,5 @@
 import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef, memo } from 'react';
-
-// Utility function to get API base URL (works for both local and deployed)
-const getApiBaseUrl = () => {
-  // Priority 1: Environment variable (set in .env or build time)
-  if (process.env.REACT_APP_API_URL) {
-    return process.env.REACT_APP_API_URL;
-  }
-
-  // Priority 2: Detect from current window location
-  // If frontend is on https://myapp.com, backend is likely on same domain
-  if (typeof window !== 'undefined') {
-    const { protocol, hostname, port } = window.location;
-
-    // For production deployments, backend is usually on same host
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      // Production: use same protocol and hostname (backend should be on same domain or use CORS)
-      return `${protocol}//${hostname}`;
-    }
-
-    // For local development, backend is on port 5000
-    return `http://127.0.0.1:5000`;
-  }
-
-  // Fallback for server-side rendering or edge cases
-  return 'http://127.0.0.1:5000';
-};
+import { API_BASE_URL } from '../config/constants';
 
 const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesUpdate, onSessionExpired, onEditorReady }, ref) => {
   const [loading, setLoading] = useState(true);
@@ -73,8 +48,7 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
       console.log('🔄 Using backend to update document with variables...', variablesObj);
 
       // Use backend to update the document properly
-      const apiBaseUrl = getApiBaseUrl();
-      const response = await fetch(`${apiBaseUrl}/api/onlyoffice/update-variables/${documentId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/onlyoffice/update-variables/${documentId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -240,9 +214,8 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     const loadConfig = async () => {
       try {
         console.log('📄 Loading ONLYOFFICE config for document:', documentId);
-        const apiBaseUrl = getApiBaseUrl();
-        console.log('📍 Using API base URL:', apiBaseUrl);
-        const response = await fetch(`${apiBaseUrl}/api/onlyoffice/config/${documentId}`);
+        console.log('📍 Using API base URL:', API_BASE_URL);
+        const response = await fetch(`${API_BASE_URL}/api/onlyoffice/config/${documentId}`);
 
         // Check if it's a 404 first (document not found)
         if (response.status === 404) {
@@ -469,8 +442,7 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
         console.log('🔍 Fetching variables for document:', documentId);
 
         // Call the real-time extraction endpoint
-        const apiBaseUrl = getApiBaseUrl();
-        const response = await fetch(`${apiBaseUrl}/api/onlyoffice/extract-realtime/${documentId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/onlyoffice/extract-realtime/${documentId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 // API Configuration for AI Services
 // This file stores API keys and endpoints for external services
+import { API_BASE_URL } from './constants';
 
 /**
  * DeepSeek API Configuration
@@ -22,9 +23,9 @@ const API_CONFIG = {
     timeout: 30000, // 30 seconds timeout
   },
 
-  // Backend API endpoint (use environment variable or default to Azure)
+  // Backend API endpoint (uses centralized auto-detection from constants.js)
   backend: {
-    baseUrl: process.env.REACT_APP_API_URL || 'https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io',
+    baseUrl: API_BASE_URL,
   },
 };
 

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Automation API - Generate Key</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .api-key-display {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+            margin: 10px 0;
+            display: none;
+        }
+        .stats-display {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .stat-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .stat-value {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .success {
+            color: #48bb78;
+            font-weight: bold;
+        }
+        .error {
+            color: #f56565;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .copy-btn {
+            background: #48bb78;
+            padding: 8px 16px;
+            margin-top: 10px;
+            width: auto;
+        }
+        .event-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .event-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        .event-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        .event-success {
+            color: #48bb78;
+        }
+        .event-failed {
+            color: #f56565;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Email Automation API</h1>
+        <p style="text-align: center; color: #666;">Generate API Key & View Statistics</p>
+
+        <!-- Step 1: Microsoft Login -->
+        <div class="section">
+            <h3>🔐 Step 1: Microsoft Login</h3>
+            <p>Sign in with your Techgene Microsoft account to generate an API key.</p>
+            <button id="loginBtn" onclick="microsoftLogin()">Sign in with Microsoft</button>
+            <div id="loginStatus"></div>
+        </div>
+
+        <!-- Step 2: Generate API Key -->
+        <div class="section" id="keySection" style="display: none;">
+            <h3>🔑 Step 2: Generate API Key</h3>
+            <input type="text" id="keyName" placeholder="Enter API key name (e.g., My Laptop)" value="Browser Generated Key">
+            <button onclick="generateApiKey()">Generate API Key</button>
+            <div class="api-key-display" id="apiKeyDisplay"></div>
+            <button class="copy-btn" id="copyBtn" style="display: none;" onclick="copyApiKey()">📋 Copy API Key</button>
+        </div>
+
+        <!-- Step 3: View Statistics -->
+        <div class="section" id="statsSection" style="display: none;">
+            <h3>📊 Step 3: View Statistics</h3>
+            <input type="text" id="apiKeyInput" placeholder="Paste your API key here to view stats">
+            <button onclick="viewStats()">View Statistics</button>
+            <button onclick="viewEvents()">View Recent Events</button>
+            <button onclick="viewAllKeys()">View All API Keys</button>
+            
+            <div class="stats-display" id="statsDisplay"></div>
+            <div class="stats-display" id="eventsDisplay"></div>
+            <div class="stats-display" id="keysDisplay"></div>
+        </div>
+    </div>
+
+    <script src="https://alcdn.msauth.net/browser/2.28.1/js/msal-browser.min.js"></script>
+    <script>
+        const CONFIG = {
+            clientId: '2b74ef92-7feb-45c7-94c2-62978353fc66',
+            tenantId: 'b3235290-db90-4365-b033-ae68284de5bd',
+            redirectUri: window.location.origin + window.location.pathname,
+            backendUrl: 'https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io'
+        };
+
+        const msalConfig = {
+            auth: {
+                clientId: CONFIG.clientId,
+                authority: `https://login.microsoftonline.com/${CONFIG.tenantId}`,
+                redirectUri: CONFIG.redirectUri
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+        let jwtToken = null;
+        let currentApiKey = null;
+
+        async function microsoftLogin() {
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+
+            try {
+                const loginRequest = {
+                    scopes: ['User.Read']
+                };
+
+                const response = await msalInstance.loginPopup(loginRequest);
+                const accessToken = response.accessToken;
+
+                // Verify with backend
+                const verifyResponse = await fetch(`${CONFIG.backendUrl}/api/auth/microsoft/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ access_token: accessToken })
+                });
+
+                const data = await verifyResponse.json();
+                jwtToken = data.access_token;
+
+                document.getElementById('loginStatus').innerHTML = `
+                    <div class="success">✓ Signed in as ${data.user.name}</div>
+                    <div style="color: #666; font-size: 14px;">${data.user.email}</div>
+                `;
+                document.getElementById('keySection').style.display = 'block';
+                document.getElementById('statsSection').style.display = 'block';
+                loginBtn.style.display = 'none';
+            } catch (error) {
+                document.getElementById('loginStatus').innerHTML = `
+                    <div class="error">✗ Login failed: ${error.message}</div>
+                `;
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign in with Microsoft';
+            }
+        }
+
+        async function generateApiKey() {
+            const keyName = document.getElementById('keyName').value || 'Browser Generated Key';
+            
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/api/keys`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: keyName,
+                        scopes: 'read,write',
+                        expires_in_days: 90
+                    })
+                });
+
+                const data = await response.json();
+                currentApiKey = data.api_key.api_key;
+
+                document.getElementById('apiKeyDisplay').textContent = currentApiKey;
+                document.getElementById('apiKeyDisplay').style.display = 'block';
+                document.getElementById('copyBtn').style.display = 'inline-block';
+                document.getElementById('apiKeyInput').value = currentApiKey;
+
+                alert('✓ API Key generated successfully!\n\nSave this key - you won\'t see it again!');
+            } catch (error) {
+                alert('Failed to generate API key: ' + error.message);
+            }
+        }
+
+        function copyApiKey() {
+            navigator.clipboard.writeText(currentApiKey);
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                btn.textContent = '📋 Copy API Key';
+            }, 2000);
+        }
+
+        async function viewStats() {
+            const apiKey = document.getElementById('apiKeyInput').value;
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            const display = document.getElementById('statsDisplay');
+            display.innerHTML = '<div class="loading">Loading statistics...</div>';
+            display.style.display = 'block';
+
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/api/analytics/login-events/stats?period=week`, {
+                    headers: { 'Authorization': `Bearer ${apiKey}` }
+                });
+
+                const data = await response.json();
+                const stats = data.stats;
+
+                let methodsHtml = '';
+                for (let method in stats.by_method) {
+                    methodsHtml += `
+                        <div class="stat-item">
+                            <span class="stat-label">${method}</span>
+                            <span class="stat-value">${stats.by_method[method]}</span>
+                        </div>
+                    `;
+                }
+
+                display.innerHTML = `
+                    <h4>📊 Login Statistics (Last 7 Days)</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Logins</span>
+                        <span class="stat-value">${stats.total_logins}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Successful</span>
+                        <span class="stat-value" style="color: #48bb78;">${stats.successful_logins}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Failed</span>
+                        <span class="stat-value" style="color: #f56565;">${stats.failed_logins}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Success Rate</span>
+                        <span class="stat-value">${(stats.success_rate * 100).toFixed(1)}%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Unique IPs</span>
+                        <span class="stat-value">${stats.unique_ips}</span>
+                    </div>
+                    <h4 style="margin-top: 20px;">By Method:</h4>
+                    ${methodsHtml}
+                `;
+            } catch (error) {
+                display.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function viewEvents() {
+            const apiKey = document.getElementById('apiKeyInput').value;
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            const display = document.getElementById('eventsDisplay');
+            display.innerHTML = '<div class="loading">Loading events...</div>';
+            display.style.display = 'block';
+
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/api/analytics/login-events?limit=20`, {
+                    headers: { 'Authorization': `Bearer ${apiKey}` }
+                });
+
+                const data = await response.json();
+                
+                let tableHtml = `
+                    <h4>📝 Recent Login Events</h4>
+                    <table class="event-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Method</th>
+                                <th>Email</th>
+                                <th>IP Address</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.events.forEach(event => {
+                    const statusClass = event.success ? 'event-success' : 'event-failed';
+                    const statusText = event.success ? '✓ Success' : '✗ Failed';
+                    const time = new Date(event.created_at).toLocaleString();
+
+                    tableHtml += `
+                        <tr>
+                            <td>${event.event_type}</td>
+                            <td>${event.auth_method}</td>
+                            <td>${event.email_attempted || '-'}</td>
+                            <td>${event.ip_address || '-'}</td>
+                            <td class="${statusClass}">${statusText}</td>
+                            <td>${time}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHtml += '</tbody></table>';
+                display.innerHTML = tableHtml;
+            } catch (error) {
+                display.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function viewAllKeys() {
+            const apiKey = document.getElementById('apiKeyInput').value;
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            const display = document.getElementById('keysDisplay');
+            display.innerHTML = '<div class="loading">Loading API keys...</div>';
+            display.style.display = 'block';
+
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/api/keys`, {
+                    headers: { 'Authorization': `Bearer ${apiKey}` }
+                });
+
+                const data = await response.json();
+                
+                let keysHtml = `<h4>🔑 Your API Keys (${data.total})</h4>`;
+                
+                data.api_keys.forEach(key => {
+                    const status = key.is_active ? '✓ Active' : '✗ Inactive';
+                    const statusColor = key.is_active ? '#48bb78' : '#f56565';
+                    const lastUsed = key.last_used_at ? new Date(key.last_used_at).toLocaleString() : 'Never';
+
+                    keysHtml += `
+                        <div style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px;">
+                            <div style="font-weight: bold; font-size: 16px;">${key.name}</div>
+                            <div style="color: #666; font-size: 13px; margin-top: 5px;">
+                                Prefix: <code>${key.key_prefix}</code> | 
+                                Requests: ${key.request_count} | 
+                                Status: <span style="color: ${statusColor};">${status}</span>
+                            </div>
+                            <div style="color: #999; font-size: 12px; margin-top: 5px;">
+                                Last used: ${lastUsed}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                display.innerHTML = keysHtml;
+            } catch (error) {
+                display.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

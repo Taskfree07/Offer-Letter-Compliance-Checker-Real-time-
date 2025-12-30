@@ -4,7 +4,12 @@
  */
 
 class NLPService {
-  constructor(baseUrl = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000') {
+  constructor(baseUrl = null) {
+    // Import API_BASE_URL dynamically to avoid circular dependencies
+    if (!baseUrl) {
+      const { API_BASE_URL } = require('../config/constants');
+      baseUrl = API_BASE_URL;
+    }
     this.baseUrl = baseUrl;
     this.isAvailable = false;
     this.checkServiceAvailability();

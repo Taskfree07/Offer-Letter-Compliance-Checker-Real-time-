@@ -1,0 +1,18 @@
+# ONE-LINE COMMAND FOR COLLEAGUES
+# Copy and paste this in PowerShell
+
+# Option 1: From the project folder
+E:\Email-automation-MVP\microsoft-login.ps1
+
+# Option 2: Download and run from anywhere
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/your-repo/microsoft-login.ps1" -UseBasicParsing).Content
+
+# Option 3: Manual Microsoft login steps
+# Step 1: Install MSAL
+Install-Module -Name MSAL.PS -Scope CurrentUser -Force
+
+# Step 2: Get Microsoft token and login
+Import-Module MSAL.PS; $t = Get-MsalToken -ClientId "2b74ef92-7feb-45c7-94c2-62978353fc66" -TenantId "b3235290-db90-4365-b033-ae68284de5bd" -Scopes @("User.Read") -Interactive; $r = Invoke-RestMethod -Method POST -Uri "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/auth/microsoft/verify" -ContentType "application/json" -Body (@{access_token=$t.AccessToken}|ConvertTo-Json); $token=$r.access_token; Write-Host "Logged in as: $($r.user.name)" -ForegroundColor Green
+
+# Step 3: Create API Key
+$k = Invoke-RestMethod -Method POST -Uri "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/keys" -Headers @{"Authorization"="Bearer $token"} -ContentType "application/json" -Body (@{name="My Key";scopes="read,write";expires_in_days=90}|ConvertTo-Json); Write-Host "`nAPI KEY: $($k.api_key.api_key)" -ForegroundColor Cyan; Set-Clipboard -Value $($k.api_key.api_key); Write-Host "Copied to clipboard!" -ForegroundColor Green

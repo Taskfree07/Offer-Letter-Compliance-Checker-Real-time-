@@ -5,6 +5,7 @@
 
 import glinerService from './glinerService';
 import fieldExtractor from './fieldExtractor';
+import { API_BASE_URL } from '../config/constants';
 
 class RealtimeExtractionService {
   constructor() {
@@ -153,7 +154,7 @@ class RealtimeExtractionService {
     try {
       console.log('📄 Extracting variables from OnlyOffice document:', documentId);
 
-      const response = await fetch(process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL || `http://127.0.0.1:5000/api/onlyoffice/extract-realtime/${documentId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/onlyoffice/extract-realtime/${documentId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

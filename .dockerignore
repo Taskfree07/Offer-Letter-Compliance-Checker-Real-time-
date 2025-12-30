@@ -1,11 +1,6 @@
-# Node modules (not needed for backend)
+# Node modules (not needed for backend, but package files needed for frontend)
 node_modules/
 npm-debug.log*
-package.json
-package-lock.json
-src/
-public/
-build/
 
 # Python virtual environments (EXCLUDE - these are huge!)
 **/.venv/

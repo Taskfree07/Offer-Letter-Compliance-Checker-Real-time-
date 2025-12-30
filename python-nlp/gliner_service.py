@@ -25,16 +25,44 @@ class GLiNERService:
         self._load_model()
     
     def _load_model(self):
-        """Load GLiNER model"""
+        """Load GLiNER model with proper error handling"""
         try:
+            import os
+            import torch
+            
             logger.info(f"Loading GLiNER model: {self.model_name}")
             logger.info("This may take a few minutes on first run to download the model...")
-            self.model = GLiNER.from_pretrained(self.model_name)
-            logger.info("GLiNER model loaded successfully")
+            
+            # Try loading the model
+            try:
+                self.model = GLiNER.from_pretrained(
+                    self.model_name,
+                    local_files_only=False,  # Allow downloading if not cached
+                )
+                logger.info("GLiNER model loaded successfully")
+            except Exception as load_error:
+                logger.warning(f"Standard loading failed: {load_error}")
+                logger.info("Attempting alternative loading method...")
+                
+                # Try with trust_remote_code if available
+                try:
+                    self.model = GLiNER.from_pretrained(
+                        self.model_name,
+                        local_files_only=False,
+                        trust_remote_code=True
+                    )
+                    logger.info("GLiNER model loaded successfully with alternative method")
+                except Exception as alt_error:
+                    logger.error(f"Alternative loading also failed: {alt_error}")
+                    raise load_error  # Raise the original error
+                    
+        except KeyboardInterrupt:
+            logger.warning("GLiNER model loading interrupted by user")
+            raise
         except Exception as e:
             logger.error(f"Failed to load GLiNER model: {e}")
-            logger.error("If this is the first run, the model download may have failed.")
-            logger.error("Check your internet connection and try again.")
+            logger.error("The service will continue without GLiNER support")
+            logger.error("Some advanced features may be limited")
             raise
     
     def extract_offer_letter_entities(self, text: str) -> Dict[str, Any]:

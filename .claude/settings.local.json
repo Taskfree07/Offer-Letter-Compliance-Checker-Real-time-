@@ -26,7 +26,13 @@
       "Bash(tasklist)",
       "Bash(npm install:*)",
       "Bash(cat:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(ls:*)",
+      "Bash(az containerapp show:*)",
+      "Bash(pip install:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File deploy-latest.ps1)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File deploy-latest-clean.ps1)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

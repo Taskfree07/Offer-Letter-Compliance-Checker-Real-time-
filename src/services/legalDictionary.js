@@ -2,7 +2,7 @@
 
 import { COMPLIANCE_RULES } from '../components/compliance/complianceRules';
 
-const NLP_BASE_URL = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+import { API_BASE_URL as NLP_BASE_URL } from '../config/constants';
 
 /**
  * Collect legal/compliance phrases from COMPLIANCE_RULES for a state.

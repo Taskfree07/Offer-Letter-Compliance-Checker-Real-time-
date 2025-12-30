@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as pdfjs from 'pdfjs-dist';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { setupPdfVariableInputs, cleanupPdfVariableInputs, applyCleanTextWrapping } from '../utils/inputAutoResize';
+import { API_BASE_URL } from '../config/constants';
 
 // Configure PDF.js worker - use a more reliable approach
 try {
@@ -174,7 +175,7 @@ const EnhancedPDFViewer = React.forwardRef(({
         console.log(`Page ${pageNum} text:`, pageText);
         
         // Use NLP service to find entities with precise positions
-        const nlpResponse = await fetch('http://127.0.0.1:5000/api/extract-entities-with-positions', {
+        const nlpResponse = await fetch(`${API_BASE_URL}/api/extract-entities-with-positions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: pageText })

@@ -1,5 +1,13 @@
 flask
 flask-cors
+flask-jwt-extended
+flask-bcrypt
+flask-sqlalchemy
+flask-socketio
+python-socketio
+eventlet
+msal
+pyjwt
 spacy
 gunicorn
 python-dotenv

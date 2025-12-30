@@ -1,0 +1,174 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                    API TESTING CHEAT SHEET                         ║
+║                  Test from ANY Computer - Copy & Paste             ║
+╚════════════════════════════════════════════════════════════════════╝
+
+📍 BACKEND: https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io
+📍 FRONTEND: https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io
+
+═══════════════════════════════════════════════════════════════════════
+
+🪟 WINDOWS POWERSHELL (Copy entire block and run):
+
+# Step 1: Health Check
+Invoke-RestMethod https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+
+# Step 2: Login (replace email/password)
+$r = Invoke-RestMethod -Method POST -Uri "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/auth/login" -ContentType "application/json" -Body '{"email":"YOUR_EMAIL","password":"YOUR_PASSWORD"}'
+$token = $r.access_token
+Write-Host "Token: $token" -ForegroundColor Green
+
+# Step 3: Create API Key
+$r2 = Invoke-RestMethod -Method POST -Uri "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/keys" -Headers @{"Authorization"="Bearer $token"} -ContentType "application/json" -Body '{"name":"Test Key","scopes":"read,write","expires_in_days":90}'
+$apiKey = $r2.api_key.api_key
+Write-Host "API KEY: $apiKey" -ForegroundColor Cyan
+
+# Step 4: Test API Key - Get Statistics
+Invoke-RestMethod -Uri "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/analytics/login-events/stats?period=week" -Headers @{"Authorization"="Bearer $apiKey"}
+
+═══════════════════════════════════════════════════════════════════════
+
+🐧 LINUX/MAC TERMINAL (Copy entire block and run):
+
+# Step 1: Health Check
+curl https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+
+# Step 2: Login (replace email/password)
+TOKEN=$(curl -X POST https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"YOUR_EMAIL","password":"YOUR_PASSWORD"}' | jq -r '.access_token')
+echo "Token: $TOKEN"
+
+# Step 3: Create API Key
+API_KEY=$(curl -X POST https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/keys \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test Key","scopes":"read,write","expires_in_days":90}' | jq -r '.api_key.api_key')
+echo "API KEY: $API_KEY"
+
+# Step 4: Test API Key - Get Statistics
+curl https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/analytics/login-events/stats?period=week \
+  -H "Authorization: Bearer $API_KEY"
+
+═══════════════════════════════════════════════════════════════════════
+
+🐍 PYTHON (Save as test.py and run):
+
+import requests
+BASE = "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io"
+
+# Login
+r = requests.post(f"{BASE}/api/auth/login", json={"email":"YOUR_EMAIL","password":"YOUR_PASSWORD"})
+token = r.json()['access_token']
+print(f"Token: {token[:50]}...")
+
+# Create API Key
+r2 = requests.post(f"{BASE}/api/keys", headers={"Authorization":f"Bearer {token}"}, json={"name":"Test","scopes":"read,write","expires_in_days":90})
+api_key = r2.json()['api_key']['api_key']
+print(f"API Key: {api_key}")
+
+# Get Stats
+stats = requests.get(f"{BASE}/api/analytics/login-events/stats?period=week", headers={"Authorization":f"Bearer {api_key}"}).json()
+print(f"Total logins: {stats['stats']['total_logins']}")
+
+═══════════════════════════════════════════════════════════════════════
+
+🌐 BROWSER (Open Dev Console F12, paste this):
+
+const BASE = 'https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io';
+
+// Login
+const r = await fetch(`${BASE}/api/auth/login`, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({email:'YOUR_EMAIL',password:'YOUR_PASSWORD'})
+});
+const {access_token} = await r.json();
+console.log('Token:', access_token);
+
+// Create API Key
+const r2 = await fetch(`${BASE}/api/keys`, {
+  method: 'POST',
+  headers: {'Authorization':`Bearer ${access_token}`,'Content-Type':'application/json'},
+  body: JSON.stringify({name:'Test',scopes:'read,write',expires_in_days:90})
+});
+const {api_key} = await r2.json();
+console.log('API Key:', api_key.api_key);
+
+// Get Stats
+const r3 = await fetch(`${BASE}/api/analytics/login-events/stats?period=week`, {
+  headers: {'Authorization':`Bearer ${api_key.api_key}`}
+});
+const stats = await r3.json();
+console.log('Stats:', stats.stats);
+
+═══════════════════════════════════════════════════════════════════════
+
+📋 QUICK REFERENCE - All Endpoints:
+
+Health:
+  GET https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+
+Register:
+  POST https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/auth/register
+  Body: {"email":"x","password":"x","name":"x"}
+
+Login:
+  POST https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/auth/login
+  Body: {"email":"x","password":"x"}
+
+Create API Key:
+  POST https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/keys
+  Header: Authorization: Bearer JWT_TOKEN
+  Body: {"name":"x","scopes":"read,write","expires_in_days":90}
+
+List API Keys:
+  GET https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/keys
+  Header: Authorization: Bearer JWT_TOKEN
+
+Login Statistics:
+  GET https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/analytics/login-events/stats?period=week
+  Header: Authorization: Bearer API_KEY
+
+Recent Events:
+  GET https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/analytics/login-events/recent
+  Header: Authorization: Bearer API_KEY
+
+All Events:
+  GET https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/api/analytics/login-events?limit=50
+  Header: Authorization: Bearer API_KEY
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ EXPECTED RESPONSES:
+
+Health Check:
+{"status":"healthy","timestamp":"2024-01-15T10:30:00"}
+
+Login:
+{"success":true,"access_token":"eyJ...","user":{"id":1,"email":"x"}}
+
+API Key:
+{"success":true,"api_key":{"api_key":"ea_live_xxx...","name":"Test"}}
+
+Statistics:
+{"success":true,"stats":{"total_logins":25,"successful_logins":24}}
+
+═══════════════════════════════════════════════════════════════════════
+
+📱 TEST WITH POSTMAN:
+
+1. Import Collection
+2. Set Variable: {{baseUrl}} = https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io
+3. Run requests in order: Health → Login → Create Key → Stats
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 ONE-LINE TEST (Verify it's working):
+
+Windows:  Invoke-RestMethod https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+Linux:    curl https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io/health
+
+If you see {"status":"healthy"} - IT WORKS! ✅
+
+═══════════════════════════════════════════════════════════════════════

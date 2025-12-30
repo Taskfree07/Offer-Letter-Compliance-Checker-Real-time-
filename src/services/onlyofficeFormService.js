@@ -2,10 +2,11 @@
  * OnlyOffice Form Service
  * Directly manipulates OnlyOffice Editor using JavaScript API
  */
+import { API_BASE_URL } from '../config/constants';
 
 class OnlyOfficeFormService {
   constructor() {
-    this.apiBaseUrl = 'http://127.0.0.1:5000/api';
+    this.apiBaseUrl = `${API_BASE_URL}/api`;
     this.documentId = null;
     this.extractedFields = null;
     this.analyzedFields = null;

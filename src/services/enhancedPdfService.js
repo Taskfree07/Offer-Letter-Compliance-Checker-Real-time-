@@ -5,7 +5,8 @@
 
 class EnhancedPdfService {
   constructor() {
-    this.baseUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+    const { API_BASE_URL } = require('../config/constants');
+    this.baseUrl = API_BASE_URL;
   }
 
   /**

@@ -58,9 +58,15 @@ class EnhancedPDFService:
         self.gliner_service = None
         if GLINER_AVAILABLE:
             try:
+                logger.info("Initializing GLiNER service for enhanced PDF processing...")
                 self.gliner_service = get_gliner_service()
+                logger.info("GLiNER service initialized successfully")
+            except KeyboardInterrupt:
+                logger.warning("GLiNER initialization interrupted, continuing without GLiNER")
+                self.gliner_available = False
+                self.gliner_service = None
             except Exception as e:
-                logger.warning(f"GLiNER not available: {e}")
+                logger.warning(f"GLiNER not available for enhanced PDF service: {e}")
                 self.gliner_available = False
                 self.gliner_service = None
     

@@ -1,0 +1,31 @@
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-JWT-Extended==4.6.0
+Flask-Bcrypt==1.0.1
+python-dotenv==1.0.0
+requests==2.31.0
+gunicorn==21.2.0
+
+# Database
+SQLAlchemy>=2.0.35
+alembic>=1.13.1
+
+# Microsoft OAuth
+msal==1.26.0
+PyJWT==2.8.0
+cryptography==41.0.7
+
+# NLP and Document Processing
+spacy>=3.8.0
+python-docx==1.1.0
+docxtpl==0.16.7
+PyMuPDF>=1.24.0
+pdfplumber>=0.11.0
+pdf2image>=1.17.0
+Pillow>=10.4.0
+PyPDF2==3.0.1
+mammoth==1.6.0
+
+# Utilities
+python-dateutil==2.8.2

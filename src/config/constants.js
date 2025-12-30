@@ -1,39 +1,38 @@
 // Dynamic API URL detection - works for both local and deployed environments
 function getApiBaseUrl() {
-  // Priority 1: Environment variable (set in .env or build time for Azure)
-  if (process.env.REACT_APP_API_URL) {
-    console.log('🌐 Using REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
-    return process.env.REACT_APP_API_URL;
-  }
-
-  // Priority 2: Detect from current window location
+  // Priority 1: Check if running locally (localhost or 127.0.0.1)
   if (typeof window !== 'undefined') {
     const { protocol, hostname } = window.location;
+    
+    // LOCAL DEVELOPMENT: Use localhost backend
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0') {
+      console.log('🏠 Local development mode - using localhost:5000');
+      return 'http://localhost:5000';
+    }
 
-    // Azure Container Apps: frontend.*.azurecontainerapps.io -> backend.*.azurecontainerapps.io
+    // AZURE DEPLOYMENT: frontend.*.azurecontainerapps.io -> backend.*.azurecontainerapps.io
     if (hostname.includes('azurecontainerapps.io')) {
       const backendUrl = hostname.replace('frontend', 'backend');
       const url = `${protocol}//${backendUrl}`;
-      console.log('🌐 Azure deployment detected, using backend:', url);
+      console.log('☁️ Azure deployment detected - using backend:', url);
       return url;
     }
 
-    // For other production deployments (not localhost)
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      // Production: use same protocol and hostname with /api prefix or direct
-      const url = `${protocol}//${hostname}`;
-      console.log('🌐 Production deployment detected:', url);
-      return url;
+    // OTHER PRODUCTION: use environment variable or same hostname
+    if (process.env.REACT_APP_API_URL) {
+      console.log('🌐 Using REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
+      return process.env.REACT_APP_API_URL;
     }
 
-    // For local development, backend is on port 5000
-    console.log('🌐 Local development mode, using localhost:5000');
-    return 'http://127.0.0.1:5000';
+    // Fallback for other production deployments
+    const url = `${protocol}//${hostname}`;
+    console.log('🌐 Production deployment:', url);
+    return url;
   }
 
-  // Fallback for server-side rendering or edge cases
+  // SSR fallback
   console.log('🌐 Fallback to localhost:5000');
-  return 'http://127.0.0.1:5000';
+  return 'http://localhost:5000';
 }
 
 // API endpoint configuration

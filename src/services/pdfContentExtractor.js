@@ -1,7 +1,7 @@
 import pdfjs from '../utils/pdfWorker';
 import nlpService from './nlpService';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000';
+import { API_BASE_URL } from '../config/constants';
 
 export async function extractTextFromPDF(file) {
   try {

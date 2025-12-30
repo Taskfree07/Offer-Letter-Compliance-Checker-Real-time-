@@ -69,6 +69,53 @@ except Exception as e:
 # Initialize Flask app
 app = Flask(__name__)
 
+# ====== Authentication Configuration ======
+# JWT Configuration
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-super-secret-jwt-key-change-this-in-production-min-32-chars')
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES', 3600))  # 1 hour
+app.config['JWT_REFRESH_TOKEN_EXPIRES'] = int(os.getenv('JWT_REFRESH_TOKEN_EXPIRES', 2592000))  # 30 days
+
+# Database Configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///email_automation.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Import and initialize authentication
+try:
+    from models import db, bcrypt, User
+    from auth import auth_bp
+    from api_keys_bp import api_keys_bp, analytics_bp
+    from websocket_events import init_socketio
+    from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+
+    # Initialize extensions
+    db.init_app(app)
+    bcrypt.init_app(app)
+    jwt = JWTManager(app)
+
+    # Initialize WebSocket
+    socketio = init_socketio(app)
+
+    # Register blueprints
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(api_keys_bp)
+    app.register_blueprint(analytics_bp)
+
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+        logger.info("✅ Authentication system initialized successfully")
+        logger.info("✅ API Keys and Analytics endpoints registered")
+        logger.info("✅ WebSocket server initialized for real-time events")
+
+    AUTH_AVAILABLE = True
+except Exception as e:
+    logger.error(f"⚠️  Authentication system not available: {e}")
+    logger.error(traceback.format_exc())
+    AUTH_AVAILABLE = False
+    jwt_required = lambda *args, **kwargs: lambda f: f  # No-op decorator
+    get_jwt_identity = lambda: None
+    socketio = None
+
 # ONLYOFFICE Configuration
 # OnlyOffice server URL - auto-detects for Azure or uses local default
 def get_onlyoffice_url():
@@ -279,9 +326,10 @@ logger.info(f"CORS Allowed Origins: {ALLOWED_ORIGINS}")
 CORS(app, resources={
     r"/*": {
         "origins": list(ALLOWED_ORIGINS),
-        "methods": ["GET", "POST", "OPTIONS"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
-        "expose_headers": ["Content-Type"]
+        "expose_headers": ["Content-Type"],
+        "supports_credentials": True
     }
 })
 
@@ -290,9 +338,14 @@ def apply_cors(response):
     origin = request.headers.get('Origin')
     if origin and origin in ALLOWED_ORIGINS:
         response.headers['Access-Control-Allow-Origin'] = origin
-        response.headers['Vary'] = 'Origin'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    else:
+        # Allow requests without Origin header (like from curl/Postman)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    
+    response.headers['Vary'] = 'Origin'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
 
 # Removed problematic catch-all OPTIONS route that was blocking POST requests
@@ -1832,5 +1885,10 @@ if __name__ == '__main__':
     logger.info(f"Debug mode: {debug}")
     logger.info(f"NLP service available: {nlp_service is not None}")
 
-    # Start the Flask development server
-    app.run(host=host, port=port, debug=debug)
+    # Start the server with WebSocket support
+    if socketio:
+        logger.info("Starting server with WebSocket support (SocketIO)")
+        socketio.run(app, host=host, port=port, debug=debug, allow_unsafe_werkzeug=True)
+    else:
+        logger.warning("Starting server without WebSocket support")
+        app.run(host=host, port=port, debug=debug)
