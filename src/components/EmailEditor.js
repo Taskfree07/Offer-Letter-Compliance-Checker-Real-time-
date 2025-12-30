@@ -15,6 +15,7 @@ import WordDocumentEditor from './WordDocumentEditor';
 import OnlyOfficeViewer from './OnlyOfficeViewer';
 import VariablePanel from './VariablePanel';
 import FormExtraction from './FormExtraction';
+import UserMenu from './UserMenu';
 import enhancedPdfService from '../services/enhancedPdfService';
 import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
 import * as pdfjs from 'pdfjs-dist';
@@ -1487,30 +1488,38 @@ useEffect(() => {
   };
 
   const renderStateConfigTab = () => (
-    <div className="tab-content" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {/* Compliance Header with Replace and Reset buttons */}
+    <div className="tab-content" style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Fixed Action Header - Non-Scrolling */}
       <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '20px 20px 16px 20px',
-        borderBottom: '1px solid #e2e8f0',
-        backgroundColor: '#fff'
+        flexShrink: 0,
+        padding: '12px 20px 16px 20px',
+        backgroundColor: '#fff',
+        borderBottom: '1px solid #e2e8f0'
       }}>
         <h2 style={{
-          margin: 0,
-          fontSize: '18px',
-          fontWeight: '500',
+          margin: '0 0 14px 0',
+          fontSize: '20px',
+          fontWeight: 'bold',
           color: '#1e293b',
           fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
         }}>
           Compliance
         </h2>
-        <div style={{ display: 'flex', gap: '10px' }}>
+
+        {/* Replace and Reset buttons - Responsive Layout */}
+        <div style={{
+          display: 'flex',
+          gap: '10px',
+          marginBottom: '12px',
+          width: '100%',
+          maxWidth: '100%'
+        }}>
           <button style={{
-            width: '150px',
+            flex: '1',
+            minWidth: '0',
+            maxWidth: '150px',
             height: '36px',
-            padding: '0',
+            padding: '0 12px',
             fontSize: '14px',
             backgroundColor: '#3b82f6',
             color: 'white',
@@ -1520,55 +1529,93 @@ useEffect(() => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: '6px',
             fontWeight: '500',
-            transition: 'background-color 0.2s'
+            transition: 'background-color 0.2s',
+            whiteSpace: 'nowrap'
           }}
           onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
           onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
           >
+            <RefreshCw size={16} />
             Replace
           </button>
           <button style={{
-            width: '150px',
+            flex: '1',
+            minWidth: '0',
+            maxWidth: '150px',
             height: '36px',
-            padding: '0',
+            padding: '0 12px',
             fontSize: '14px',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            border: 'none',
+            backgroundColor: '#fff',
+            color: '#3b82f6',
+            border: '1px solid #3b82f6',
             borderRadius: '6px',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: '6px',
             fontWeight: '500',
-            transition: 'background-color 0.2s'
+            transition: 'all 0.2s',
+            whiteSpace: 'nowrap'
           }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
-          onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#eff6ff';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = '#fff';
+          }}
           >
+            <RefreshCw size={16} />
             Reset
           </button>
         </div>
+
+        {/* Manage Rules button - Responsive Width */}
+        <button
+          onClick={() => setShowRulesManager(!showRulesManager)}
+          style={{
+            width: '100%',
+            maxWidth: '310px',
+            height: '34px',
+            padding: '0 12px',
+            fontSize: '14px',
+            backgroundColor: '#fff',
+            color: '#3b82f6',
+            border: '1px solid #3b82f6',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            fontWeight: '500',
+            transition: 'all 0.2s',
+            whiteSpace: 'nowrap'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#eff6ff';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = '#fff';
+          }}
+        >
+          <BookOpen size={14} />
+          {showRulesManager ? 'Hide' : 'Manage'} Rules
+        </button>
       </div>
 
       {/* Scrollable Content Area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
-        {/* Legal Compliance Configuration */}
+      <div style={{
+        flex: 1,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        padding: '16px 20px',
+        minHeight: 0
+      }}>
+        {/* State Selection (removed "Legal Compliance Configuration" heading) */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: '600', margin: 0, color: '#374151' }}>
-              Legal Compliance Configuration
-            </h3>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setShowRulesManager(!showRulesManager)}
-              style={{ padding: '6px 12px', fontSize: '13px' }}
-            >
-              <BookOpen size={14} />
-              {showRulesManager ? 'Hide' : 'Manage'} Rules
-            </button>
-          </div>
 
           <div style={{ marginBottom: '16px' }}>
             <label style={{ fontWeight: '500', marginBottom: '8px', display: 'block', fontSize: '14px', color: '#374151' }}>
@@ -2239,27 +2286,88 @@ useEffect(() => {
 
   return (
     <div className="email-editor">
-      {/* Top Navigation Bar */}
-      <div className="top-navbar">
-        <div className="navbar-content">
-          <div className="navbar-left">
+      {/* Top Navigation Bar - Matches HomeScreen */}
+      <div className="top-navbar" style={{
+        background: '#3B82F6',
+        border: 'none',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        width: '100%',
+        maxWidth: '100%',
+        height: '65px',
+        overflow: 'hidden',
+        boxSizing: 'border-box'
+      }}>
+        <div style={{
+          width: '100%',
+          maxWidth: '100%',
+          margin: 0,
+          padding: '0 48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '65px',
+          boxSizing: 'border-box',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            minWidth: 0,
+            flexShrink: 0
+          }}>
             <img
               src="/Button (1).png"
               alt="Logo"
-              className="navbar-logo"
+              style={{
+                height: '42px',
+                width: 'auto',
+                maxWidth: '100%',
+                objectFit: 'contain',
+                display: 'block',
+                flexShrink: 0
+              }}
             />
-            <span className="navbar-brand">Onboarding Talks</span>
+            <span style={{
+              fontSize: '28px',
+              fontWeight: 600,
+              color: '#FFFFFF',
+              lineHeight: 1,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: '100%'
+            }}>
+              Onboarding Docs
+            </span>
           </div>
-          <div className="navbar-right">
-            <span className="navbar-username">User_name</span>
-            <div className="navbar-avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
-            </div>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            cursor: 'pointer',
+            marginLeft: 'auto',
+            transition: 'all 0.2s ease',
+            flexShrink: 0
+          }}>
+            <UserMenu />
           </div>
         </div>
       </div>
 
-      <div className="split-view">
+      <div className="split-view" style={{
+        marginTop: '65px',
+        height: 'calc(100vh - 65px)',
+        overflow: 'hidden',
+        width: '100%',
+        maxWidth: '100%',
+        boxSizing: 'border-box'
+      }}>
         {previewMode === 'html-edit' ? renderHtmlEditor() : renderProfessionalPreview()}
         {renderEditorPanel()}
       </div>

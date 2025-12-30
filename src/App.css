@@ -1,6 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   min-height: 100vh;
   background-color: #f8fafc;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Top Navigation Bar */
@@ -12,29 +18,51 @@
   top: 0;
   z-index: 1000;
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .navbar-content {
   width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 65px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+  .navbar-content {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 0 20px;
+  }
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .navbar-logo {
-  height: 50px;
+  height: 42px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
   display: block;
+  flex-shrink: 0;
 }
 
 .navbar-brand {
@@ -43,6 +71,21 @@
   color: #FFFFFF;
   line-height: 1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .navbar-brand {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 20px;
+  }
 }
 
 .navbar-right {
@@ -52,6 +95,7 @@
   cursor: pointer;
   margin-left: auto;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .navbar-right:hover {
@@ -170,8 +214,10 @@
   display: grid;
   grid-template-columns: 70fr 30fr;
   gap: 24px;
-  height: calc(100vh - 56px);
   padding: 0;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .email-preview {
@@ -185,6 +231,8 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .editor-panel {
@@ -193,8 +241,12 @@
   padding: 24px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid #e2e8f0;
-  overflow-y: auto;
+  overflow: hidden;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .panel-header {
@@ -347,6 +399,7 @@
   display: flex;
   flex-direction: column;
   background-color: #f8fafc;
+  overflow: hidden;
 }
 
 .editor-header {
@@ -1327,13 +1380,23 @@
 
 .tab-content-wrapper {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .tab-content {
   height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .tab-header {

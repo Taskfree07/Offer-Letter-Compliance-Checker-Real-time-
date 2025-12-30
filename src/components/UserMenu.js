@@ -3,7 +3,7 @@
  */
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, User, Settings } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const UserMenu = () => {
@@ -57,13 +57,6 @@ const UserMenu = () => {
         className="user-profile-trigger"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="user-details">
-          <span className="user-name">{user.name}</span>
-          <span className="user-role">{user.job_title || 'User'}</span>
-          {user.department && (
-            <span className="user-org">{user.department}</span>
-          )}
-        </div>
         <div className="user-avatar">
           <div className="user-avatar-image">
             {initials}
@@ -81,19 +74,6 @@ const UserMenu = () => {
                 <div className="user-menu-badge">Microsoft Account</div>
               )}
             </div>
-          </div>
-
-          <div className="user-menu-divider"></div>
-
-          <div className="user-menu-items">
-            <button className="user-menu-item" onClick={() => setIsOpen(false)}>
-              <User size={16} />
-              <span>Profile</span>
-            </button>
-            <button className="user-menu-item" onClick={() => setIsOpen(false)}>
-              <Settings size={16} />
-              <span>Settings</span>
-            </button>
           </div>
 
           <div className="user-menu-divider"></div>
@@ -119,60 +99,38 @@ const UserMenu = () => {
         .user-profile-trigger {
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 8px 16px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
+          justify-content: center;
+          padding: 0;
+          background: transparent;
+          border: none;
           cursor: pointer;
           transition: all 0.2s ease;
         }
 
-        .user-profile-trigger:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.2);
+        .user-profile-trigger:hover .user-avatar-image {
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .user-details {
+        .user-avatar {
           display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 2px;
-        }
-
-        .user-name {
-          font-size: 14px;
-          font-weight: 600;
-          color: #FFFFFF;
-          line-height: 1;
-        }
-
-        .user-role {
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.7);
-          font-weight: 500;
-          line-height: 1;
-        }
-
-        .user-org {
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.6);
-          font-weight: 400;
-          line-height: 1;
+          align-items: center;
+          justify-content: center;
         }
 
         .user-avatar-image {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
           background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 600;
-          border: 2px solid rgba(0, 85, 164, 0.2);
+          border: 2px solid rgba(255, 255, 255, 0.25);
+          transition: all 0.2s ease;
         }
 
         .user-menu-dropdown {

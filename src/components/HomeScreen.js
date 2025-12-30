@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, FileText, Star, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import TemplateModal from './TemplateModal';
+import UserMenu from './UserMenu';
 
 const HomeScreen = () => {
   const navigate = useNavigate();
@@ -10,7 +11,6 @@ const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeTab, setActiveTab] = useState('available');
   const [favorites, setFavorites] = useState([1]); // Store favorite template IDs
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [templates, setTemplates] = useState([
     {
       id: 1,
@@ -140,29 +140,11 @@ Best regards,
                 alt="Logo"
                 className="brand-logo-img"
               />
-              <span className="brand-name">Onboarding Talks</span>
+              <span className="brand-name">Onboarding Docs</span>
             </div>
           </div>
           <div className="header-right">
-            <div className="user-profile" onClick={() => setShowUserDropdown(!showUserDropdown)}>
-              <span className="user-name">User_name</span>
-              <div className="user-avatar">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
-              </div>
-            </div>
-            {showUserDropdown && (
-              <div className="user-dropdown">
-                <div className="user-dropdown-header">
-                  <div className="dropdown-avatar">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%233b82f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='600'%3ESJ%3C/text%3E%3C/svg%3E" alt="User Avatar" />
-                  </div>
-                  <div className="dropdown-user-info">
-                    <div className="dropdown-user-name">Sarah Johnson</div>
-                    <div className="dropdown-user-email">sarah.johnson@company.com</div>
-                  </div>
-                </div>
-              </div>
-            )}
+            <UserMenu />
           </div>
         </div>
       </div>
@@ -210,18 +192,20 @@ Best regards,
             </button>
 
             <div className="template-carousel">
-              {/* Add Template Card - First */}
-              <div
-                className="template-card add-template-card"
-                onClick={() => setShowAddModal(true)}
-              >
-                <div className="add-template-content">
-                  <div className="add-template-icon-circle">
-                    <Plus size={40} />
+              {/* Add Template Card - Only show in Available Templates tab */}
+              {activeTab === 'available' && (
+                <div
+                  className="template-card add-template-card"
+                  onClick={() => setShowAddModal(true)}
+                >
+                  <div className="add-template-content">
+                    <div className="add-template-icon-circle">
+                      <Plus size={40} />
+                    </div>
+                    <p className="add-template-text">Add New Template</p>
                   </div>
-                  <p className="add-template-text">Add New Template</p>
                 </div>
-              </div>
+              )}
 
               {/* Template Cards */}
               {filteredTemplates.map((template) => (
@@ -277,6 +261,8 @@ Best regards,
         .home-screen {
           min-height: 100vh;
           background-color: #ffffff;
+          width: 100%;
+          overflow-x: hidden;
         }
 
         /* Enterprise Header */
@@ -287,17 +273,29 @@ Best regards,
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
           position: relative;
           margin-bottom: 48px;
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+          box-sizing: border-box;
         }
 
         .header-content {
           width: 100%;
+          max-width: 100%;
           margin: 0 auto;
           padding: 0 48px;
           display: grid !important;
           grid-template-columns: auto 1fr auto;
           align-items: center;
-          height: 80px;
-          max-width: 100%;
+          height: 65px;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+
+        @media (max-width: 1200px) {
+          .header-content {
+            padding: 0 32px;
+          }
         }
 
         .header-left {
@@ -305,19 +303,24 @@ Best regards,
           align-items: center;
           gap: 12px;
           justify-self: start;
+          min-width: 0;
+          flex-shrink: 0;
         }
 
         .company-brand {
           display: flex;
           align-items: center;
           gap: 12px;
+          min-width: 0;
         }
 
         .brand-logo-img {
-          height: 50px;
+          height: 42px;
           width: auto;
+          max-width: 100%;
           object-fit: contain;
           display: block;
+          flex-shrink: 0;
         }
 
         .brand-name {
@@ -326,6 +329,15 @@ Best regards,
           color: #FFFFFF;
           line-height: 1;
           white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+          .brand-name {
+            font-size: 24px;
+          }
         }
 
         .header-right {
@@ -334,6 +346,7 @@ Best regards,
           position: relative;
           justify-self: end;
           grid-column: 3;
+          flex-shrink: 0;
         }
 
         .user-profile {
@@ -419,8 +432,16 @@ Best regards,
         /* Main Content */
         .container {
           max-width: 1400px;
+          width: 100%;
           margin: 0 auto;
           padding: 0 48px;
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 1200px) {
+          .container {
+            padding: 0 32px;
+          }
         }
 
         .page-header {
