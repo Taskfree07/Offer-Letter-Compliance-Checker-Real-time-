@@ -1506,72 +1506,6 @@ useEffect(() => {
           Compliance
         </h2>
 
-        {/* Replace and Reset buttons - Responsive Layout */}
-        <div style={{
-          display: 'flex',
-          gap: '10px',
-          marginBottom: '12px',
-          width: '100%',
-          maxWidth: '100%'
-        }}>
-          <button style={{
-            flex: '1',
-            minWidth: '0',
-            maxWidth: '150px',
-            height: '36px',
-            padding: '0 12px',
-            fontSize: '14px',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            fontWeight: '500',
-            transition: 'background-color 0.2s',
-            whiteSpace: 'nowrap'
-          }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
-          onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
-          >
-            <RefreshCw size={16} />
-            Replace
-          </button>
-          <button style={{
-            flex: '1',
-            minWidth: '0',
-            maxWidth: '150px',
-            height: '36px',
-            padding: '0 12px',
-            fontSize: '14px',
-            backgroundColor: '#fff',
-            color: '#3b82f6',
-            border: '1px solid #3b82f6',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            fontWeight: '500',
-            transition: 'all 0.2s',
-            whiteSpace: 'nowrap'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#eff6ff';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#fff';
-          }}
-          >
-            <RefreshCw size={16} />
-            Reset
-          </button>
-        </div>
-
         {/* Manage Rules button - Responsive Width */}
         <button
           onClick={() => setShowRulesManager(!showRulesManager)}
@@ -2299,7 +2233,7 @@ useEffect(() => {
         width: '100%',
         maxWidth: '100%',
         height: '65px',
-        overflow: 'hidden',
+        overflow: 'visible',
         boxSizing: 'border-box'
       }}>
         <div style={{
@@ -2312,7 +2246,7 @@ useEffect(() => {
           justifyContent: 'space-between',
           height: '65px',
           boxSizing: 'border-box',
-          overflow: 'hidden'
+          overflow: 'visible'
         }}>
           <div style={{
             display: 'flex',

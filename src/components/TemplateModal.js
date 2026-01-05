@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Upload } from 'lucide-react';
 
 const TemplateModal = ({ onClose, onSave }) => {
   const [formData, setFormData] = useState({
@@ -7,6 +7,7 @@ const TemplateModal = ({ onClose, onSave }) => {
     description: '',
     content: ''
   });
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,10 +17,39 @@ const TemplateModal = ({ onClose, onSave }) => {
     }));
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.name.toLowerCase().endsWith('.docx')) {
+        alert('Please upload a Word document (.docx file)');
+        e.target.value = '';
+        return;
+      }
+      setUploadedFile(file);
+      // Auto-fill title from filename if title is empty
+      if (!formData.title) {
+        const fileName = file.name.replace('.docx', '');
+        setFormData(prev => ({
+          ...prev,
+          title: fileName
+        }));
+      }
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setUploadedFile(null);
+    // Reset the file input
+    const fileInput = document.getElementById('template-file-upload');
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.title.trim()) {
-      onSave(formData);
+      onSave({ ...formData, file: uploadedFile });
     }
   };
 
@@ -66,19 +96,59 @@ const TemplateModal = ({ onClose, onSave }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="content" className="form-label">
-              Email Content
+            <label className="form-label">
+              Upload Template (Optional)
             </label>
-            <textarea
-              id="content"
-              name="content"
-              value={formData.content}
-              onChange={handleInputChange}
-              className="textarea"
-              placeholder="Enter your email template content here..."
-              rows={8}
-            />
+            <div className="file-upload-container">
+              <input
+                type="file"
+                id="template-file-upload"
+                accept=".docx"
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+              />
+              {!uploadedFile ? (
+                <label htmlFor="template-file-upload" className="file-upload-label">
+                  <Upload size={20} />
+                  <span>Upload .docx file</span>
+                </label>
+              ) : (
+                <div className="file-uploaded">
+                  <div className="file-info">
+                    <Upload size={18} />
+                    <span className="file-name">{uploadedFile.name}</span>
+                  </div>
+                  <button
+                    type="button"
+                    className="remove-file-btn"
+                    onClick={handleRemoveFile}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
+            <p className="form-hint">
+              Upload an offer letter template in .docx format
+            </p>
           </div>
+
+          {!uploadedFile && (
+            <div className="form-group">
+              <label htmlFor="content" className="form-label">
+                Email Content
+              </label>
+              <textarea
+                id="content"
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
+                className="textarea"
+                placeholder="Enter your email template content here..."
+                rows={8}
+              />
+            </div>
+          )}
 
           <div className="modal-actions">
             <button type="button" className="btn btn-secondary" onClick={onClose}>
@@ -90,6 +160,84 @@ const TemplateModal = ({ onClose, onSave }) => {
           </div>
         </form>
       </div>
+
+      <style jsx>{`
+        .file-upload-container {
+          margin-top: 8px;
+        }
+
+        .file-upload-label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 16px 20px;
+          border: 2px dashed #cbd5e1;
+          border-radius: 8px;
+          background: #f8fafc;
+          color: #64748b;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .file-upload-label:hover {
+          border-color: #3b82f6;
+          background: #eff6ff;
+          color: #3b82f6;
+        }
+
+        .file-uploaded {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          border: 1px solid #10b981;
+          border-radius: 8px;
+          background: #f0fdf4;
+        }
+
+        .file-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #059669;
+          flex: 1;
+          min-width: 0;
+        }
+
+        .file-name {
+          font-size: 14px;
+          font-weight: 500;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .remove-file-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #dc2626;
+          transition: all 0.2s ease;
+          border-radius: 4px;
+        }
+
+        .remove-file-btn:hover {
+          background: #fee2e2;
+        }
+
+        .form-hint {
+          font-size: 12px;
+          color: #94a3b8;
+          margin-top: 8px;
+          margin-bottom: 0;
+        }
+      `}</style>
     </div>
   );
 };

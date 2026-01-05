@@ -135,15 +135,27 @@ const UserMenu = () => {
 
         .user-menu-dropdown {
           position: absolute;
-          top: calc(100% + 8px);
+          top: calc(100% + 12px);
           right: 0;
           width: 280px;
           background: white;
           border-radius: 12px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
           border: 1px solid #e2e8f0;
-          z-index: 1000;
+          z-index: 9999;
           overflow: hidden;
+          animation: slideDown 0.2s ease-out;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .user-menu-header {

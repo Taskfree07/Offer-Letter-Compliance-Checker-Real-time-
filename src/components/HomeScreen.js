@@ -15,7 +15,7 @@ const HomeScreen = () => {
     {
       id: 1,
       title: 'Offer Letter Template',
-      description: 'Standard employment offer letter with customizable clauses',
+      description: 'Professional employment offer letter with smart variables, compliance verification, and customizable terms',
       category: 'hiring',
       lastModified: '2025-01-20',
       usage: 45,
@@ -42,7 +42,7 @@ Sincerely,
     {
       id: 2,
       title: 'Welcome Email',
-      description: 'New employee welcome and onboarding email',
+      description: 'Warm welcome message with onboarding checklist and first-day instructions for new hires',
       category: 'onboarding',
       lastModified: '2025-01-18',
       usage: 32,
@@ -77,7 +77,7 @@ Best regards,
     const newTemplate = {
       id: Date.now(),
       ...templateData,
-      category: templateData.category || 'other',
+      category: templateData.category || 'hiring',
       lastModified: new Date().toISOString().split('T')[0],
       usage: 0,
       compliance: 'pending',
@@ -85,6 +85,16 @@ Best regards,
     };
     setTemplates([...templates, newTemplate]);
     setShowAddModal(false);
+
+    // If a file was uploaded, navigate to the editor with the template and file
+    if (templateData.file) {
+      navigate('/offer-letter', {
+        state: {
+          template: newTemplate,
+          uploadedFile: templateData.file
+        }
+      });
+    }
   };
 
   const toggleFavorite = (templateId) => {
@@ -262,7 +272,6 @@ Best regards,
           min-height: 100vh;
           background-color: #ffffff;
           width: 100%;
-          overflow-x: hidden;
         }
 
         /* Enterprise Header */
@@ -275,8 +284,9 @@ Best regards,
           margin-bottom: 48px;
           width: 100%;
           max-width: 100%;
-          overflow-x: hidden;
+          overflow: visible;
           box-sizing: border-box;
+          z-index: 100;
         }
 
         .header-content {
@@ -289,7 +299,7 @@ Best regards,
           align-items: center;
           height: 65px;
           box-sizing: border-box;
-          overflow: hidden;
+          overflow: visible;
         }
 
         @media (max-width: 1200px) {
@@ -347,6 +357,7 @@ Best regards,
           justify-self: end;
           grid-column: 3;
           flex-shrink: 0;
+          z-index: 10000;
         }
 
         .user-profile {
@@ -356,6 +367,7 @@ Best regards,
           cursor: pointer;
           transition: all 0.2s ease;
           white-space: nowrap;
+          position: relative;
         }
 
         .user-profile:hover {
@@ -387,10 +399,10 @@ Best regards,
           right: 0;
           background: white;
           border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
           min-width: 280px;
-          z-index: 1000;
-          overflow: hidden;
+          z-index: 99999;
+          overflow: visible;
         }
 
         .user-dropdown-header {
