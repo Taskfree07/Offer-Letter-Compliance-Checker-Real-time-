@@ -30,7 +30,12 @@ Write-Host "Step 4: Pushing backend image..."
 docker push "$ACR_NAME.azurecr.io/backend:latest"
 
 Write-Host "Step 5: Building frontend image..."
-docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" --build-arg REACT_APP_API_URL=$BACKEND_URL .
+docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" `
+    --build-arg REACT_APP_API_URL=$BACKEND_URL `
+    --build-arg REACT_APP_MICROSOFT_CLIENT_ID=2b74ef92-7feb-45c7-94c2-62978353fc66 `
+    --build-arg REACT_APP_MICROSOFT_TENANT_ID=b3235290-db90-4365-b033-ae68284de5bd `
+    --build-arg REACT_APP_REDIRECT_URI=$FRONTEND_URL/auth/callback `
+    .
 
 Write-Host "Step 6: Pushing frontend image..."
 docker push "$ACR_NAME.azurecr.io/frontend:latest"

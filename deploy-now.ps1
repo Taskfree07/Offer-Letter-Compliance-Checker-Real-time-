@@ -2,6 +2,12 @@
 $ACR_NAME = "emailautomation22833"
 $RESOURCE_GROUP = "TECHGENE_group"
 $BACKEND_URL = "https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io"
+$FRONTEND_URL = "https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io"
+
+# Microsoft OAuth Configuration (from .env file)
+$MICROSOFT_CLIENT_ID = "2b74ef92-7feb-45c7-94c2-62978353fc66"
+$MICROSOFT_TENANT_ID = "b3235290-db90-4365-b033-ae68284de5bd"
+$REDIRECT_URI = "$FRONTEND_URL/auth/callback"
 
 Write-Host "`nStarting Deployment..." -ForegroundColor Cyan
 
@@ -26,7 +32,11 @@ Write-Host "DONE`n" -ForegroundColor Green
 
 # Build Frontend
 Write-Host "Step 4: Building frontend image..." -ForegroundColor Green
-docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" --build-arg REACT_APP_API_URL=$BACKEND_URL .
+docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" `
+    --build-arg REACT_APP_API_URL=$BACKEND_URL `
+    --build-arg REACT_APP_MICROSOFT_CLIENT_ID=$MICROSOFT_CLIENT_ID `
+    --build-arg REACT_APP_MICROSOFT_TENANT_ID=$MICROSOFT_TENANT_ID `
+    --build-arg REACT_APP_REDIRECT_URI=$REDIRECT_URI .
 if ($LASTEXITCODE -ne 0) { Write-Host "Frontend build failed" -ForegroundColor Red; exit 1 }
 Write-Host "DONE`n" -ForegroundColor Green
 

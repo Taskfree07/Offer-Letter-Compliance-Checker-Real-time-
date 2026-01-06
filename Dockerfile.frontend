@@ -12,9 +12,17 @@ RUN npm ci
 COPY public/ ./public/
 COPY src/ ./src/
 
-# Build argument for backend URL (passed at build time)
+# Build arguments for environment variables (passed at build time)
 ARG REACT_APP_API_URL
+ARG REACT_APP_MICROSOFT_CLIENT_ID
+ARG REACT_APP_MICROSOFT_TENANT_ID
+ARG REACT_APP_REDIRECT_URI
+
+# Set environment variables for the build
 ENV REACT_APP_API_URL=${REACT_APP_API_URL}
+ENV REACT_APP_MICROSOFT_CLIENT_ID=${REACT_APP_MICROSOFT_CLIENT_ID}
+ENV REACT_APP_MICROSOFT_TENANT_ID=${REACT_APP_MICROSOFT_TENANT_ID}
+ENV REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}
 
 # Build the React app
 RUN npm run build

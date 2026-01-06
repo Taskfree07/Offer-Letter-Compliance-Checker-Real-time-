@@ -80,7 +80,13 @@ Write-Host ""
 Write-Host "Step 6: Building frontend Docker image..." -ForegroundColor Green
 Write-Host "  📦 Includes: New UI, Login/Register, MSAL Auth, Protected Routes" -ForegroundColor Cyan
 Write-Host "  🔗 Using backend URL: $BACKEND_URL" -ForegroundColor Cyan
-docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" --build-arg REACT_APP_API_URL=$BACKEND_URL .
+Write-Host "  🔐 Using Microsoft Client ID: $MS_CLIENT_ID" -ForegroundColor Cyan
+docker build -f Dockerfile.frontend -t "$ACR_NAME.azurecr.io/frontend:latest" `
+    --build-arg REACT_APP_API_URL=$BACKEND_URL `
+    --build-arg REACT_APP_MICROSOFT_CLIENT_ID=$MS_CLIENT_ID `
+    --build-arg REACT_APP_MICROSOFT_TENANT_ID=$MS_TENANT_ID `
+    --build-arg REACT_APP_REDIRECT_URI=$FRONTEND_URL/auth/callback `
+    .
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: Frontend build failed" -ForegroundColor Red
     exit 1
