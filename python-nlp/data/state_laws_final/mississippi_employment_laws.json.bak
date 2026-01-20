@@ -1,0 +1,102 @@
+{
+  "state": "Mississippi",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://mdes.ms.gov/",
+      "title": "Mississippi Department of Employment Security",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Mississippi common law",
+      "message": "Non-competes ENFORCEABLE if reasonable",
+      "detailedExplanation": "Mississippi enforces reasonable non-competes under common law. Must protect legitimate business interest. Reasonableness evaluated on case-by-case basis.",
+      "suggestion": "Keep duration 2 years or less, reasonable geography",
+      "actionRequired": "Ensure reasonableness standards met",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "source": "Mississippi case law"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA only"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Federal FLSA (no state minimum)",
+      "message": "Mississippi has NO state minimum wage - federal $7.25 applies",
+      "requirement": "Must pay federal minimum $7.25/hour",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED",
+      "detailedExplanation": "Drug-free workplace programs encouraged",
+      "source": "Allowed"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Mississippi law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Mississippi common law",
+      "message": "Final wages due within reasonable time",
+      "detailedExplanation": "No specific statute. Best practice is next regular payday.",
+      "actionRequired": "Pay by next regular payday",
+      "bestPractice": "Within 7-14 days",
+      "source": "No specific statute"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Mississippi Constitution \u00a7 258-A",
+      "message": "Mississippi is RIGHT TO WORK state",
+      "source": "State Constitution"
+    },
+    "breaks": {
+      "required": false,
+      "severity": "info",
+      "message": "NO required meal or rest breaks for adults",
+      "source": "No state requirement"
+    }
+  }
+}

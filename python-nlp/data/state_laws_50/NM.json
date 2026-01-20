@@ -1,0 +1,28 @@
+{
+  "state": "New Mexico",
+  "state_code": "NM",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "an or equal to 200% of the federal minimum wage\nNotice requirement: Must provide copy of agreement to employee prior to acceptance of offer\nExceptions: Generally banned for physicians and podiatrists\nNew Mexico\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activi",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "an or equal to 200% of the federal minimum wage\nNotice requirement: Must provide copy of agreement to employee prior to acceptance of offer\nExceptions: Generally banned for physicians and podiatrists\nNew Mexico\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Generally",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "needs_verification": 1,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

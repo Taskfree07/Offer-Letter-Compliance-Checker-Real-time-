@@ -1,0 +1,179 @@
+{
+  "state": "Alabama",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.alabama.gov/",
+      "title": "Alabama Department of Labor",
+      "dateAccessed": "2026-01-16"
+    },
+    {
+      "url": "https://www.alabamaworks.alabama.gov/",
+      "title": "Alabama Career Center System",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Alabama Code \u00a7 8-1-190 et seq.",
+      "message": "Non-compete agreements are ENFORCEABLE if reasonable",
+      "detailedExplanation": "Alabama enforces non-competes that are reasonable in time (typically 2 years max), geography, and scope. Must protect legitimate business interest. Blue-pencil doctrine does NOT apply - entire agreement may be void if unreasonable.",
+      "suggestion": "Keep time limit to 2 years or less, reasonable geographic scope tied to actual business territory",
+      "actionRequired": "Ensure reasonableness in all three factors: time, geography, scope",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competitive activities",
+        "restraint of trade",
+        "competing business"
+      ],
+      "alternativeLanguage": "reasonable non-compete restrictions protecting legitimate business interests for up to 2 years within [specific geographic area]",
+      "source": "Alabama Code Title 8"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "No statutory prohibition",
+      "message": "Salary history inquiries are PERMITTED in Alabama",
+      "detailedExplanation": "Alabama has no state law prohibiting employers from asking about salary history. Employers may inquire about previous compensation.",
+      "actionRequired": "No restrictions - permitted by state law",
+      "bestPractice": "While legal, consider avoiding to promote pay equity",
+      "source": "No state restrictions"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No statutory requirement",
+      "message": "NO pay transparency or salary disclosure requirements",
+      "detailedExplanation": "Alabama does not require employers to disclose salary ranges in job postings or to applicants.",
+      "actionRequired": "No action required - optional disclosure",
+      "bestPractice": "Including salary information can improve candidate quality",
+      "source": "No state mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Federal FCRA only",
+      "message": "Background checks permitted at any stage - NO ban-the-box law",
+      "detailedExplanation": "Alabama has no statewide ban-the-box restrictions. Criminal history can be inquired about on applications. Must comply with federal FCRA requirements for background checks.",
+      "actionRequired": "Follow federal FCRA procedures only",
+      "process": [
+        "Provide standalone disclosure form",
+        "Obtain written authorization",
+        "Provide pre-adverse action notice if issues found",
+        "Provide final adverse action notice with rights"
+      ],
+      "bestPractice": "Consider individualized assessment even if not legally required",
+      "source": "Federal FCRA compliance"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Alabama Drug-Free Workplace Program (optional)",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "Alabama allows pre-employment, random, reasonable suspicion, and post-accident drug testing. Employers with certified drug-free workplace programs receive workers' compensation premium discounts.",
+      "actionRequired": "Ensure testing procedures are documented if implementing program",
+      "flaggedPhrases": [
+        "drug test",
+        "drug screening",
+        "substance test"
+      ],
+      "suggestion": "Drug testing is legal and can provide workers' comp benefits",
+      "bestPractice": "Consider establishing certified drug-free workplace program for premium discounts",
+      "source": "Alabama Workers' Compensation Law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Federal Arbitration Act",
+      "message": "Arbitration agreements are ENFORCEABLE",
+      "detailedExplanation": "Alabama follows the Federal Arbitration Act. Mandatory arbitration clauses are generally enforceable if not unconscionable.",
+      "actionRequired": "Ensure clause provides fair procedures",
+      "flaggedPhrases": [
+        "mandatory arbitration",
+        "binding arbitration",
+        "disputes arising out of"
+      ],
+      "suggestion": "Arbitration agreements are acceptable - ensure fairness standards",
+      "bestPractice": "Include provisions for reasonable costs and neutral arbitrators",
+      "source": "FAA and Alabama case law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "lawReference": "Alabama common law",
+      "message": "At-will employment STRONGLY PROTECTED in Alabama",
+      "detailedExplanation": "Alabama is a strong at-will employment state with very limited exceptions. Employment is presumed at-will unless modified by clear contract.",
+      "bestPractice": "Include clear at-will disclaimer to maximize protection",
+      "flaggedPhrases": [
+        "at-will",
+        "at will",
+        "employment at will"
+      ],
+      "suggestion": "Strong at-will language recommended and legally protective",
+      "source": "Alabama employment law"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Federal FLSA (no state minimum)",
+      "message": "NO state minimum wage - federal $7.25/hour applies",
+      "detailedExplanation": "Alabama has no state minimum wage law. Federal minimum wage of $7.25/hour applies under FLSA.",
+      "requirement": "Must meet federal minimum wage of $7.25/hour",
+      "actionRequired": "Ensure compliance with federal minimum wage",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state mandate",
+      "message": "NO state-mandated paid sick leave or paid family leave",
+      "detailedExplanation": "Alabama does not require employers to provide paid sick leave, paid family leave, or vacation time. Federal FMLA may apply for eligible employers (50+ employees).",
+      "actionRequired": "No state requirements - federal FMLA only for eligible employers",
+      "bestPractice": "Consider offering paid leave as competitive benefit",
+      "source": "No state mandate"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "No specific statute",
+      "message": "Final paycheck timing not specified by state law",
+      "detailedExplanation": "Alabama has no specific law requiring payment of final wages by a certain deadline. Best practice is next regular payday or within reasonable time.",
+      "actionRequired": "Follow company policy or next regular payday",
+      "bestPractice": "Pay by next regular payday or within 7 days",
+      "source": "No specific state law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Alabama Constitution Amendment 772 & Alabama Code \u00a7 25-7-30",
+      "message": "Alabama is a RIGHT TO WORK state",
+      "detailedExplanation": "Employees cannot be required to join or pay dues to a union as a condition of employment. Union membership and payment of dues must be voluntary.",
+      "actionRequired": "Cannot require union membership or dues payment",
+      "source": "Alabama Right to Work Law"
+    },
+    "breaks": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state requirement",
+      "message": "NO required meal or rest breaks for adults",
+      "detailedExplanation": "Alabama does not require employers to provide meal breaks or rest breaks to employees 16 years or older. Federal law requires breaks under 20 minutes be paid if provided.",
+      "actionRequired": "No state mandate - optional",
+      "bestPractice": "Consider providing breaks for employee wellbeing",
+      "source": "No state law"
+    },
+    "childLaborLaws": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Alabama Child Labor Law",
+      "message": "Strict child labor restrictions apply",
+      "detailedExplanation": "Special rules for employees under 18. Minors under 16 require work certificates. Hour restrictions and prohibited occupations apply.",
+      "actionRequired": "Verify age certificates and comply with hour restrictions",
+      "source": "Alabama Child Labor Law"
+    }
+  }
+}

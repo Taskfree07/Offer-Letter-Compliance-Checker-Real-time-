@@ -1,0 +1,106 @@
+{
+  "state": "Oklahoma",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://oklahoma.gov/odol.html",
+      "title": "Oklahoma Department of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Oklahoma Statutes Title 15 \u00a7 219A",
+      "message": "Non-competes VOID except in very limited circumstances",
+      "detailedExplanation": "Oklahoma law makes non-compete agreements void except: (1) sale of business or dissolution of partnership, (2) protection of trade secrets (narrowly defined), (3) employees with access to confidential information who earn $100k+ (executive/management), (4) physicians under specific conditions.",
+      "requirement": "Can only use for: business sale, trade secrets, executives earning $100k+, or physicians",
+      "actionRequired": "Remove non-compete OR verify exception applies (business sale, trade secrets, exec $100k+)",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete",
+        "noncompete",
+        "competing business"
+      ],
+      "alternativeLanguage": "confidentiality obligations (non-compete generally void in Oklahoma)",
+      "source": "Oklahoma Title 15 \u00a7 219A"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Oklahoma Statutes Title 40 \u00a7 197.5",
+      "message": "Oklahoma follows federal minimum: $7.25/hour",
+      "requirement": "Must pay federal minimum $7.25/hour",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "Oklahoma Standards for Workplace Drug and Alcohol Testing Act provides liability protections",
+      "bestPractice": "Consider certified program for legal protections",
+      "source": "Oklahoma drug testing law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Oklahoma law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Oklahoma Statutes Title 40 \u00a7 165.3",
+      "message": "Final wages due next regular payday",
+      "requirement": "Pay by next regular payday",
+      "source": "Oklahoma wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Oklahoma Constitution Article 23 \u00a7 1A",
+      "message": "Oklahoma is RIGHT TO WORK state",
+      "source": "State Constitution"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Oklahoma Statutes Title 40 \u00a7 165.1",
+      "message": "Meal and rest breaks required for minors, recommended for adults",
+      "detailedExplanation": "Minors under 16: rest breaks required. Adults: not required but recommended. Federal law requires breaks under 20 minutes be paid if provided.",
+      "source": "Oklahoma law"
+    }
+  }
+}

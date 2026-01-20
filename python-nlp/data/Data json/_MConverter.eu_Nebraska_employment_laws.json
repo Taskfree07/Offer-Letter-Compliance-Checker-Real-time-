@@ -1,0 +1,164 @@
+{
+  "state": "Nebraska",
+  "state_code": "NE",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Nebraska does not have a statewide salary history ban. Employers may ask about wage history, but such practices can increase discrimination risk under federal law.",
+      "statute_citation": "No statewide prohibition; federal anti-discrimination laws apply",
+      "requirements": [
+        "Employers are legally permitted to ask about prior salary",
+        "However, reliance on salary history may create risk under Title VII or Equal Pay Act",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dol.nebraska.gov/LaborStandards",
+      "notes": "While legal, many employers voluntarily avoid salary history questions for equity reasons."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Nebraska does not currently require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Nebraska statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may choose to disclose voluntarily",
+        "Federal equal pay and discrimination protections still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dol.nebraska.gov/LaborStandards/WageAndHour",
+      "notes": "This may change in future legislative sessions; monitoring recommended."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in Nebraska if reasonable in scope, geography, and duration, and if they protect legitimate business interests.",
+      "statute_citation": "Nebraska common law (e.g., H & R Block Tax Services, Inc. v. Circle A Enterprises, Inc.)",
+      "requirements": [
+        "Must protect legitimate business interests",
+        "Must be reasonable in time duration",
+        "Must be reasonable in geographic scope",
+        "Cannot impose undue hardship on employee",
+        "Overly broad agreements are frequently invalidated by courts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://supremecourt.nebraska.gov",
+      "notes": "Nebraska courts scrutinize restrictive covenants closely."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Nebraska does not have a statewide ban-the-box law for private employers, but employers must follow federal FCRA procedures when using background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before background check via third party",
+        "Must provide pre-adverse action notice if report used negatively",
+        "Must provide copy of report and rights before adverse action",
+        "Must issue final adverse action notice if decision is finalized",
+        "Must avoid discriminatory use of criminal records"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Nebraska does not mandate paid sick leave statewide. However, employers must comply with required leave such as jury duty protections and voting leave.",
+      "statute_citation": "Neb. Rev. Stat. § 48-837 (jury duty); § 32-922 (voting leave)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty",
+        "Employers cannot penalize employees for jury service",
+        "Employees may take reasonable unpaid time to vote if needed",
+        "Paid sick leave is not required by state law"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dol.nebraska.gov/LaborStandards",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Nebraska permits workplace drug testing. Nebraska does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Nebraska common law; Nebraska Revised Statutes Title 48",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Drug testing policies should be applied consistently",
+        "Cannabis remains illegal under Nebraska law",
+        "Employers may discipline for positive marijuana tests"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://nebraskalegislature.gov/laws/statutes.php",
+      "notes": "Nebraska is more employer-friendly than states like CA or CT on cannabis."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Nebraska if not unconscionable and consistent with federal arbitration law.",
+      "statute_citation": "Federal Arbitration Act; Nebraska contract law",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be overly one-sided",
+        "Must provide basic procedural fairness",
+        "Courts may invalidate unconscionable clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Standard enforceability principles apply."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Nebraska follows the at-will employment doctrine, subject to exceptions for contracts, discrimination, and public policy.",
+      "statute_citation": "Nebraska common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract states otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions exist",
+        "Employee handbooks can sometimes create implied obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dol.nebraska.gov/LaborStandards",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Nebraska law prohibits discrimination in employment based on protected characteristics and mirrors federal civil rights protections.",
+      "statute_citation": "Nebraska Fair Employment Practice Act (Neb. Rev. Stat. § 48-1101 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Harassment is prohibited",
+        "Retaliation against protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://neoc.nebraska.gov",
+      "notes": "Offer letters must avoid language implying exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Nebraska Department of Labor, Nebraska Revised Statutes, Nebraska Equal Opportunity Commission, official court guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Nebraska is generally employer-friendly compared to coastal states, with fewer statutory hiring restrictions but continued federal law obligations.",
+    "enforcement_agencies": [
+      "Nebraska Department of Labor",
+      "Nebraska Equal Opportunity Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "Continued reliance on common law for non-competes",
+      "Ongoing federal FCRA enforcement for background checks"
+    ]
+  }
+}

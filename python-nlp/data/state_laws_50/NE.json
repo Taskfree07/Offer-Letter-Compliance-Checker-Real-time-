@@ -1,0 +1,28 @@
+{
+  "state": "Nebraska",
+  "state_code": "NE",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Generally banned for physicians\nNorth Dakota\n\nBanned for all employees\nNebraska\n\nTraditional non-competes unenforceable; non-competes allowed only to the extent they restr",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Generally banned for physicians\nNorth Dakota\n\nBanned for all employees\nNebraska\n\nTraditional non-competes unenforceable; non-competes allowed only to the extent they restrict the former employee from doing business with customers the former employee actually did business with (g",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "needs_verification": 1,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

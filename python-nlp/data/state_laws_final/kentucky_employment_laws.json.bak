@@ -1,0 +1,105 @@
+{
+  "state": "Kentucky",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.ky.gov/",
+      "title": "Kentucky Labor Cabinet",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Kentucky Revised Statutes \u00a7 365.350 et seq.",
+      "message": "Non-competes ENFORCEABLE if reasonable",
+      "detailedExplanation": "Kentucky enforces reasonable non-competes. Blue-pencil doctrine applies. Courts will modify overly broad restrictions. Typically 2 years or less reasonable.",
+      "suggestion": "Limit to 2 years, reasonable geographic scope",
+      "actionRequired": "Ensure reasonableness standards met",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "source": "Kentucky case law"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Kentucky Revised Statutes \u00a7 337.275",
+      "message": "Kentucky follows federal minimum: $7.25/hour",
+      "requirement": "Must pay $7.25/hour minimum",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "Kentucky Drug-Free Workplace programs provide workers' comp discounts",
+      "bestPractice": "Consider certified program for premium discounts",
+      "source": "Kentucky law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Kentucky law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Kentucky Revised Statutes \u00a7 337.055",
+      "message": "Final wages due next regular payday or within 14 days",
+      "requirement": "Pay by next payday or within 14 days, whichever is later",
+      "source": "Kentucky wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Kentucky Constitution \u00a7 241",
+      "message": "Kentucky is RIGHT TO WORK state",
+      "source": "State Constitution"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Kentucky Revised Statutes \u00a7 337.355",
+      "message": "Meal break REQUIRED for 3-5 hour shifts",
+      "detailedExplanation": "Reasonable meal period must be provided between 3rd and 5th hour of work. Rest breaks under 20 minutes must be paid.",
+      "requirement": "Provide meal break for shifts 3-5 hours",
+      "actionRequired": "Ensure meal break compliance",
+      "source": "Kentucky labor law"
+    }
+  }
+}

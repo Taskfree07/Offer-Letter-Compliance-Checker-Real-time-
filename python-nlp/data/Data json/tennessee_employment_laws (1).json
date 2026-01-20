@@ -1,0 +1,138 @@
+{
+  "state": "Tennessee",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.tn.gov/workforce/",
+      "title": "Tennessee Department of Labor and Workforce Development",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Tennessee common law - 6 factor test",
+      "message": "Non-competes EMPLOYER-FRIENDLY - broadly enforceable",
+      "detailedExplanation": "Tennessee courts favor reasonable employer restrictions using 6-factor balancing test. Non-competes protecting legitimate business interests typically upheld. 1-2 years generally reasonable. Courts will enforce if protecting confidential information, customer relationships, or specialized training.",
+      "suggestion": "Non-competes are enforceable - use 1-2 year duration with reasonable scope",
+      "actionRequired": "Ensure reasonableness in time and scope",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competitive activities",
+        "competing business"
+      ],
+      "alternativeLanguage": "non-compete restrictions protecting legitimate business interests (enforceable in Tennessee)",
+      "source": "Tennessee Supreme Court - Hasty v. Rent-A-Driver"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "No statutory prohibition",
+      "message": "Salary history inquiries are PERMITTED",
+      "detailedExplanation": "Tennessee has no law prohibiting salary history questions",
+      "actionRequired": "No restrictions",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No statutory requirement",
+      "message": "NO pay transparency requirements",
+      "detailedExplanation": "No requirement to disclose salary ranges",
+      "actionRequired": "Optional",
+      "source": "No state mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Federal FCRA only",
+      "message": "Background checks permitted at any stage",
+      "detailedExplanation": "No ban-the-box law. Criminal history inquiries permitted on applications. Follow federal FCRA.",
+      "actionRequired": "Federal FCRA compliance only",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Federal FLSA (no state minimum)",
+      "message": "Tennessee has NO state minimum wage - federal $7.25 applies",
+      "detailedExplanation": "Tennessee does not have state minimum wage law. Federal minimum wage of $7.25/hour applies under FLSA.",
+      "requirement": "Must pay federal minimum $7.25/hour",
+      "actionRequired": "Ensure federal minimum wage compliance",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state mandate",
+      "message": "NO state-mandated paid leave",
+      "detailedExplanation": "Tennessee does not require paid sick leave, paid family leave, or vacation",
+      "actionRequired": "No state requirements",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Tennessee Drug-Free Workplace Program",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "Tennessee allows drug testing and encourages drug-free workplace programs. Certified programs provide workers' compensation premium discounts.",
+      "actionRequired": "No restrictions",
+      "bestPractice": "Consider certified drug-free workplace program for workers' comp discounts",
+      "source": "Tennessee Drug-Free Workplace Act"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "lawReference": "Tennessee Code \u00a7 50-1-305",
+      "message": "At-will employment STRONGLY PROTECTED",
+      "detailedExplanation": "Tennessee is very employer-friendly at-will state with limited exceptions",
+      "bestPractice": "Include clear at-will disclaimer",
+      "flaggedPhrases": [
+        "at-will",
+        "at will"
+      ],
+      "suggestion": "Strong at-will language is legally protective",
+      "source": "Tennessee employment law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Federal Arbitration Act",
+      "message": "Arbitration agreements are ENFORCEABLE",
+      "detailedExplanation": "Tennessee follows FAA. Arbitration clauses generally enforceable.",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Tennessee Code \u00a7 50-2-103",
+      "message": "Final wages due next regular payday or within 21 days",
+      "detailedExplanation": "Final wages must be paid by next regular payday or within 21 days of separation, whichever occurs later.",
+      "requirement": "Pay by next payday or within 21 days",
+      "actionRequired": "Ensure timely final payment",
+      "source": "Tennessee wage payment law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Tennessee Code \u00a7 50-1-201 et seq.",
+      "message": "Tennessee is a RIGHT TO WORK state",
+      "detailedExplanation": "Union membership and dues cannot be required as condition of employment",
+      "source": "Tennessee Right to Work Law"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Tennessee Code \u00a7 50-2-103",
+      "message": "Meal breaks REQUIRED for 6+ hour shifts",
+      "detailedExplanation": "Employees scheduled to work 6+ consecutive hours must receive unpaid meal or rest period of at least 30 minutes. Does not apply if workplace nature provides ample opportunity to rest or take breaks.",
+      "requirement": "Provide 30-minute break for 6+ hour shifts",
+      "actionRequired": "Implement meal break policy complying with state law",
+      "source": "Tennessee break law"
+    }
+  }
+}

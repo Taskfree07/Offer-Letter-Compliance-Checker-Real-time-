@@ -1,6 +1,47 @@
 # Email & Offer Letter Compliance System
 
-A modern React application for ensuring legal compliance in offer letters and email templates, with a specific focus on California employment law. The system provides real-time compliance checking, advanced document editing with ONLYOFFICE, AI-powered entity extraction with GLiNER, and protected variable fields.
+A modern React application for ensuring legal compliance in offer letters and email templates across **all 50 U.S. states**. The system uses a **multi-layer AI compliance analysis** approach combining pattern matching, RAG (Retrieval Augmented Generation), and LLM (Large Language Model) analysis for comprehensive legal compliance checking.
+
+## Multi-Layer Compliance Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    OFFER LETTER DOCUMENT                        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ LAYER 1: Pattern Matching (Frontend - Instant)                  │
+│ • complianceRules.js - 50 states, 400+ rules                   │
+│ • Keyword detection for prohibited clauses                      │
+│ • Real-time as-you-type analysis                               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ LAYER 2: RAG Semantic Search (Backend - ChromaDB)              │
+│ • 469 state employment laws in vector database                  │
+│ • Semantic similarity matching                                  │
+│ • Retrieves relevant laws based on document content             │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ LAYER 3: LLM Analysis (Ollama + Phi-3 Mini)                    │
+│ • Deep contextual understanding                                 │
+│ • Explains WHY something is a violation                         │
+│ • Provides specific remediation suggestions                     │
+│ • Runs locally - no API costs                                   │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    COMBINED RESULTS                             │
+│ • Highest confidence answers from all layers                    │
+│ • Severity: Error > Warning > Info                              │
+│ • Law citations and suggestions                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ## Features
 
@@ -27,15 +68,19 @@ A modern React application for ensuring legal compliance in offer letters and em
 - **Context-Aware Suggestions**: Smart recommendations based on document analysis
 
 ### ⚖️ Compliance Features
+- **All 50 U.S. States Supported**: Complete coverage of state employment laws
+- **469 Laws in RAG Database**: Comprehensive legal knowledge base
+- **Multi-Layer Analysis**: Pattern + RAG + LLM for highest accuracy
 - **Real-time Analysis**: Instant feedback on compliance issues
-- **California Employment Law**: Focused on CA state requirements
 - **Key Compliance Areas**:
-  - Non-compete clauses (prohibited in CA)
-  - Salary history questions (illegal)
-  - Background check requirements
-  - Drug testing regulations
+  - Non-compete clauses (prohibited in CA, NY, MN, ND, OK, etc.)
+  - Salary history bans (CA, NY, NJ, IL, MA, etc.)
+  - Pay transparency requirements
+  - Background check requirements (Fair Chance Act states)
+  - Drug testing regulations (including cannabis laws)
   - Arbitration clauses
-  - Employment agreement terms
+  - At-will employment statements
+  - Paid leave requirements
 
 ### 🚨 Compliance Analysis
 - **Visual Indicators**:
@@ -88,20 +133,118 @@ docker-compose up -d
 # Open http://localhost:8080 in your browser
 ```
 
-#### 5. Start the Application
+#### 5. Ollama LLM Setup (Required for AI Analysis)
 
-**Terminal 1 - Backend:**
+Ollama runs the Phi-3 Mini LLM locally for free - no API keys needed.
+
+**Step 1: Install Ollama**
 ```bash
-cd python-nlp
-python app.py
+# Download from: https://ollama.ai/download
+# Or on Windows, download OllamaSetup.exe and run installer
 ```
 
-**Terminal 2 - Frontend:**
+**Step 2: Pull the Phi-3 Mini Model**
+```bash
+# Open a terminal and run:
+ollama pull phi3:mini
+
+# This downloads ~2.2GB model (only needed once)
+```
+
+**Step 3: Start Ollama Server**
+```bash
+# Ollama runs as a background service automatically on Windows
+# To verify it's running:
+ollama list
+
+# Should show: phi3:mini
+```
+
+#### 6. Load 50 States Data into ChromaDB (RAG Database)
+
+The RAG system needs state employment laws loaded into the vector database.
+
+**Step 1: Activate Virtual Environment**
+```bash
+cd python-nlp
+.venv\Scripts\activate  # Windows
+# source .venv/bin/activate  # Linux/Mac
+```
+
+**Step 2: Load All State Laws**
+```bash
+# Load all 50 states into ChromaDB vector database
+python load_all_states.py --data-dir data/state_laws_final
+
+# Expected output:
+# [INFO] Found 50 state files
+# [1/50] Loading AL... [OK]
+# [2/50] Loading AK... [OK]
+# ...
+# [50/50] Loading WY... [OK]
+#
+# LOADING COMPLETE
+# Successful: 50/50
+# Total laws in database: 469
+```
+
+**Step 3: Verify Database**
+```bash
+# Check which states are loaded
+python check_db_states.py
+
+# Should show all 50 states with law counts
+```
+
+**Troubleshooting ChromaDB:**
+```bash
+# If you get schema errors, delete and reload:
+# 1. Delete the vector_store folder
+rmdir /s /q vector_store  # Windows
+# rm -rf vector_store      # Linux/Mac
+
+# 2. Reload all states
+python load_all_states.py --data-dir data/state_laws_final
+```
+
+#### 7. Start the Application
+
+You need 3 services running:
+
+**Terminal 1 - Ollama (LLM Server):**
+```bash
+# Usually runs automatically as a service on Windows
+# If not, start manually:
+ollama serve
+```
+
+**Terminal 2 - Python Backend:**
+```bash
+cd python-nlp
+.venv\Scripts\activate
+python app.py
+
+# Should show:
+# ✅ RAG Service initialized with 50 states
+# ✅ LLM Service connected to Ollama (phi3:mini)
+# * Running on http://0.0.0.0:5000
+```
+
+**Terminal 3 - React Frontend:**
 ```bash
 npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Quick Verification
+
+After starting all services, verify the multi-layer system:
+
+1. **Frontend**: Open browser to http://localhost:3000
+2. **Backend API**: http://localhost:5000/api/health should return OK
+3. **Ollama**: `ollama list` should show phi3:mini
+4. **ChromaDB**: Backend logs should show "50 states loaded"
 
 ## Technical Architecture
 
@@ -114,9 +257,17 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
          │                        │
          │                        ▼
          │               ┌─────────────────┐
-         │               │  GLiNER NLP     │
-         │               │  Entity Extract │
+         │               │  Multi-Layer    │
+         │               │  Compliance     │
          │               └─────────────────┘
+         │                   │   │   │
+         │          ┌────────┘   │   └────────┐
+         │          ▼           ▼            ▼
+         │    ┌──────────┐ ┌──────────┐ ┌──────────┐
+         │    │ Pattern  │ │   RAG    │ │   LLM    │
+         │    │ Matching │ │ ChromaDB │ │  Ollama  │
+         │    │(Frontend)│ │(469 Laws)│ │(Phi-3)   │
+         │    └──────────┘ └──────────┘ └──────────┘
          │                        │
          ▼                        ▼
 ┌─────────────────────────────────────────┐
@@ -124,6 +275,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 │  - Content Controls Conversion          │
 │  - Variable Protection                  │
 │  - Real-time Synchronization            │
+│  - 50 State Compliance Checking         │
 └─────────────────────────────────────────┘
 ```
 
@@ -312,6 +464,34 @@ GET    /api/gliner-health                    # Check GLiNER service health
 POST   /api/extract-entities                 # Extract entities (SpaCy)
 POST   /api/suggest-variables                # Suggest template variables
 POST   /api/process-document                 # Comprehensive document analysis
+```
+
+### Multi-Layer Compliance API (RAG + LLM)
+```
+POST   /api/v2/compliance-check              # Full multi-layer analysis
+       Body: {
+         "document_text": "offer letter text...",
+         "state": "CA",
+         "options": { "min_confidence": 0.3 }
+       }
+       Response: {
+         "success": true,
+         "violations": [
+           {
+             "severity": "error",
+             "law_citation": "CA Business & Professions Code §16600",
+             "violation_text": "Non-compete clause detected",
+             "explanation": "California prohibits...",
+             "suggestion": "Remove non-compete clause",
+             "confidence": 0.92
+           }
+         ],
+         "analysis_layers": ["pattern", "rag", "llm"]
+       }
+
+GET    /api/v2/states                        # List all 50 supported states
+GET    /api/v2/state/:code/laws              # Get laws for specific state
+GET    /api/v2/rag/coverage                  # Check RAG database coverage
 ```
 
 ## Configuration
@@ -522,7 +702,16 @@ For issues, questions, or contributions:
 
 ## Changelog
 
-### Latest Update (2025)
+### Latest Update (January 2026)
+- ✅ **Multi-Layer Compliance System**: Pattern + RAG + LLM analysis
+- ✅ **All 50 U.S. States Supported**: Complete coverage of employment laws
+- ✅ **469 Laws in RAG Database**: ChromaDB vector store with semantic search
+- ✅ **Ollama LLM Integration**: Local Phi-3 Mini model for deep analysis
+- ✅ **Automatic Analysis**: Triggers on document load and state change
+- ✅ **Searchable State Dropdown**: Type-to-filter with keyboard navigation
+- ✅ **Combined Results Display**: Shows findings from all analysis layers
+
+### Previous Updates (2025)
 - ✅ ONLYOFFICE Document Server integration
 - ✅ GLiNER AI-powered entity recognition
 - ✅ Content Controls for variable protection
@@ -537,3 +726,4 @@ For issues, questions, or contributions:
 - v1.1: Added compliance checking
 - v1.2: California employment law rules
 - v1.3: Template management system
+- v2.0: Multi-layer AI compliance (current)

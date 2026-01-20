@@ -1,0 +1,152 @@
+{
+  "state": "Delaware",
+  "state_code": "DE",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes RESTRICTED - scrutinized closely",
+      "statute_citation": "Delaware Code Title 19 § 4104",
+      "requirements": [
+        "Non-competes RESTRICTED - scrutinized closely",
+        "Delaware courts closely scrutinize non-competes. Must be necessary to protect legitimate business interest, reasonable in scope/time/geography. Employee must receive something of value beyond continued employment.",
+        "Best practice: Use narrowly tailored restrictions, 1 year maximum recommended",
+        "Action required: Ensure narrow scope and adequate consideration provided"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": "Delaware courts closely scrutinize non-competes. Must be necessary to protect legitimate business interest, reasonable in scope/time/geography. Employee must receive something of value beyond continued employment."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "CANNOT inquire about salary history",
+      "statute_citation": "Delaware Code Title 19 § 709B",
+      "requirements": [
+        "CANNOT inquire about salary history",
+        "Employers cannot screen applicants based on wage history or require disclosure of wage history. Cannot seek wage history from current or former employers.",
+        "Action required: Remove all salary history questions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": "Employers cannot screen applicants based on wage history or require disclosure of wage history. Cannot seek wage history from current or former employers."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency mandate currently",
+      "statute_citation": "Delaware common law",
+      "requirements": [
+        "NO pay transparency mandate currently",
+        "Action required: Optional"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Cannot inquire about criminal history on initial application",
+      "statute_citation": "Delaware Ban the Box Law",
+      "requirements": [
+        "Cannot inquire about criminal history on initial application",
+        "Employers with 4+ employees cannot ask about criminal convictions on initial employment application. Can inquire later in hiring process.",
+        "Action required: Delay criminal history inquiry until after initial application",
+        "Remove criminal history questions from applications"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": "Employers with 4+ employees cannot ask about criminal convictions on initial employment application. Can inquire later in hiring process."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Delaware minimum wage: $13.25/hour (2025), $15.00/hour (January 1, 2026)",
+      "statute_citation": "Delaware Code Title 19 § 902",
+      "requirements": [
+        "Delaware minimum wage: $13.25/hour (2025), $15.00/hour (January 1, 2026)",
+        "Action required: Ensure compliance with $15/hour minimum",
+        "Must pay $15.00/hour effective January 1, 2026"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "PAID SICK LEAVE REQUIRED (2025)",
+      "statute_citation": "Delaware Healthy Delaware Families Act",
+      "requirements": [
+        "PAID SICK LEAVE REQUIRED (2025)",
+        "Employers with 10+ employees must provide paid sick leave. 1 hour per 30 hours worked, up to 40 hours per year.",
+        "Action required: Implement paid sick leave policy",
+        "Provide paid sick leave accrual"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": "Employers with 10+ employees must provide paid sick leave. 1 hour per 30 hours worked, up to 40 hours per year."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Delaware common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Delaware common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing permitted",
+      "statute_citation": "Delaware common law",
+      "requirements": [
+        "Drug testing permitted"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next regular payday",
+      "statute_citation": "Delaware Code Title 19 § 1103",
+      "requirements": [
+        "Final wages due next regular payday",
+        "Pay by next regular payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.delaware.gov/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Delaware Department of Labor",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Delaware employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

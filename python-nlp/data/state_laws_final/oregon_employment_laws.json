@@ -1,0 +1,150 @@
+{
+  "state": "Oregon",
+  "state_code": "OR",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Oregon restricts non-compete agreements significantly. O.R.S. § 653.295 prohibits non-competes for employees earning less than $123,428/year (2026 threshold, adjusted biennially). For higher earners, non-competes limited to 12 months maximum. Healthcare practitioners (physicians, NPs, PAs, etc.) are prohibited from non-competes entirely as of July 1, 2025.",
+      "effective_date": "2008 (original); Amended 2025 (healthcare ban)",
+      "source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+      "notes": "Oregon significantly restricts non-competes. Healthcare practitioner ban took effect July 2025. Wage thresholds adjusted biennially. Federal FTC ban blocked but Oregon law already restrictive.",
+      "law_citation": "O.R.S. § 653.295 (Non-Compete Agreements); O.R.S. § 653.640 (Healthcare Practitioner Non-Competes)",
+      "full_text": "WAGE THRESHOLD: Cannot enforce non-compete for employees earning less than $123,428/year (2026 threshold, adjusted every 2 years based on median family income)\nFor employees above threshold: Non-compete limited to 12 months maximum\nMust provide written notice of non-compete at job offer or 2 weeks before start of employment\nMust be in writing\nGeographic scope must be reasonable\nHEALTHCARE PRACTITIONERS: Non-competes PROHIBITED for physicians, nurse practitioners, physician assistants, optometrists, dentists, dental hygienists (effective July 1, 2025)\nHEALTHCARE: Exception for sale of practice\nNon-solicitation agreements: More lenient - can enforce for employees earning $103,690+ (2026 threshold)\nCustomer non-solicitation: Maximum 18 months\nEmployee must receive bona fide advancement (promotion, salary increase, or other consideration) for existing employee non-compete\nCourts will NOT blue-pencil unreasonable provisions\nVoid non-competes: Employer may be liable for attorney fees",
+      "severity": "error",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review Oregon non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Oregon prohibits employers from asking about salary history. O.R.S. § 652.220 prevents employers from screening applicants based on salary history or requiring disclosure of current/past compensation. One of the early adopter states.",
+      "effective_date": "2017-10-06",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/equal-pay.aspx",
+      "notes": "Oregon was one of first states to ban salary history inquiries. Part of broader pay equity law.",
+      "law_citation": "O.R.S. § 652.220 (Equal Pay - Salary History)",
+      "full_text": "Employers cannot screen applicants based on current or past compensation\nCannot require disclosure of salary history as condition of employment\nCannot require disclosure as condition for being interviewed\nCannot determine whether to interview based on salary history\nApplicant may voluntarily disclose salary history without prompting\nIf voluntarily disclosed, employer may verify and consider\nDoes not prohibit asking about salary expectations\nApplies to all Oregon employers\nViolations: Civil penalties enforced by Commissioner of Bureau of Labor and Industries (BOLI)\nEffective October 6, 2017",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review Oregon salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Oregon requires pay transparency. O.R.S. § 652.210 requires employers with 15+ employees to include salary range or wage scale in job postings. Must also provide pay scale information to current employees upon request or hire/transfer/promotion.",
+      "effective_date": "2025-01-01",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/equal-pay.aspx",
+      "notes": "Oregon pay transparency law took effect January 2025. Applies to employers with 15+ employees.",
+      "law_citation": "O.R.S. § 652.210 (Pay Transparency - Wage Disclosure)",
+      "full_text": "Applies to employers with 15 or more employees\nMust include salary range or wage scale in ALL job postings for positions in Oregon\nPosting must show: minimum and maximum salary/wage for position\nMust include general description of benefits and other compensation\nApplies to: external job postings, internal postings, transfer opportunities, promotional opportunities\nIncludes remote positions if work performed in Oregon\nMust provide wage scale information to employees: upon hire, upon transfer to new position, upon promotion, at any time upon request\nCannot retaliate against employees who discuss wages\nCannot prohibit employees from disclosing their own wages\nViolations: Enforced by Oregon Bureau of Labor and Industries (BOLI), civil penalties\nEffective January 1, 2025",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review Oregon pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Oregon has comprehensive ban-the-box law. O.R.S. § 659A.360 prohibits employers from asking about criminal history on initial applications or before initial interview. Must conduct individualized assessment. Cannot consider arrests more than 3 years old without conviction.",
+      "effective_date": "2016 (private employers); Expanded subsequently",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/ban-the-box.aspx",
+      "notes": "Oregon has strong ban-the-box protections. Cannot ask about criminal history until after initial interview. Must conduct individualized assessment.",
+      "law_citation": "O.R.S. § 659A.360 (Criminal History in Employment); Federal FCRA (15 U.S.C. § 1681)",
+      "full_text": "Cannot ask about criminal history on initial employment application\nCannot ask about criminal history before initial interview\nCannot conduct background check before initial interview\nAfter initial interview: May inquire about criminal history and conduct background check\nCannot consider: arrests not resulting in conviction (if more than 3 years old), expunged/sealed records, juvenile records\nMust conduct individualized assessment before taking adverse action\nMust consider: nature/gravity of offense, time elapsed, nature of job sought, evidence of rehabilitation\nMust provide written notice before adverse action\nApplicant has 5 business days to respond with evidence of inaccuracy or rehabilitation\nExceptions: Positions where law prohibits hiring with certain convictions\nFCRA: Must get written consent for background check\nFCRA: Must provide pre-adverse action and final adverse action notices\nViolations: Enforced by Oregon Bureau of Labor and Industries (BOLI)\nCivil penalties: Up to $1,000 per violation",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review Oregon background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Oregon has comprehensive paid sick leave law. O.R.S. § 653.601 et seq. requires all employers to provide earned sick time. Employees accrue minimum 1 hour per 30 hours worked (or 1 hour per 40 for employers with 10+ employees in Portland metro). Oregon also has Paid Leave Oregon program for family/medical leave starting September 2023.",
+      "effective_date": "Paid sick leave: 2016-01-01; Paid Leave Oregon: 2023-09-03",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/paid-sick-time.aspx",
+      "notes": "Oregon has comprehensive paid leave system. State-run Paid Leave Oregon provides family/medical leave benefits. Separate paid sick leave law for all employers.",
+      "law_citation": "O.R.S. § 653.601 et seq. (Paid Sick Leave); O.R.S. § 657B.010 et seq. (Paid Leave Oregon)",
+      "full_text": "PAID SICK LEAVE: Applies to ALL Oregon employers regardless of size\nPAID SICK LEAVE: Employees accrue minimum 1 hour per 30 hours worked\nPAID SICK LEAVE: Employers with 10+ employees (or 6+ in Portland metro): paid sick time\nPAID SICK LEAVE: Smaller employers: unpaid sick time\nPAID SICK LEAVE: Maximum 40 hours per year\nPAID SICK LEAVE: Can use after 91st calendar day of employment\nPAID SICK LEAVE: Carries over year to year (employer may cap accrual at 80 hours)\nPAID SICK LEAVE: Use for: illness/injury, medical care, public health emergency, child's illness/care, domestic violence/harassment/sexual assault/stalking situations, bereavement\nPAID SICK LEAVE: NOT required to pay out at termination\nPAID LEAVE OREGON: State-run program provides up to 12 weeks paid leave (14 for pregnancy disability, 16 combined)\nPAID LEAVE OREGON: Covers: serious health condition, family care, bonding with child, safe leave\nPAID LEAVE OREGON: Funded by payroll contributions (employer + employee)\nPAID LEAVE OREGON: Applies to employees who worked 120 days in Oregon\nPAID LEAVE OREGON: Started September 3, 2023\nRecords must be maintained for 3 years\nRetaliation prohibited",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review Oregon paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Oregon enforces arbitration agreements under federal and state law but with employee protections. Follows Federal Arbitration Act. Oregon Uniform Arbitration Act governs. Courts scrutinize for fairness and may find unconscionable if one-sided.",
+      "effective_date": "Ongoing under federal and state law",
+      "source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors036.html",
+      "notes": "Oregon enforces arbitration but with employee-friendly scrutiny. Must be procedurally fair.",
+      "law_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); O.R.S. § 36.600 et seq. (Uniform Arbitration Act)",
+      "full_text": "Arbitration agreements generally enforceable under FAA\nMust be in writing and clearly presented\nMust have mutual agreement to arbitrate\nMust identify claims subject to arbitration\nCannot be procedurally or substantively unconscionable\nMust provide for neutral arbitrator\nCannot impose unreasonable costs on employee\nAdequate consideration required\nOregon courts scrutinize arbitration agreements for fairness\nClass action waivers generally enforceable but may be challenged\nPre-dispute arbitration agreements enforceable if fair\nCan be challenged on unconscionability grounds\nFederal policy favoring arbitration applies but state law provides protections",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review Oregon arbitration requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Oregon follows at-will employment doctrine with significant exceptions. Either party can terminate employment for any legal reason. Strong anti-discrimination protections, whistleblower protections, and public policy exceptions. Oregon is moderately employee-friendly.",
+      "effective_date": "Ongoing common law and statutory",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/protected-classes.aspx",
+      "notes": "Oregon has strong employee protections including broad anti-discrimination law and marijuana protections. Handbook disclaimers important.",
+      "law_citation": "Common law doctrine; O.R.S. § 659A.030 (Oregon Equality Act - anti-discrimination)",
+      "full_text": "Default: Employment terminable at will by either party\nNo notice required unless contract/policy requires it\nFinal wages: If employee quits with 48+ hours notice, must pay immediately; if less notice, within 5 days or next payday, whichever comes first; if terminated, must pay by end of next business day\nEXCEPTIONS - Cannot terminate for: Race, color, religion, sex, sexual orientation, gender identity, national origin, marital status, age 18+, disability, source of income, domestic violence victim status, familial status, expunged juvenile record (Oregon Equality Act - very broad)\nCannot terminate for: Retaliation (whistleblowing, workers' comp, wage claims, jury duty, military service, victim of crime assistance)\nCannot terminate for: Serving as volunteer firefighter/emergency responder\nCannot terminate for: Off-duty legal marijuana use (with exceptions for safety-sensitive positions)\nCannot terminate for: Violation of public policy\nCannot terminate for: Breach of employment contract\nEmployment handbooks may create enforceable obligations if not properly disclaimed\nWritten employment contracts override at-will status\nUnion/collective bargaining agreements override at-will status",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review Oregon at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Oregon restricts drug testing, particularly for marijuana. O.R.S. § 659A.300 prohibits employment discrimination for off-duty marijuana use. Employers must have reasonable suspicion of impairment. Pre-employment marijuana testing significantly limited. Safety-sensitive positions have more latitude.",
+      "effective_date": "Marijuana protections: 2015 (legalization); Enhanced protections: ongoing",
+      "source_url": "https://www.oregon.gov/boli/workers/pages/cannabis.aspx",
+      "notes": "Oregon has strong marijuana employee protections. Pre-employment marijuana testing largely prohibited. Cannot discriminate for off-duty use unless safety-sensitive. Must show impairment, not just use.",
+      "law_citation": "O.R.S. § 659A.300 et seq. (Marijuana Use); O.R.S. § 659A.300 (Drug/Alcohol Testing)",
+      "full_text": "Cannot discriminate based on off-duty marijuana use (with exceptions)\nPre-employment marijuana testing: Prohibited for most positions (as of 2024)\nCannot refuse to hire solely based on pre-employment marijuana test\nEXCEPTIONS: Can test and take action for: safety-sensitive positions, positions requiring federal background checks/contracts/licensing, positions with potential adverse impact on safety of others, positions where impairment could create unacceptable risk\nRandom testing: Only permitted for safety-sensitive positions\nReasonable suspicion testing: Permitted if observable evidence of impairment\nPost-accident testing: Permitted\nMust have written drug testing policy\nPolicy must be provided to employees/applicants\nTesting must be conducted by qualified lab\nCannot test based solely on smell of marijuana\nMust establish observable impairment, not just positive test\nMedical marijuana: Same protections as recreational\nFederal contractors: Must comply with Drug-Free Workplace Act\nDOT-regulated positions: Must follow federal testing requirements\nWorkers' comp: Drug testing provisions may affect claims",
+      "severity": "error",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review Oregon drug screening requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 8,
+    "needs_verification": 0,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

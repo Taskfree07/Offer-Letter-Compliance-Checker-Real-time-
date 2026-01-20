@@ -1,0 +1,165 @@
+{
+  "state": "Iowa",
+  "state_code": "IA",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Iowa does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase discrimination risk under federal law",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.iowadivisionoflabor.gov/",
+      "notes": "While legal in Iowa, many employers avoid salary history questions to reduce risk under Title VII and Equal Pay Act."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Iowa does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose compensation information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.iowadivisionoflabor.gov/wage-and-hour",
+      "notes": "Some multi-state employers disclose pay ranges to comply with other state laws."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in Iowa if reasonable in scope, duration, and geography and if they protect legitimate business interests.",
+      "statute_citation": "Iowa common law",
+      "requirements": [
+        "Must protect legitimate business interests",
+        "Must be reasonable in duration",
+        "Must be reasonable in geographic scope",
+        "Cannot impose undue hardship on employee",
+        "Overly broad restrictions may be invalidated by courts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.iowacourts.gov/",
+      "notes": "Iowa courts evaluate restrictive covenants under a reasonableness test."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Iowa does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Iowa does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "Iowa Code § 607A.1 (jury duty); § 49.109 (voting leave)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty",
+        "Employers cannot penalize employees for jury service",
+        "Employees must be allowed unpaid time to vote if their schedule does not permit voting outside work hours",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.iowadivisionoflabor.gov/",
+      "notes": "Offer letters should not contradict statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Iowa permits workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Iowa Code § 730.5 (drug testing procedures)",
+      "requirements": [
+        "Employers may conduct drug testing under a written policy",
+        "Drug testing must follow statutory procedures",
+        "Employers may discipline or refuse to hire based on positive marijuana tests",
+        "Cannabis is not protected for employment purposes"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.legis.iowa.gov/docs/code/730.5.pdf",
+      "notes": "Iowa has specific procedural rules for employer drug testing programs."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Iowa if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Iowa Uniform Arbitration Act",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.legis.iowa.gov/law/iowaCode/chapters?chapter=679A",
+      "notes": "Fairness and clarity are key to enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Iowa follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Iowa common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract provides otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks can create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.iowadivisionoflabor.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Iowa law prohibits discrimination in employment based on protected characteristics.",
+      "statute_citation": "Iowa Civil Rights Act (Iowa Code § 216.6)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, sexual orientation, gender identity",
+        "Cannot discriminate based on national origin or ancestry",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (18+ under Iowa law)",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://icrc.iowa.gov/",
+      "notes": "Iowa protects sexual orientation and gender identity explicitly under state law."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Iowa Division of Labor, Iowa Code, Iowa Civil Rights Commission, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Iowa is generally employer-friendly but has specific statutory procedures for drug testing and strong civil rights protections.",
+    "enforcement_agencies": [
+      "Iowa Division of Labor",
+      "Iowa Civil Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Statutory procedures continue to govern employer drug testing"
+    ]
+  }
+}

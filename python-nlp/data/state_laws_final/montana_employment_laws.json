@@ -1,0 +1,166 @@
+{
+  "state": "Montana",
+  "state_code": "MT",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes HEAVILY RESTRICTED - very limited enforceability",
+      "statute_citation": "Montana Code Annotated § 28-2-703 to 705",
+      "requirements": [
+        "Non-competes HEAVILY RESTRICTED - very limited enforceability",
+        "Montana law voids most non-compete agreements. Only enforceable when: (1) protects trade secrets, proprietary information, or customer relationships, (2) employee is key employee, officer, or agent, (3) reasonable time/scope. Courts strictly construe.",
+        "Best practice: Use confidentiality agreements instead - non-competes rarely enforceable",
+        "Action required: Remove non-compete OR ensure very narrow scope with trade secret protection only"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": "Montana law voids most non-compete agreements. Only enforceable when: (1) protects trade secrets, proprietary information, or customer relationships, (2) employee is key employee, officer, or agent, (3) reasonable time/scope. Courts strictly construe."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Montana common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Montana common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Criminal history restrictions apply",
+      "statute_citation": "Montana Code § 49-2-312",
+      "requirements": [
+        "Criminal history restrictions apply",
+        "Cannot disqualify based on conviction unless directly related to job or public safety concern. Must consider rehabilitation.",
+        "Action required: Ensure job-relatedness of criminal history criteria",
+        "Individualized assessment required"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": "Cannot disqualify based on conviction unless directly related to job or public safety concern. Must consider rehabilitation."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Montana minimum wage: $10.30/hour (2024), adjusted annually",
+      "statute_citation": "Montana Code § 39-3-404",
+      "requirements": [
+        "Montana minimum wage: $10.30/hour (2024), adjusted annually",
+        "Action required: Track annual adjustments",
+        "Must pay current Montana minimum wage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid sick leave",
+      "statute_citation": "Montana common law",
+      "requirements": [
+        "NO state-mandated paid sick leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "wrongful_discharge",
+      "summary": "Montana is NOT at-will - good cause required after probation",
+      "statute_citation": "Montana Wrongful Discharge from Employment Act (WDEA)",
+      "requirements": [
+        "Montana is NOT at-will - good cause required after probation",
+        "Montana is ONLY state that significantly limits at-will employment. After probationary period (up to 12 months), employees can only be discharged for good cause. WDEA provides exclusive remedy for wrongful discharge.",
+        "Best practice: Montana is NOT at-will after probation - use probationary period language and good cause standards",
+        "Action required: Establish clear probationary period (up to 12 months) and good cause standards",
+        "Must have good cause for discharge after probation"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": "Montana is ONLY state that significantly limits at-will employment. After probationary period (up to 12 months), employees can only be discharged for good cause. WDEA provides exclusive remedy for wrongful discharge."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment LIMITED to probationary period only",
+      "statute_citation": "Montana WDEA",
+      "requirements": [
+        "At-will employment LIMITED to probationary period only",
+        "After probationary period, good cause required for termination. Do not use standard at-will language.",
+        "Action required: Replace at-will language with probationary period and good cause provisions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": "After probationary period, good cause required for termination. Do not use standard at-will language."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Montana common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing permitted with policy",
+      "statute_citation": "Montana common law",
+      "requirements": [
+        "Drug testing permitted with policy"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due immediately upon discharge or within 4 business days",
+      "statute_citation": "Montana Code § 39-3-205",
+      "requirements": [
+        "Final wages due immediately upon discharge or within 4 business days",
+        "Discharge: earlier of immediately or next regular payday (if within 15 days). Resignation: next regular payday or 15 days, whichever is first.",
+        "Action required: Ensure immediate final payment process",
+        "Immediate payment capability for discharges"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://erd.dli.mt.gov/",
+      "notes": "Discharge: earlier of immediately or next regular payday (if within 15 days). Resignation: next regular payday or 15 days, whichever is first."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Montana Department of Labor & Industry",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Montana employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

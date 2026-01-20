@@ -1,0 +1,169 @@
+{
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Rhode Island prohibits employers from asking applicants about wage or salary history and from relying on such information to determine compensation.",
+      "statute_citation": "R.I. Gen. Laws § 28-6-17.2",
+      "requirements": [
+        "Employers may not inquire about an applicant’s wage or salary history",
+        "Employers may not seek wage history from current or former employers",
+        "Applicants may voluntarily disclose wage history without prompting",
+        "Employers may confirm wage history only if voluntarily disclosed",
+        "Retaliation for refusing to disclose wage history is prohibited"
+      ],
+      "effective_date": "2017-01-01",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/regulation-and-safety/labor-standards/equal-pay",
+      "notes": "Rhode Island has one of the earlier enacted salary history bans in the U.S."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Rhode Island requires employers to provide wage ranges to applicants upon request and prior to discussing compensation, and to employees upon request.",
+      "statute_citation": "R.I. Gen. Laws § 28-6-17.2",
+      "requirements": [
+        "Employers must provide wage range for a position upon applicant’s request",
+        "Wage range must be provided before discussing compensation",
+        "Employees may request and receive the wage range for their current position",
+        "Employers may not prohibit employees from discussing wages",
+        "Retaliation for requesting wage information is prohibited"
+      ],
+      "effective_date": "2023-01-01",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/regulation-and-safety/labor-standards/equal-pay",
+      "notes": "Rhode Island does not require pay ranges in all job postings, but disclosure is mandatory upon request."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Rhode Island restricts non-compete agreements for certain categories of employees and applies reasonableness standards for others.",
+      "statute_citation": "R.I. Gen. Laws § 28-6-18",
+      "requirements": [
+        "Non-competes are prohibited for non-exempt employees under FLSA",
+        "Non-competes are prohibited for employees earning less than 250% of the federal poverty level",
+        "Non-competes are prohibited for minors and undergraduate/graduate student interns",
+        "For permitted employees, restrictions must be reasonable in scope and duration",
+        "Overly broad restrictions are unenforceable"
+      ],
+      "effective_date": "2020-01-01",
+      "confidence_level": "high",
+      "source_url": "http://webserver.rilin.state.ri.us/Statutes/TITLE28/28-6/28-6-18.HTM",
+      "notes": "Rhode Island is relatively employee-protective in its statutory limits on non-competes."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Rhode Island restricts criminal history inquiries under its ban-the-box law and requires compliance with FCRA when using third-party background check vendors.",
+      "statute_citation": "R.I. Gen. Laws § 28-5-7(7); Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Employers may not inquire about criminal convictions on initial job applications",
+        "Criminal history inquiries may occur later in the hiring process",
+        "If using third-party background checks, written consent is required",
+        "Pre-adverse action notice must be provided with report and rights",
+        "Final adverse action notice must be provided if a negative decision is made"
+      ],
+      "effective_date": "2014-01-01",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/regulation-and-safety/labor-standards/fair-employment-practices",
+      "notes": "Applies broadly to private employers in Rhode Island."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Rhode Island mandates paid sick and safe leave and protects certain statutory leave rights.",
+      "statute_citation": "R.I. Gen. Laws § 28-57 et seq. (Healthy and Safe Families and Workplaces Act)",
+      "requirements": [
+        "Employers with 18+ employees must provide paid sick and safe leave",
+        "Accrual is generally 1 hour per 35 hours worked",
+        "Up to 40 hours of paid leave per year required",
+        "Leave covers illness, preventive care, family care, and domestic violence situations",
+        "Employees are entitled to jury duty leave without retaliation"
+      ],
+      "effective_date": "2018-07-01",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/regulation-and-safety/labor-standards/healthy-and-safe-families-and-workplaces-act",
+      "notes": "Paid sick leave must be reflected accurately in benefits sections of offer letters."
+    },
+    {
+      "topic": "drug_screening_and_cannabis_protections",
+      "summary": "Rhode Island legalizes recreational cannabis but does not provide broad statutory employment protections for off-duty use.",
+      "statute_citation": "R.I. Gen. Laws § 21-28.11",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may prohibit impairment during work hours",
+        "Employers may take action based on positive drug tests depending on policy",
+        "Policies must be applied consistently and in compliance with anti-discrimination laws"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://health.ri.gov/marijuana/",
+      "notes": "Rhode Island does not mandate protection for recreational cannabis use in employment."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Rhode Island if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Rhode Island contract law",
+      "requirements": [
+        "Agreement must be voluntary and clearly written",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Clear drafting improves enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Rhode Island follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Rhode Island common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract specifies otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Rhode Island law prohibits employment discrimination on a broad range of protected characteristics.",
+      "statute_citation": "R.I. Gen. Laws § 28-5-1 et seq. (Fair Employment Practices Act)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age, disability, national origin, ancestry",
+        "Cannot discriminate based on marital status or domestic violence victim status",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlt.ri.gov/regulation-and-safety/labor-standards/fair-employment-practices",
+      "notes": "Rhode Island provides broad civil rights protections beyond federal minimums."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Rhode Island General Laws, Rhode Island Department of Labor and Training, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Rhode Island is employee-protective, with mandatory salary history bans, pay range disclosure upon request, paid sick leave, and statutory limits on non-competes.",
+    "enforcement_agencies": [
+      "Rhode Island Department of Labor and Training",
+      "Rhode Island Commission for Human Rights",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Pay range disclosure upon request strengthened effective 2023",
+      "Continued enforcement of salary history ban",
+      "Ongoing enforcement of Healthy and Safe Families and Workplaces Act",
+      "Statutory restrictions on non-competes remain in effect"
+    ]
+  }
+}

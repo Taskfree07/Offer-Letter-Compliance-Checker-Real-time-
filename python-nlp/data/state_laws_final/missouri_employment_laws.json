@@ -1,0 +1,161 @@
+{
+  "state": "Missouri",
+  "state_code": "MO",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes VERY EMPLOYER-FRIENDLY - broadly enforceable",
+      "statute_citation": "Missouri common law - House Springs v. Schneider",
+      "requirements": [
+        "Non-competes VERY EMPLOYER-FRIENDLY - broadly enforceable",
+        "Missouri courts are very employer-friendly regarding non-competes. Statewide geographic scope often upheld. 2 years typically reasonable. Blue-pencil doctrine applies.",
+        "Best practice: Non-competes strongly enforceable - use reasonable 2-year limit",
+        "Action required: Ensure basic reasonableness standards met"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": "Missouri courts are very employer-friendly regarding non-competes. Statewide geographic scope often upheld. 2 years typically reasonable. Blue-pencil doctrine applies."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Missouri minimum wage: $12.30/hour (2024), $13.75 (2025), $15.00 (2026)",
+      "statute_citation": "Missouri Revised Statutes § 290.502",
+      "requirements": [
+        "Missouri minimum wage: $12.30/hour (2024), $13.75 (2025), $15.00 (2026)",
+        "Minimum wage increases annually through 2026. January 1, 2025: $13.75/hour. January 1, 2026: $15.00/hour.",
+        "Action required: Track scheduled increases",
+        "Must pay $13.75/hour (2025) or $15.00 (2026)"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": "Minimum wage increases annually through 2026. January 1, 2025: $13.75/hour. January 1, 2026: $15.00/hour."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "EARNED PAID SICK TIME REQUIRED (effective May 1, 2025)",
+      "statute_citation": "Missouri Proposition A (approved November 2024)",
+      "requirements": [
+        "EARNED PAID SICK TIME REQUIRED (effective May 1, 2025)",
+        "Employers with 15+ employees must provide earned paid sick time. 1 hour per 30 hours worked. Can accrue up to 56 hours per year (15+ employees) or 40 hours (fewer than 15 employees).",
+        "Action required: Implement earned sick time policy by May 1, 2025",
+        "Provide 1 hour per 30 hours worked (effective May 1, 2025)"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": "Employers with 15+ employees must provide earned paid sick time. 1 hour per 30 hours worked. Can accrue up to 56 hours per year (15+ employees) or 40 hours (fewer than 15 employees)."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED",
+      "statute_citation": "Missouri common law",
+      "requirements": [
+        "Drug testing PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due immediately if terminated, next payday if quit",
+      "statute_citation": "Missouri Revised Statutes § 290.110",
+      "requirements": [
+        "Final wages due immediately if terminated, next payday if quit",
+        "Involuntary termination: immediately. Voluntary resignation: next regular payday.",
+        "Action required: Ensure capability for immediate final payment",
+        "Immediate pay if terminated"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": "Involuntary termination: immediately. Voluntary resignation: next regular payday."
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Missouri is RIGHT TO WORK state",
+      "statute_citation": "Missouri Constitution Article I § 29",
+      "requirements": [
+        "Missouri is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.mo.gov/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Missouri Department of Labor and Industrial Relations",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Missouri employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

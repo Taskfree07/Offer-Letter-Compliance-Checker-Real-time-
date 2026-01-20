@@ -1,0 +1,67 @@
+{
+  "state": "Texas",
+  "state_code": "TX",
+  "last_updated": "2025-01-01",
+  "data_sources": [
+    {
+      "url": "https://www.twc.texas.gov/businesses/employee-rights-laws",
+      "title": "Texas Workforce Commission"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "Non-compete agreements are enforceable in Texas if reasonable in time, geography, and scope.",
+      "law_citation": "Texas Business & Commerce Code Section 15.50",
+      "full_text": "Texas allows non-competes if they: (1) are ancillary to an otherwise enforceable agreement, (2) contain reasonable time/geographic/scope limits, and (3) do not impose greater restraint than necessary. Typically 2 years maximum.",
+      "severity": "info",
+      "flagged_phrases": [
+        "non-compete",
+        "competitive activities",
+        "restraint of trade"
+      ],
+      "suggestion": "Non-compete is acceptable but ensure reasonableness standards are met (2 years max, limited geography)",
+      "source_url": "https://www.twc.texas.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Texas does not prohibit salary history inquiries.",
+      "law_citation": "No state law prohibition",
+      "full_text": "Texas has no state law prohibiting employers from asking about salary history. However, best practice is to avoid to promote pay equity.",
+      "severity": "info",
+      "flagged_phrases": [],
+      "suggestion": "While legal, consider avoiding salary history questions to promote pay equity",
+      "source_url": "https://www.twc.texas.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "pay_schedule",
+      "summary": "Texas requires at least monthly paydays.",
+      "law_citation": "Texas Labor Code Section 61.011",
+      "full_text": "Employers must pay employees at least once per month. Exempt employees can be paid less frequently if agreed. Semi-monthly or bi-weekly is common and acceptable.",
+      "severity": "info",
+      "flagged_phrases": [
+        "pay frequency",
+        "payroll schedule"
+      ],
+      "suggestion": "Ensure pay frequency is stated and at least monthly",
+      "source_url": "https://www.twc.texas.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Texas.",
+      "law_citation": "Texas Civil Practice & Remedies Code",
+      "full_text": "Texas follows Federal Arbitration Act. Mandatory arbitration is acceptable if agreement is not unconscionable. Ensure arbitration clause provides fair procedures and reasonable costs.",
+      "severity": "info",
+      "flagged_phrases": [
+        "mandatory arbitration",
+        "disputes arising out of"
+      ],
+      "suggestion": "Arbitration clause is acceptable but ensure fairness standards",
+      "source_url": "https://www.twc.texas.gov",
+      "effective_date": "2025-01-01"
+    }
+  ]
+}

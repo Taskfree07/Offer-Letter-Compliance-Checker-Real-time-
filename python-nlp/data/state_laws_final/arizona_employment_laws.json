@@ -1,0 +1,150 @@
+{
+  "state": "Arizona",
+  "state_code": "AZ",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Arizona enforces non-compete agreements but with statutory restrictions. A.R.S. § 23-494 allows non-competes that are reasonable in time, geographic area, and scope. Courts will reform unreasonable provisions. Non-competes must protect legitimate business interests. Generally employer-friendly but not as permissive as some states.",
+      "effective_date": "1996 (amended multiple times)",
+      "source_url": "https://www.azleg.gov/ars/23/00494.htm",
+      "notes": "Arizona statute specifically authorizes courts to modify unreasonable provisions. Federal FTC ban blocked in 2024. Broadcast industry has special protections.",
+      "law_citation": "A.R.S. § 23-494 (Arizona Non-Competition Agreement Statute)",
+      "full_text": "Must be reasonable in duration (no specific statutory limit, but courts typically find 1-2 years reasonable)\nMust be reasonable in geographic scope (limited to area where employer conducts business)\nMust be reasonable in scope of restricted activities\nMust protect legitimate business interest (trade secrets, confidential information, substantial customer relationships, specialized training)\nMust be ancillary to lawful employment relationship\nCourts will reform (blue-pencil) overly broad agreements to make them reasonable\nCannot be used to restrain ordinary competition\nMust be supported by consideration (new employment or continued employment with new duties/benefits)\nBroadcast industry: Special restrictions apply (A.R.S. § 23-494.01) - cannot exceed 1 year, limited geographic scope\nPhysicians: Can enforce non-competes in certain circumstances but with limitations",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review Arizona non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Arizona has NO statewide salary history ban. Employers may ask about and consider applicant salary history when setting compensation. No state-level restrictions on salary history inquiries.",
+      "effective_date": "N/A - No law enacted",
+      "source_url": "https://www.shrm.org/topics-tools/news/talent-acquisition/state-state-salary-history-bans-pay-transparency-laws",
+      "notes": "Arizona has not enacted salary history ban legislation. Employers have broad discretion.",
+      "law_citation": "No Arizona statute",
+      "full_text": "STATEWIDE: No restriction on asking about salary history\nEmployers may ask applicants about prior compensation\nEmployers may use salary history in setting compensation\nNo state penalties for salary history inquiries\nFederal equal pay laws still apply (Equal Pay Act, Title VII)\nSome employers voluntarily avoid asking for equity reasons",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review Arizona salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Arizona has NO statewide pay transparency law requiring salary ranges in job postings. No requirement to disclose compensation ranges to applicants or employees. No pay data reporting mandates.",
+      "effective_date": "N/A - No law enacted",
+      "source_url": "https://www.paycor.com/resource-center/articles/pay-transparency-laws-by-state/",
+      "notes": "Arizona has not enacted pay transparency legislation. No posting requirements.",
+      "law_citation": "No Arizona statute",
+      "full_text": "STATEWIDE: No requirement to include salary ranges in job postings\nSTATEWIDE: No requirement to disclose pay ranges to applicants\nSTATEWIDE: No requirement to disclose pay ranges to current employees\nSTATEWIDE: No pay data reporting requirements\nFederal equal pay laws still apply\nEmployers may voluntarily disclose pay ranges",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review Arizona pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Arizona has limited ban-the-box protections. Executive Order 2017-07 prohibits state agencies from asking about criminal history on initial applications. Private employers generally can ask about criminal history at any stage. Must comply with federal FCRA.",
+      "effective_date": "Executive Order: 2017; FCRA ongoing",
+      "source_url": "https://www.goodhire.com/background-checks/arizona/",
+      "notes": "Arizona is employer-friendly with minimal state restrictions. Federal FCRA provides primary regulation. Expunged records cannot be used.",
+      "law_citation": "Executive Order 2017-07 (state agencies); Federal FCRA (15 U.S.C. § 1681); A.R.S. § 13-904(E) (employment discrimination based on expunged records)",
+      "full_text": "STATE AGENCIES: Cannot ask about criminal history on initial application (Executive Order 2017-07)\nPRIVATE EMPLOYERS: Generally can ask about criminal history on applications\nPRIVATE EMPLOYERS: Must comply with federal FCRA\nCannot discriminate based on expunged or set-aside conviction (A.R.S. § 13-904(E))\nFCRA: Must get written consent before background check\nFCRA: Must provide pre-adverse action notice with copy of report\nFCRA: Must provide final adverse action notice with dispute rights\nFCRA: Seven-year lookback for most non-conviction records\nFCRA: Ten-year lookback for bankruptcies\nFCRA: No time limit on convictions\nFCRA: $75,000+ salary positions exempt from lookback limits\nMust consider: nature of crime, time elapsed, job duties, rehabilitation\nCannot discriminate based solely on arrest without conviction",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review Arizona background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Arizona has NO statewide paid sick leave or paid leave mandate for private employers. No state law requires employers to provide paid or unpaid sick leave beyond federal FMLA. Some local jurisdictions may have requirements, but state law preempts most local ordinances.",
+      "effective_date": "N/A - No state law",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "Arizona has no paid leave mandates. Very employer-friendly state on leave policies.",
+      "law_citation": "No Arizona statute; Federal FMLA (29 U.S.C. § 2601)",
+      "full_text": "STATEWIDE: No requirement for paid sick leave\nSTATEWIDE: No requirement for unpaid sick leave beyond federal FMLA\nPrivate employers not required to provide sick leave benefits\nFederal FMLA applies to employers with 50+ employees: up to 12 weeks unpaid leave\nFMLA requirements: employee worked 1,250 hours in past 12 months, employed 12+ months, employer has 50+ employees within 75 miles\nEmployers may establish own sick leave policies\nState law generally preempts local paid leave ordinances\nNo state penalties for lack of paid leave",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review Arizona paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arizona generally enforces arbitration agreements under federal and state law. Follows Federal Arbitration Act. Arizona has enacted Uniform Arbitration Act. Agreements must be clear, mutual, and not unconscionable. Courts favor arbitration.",
+      "effective_date": "Ongoing under federal and state law",
+      "source_url": "https://www.azleg.gov/ars/12/01501.htm",
+      "notes": "Arizona is arbitration-friendly. Courts enforce valid arbitration agreements.",
+      "law_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); A.R.S. § 12-1501 et seq. (Uniform Arbitration Act)",
+      "full_text": "Arbitration agreements generally enforceable under FAA and Arizona Uniform Arbitration Act\nMust be in writing and signed by both parties\nMust have mutual agreement to arbitrate\nMust identify claims subject to arbitration\nCannot be unconscionable\nMust provide for neutral arbitrator\nAdequate consideration required\nArizona courts favor arbitration\nClass action waivers generally enforceable\nPre-dispute arbitration agreements enforceable\nCan be challenged on contract grounds (fraud, duress, unconscionability)\nFederal policy favoring arbitration applies",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review Arizona arbitration requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Arizona follows at-will employment doctrine. Either party can terminate employment at any time for any legal reason or no reason. Exceptions exist for discrimination, retaliation, public policy violations, and breach of contract. Arizona is generally employer-friendly.",
+      "effective_date": "Ongoing common law and statutory",
+      "source_url": "https://www.azleg.gov/ars/23/01501.htm",
+      "notes": "Arizona is strongly at-will employment state with typical exceptions. Handbook disclaimers recommended.",
+      "law_citation": "Common law doctrine; A.R.S. § 23-1501 (Civil Rights Act - anti-discrimination); A.R.S. § 23-1502 (employment at will)",
+      "full_text": "Default: Employment terminable at will by either party (A.R.S. § 23-1501(2))\nNo notice required unless contract/policy requires it\nFinal wages must be paid within 7 working days or by next regular payday, whichever is sooner\nEXCEPTIONS - Cannot terminate for: Race, color, religion, sex, age, disability, national origin discrimination (Arizona Civil Rights Act)\nCannot terminate for: Retaliation (workers' comp claim, jury duty, voting, military service)\nCannot terminate for: Violation of public policy (refusing illegal acts, exercising statutory rights)\nCannot terminate for: Breach of employment contract (written or implied)\nEmployment handbooks may create implied contracts if not properly disclaimed\nWritten employment contracts override at-will status\nUnion/collective bargaining agreements override at-will status\nArizona courts narrowly construe at-will exceptions",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review Arizona at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Arizona has NO state statute restricting private employer drug testing. Employers may conduct pre-employment, random, reasonable suspicion, and post-accident testing. Medical marijuana users have limited protections under Arizona Medical Marijuana Act (AMMA). Drug-free workplace programs may receive workers' comp premium discounts.",
+      "effective_date": "AMMA: 2010; Recreational: 2021; Workers' comp provisions ongoing",
+      "source_url": "https://www.azleg.gov/ars/36/02813.htm",
+      "notes": "Arizona medical marijuana law provides limited employee protections but allows employer action for impairment. Recreational users have no protections.",
+      "law_citation": "A.R.S. § 36-2813 (Arizona Medical Marijuana Act); A.R.S. § 23-493.04 (drug testing and workers' comp); No general restriction statute",
+      "full_text": "STATEWIDE: No general restriction on private employer drug testing\nPre-employment testing: Permitted\nRandom testing: Permitted\nReasonable suspicion testing: Permitted\nPost-accident testing: Permitted\nMEDICAL MARIJUANA: AMMA prohibits discrimination against medical marijuana cardholders\nMEDICAL MARIJUANA: Employers cannot discriminate solely based on positive test for marijuana or cardholder status\nMEDICAL MARIJUANA: EXCEPTION: Can take action if employee is impaired at work or used/possessed marijuana at workplace\nMEDICAL MARIJUANA: EXCEPTION: Can take action if it would cause employer to lose federal contract or federal licensing-related benefit\nMEDICAL MARIJUANA: No requirement to accommodate on-site use\nRECREATIONAL MARIJUANA: No workplace protections (approved by voters 2020, effective 2021)\nWorkers' comp: Drug-free workplace programs can reduce comp premiums up to 5%\nRecommended: Written drug testing policy\nFederal DOT requirements apply to transportation/safety-sensitive positions",
+      "severity": "warning",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review Arizona drug screening requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 8,
+    "needs_verification": 0,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

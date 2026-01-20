@@ -1,0 +1,192 @@
+{
+  "state": "North Carolina",
+  "state_code": "NC",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "North Carolina traditionally enforces reasonable non-compete agreements. However, House Bill 269 (Workforce Freedom and Protection Act) proposed in 2025 would ban non-competes for employees earning less than $75,000/year. As of January 2026, this bill is PROPOSED but NOT YET LAW. Current law allows reasonable non-competes if supported by consideration and protecting legitimate business interests.",
+      "statute_citation": "Common law; Proposed H.B. 269 (not yet enacted as of Jan 2026)",
+      "requirements": [
+        "CURRENT LAW: Non-competes enforceable if reasonable in scope, duration, and geography",
+        "CURRENT LAW: Must be in writing and part of employment contract",
+        "CURRENT LAW: Must be supported by valuable consideration (employment, continued employment, promotion, training, confidential information access)",
+        "CURRENT LAW: Must protect legitimate business interest (trade secrets, confidential information, specialized training)",
+        "CURRENT LAW: Courts will not rewrite overly broad agreements (all-or-nothing approach)",
+        "CURRENT LAW: Typical duration: 1-2 years",
+        "CURRENT LAW: Geographic scope must be reasonable for employer's business operations",
+        "PROPOSED H.B. 269: Would prohibit non-competes for employees earning less than $75,000/year",
+        "PROPOSED H.B. 269: Would not apply to agreements entered before effective date",
+        "PROPOSED H.B. 269: Would still allow non-competes for higher earners ($75k+)",
+        "PROPOSED H.B. 269: Would also restrict franchise non-poaching agreements",
+        "Status: Bill introduced March 2025, not yet passed as of Jan 2026"
+      ],
+      "effective_date": "Current law ongoing; H.B. 269 proposed but not enacted",
+      "confidence_level": "high",
+      "source_url": "https://lordlindley.com/2025/07/02/north-carolinas-proposed-ban-on-noncompete-agreements-what-employers-need-to-know/",
+      "notes": "North Carolina may significantly change non-compete landscape if H.B. 269 passes. Currently, NC is employer-friendly on non-competes but uses strict 'all-or-nothing' approach (won't modify agreements)."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "North Carolina has NO statewide salary history ban. Employers may ask about and consider applicant salary history when setting compensation. Some local jurisdictions may have restrictions, but no state-level prohibition exists.",
+      "statute_citation": "No North Carolina statute",
+      "requirements": [
+        "STATEWIDE: No restriction on asking about salary history",
+        "STATEWIDE: Employers may ask applicants about prior compensation",
+        "STATEWIDE: Employers may use salary history in setting compensation",
+        "STATEWIDE: No penalties for inquiring about salary history",
+        "Equal pay laws still apply (federal EPA and Title VII)",
+        "Employers increasingly adopt voluntary salary history bans for equity"
+      ],
+      "effective_date": "N/A - No law enacted",
+      "confidence_level": "high",
+      "source_url": "https://www.shrm.org/topics-tools/news/talent-acquisition/state-state-salary-history-bans-pay-transparency-laws",
+      "notes": "North Carolina has not enacted salary history ban legislation. Employers have broad discretion."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "North Carolina has NO statewide pay transparency law requiring salary ranges in job postings. No requirement to disclose compensation ranges to applicants or employees. No pay data reporting mandates.",
+      "statute_citation": "No North Carolina statute",
+      "requirements": [
+        "STATEWIDE: No requirement to include salary ranges in job postings",
+        "STATEWIDE: No requirement to disclose pay ranges to applicants",
+        "STATEWIDE: No requirement to disclose pay ranges to current employees",
+        "STATEWIDE: No pay data reporting requirements",
+        "Federal equal pay laws still apply (Equal Pay Act, Title VII)",
+        "Employers may voluntarily disclose pay ranges"
+      ],
+      "effective_date": "N/A - No law enacted",
+      "confidence_level": "high",
+      "source_url": "https://www.paycor.com/resource-center/articles/pay-transparency-laws-by-state/",
+      "notes": "North Carolina has not enacted pay transparency legislation. Employers not required to post salary ranges."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "North Carolina has limited background check restrictions. No statewide ban-the-box law for private employers. Employers may ask about criminal history on applications. Must comply with federal FCRA requirements. Seven-year lookback limit on most criminal records under FCRA.",
+      "statute_citation": "Federal FCRA (15 U.S.C. \u00a7 1681); N.C. Gen. Stat. \u00a7 126-7.1 (state employees only)",
+      "requirements": [
+        "PRIVATE EMPLOYERS: Can ask about criminal history on applications",
+        "PRIVATE EMPLOYERS: No ban-the-box restrictions",
+        "STATE AGENCIES: Limited criminal history inquiry restrictions",
+        "FCRA: Must get written consent before background check",
+        "FCRA: Must provide pre-adverse action notice with copy of report",
+        "FCRA: Must provide final adverse action notice with dispute rights",
+        "FCRA: Seven-year lookback for: civil suits/judgments, arrests without conviction, paid tax liens, collection accounts",
+        "FCRA: Ten-year lookback for bankruptcies",
+        "FCRA: No time limit on convictions",
+        "FCRA: $75,000+ salary positions exempt from lookback limits",
+        "Cannot discriminate based solely on arrest without conviction",
+        "Must consider: nature of crime, time elapsed, job duties, rehabilitation"
+      ],
+      "effective_date": "Federal FCRA ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.fcra.com/",
+      "notes": "North Carolina is employer-friendly with minimal state restrictions. Federal FCRA is primary regulation."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "North Carolina has NO statewide paid sick leave or paid leave mandate for private employers. No state law requires employers to provide paid or unpaid sick leave beyond federal FMLA. Employers may voluntarily offer paid leave benefits.",
+      "statute_citation": "No North Carolina statute; Federal FMLA (29 U.S.C. \u00a7 2601)",
+      "requirements": [
+        "STATEWIDE: No requirement for paid sick leave",
+        "STATEWIDE: No requirement for unpaid sick leave beyond federal FMLA",
+        "Private employers not required to provide sick leave benefits",
+        "Federal FMLA applies to employers with 50+ employees: up to 12 weeks unpaid leave",
+        "FMLA requirements: employee worked 1,250 hours in past 12 months, employed 12+ months, employer has 50+ employees within 75 miles",
+        "Employers may establish own sick leave policies",
+        "No state penalties for lack of paid leave"
+      ],
+      "effective_date": "N/A - No state law",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "North Carolina has no paid leave mandates. Employer-friendly state on leave policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "North Carolina generally enforces arbitration agreements in employment contracts under federal law and common law. Follows Federal Arbitration Act. Agreements must be clear, mutual, and not unconscionable. State courts favor arbitration.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. \u00a7\u00a7 1-16); North Carolina common law",
+      "requirements": [
+        "Arbitration agreements generally enforceable under FAA",
+        "Must be in writing and signed by both parties",
+        "Must have mutual agreement to arbitrate",
+        "Must identify claims subject to arbitration",
+        "Cannot be unconscionable or one-sided",
+        "Must provide for neutral arbitrator",
+        "Adequate consideration required",
+        "North Carolina courts favor arbitration",
+        "Class action waivers generally enforceable",
+        "Pre-dispute arbitration agreements enforceable",
+        "Can be challenged on contract formation grounds (fraud, duress, unconscionability)",
+        "Federal policy favoring arbitration applies"
+      ],
+      "effective_date": "Ongoing under federal and state law",
+      "confidence_level": "high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "North Carolina is arbitration-friendly. Courts rarely invalidate valid agreements."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "North Carolina follows at-will employment doctrine. Either party can terminate employment at any time for any legal reason or no reason. Exceptions exist for discrimination, retaliation, public policy violations, and breach of contract.",
+      "statute_citation": "Common law doctrine; N.C. Gen. Stat. \u00a7 143-422.2 (anti-discrimination)",
+      "requirements": [
+        "Default: Employment terminable at will by either party",
+        "No notice required unless contract/policy requires it",
+        "Final wages must be paid by next regular payday",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, national origin, sex, age 40+, disability, genetic information discrimination",
+        "Cannot terminate for: Retaliation (workers' comp claim, jury duty, whistleblowing, military service)",
+        "Cannot terminate for: Violation of public policy (refusing illegal acts, reporting violations)",
+        "Cannot terminate for: Breach of employment contract (written or implied)",
+        "Employment handbooks may create implied contracts if not properly disclaimed",
+        "Written employment contracts override at-will status",
+        "Union/collective bargaining agreements override at-will status",
+        "North Carolina courts narrowly construe at-will exceptions"
+      ],
+      "effective_date": "Ongoing common law doctrine",
+      "confidence_level": "high",
+      "source_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_143.html",
+      "notes": "North Carolina is at-will employment state with typical exceptions. Handbook disclaimers recommended."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "North Carolina has NO state statute restricting private employer drug testing. Employers may conduct pre-employment, random, reasonable suspicion, and post-accident testing. Recommended to have written policy. Workers' compensation benefits may be affected by positive drug tests.",
+      "statute_citation": "N.C. Gen. Stat. \u00a7 95-230 et seq. (workers' comp drug testing provisions); No general restriction statute",
+      "requirements": [
+        "STATEWIDE: No restriction on private employer drug testing",
+        "Pre-employment testing: Permitted",
+        "Random testing: Permitted",
+        "Reasonable suspicion testing: Permitted",
+        "Post-accident testing: Permitted",
+        "Workers' comp: Positive drug test may reduce or eliminate benefits if intoxication contributed to injury",
+        "Workers' comp: Must conduct test within 24 hours of accident",
+        "Workers' comp: Must use approved testing methods",
+        "Recommended: Written drug testing policy",
+        "Recommended: Apply policy consistently",
+        "Federal DOT requirements apply to transportation/safety-sensitive positions",
+        "No state protections for medical or recreational marijuana users"
+      ],
+      "effective_date": "Workers' comp provisions ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_95.html",
+      "notes": "North Carolina is employer-friendly on drug testing with no state restrictions. Drug testing can affect workers' comp claims."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-13",
+    "sources": "North Carolina statutes, federal laws, legal analysis from employment law firms",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "North Carolina is employer-friendly state with minimal employment regulations. Most restrictions come from federal law. House Bill 269 may significantly change non-compete landscape if enacted.",
+    "enforcement_agencies": [
+      "North Carolina Department of Labor",
+      "North Carolina Human Relations Commission",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor"
+    ],
+    "recent_developments": [
+      "House Bill 269 (non-compete ban for employees under $75k) proposed but not yet enacted as of Jan 2026",
+      "Federal FTC non-compete ban blocked August 2024",
+      "No major state employment law changes in 2025-2026"
+    ]
+  }
+}

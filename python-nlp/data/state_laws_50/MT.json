@@ -1,0 +1,28 @@
+{
+  "state": "Montana",
+  "state_code": "MT",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "st be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: Duration of one-year presumed reasonable\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: n/a\nMontana\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activitie",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "st be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: Duration of one-year presumed reasonable\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: n/a\nMontana\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned fo",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "needs_verification": 1,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

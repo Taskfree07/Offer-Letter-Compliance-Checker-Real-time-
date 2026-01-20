@@ -1,0 +1,43 @@
+{
+  "state": "California",
+  "state_code": "CA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "e new non-compete regulations at the state level.\nThree States to Watch:\nIllinois\nIllinois is considering HB 5385, which would replace its 2022 non-compete law overhaul with a complete ban. Following California’s lead, this bill would void non-competes with all current employees and some former empl",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "e new non-compete regulations at the state level.\nThree States to Watch:\nIllinois\nIllinois is considering HB 5385, which would replace its 2022 non-compete law overhaul with a complete ban. Following California’s lead, this bill would void non-competes with all current employees and some former employees, regardless of where they were signed or maintained. Once again echoing California, the bill introduces  mplete ban. Following California’s lead, this bill would void non-competes with all curre parating from employment.State governments continue to tighten restrictions on non-competes across the country. State laws in North Dakota and Oklahoma prohibit the enforcement of the contractsâand California doesnât recognize them at all.Many states also recognize their own non-compete standards. They state that the agreements shouldnât meaningfully restrict an employeeâs ability to get another job",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "gn up for our newsletter. Have a question or comment?  Email us.\n\n\n\r\n            State-wide Bans:\r\n            22\n\n\r\n            Local Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouis",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "gn up for our newsletter. Have a question or comment?  Email us.\n\n\n\r\n            State-wide Bans:\r\n            22\n\n\r\n            Local Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Car , 2019\nEmployers affected: All employers\nEmployers may not refuse to hire, interview, pro",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

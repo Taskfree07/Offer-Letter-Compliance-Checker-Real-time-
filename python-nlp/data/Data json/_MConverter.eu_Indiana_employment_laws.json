@@ -1,0 +1,164 @@
+{
+  "state": "Indiana",
+  "state_code": "IN",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Indiana does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase risk under federal anti-discrimination laws",
+        "Best practice is to avoid salary history inquiries to reduce bias risk"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/dol/",
+      "notes": "While permitted, many employers avoid salary history questions for equity and compliance best practices."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Indiana does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Indiana statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose pay information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/dol/wage-and-hour/",
+      "notes": "Some employers disclose ranges to align with multi-state compliance strategies."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in Indiana if reasonable in scope, duration, and geography and if they protect legitimate business interests.",
+      "statute_citation": "Indiana common law",
+      "requirements": [
+        "Must protect legitimate business interests",
+        "Must be reasonable in duration",
+        "Must be reasonable in geographic scope",
+        "Cannot impose undue hardship on the employee",
+        "Courts may modify or invalidate overly broad restrictions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.in.gov/judiciary/",
+      "notes": "Indiana courts apply a traditional reasonableness test to restrictive covenants."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Indiana does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when third-party background check providers are used.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before conducting third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue final adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "These procedural requirements apply whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Indiana does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "Ind. Code § 33-28-5-24 (jury duty); Ind. Code § 3-11-8-3 (voting leave)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty",
+        "Employers cannot retaliate against employees for jury service",
+        "Employees must be allowed time off to vote if work schedule conflicts with polling hours",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/dol/",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Indiana permits workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Indiana common law; criminal statutes governing marijuana",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may discipline or refuse to hire based on positive drug tests",
+        "Cannabis remains illegal for recreational use under Indiana law",
+        "Drug testing policies should be applied consistently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/dol/",
+      "notes": "Indiana is employer-friendly regarding drug testing and cannabis-related policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Indiana if they comply with contract law principles and federal arbitration law.",
+      "statute_citation": "Federal Arbitration Act; Indiana Uniform Arbitration Act (Ind. Code § 34-57-2)",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice to the employee",
+        "Courts may invalidate unfair or one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://iga.in.gov/legislative/laws/2022/ic/titles/034",
+      "notes": "Fair drafting improves enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Indiana follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Indiana common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract states otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/dol/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Indiana law prohibits discrimination in employment based on protected characteristics.",
+      "statute_citation": "Indiana Civil Rights Law (Ind. Code § 22-9-1-1 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.in.gov/icrc/",
+      "notes": "Offer letters must avoid language implying exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Indiana Department of Labor, Indiana Code, Indiana Civil Rights Commission, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Indiana is generally employer-friendly, with fewer state-specific hiring restrictions than some states, but strong adherence to anti-discrimination and FCRA procedures remains critical.",
+    "enforcement_agencies": [
+      "Indiana Department of Labor",
+      "Indiana Civil Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Continued reliance on common law for non-competes"
+    ]
+  }
+}

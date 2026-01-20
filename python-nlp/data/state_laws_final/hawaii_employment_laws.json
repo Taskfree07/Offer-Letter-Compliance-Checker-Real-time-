@@ -1,0 +1,153 @@
+{
+  "state": "Hawaii",
+  "state_code": "HI",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes PROHIBITED for most tech/creative workers",
+      "statute_citation": "Hawaii Revised Statutes § 480-4(c)",
+      "requirements": [
+        "Non-competes PROHIBITED for most tech/creative workers",
+        "Hawaii prohibits non-compete agreements for technology workers and employees earning less than $100,000/year (effective 2022). Enforceable only for executive/management earning $100k+ or if business is sold.",
+        "Action required: Remove non-compete OR verify employee earns $100k+ and is executive",
+        "Can only use for executives earning $100k+ or business sale"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": "Hawaii prohibits non-compete agreements for technology workers and employees earning less than $100,000/year (effective 2022). Enforceable only for executive/management earning $100k+ or if business is sold."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "CANNOT inquire about salary history",
+      "statute_citation": "Hawaii Revised Statutes § 378-2.3",
+      "requirements": [
+        "CANNOT inquire about salary history",
+        "Employers cannot inquire about prospective employee's compensation history or require that history satisfies minimum/maximum criteria.",
+        "Action required: Remove all salary history questions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": "Employers cannot inquire about prospective employee's compensation history or require that history satisfies minimum/maximum criteria."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirement currently",
+      "statute_citation": "Hawaii common law",
+      "requirements": [
+        "NO pay transparency requirement currently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Cannot inquire about convictions until after conditional offer",
+      "statute_citation": "Hawaii Fair Chance Law",
+      "requirements": [
+        "Cannot inquire about convictions until after conditional offer",
+        "Employers cannot ask about or consider arrest or criminal records until after conditional job offer made.",
+        "Action required: Ensure background check occurs post-offer",
+        "Delay criminal history inquiry until after conditional offer"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": "Employers cannot ask about or consider arrest or criminal records until after conditional job offer made."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Hawaii minimum wage: $14.00/hour (2024-2027), $18.00/hour by 2028",
+      "statute_citation": "Hawaii Revised Statutes § 387-2",
+      "requirements": [
+        "Hawaii minimum wage: $14.00/hour (2024-2027), $18.00/hour by 2028",
+        "Action required: Track future increases to $18/hour by 2028",
+        "Must pay $14.00/hour currently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Temporary Disability Insurance (TDI) and family leave required",
+      "statute_citation": "Hawaii Family Leave Law & Temp Disability Insurance",
+      "requirements": [
+        "Temporary Disability Insurance (TDI) and family leave required",
+        "Hawaii requires TDI coverage providing partial wage replacement. Family leave available for certain employees.",
+        "Action required: Ensure TDI compliance and family leave policies",
+        "Provide TDI coverage and family leave rights"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": "Hawaii requires TDI coverage providing partial wage replacement. Family leave available for certain employees."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies with some exceptions",
+      "statute_citation": "Hawaii common law",
+      "requirements": [
+        "At-will employment applies with some exceptions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Hawaii common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Cannot discriminate against medical cannabis users",
+      "statute_citation": "Hawaii medical cannabis protections",
+      "requirements": [
+        "Cannot discriminate against medical cannabis users",
+        "Hawaii protects medical cannabis patients from discrimination. Cannot refuse to hire or penalize for lawful medical cannabis use.",
+        "Action required: Review drug testing policies for medical cannabis compliance"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": "Hawaii protects medical cannabis patients from discrimination. Cannot refuse to hire or penalize for lawful medical cannabis use."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due immediately or next business day",
+      "statute_citation": "Hawaii Revised Statutes § 388-3",
+      "requirements": [
+        "Final wages due immediately or next business day",
+        "Pay immediately upon discharge or next working day"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.hawaii.gov/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Hawaii Department of Labor and Industrial Relations",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Hawaii employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

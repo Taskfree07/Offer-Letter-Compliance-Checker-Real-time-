@@ -1,0 +1,171 @@
+{
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes RESTRICTED - statutory requirements (effective 2020)",
+      "statute_citation": "New Hampshire RSA 275:70 et seq.",
+      "requirements": [
+        "Non-competes RESTRICTED - statutory requirements (effective 2020)",
+        "New Hampshire law requires: (1) non-compete must be in writing signed by employee, (2) employee paid during restricted period OR other consideration provided, (3) specific protectable interest identified, (4) presented before job acceptance or with new consideration if during employment.",
+        "Best practice: Provide consideration, present before job offer, limit reasonably",
+        "Action required: Ensure: written agreement, consideration provided, protectable interest stated, proper timing"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": "New Hampshire law requires: (1) non-compete must be in writing signed by employee, (2) employee paid during restricted period OR other consideration provided, (3) specific protectable interest identified, (4) presented before job acceptance or with new consideration if during employment."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "New Hampshire follows federal minimum: $7.25/hour",
+      "statute_citation": "New Hampshire RSA 279:21",
+      "requirements": [
+        "New Hampshire follows federal minimum: $7.25/hour",
+        "Must pay federal minimum $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing permitted",
+      "statute_citation": "New Hampshire common law",
+      "requirements": [
+        "Drug testing permitted"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due within 72 hours or next payday",
+      "statute_citation": "New Hampshire RSA 275:44",
+      "requirements": [
+        "Final wages due within 72 hours or next payday",
+        "Must pay within 72 hours of termination or by next regular payday, whichever is sooner.",
+        "Action required: Ensure timely final payment",
+        "Pay within 72 hours or next payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": "Must pay within 72 hours of termination or by next regular payday, whichever is sooner."
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "New Hampshire is RIGHT TO WORK state",
+      "statute_citation": "New Hampshire RSA 275:1-a",
+      "requirements": [
+        "New Hampshire is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "30-minute meal break REQUIRED for 5+ hour shifts",
+      "statute_citation": "New Hampshire RSA 275:30-a",
+      "requirements": [
+        "30-minute meal break REQUIRED for 5+ hour shifts",
+        "Employees working 5+ consecutive hours must be given 30-minute meal break. Unpaid if completely relieved of duties.",
+        "Action required: Ensure meal break policy complies",
+        "Provide 30-minute break for 5+ hour shifts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nh.gov/labor/",
+      "notes": "Employees working 5+ consecutive hours must be given 30-minute meal break. Unpaid if completely relieved of duties."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "New Hampshire Department of Labor",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "New Hampshire employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

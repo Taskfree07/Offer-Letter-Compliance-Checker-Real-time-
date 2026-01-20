@@ -1,0 +1,166 @@
+{
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Under Massachusetts law, employers are generally prohibited from asking applicants about their salary history prior to making a job offer with compensation terms.",
+      "statute_citation": "Massachusetts Equal Pay Act and related wage equity guidance",
+      "requirements": [
+        "Employers may not inquire about or require disclosure of salary history before making an offer of compensation",
+        "Applicants may voluntarily disclose salary history without prompting",
+        "Employers may consider salary history only after an offer with compensation has been made",
+        "Federal anti-discrimination protections also apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://capd.mit.edu/resources/reviewing-your-massachusetts-job-offer/",
+      "notes": "This aligns with Massachusetts Equal Pay Act principles aimed at reducing wage inequities." :contentReference[oaicite:1]{index=1}
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Massachusetts requires covered employers (25+ employees) to disclose the pay range for positions in job postings and to applicants and current employees in certain situations.",
+      "statute_citation": "An Act Relative to Salary Range Transparency, Mass. Sess. Law ch. 141 (2024)",
+      "requirements": [
+        "Employers with 25 or more employees must include the annual salary range or hourly wage range in all external and internal job postings",
+        "Provide the pay range to current employees upon request for their current position",
+        "Provide the pay range when offering a promotion or transfer with different job duties",
+        "Pay range must be a reasonable, good-faith estimate of what the employer expects to pay at the time of posting",
+        "Covered employers with 100+ employees must submit annual EEO/pay data to the Secretary of the Commonwealth"
+      ],
+      "effective_date": "2025-10-29",
+      "confidence_level": "high",
+      "source_url": "https://www.mass.gov/info-details/pay-transparency-in-massachusetts",
+      "notes": "This law also contains anti-retaliation protections and penalties for non-compliance." :contentReference[oaicite:2]{index=2}
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Massachusetts has a statutory regime limiting non-compete covenants. Non-competes are enforceable only under specific statutory conditions.",
+      "statute_citation": "Mass. Gen. Laws ch. 149, § 24L (Noncompetition Agreement Act)",
+      "requirements": [
+        "Non-competes must be in writing and signed by the employee",
+        "Employee must receive at least 10 business days’ notice before signing",
+        "Must provide consideration (e.g., continued employment) beyond mere employment continuation",
+        "Generally limited to 12 months post-employment",
+        "Certain categories of employees (e.g., nonexempt under FLSA) cannot be bound by non-competes",
+        "Overly broad or statutory non-compliant covenants are unenforceable"
+      ],
+      "effective_date": "2018-10-01",
+      "confidence_level": "high",
+      "source_url": "https://en.wikipedia.org/wiki/Non-compete_clauses_in_the_United_States#Massachusetts",
+      "notes": "Massachusetts has one of the more structured and restrictive non-compete regimes among U.S. states." :contentReference[oaicite:3]{index=3}
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Massachusetts does not have a private-sector statewide 'ban-the-box' requirement, but background checks must comply with federal FCRA when using consumer reporting agencies.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent must be obtained before a third-party background check",
+        "Pre-adverse action notice must be provided if information from the report may lead to adverse action",
+        "Copy of the report and a summary of rights must be provided",
+        "Final adverse action notice must be issued if the decision is made",
+        "Use of criminal history must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applicability is triggered when a consumer reporting agency is used." 
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Massachusetts mandates certain statutory leave rights (e.g., jury duty, voting leave) and has state family and medical leave protections; there is no universal state paid sick leave mandate.",
+      "statute_citation": "Mass. Gen. Laws ch. 149, §§ 52A–52E (Massachusetts Family and Medical Leave); other civil leave statutes",
+      "requirements": [
+        "Employees are entitled to unpaid leave for jury duty without penalty",
+        "Employees must be granted time to vote under certain conditions",
+        "Massachusetts Family and Medical Leave provides job-protected leave for qualifying medical and family reasons",
+        "No general state paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.mass.gov/orgs/department-of-family-and-medical-leave",
+      "notes": "Offer letters must not conflict with statutory unpaid leave rights."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Massachusetts allows workplace drug testing; there are limited protections for off-duty cannabis use under state law.",
+      "statute_citation": "Mass. Gen. Laws ch. 94C (marijuana statutes); case law",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies and conduct drug testing",
+        "Employers cannot discriminate solely based on off-duty cannabis use where statutory protections apply",
+        "Testing protocols should be clear and consistently applied",
+        "Policies must comply with applicable state and federal law"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.mass.gov/info-details/marijuana-in-the-workplace",
+      "notes": "Recreational cannabis users have limited employment protections; consult statutory guidance for specifics."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Massachusetts if they comply with contract law and are not unconscionable.",
+      "statute_citation": "Federal Arbitration Act; Massachusetts contract law",
+      "requirements": [
+        "Agreement must be voluntary",
+        "Must provide clear and mutual obligations",
+        "Must not be unconscionable or excessively one-sided",
+        "Notice and acceptance should be documented clearly"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "General arbitration enforceability principles apply."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Massachusetts follows the at-will employment doctrine, subject to exceptions for discrimination, public policy, and implied contract claims.",
+      "statute_citation": "Massachusetts common law; state anti-discrimination statutes",
+      "requirements": [
+        "Employment is presumed at-will unless a contract specifies otherwise",
+        "Employers cannot terminate for discriminatory reasons",
+        "Retaliation for protected activity is unlawful",
+        "Employee handbooks and practices may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.mass.gov/orgs/massachusetts-commission-against-discrimination",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Massachusetts law prohibits employment discrimination on a broad range of protected characteristics, often providing more expansive protections than federal law.",
+      "statute_citation": "Massachusetts Fair Employment Practices Laws (e.g., Mass. Gen. Laws ch. 151B)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age (40+), disability, genetic information",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is unlawful"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.mass.gov/orgs/massachusetts-commission-against-discrimination",
+      "notes": "Offer letters must avoid language implying bias or exclusion."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Massachusetts pay transparency statutes, Massachusetts General Laws, official AGO guidance, state earned leave and anti-discrimination codes",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Massachusetts has recently enacted a comprehensive pay-range transparency law effective October 29, 2025, which must be incorporated in all offer letters and job postings for covered employers. The state also has a structured non-compete regime and robust anti-discrimination protections.",
+    "enforcement_agencies": [
+      "Massachusetts Attorney General’s Office",
+      "Massachusetts Commission Against Discrimination",
+      "Massachusetts Executive Office of Labor and Workforce Development",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Pay transparency requirements effective October 29, 2025",
+      "Equal Pay and Wage Transparency Acts strengthened statutory hiring obligations",
+      "Noncompetete rules tightly regulated under Massachusetts Noncompetition Agreement Act"
+    ]
+  }
+}

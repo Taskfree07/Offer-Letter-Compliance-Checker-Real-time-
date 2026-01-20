@@ -1,0 +1,28 @@
+{
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "ed the assault on non-compete agreements. Minnesota became the fourth state to completely ban non-compete agreements with employees. On July 1, 2023, Minnesota will join California, North Dakota, and Oklahoma in the small (but growing) group of states that impose a full ban. Minnesota’s law is the f",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "ed the assault on non-compete agreements. Minnesota became the fourth state to completely ban non-compete agreements with employees. On July 1, 2023, Minnesota will join California, North Dakota, and Oklahoma in the small (but growing) group of states that impose a full ban. Minnesota’s law is the first total non-compete ban since Oklahoma banned them in 1890, more than 130 years ago! Hot on the heels of  On July 1, 2023, Minnesota will join California, North Dakota, and Oklahoma in the small (b e that the employee cannot work for a competitor after separating from employment.State governments continue to tighten restrictions on non-competes across the country. State laws in North Dakota and Oklahoma prohibit the enforcement of the contractsâand California doesnât recognize them at all.Many states also recognize their own non-compete standards. They state that the agreements shouldnât meani",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "needs_verification": 1,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

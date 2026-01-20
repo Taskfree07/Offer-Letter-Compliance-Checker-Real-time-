@@ -1,0 +1,43 @@
+{
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "e threshold: Employee must earn more than $123,394.17 annually\nNotice requirement: Employer must disclose the terms of the non-compete in writing before acceptance of employment offer\nExceptions: n/a\nWisconsin\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activit",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "e threshold: Employee must earn more than $123,394.17 annually\nNotice requirement: Employer must disclose the terms of the non-compete in writing before acceptance of employment offer\nExceptions: n/a\nWisconsin\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: n/a\nWest ",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "yland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "yland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n\nEffective date: Sept. 1, 2019\nEmployers affected: All employers\nEmployers may not refuse to hire, interview, , upon request of the applicant and after extending an offer to the applicant, must provid",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

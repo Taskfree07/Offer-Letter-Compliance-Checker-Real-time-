@@ -1,0 +1,105 @@
+{
+  "state": "Arkansas",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.labor.arkansas.gov/",
+      "title": "Arkansas Division of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Arkansas Code \u00a7 4-75-101 et seq.",
+      "message": "Non-competes ENFORCEABLE if reasonable",
+      "detailedExplanation": "Arkansas enforces reasonable non-competes. Blue-pencil doctrine applies - courts can modify overly broad restrictions. Typically 2 years or less is reasonable.",
+      "suggestion": "Keep duration to 2 years, reasonable geography",
+      "actionRequired": "Ensure reasonableness in time, geography, scope",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competing business"
+      ],
+      "alternativeLanguage": "reasonable non-compete restrictions for up to 2 years",
+      "source": "Arkansas Code"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "actionRequired": "No restrictions",
+      "source": "No state law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "actionRequired": "Optional",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "actionRequired": "Federal FCRA compliance",
+      "source": "Federal law"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Arkansas Code \u00a7 11-4-210",
+      "message": "Arkansas minimum wage: $11.00/hour (2021-present)",
+      "requirement": "Must pay at least $11.00/hour",
+      "actionRequired": "Ensure minimum wage compliance",
+      "source": "Arkansas minimum wage law"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "Arkansas Drug-Free Workplace Program provides workers' comp premium discounts",
+      "bestPractice": "Consider certified drug-free workplace program",
+      "source": "Arkansas law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "bestPractice": "Include clear disclaimer",
+      "source": "Arkansas employment law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Arkansas Code \u00a7 11-4-405",
+      "message": "Final wages due within 7 days of discharge or termination",
+      "requirement": "Pay within 7 days of separation",
+      "actionRequired": "Ensure timely final payment",
+      "source": "Arkansas wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Arkansas Constitution Amendment 34",
+      "message": "Arkansas is RIGHT TO WORK state",
+      "detailedExplanation": "Union membership cannot be required",
+      "source": "State Constitution"
+    }
+  }
+}

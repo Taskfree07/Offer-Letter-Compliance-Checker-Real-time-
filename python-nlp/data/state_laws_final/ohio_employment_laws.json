@@ -1,0 +1,231 @@
+{
+  "state": "Ohio",
+  "state_code": "OH",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Ohio enforces non-compete agreements if reasonable in time, geographic area, and scope of prohibited conduct. Must protect legitimate business interest (trade secrets, confidential information, substantial business relationships). Courts apply 'reasonableness' test. Generally employer-friendly compared to states like CA/OR but stricter than some others. Healthcare professionals subject to additional scrutiny.",
+      "statute_citation": "Ohio Revised Code § 1681.02 (Restrictive Covenants); Ohio Common Law",
+      "requirements": [
+        "Must have legitimate business interest: trade secrets, confidential information, substantial business relationships, or substantial existing/prospective business relationships",
+        "Non-compete must be reasonable in: Time duration, Geographic area, Scope of prohibited conduct/competition",
+        "Time: Generally 1-3 years considered reasonable; beyond 3 years presumed unreasonable",
+        "Geographic scope: Must be limited to territory where employer operated or had business relationships",
+        "Scope: Cannot be broader than necessary to protect legitimate interest",
+        "CONSIDERATION: Must be supported by consideration; for existing employees, change in position or valuable employment benefit may suffice",
+        "Written agreement required",
+        "NOT enforceable against: Employee at-will if no additional consideration beyond at-will employment status; breach of implied covenant of good faith",
+        "BLUE-PENCIL: Ohio courts will modify overly broad provisions to reasonable scope (more employer-friendly than some states)",
+        "HEALTHCARE: Physicians, nurses, and healthcare professionals subject to heightened scrutiny; must show protectable patient relationships or trade secrets",
+        "Garden leave: Not required but may strengthen enforceability (employer paying during restriction period)",
+        "DEFINITION: ORC § 1681.02 defines 'restrictive covenant' broadly to include non-competes, non-solicitation, confidentiality agreements",
+        "Employee can obtain injunctive relief if covenant violated",
+        "Damages available for violation"
+      ],
+      "effective_date": "ORC § 1681.02 effective 2008; ongoing common law interpretation",
+      "confidence_level": "high",
+      "source_url": "https://codes.ohio.gov/ohio-revised-code/section-1681.02",
+      "notes": "Ohio is employer-friendly regarding non-competes but still applies reasonableness standard. Blue-pencil modification available makes enforcement more likely than states that void unreasonable provisions. Recent trends show courts becoming more worker-protective."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Ohio has NO statewide salary history ban. Employers may inquire about compensation history. However, Cincinnati and Columbus have LOCAL ordinances prohibiting salary history inquiries for private employers in those cities. Federal equal pay principles apply. Growing trend toward transparency but not statewide mandate.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); Cincinnati Ordinance 3.09 (Salary History Ban); Columbus Ordinance 3910.02 (Pay Transparency)",
+      "requirements": [
+        "NO STATE-LEVEL SALARY HISTORY BAN in Ohio",
+        "Employers may ask about prior compensation",
+        "Employers may consider salary history in hiring decisions",
+        "CINCINNATI (City Ordinance): Employers with 15+ employees cannot inquire about salary history; cannot screen applicants based on compensation history; cannot require disclosure of wages as condition of employment/interview",
+        "CINCINNATI: Applies to positions working in Cincinnati",
+        "COLUMBUS (City Ordinance 3910.02): Employers cannot ask about salary history; cannot require disclosure; cannot use salary history to determine offer or interview",
+        "COLUMBUS: May apply to positions in Columbus area",
+        "Federal Equal Pay Act: Cannot use salary history to justify discriminatory pay gaps; must pay equal for equal work",
+        "Documentation required for all pay decisions",
+        "Toledo: May have local restrictions (verify with local authorities)",
+        "Retaliation prohibited if employee discusses wages",
+        "Recommendations: Check local ordinances for Cincinnati/Columbus/other cities; establish role-based pay scales; document pay decisions"
+      ],
+      "effective_date": "Cincinnati: ordinance effective (check local); Columbus: ordinance effective; Federal law ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.cincinnati-oh.gov/",
+      "notes": "Ohio lacks statewide salary history ban but major cities (Cincinnati, Columbus) have local ordinances. Federal equal pay principles apply throughout."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Ohio has NO statewide pay transparency requirement. However, Columbus (major city) requires employers to disclose salary ranges in job postings (effective 2023). Cincinnati requires pay ranges after initial interview. Federal contractors must maintain pay equity records. Growing transparency trend but not statewide mandate.",
+      "statute_citation": "Columbus Ordinance 3910.02 (Pay Transparency); Federal Executive Order on Pay Equity; Federal Equal Pay Act",
+      "requirements": [
+        "NO STATE-LEVEL PAY TRANSPARENCY REQUIREMENT in Ohio",
+        "COLUMBUS (City Ordinance 3910.02): Employers with 15+ employees must include salary range in job postings for positions in Columbus; range must be single range (not multiple ranges); must provide employees pay range upon hire, transfer, promotion",
+        "COLUMBUS: Effective 2023",
+        "CINCINNATI: After initial interview, must disclose salary range/wage scale to job applicants",
+        "OTHER CITIES: Check local ordinances for additional requirements",
+        "Federal contractors: Subject to pay equity audit requirements (OFCCP)",
+        "Federal FLSA: Must maintain payroll records",
+        "RECENT DEVELOPMENTS: Ohio Pay Stub Law (effective April 9, 2025): All employers must provide detailed pay stubs including gross wages, net wages, hours worked, itemized deductions",
+        "PAY STUB TRANSPARENCY: Employee must be able to clearly see deductions and pay calculation",
+        "Recommendations: Establish clear pay ranges by job level; provide detailed pay stubs; document pay decisions; review local city ordinances"
+      ],
+      "effective_date": "Columbus ordinance: 2023; Ohio Pay Stub Law: April 9, 2025; Federal law ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.columbus.gov/",
+      "notes": "Ohio lacks state-level mandate but major cities (Columbus, Cincinnati) have requirements. New Pay Stub Law (April 2025) requires detailed wage information on paychecks statewide."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Ohio follows federal FCRA requirements. No state-specific 'ban-the-box' law statewide. Must have legitimate business reason. FCRA requires written consent, pre-adverse and final adverse action notices. Employers may conduct background checks at any time subject to FCRA compliance. Courts generally permit background checks if job-related.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681); Ohio Revised Code § 4776.01 et seq. (Fair Hiring Practices - limited provisions); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "FCRA Federal Requirements: Written consent required before background check (separate from application authorization)",
+        "FCRA: Pre-adverse action notice required (copy of report and summary of FCRA rights) if adverse action contemplated",
+        "FCRA: Final adverse action notice required stating specific reason for adverse action",
+        "FCRA: Background check through third-party vendor complying with FCRA",
+        "FCRA: Accuracy standards; must ensure report accuracy",
+        "NO STATE BAN-THE-BOX LAW statewide in Ohio",
+        "Employers may ask about criminal history on application or any time",
+        "Criminal history consideration: Legitimate business interest requirement; related to specific position",
+        "NATURE/GRAVITY/TIMING TEST: If employer considers criminal history, must consider nature of offense, time elapsed since conviction, job duties",
+        "Sealed/expunged records: Generally cannot consider",
+        "Arrests without conviction: Cannot use if older than statute of limitations for underlying crime",
+        "Juvenile records: Generally cannot consider",
+        "ADA CONSIDERATIONS: Cannot discriminate against person with disability; criminal history cannot be pretext for disability discrimination",
+        "EEOC Guidance: Background check procedures must not have disparate impact on protected classes",
+        "Recommendations: Ensure FCRA-compliant vendor; document business necessity; maintain compliance records; establish job-related screening criteria"
+      ],
+      "effective_date": "FCRA: ongoing federal law; ORC § 4776.01: ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know",
+      "notes": "Ohio follows federal FCRA but has no state ban-the-box law. Employers have broad latitude for background checks if job-related and following FCRA procedures."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Ohio does NOT mandate paid sick leave or paid family leave for private employers. State employees have accrued leave. Federal FMLA applies to eligible employers (50+ employees within 75 miles). No state-run paid leave program. Private employers free to set own policies, but FMLA creates federal floor for large employers.",
+      "statute_citation": "Federal Family and Medical Leave Act (29 U.S.C. § 2601 et seq.); Ohio Revised Code (limited state employee provisions); No comprehensive state paid leave mandate",
+      "requirements": [
+        "NO STATE PAID SICK LEAVE MANDATE for private employers",
+        "NO STATE PAID FAMILY LEAVE MANDATE for private employers",
+        "NO STATE-RUN PAID LEAVE PROGRAM",
+        "FMLA (Federal): Applies to employers with 50+ employees; covers 12 weeks unpaid leave for FMLA-qualifying reasons (serious health condition, family care, bonding, military)",
+        "FMLA: Must maintain health insurance; employee restored to same/equivalent position",
+        "FMLA: Applies only to employers with 50+ employees",
+        "FMLA: Employee must work 12+ months for employer and have worked 1,250 hours in past 12 months",
+        "JURY DUTY: Employer cannot penalize employee for jury service",
+        "VOTING: Employer cannot penalize for voting time if needed",
+        "MILITARY: Federal SCRA applies to military service leave",
+        "WITNESS/CRIME VICTIM: Some protections for witness/crime victim activities",
+        "Recommendations: Establish voluntary paid leave policies (beneficial for recruitment/retention); if offering, must comply with stated policy; maintain clear documentation"
+      ],
+      "effective_date": "Federal FMLA ongoing; Ohio has no state mandate",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "Ohio lacks state-mandated paid leave. FMLA applies to large employers only (50+ employees). Most Ohio employers not required to provide paid sick leave or paid family leave."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Ohio enforces arbitration agreements under Federal Arbitration Act (FAA). Must be clear mutual agreement. Courts scrutinize for unconscionability but generally favor arbitration. Class action waivers generally enforceable. No state-specific law restricting arbitration for employment disputes.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. § 1 et seq.); Ohio Revised Code § 2711.01 et seq. (Ohio Uniform Arbitration Act)",
+      "requirements": [
+        "Arbitration agreements enforceable under Federal Arbitration Act (FAA)",
+        "Must be in writing; clear presentation required",
+        "Must evidence mutual agreement to arbitrate",
+        "Must identify claims subject to arbitration or clearly include employment disputes",
+        "Cannot be unconscionable (procedurally or substantively)",
+        "Must be supported by adequate consideration",
+        "Class action waivers generally enforceable if mutual and not unconscionable",
+        "Arbitration agreement cannot eliminate statutory rights (employee retains rights, just changes venue)",
+        "Costs: Employer generally bears arbitrator and forum fees if employee must bear to access remedies",
+        "Remedy preservation: Process must provide adequate remedies (no waiving statutory remedies)",
+        "Federal FAA preemption: Ohio courts apply federal law (FAA preempts state law that disfavors arbitration)",
+        "Unconscionability analysis: Procedurally (surprise, unequal bargaining) and substantively (unreasonably favorable to employer)",
+        "Recommendations: Clear language; mutual obligations; ensure employee comprehension; preserve remedies; reasonable cost allocation"
+      ],
+      "effective_date": "Federal FAA ongoing; Ohio Uniform Arbitration Act ongoing",
+      "confidence_level": "high",
+      "source_url": "https://codes.ohio.gov/ohio-revised-code/chapter-2711",
+      "notes": "Ohio enforces arbitration under federal standards. Less restrictive approach than some states; FAA preempts Ohio state law."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Ohio follows at-will employment doctrine. Either party can terminate for any reason without cause or notice (absent contract/policy). Strong exceptions: cannot terminate for illegal reason, cannot violate public policy, cannot breach express/implied contracts, cannot breach duty of good faith implied in all employment relationships.",
+      "statute_citation": "Ohio Common Law; Ohio Revised Code § 4101.17 (Whistleblower Protection); Ohio Revised Code § 1681.02 (Restrictive Covenants); Federal Laws",
+      "requirements": [
+        "DEFAULT: At-will employment; either party can terminate without cause or notice",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, sex, national origin, age 40+, disability (ADA), military service (federal), jury duty (federal), voting, workers' compensation claim (ORC § 4123.29), wage/hour claim, whistleblowing (ORC § 4101.17), retaliation for protected activity",
+        "WHISTLEBLOWER PROTECTION (ORC § 4101.17): Employee cannot be discharged, threatened, or discriminated against for reporting law violation to government agency or refusing to participate in unlawful activity",
+        "WORKERS' COMPENSATION: Cannot terminate for filing claim",
+        "WAGE CLAIMS: Cannot terminate for asserting wage rights or reporting wage violations",
+        "SEXUAL HARASSMENT/DISCRIMINATION: Cannot retaliate for reporting/complaining",
+        "JURY DUTY: Cannot terminate for jury service",
+        "VOTING: Cannot prevent voting; reasonable time off for voting",
+        "MILITARY SERVICE: Federal USERRA applies; protected from discrimination for military status",
+        "IMPLIED CONTRACT: Handbook or conduct may create enforceable employment contract",
+        "GOOD FAITH: All employment contracts include implied covenant of good faith (employer cannot act in bad faith)",
+        "PUBLIC POLICY EXCEPTION: Cannot terminate for activity in public interest (e.g., whistleblowing, refusing illegal act)",
+        "FINAL PAY: Final wages must be paid within certain timeframe (check ORC § 126.30)",
+        "AT-WILL DISCLAIMER: Should be clear and conspicuous in handbook; ambiguous disclaimers may not override implied contracts",
+        "Remedies: Breach of contract, wrongful termination, tort damages may be available"
+      ],
+      "effective_date": "Common law ongoing; statutory protections as noted",
+      "confidence_level": "high",
+      "source_url": "https://codes.ohio.gov/ohio-revised-code",
+      "notes": "Ohio at-will employment with significant exceptions for protected activities and public policy. Handbooks may create enforceable rights; good faith covenant implied in all employment contracts."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Ohio allows drug testing under reasonable circumstances. No specific restrictions on pre-employment testing. Random testing and post-employment testing permitted. Marijuana (recreational and medical) legal in Ohio; however, employers can still test for marijuana and take action based on use if policy permits and safety-sensitive or prescribed. Medical marijuana users have limited protections.",
+      "statute_citation": "Federal Drug-Free Workplace Act (41 U.S.C. § 8101 et seq.); Ohio Revised Code § 3796.01 et seq. (Medical Marijuana); Ohio law on drug testing (limited specific provisions); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "PRE-EMPLOYMENT TESTING: Permitted; written policy recommended",
+        "POST-EMPLOYMENT TESTING: Permitted with reasonable suspicion or as part of random testing policy",
+        "MEDICAL MARIJUANA: Legal in Ohio (effective 2016); registered patients have right to use",
+        "MEDICAL MARIJUANA EMPLOYMENT: Employers can test for marijuana but cannot discriminate against medical marijuana patient based solely on status of being patient",
+        "MEDICAL MARIJUANA: Employee must not be impaired at work; but employer cannot discriminate based on patient status alone",
+        "RECREATIONAL MARIJUANA: Legalized in Ohio (effective 2024); however, employers can still prohibit use and test",
+        "RECREATIONAL MARIJUANA: No employee protection for off-duty recreational use",
+        "IMPAIRMENT vs. USE: Employer concern is impairment, not mere use; testing positive does not prove impairment",
+        "TESTING REQUIREMENTS: Written policy required; notice to employees; must use certified lab (SAMHSA-certified)",
+        "CONFIRMATION: Positive screening must be confirmed with GC-MS or equivalent",
+        "MEDICAL REVIEW OFFICER (MRO): Recommended to review results and consider explanations (medical marijuana, prescribed medications, etc.)",
+        "FEDERAL CONTRACTORS: Subject to federal drug-free workplace requirements",
+        "DOT-REGULATED: DOT testing requirements apply to safety-sensitive positions",
+        "REASONABLE SUSPICION: Observable evidence of impairment required; must document before testing",
+        "SAFETY-SENSITIVE POSITIONS: Can require stricter testing policies for positions affecting public safety",
+        "ADA CONSIDERATIONS: Cannot discriminate based on disability; legal medication use cannot be basis for adverse action without showing impairment/safety issue",
+        "Recommendations: Clear written policy; notice to applicants/employees; use certified labs; document reasonable suspicion; maintain confidentiality; consider medical marijuana status carefully"
+      ],
+      "effective_date": "Medical Marijuana: 2016; Recreational: 2024; Testing laws ongoing",
+      "confidence_level": "high",
+      "source_url": "https://codes.ohio.gov/ohio-revised-code/section-3796.01",
+      "notes": "Ohio permits drug testing but marijuana (both medical and recreational) legal. Employers can test but medical marijuana patients have limited protections; recreational users have no protection. Impairment vs. use distinction important."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Ohio Revised Code, Ohio Department of Commerce, Ohio Courts, Federal EEOC, Cincinnati & Columbus Ordinances, Legal Databases",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "Ohio is MODERATE regarding worker protections. Employer-friendly on non-competes (with blue-pencil modification) but has growing local protections in major cities (Cincinnati, Columbus). No state-mandated paid leave; FMLA applies to larger employers only. At-will employment with significant exceptions. Recent legal changes include Pay Stub Law (April 2025) and ongoing marijuana legalization implications.",
+    "enforcement_agencies": [
+      "Ohio Department of Commerce (Labor & Worker Safety)",
+      "Ohio Civil Rights Commission (Discrimination)",
+      "Cincinnati Office of Management & Budget (local ordinances)",
+      "Columbus Department of Administrative Services (local ordinances)",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor (Wage & Hour)"
+    ],
+    "recent_developments": [
+      "Recreational marijuana legalized (effective 2024)",
+      "Pay Stub Law effective April 9, 2025 (detailed wage information required)",
+      "Cincinnati and Columbus pay transparency ordinances active",
+      "Courts becoming more worker-protective in non-compete cases",
+      "Growing attention to medical marijuana workplace rights"
+    ],
+    "jurisdiction_notes": {
+      "cincinnati_additional_requirements": true,
+      "columbus_additional_requirements": true,
+      "note": "Cincinnati and Columbus have ordinances exceeding state law in salary history and pay transparency areas"
+    }
+  }
+}

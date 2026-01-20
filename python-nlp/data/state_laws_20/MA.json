@@ -1,0 +1,16 @@
+{
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "phi3_local_extraction",
+  "accuracy_estimate": "0-5%",
+  "data_sources": [],
+  "laws": [],
+  "review_notes": {
+    "total_laws_found": 0,
+    "high_confidence": 0,
+    "needs_review": 0,
+    "average_confidence": "0.0%",
+    "next_steps": "Review low-confidence items and verify statute citations"
+  }
+}

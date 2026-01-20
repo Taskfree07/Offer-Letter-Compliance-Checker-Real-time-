@@ -1,0 +1,203 @@
+{
+  "state": "Michigan",
+  "state_code": "MI",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Michigan enforces reasonable non-compete agreements under common law. The Michigan Antitrust Reform Act (MARA) prohibits certain non-competes for some healthcare professionals. Non-competes must be reasonable in scope, duration (typically 1-2 years), and geography, and protect legitimate business interests.",
+      "statute_citation": "M.C.L. \u00a7 445.774a (MARA - healthcare restrictions); Common law for general non-competes",
+      "requirements": [
+        "Must be ancillary to employment relationship",
+        "Must protect legitimate business interest (trade secrets, confidential information, customer relationships)",
+        "Must be reasonable in duration (typically 1-2 years)",
+        "Must be reasonable in geographic scope",
+        "Must be reasonable in scope of prohibited activities",
+        "Supported by adequate consideration",
+        "HEALTHCARE: Physicians employed by hospitals may not be subject to non-competes under MARA in certain circumstances",
+        "HEALTHCARE: Cannot restrict physician from practicing medicine in area where they practiced during employment",
+        "Courts will apply 'reasonableness' test",
+        "Michigan courts may 'blue pencil' unreasonable provisions",
+        "Lower-level employees less likely to have enforceable non-competes"
+      ],
+      "effective_date": "MARA: 1985; Common law ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-445-774a.pdf",
+      "notes": "Michigan balances employer interests with worker mobility. MARA provides specific protections for physicians. Federal FTC ban blocked in 2024."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Michigan has NO statewide salary history ban. Employers may ask about and consider applicant salary history. No state-level restrictions on salary history inquiries.",
+      "statute_citation": "No Michigan statute",
+      "requirements": [
+        "STATEWIDE: No restriction on asking salary history",
+        "Employers may ask applicants about prior compensation",
+        "Employers may use salary history in setting compensation",
+        "No state penalties for salary history inquiries",
+        "Federal equal pay laws still apply",
+        "Some employers voluntarily avoid asking for equity reasons"
+      ],
+      "effective_date": "N/A - No law enacted",
+      "confidence_level": "high",
+      "source_url": "https://www.shrm.org/topics-tools/news/talent-acquisition/state-state-salary-history-bans-pay-transparency-laws",
+      "notes": "Michigan has not enacted salary history ban. Employers have discretion to ask."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Michigan has NO statewide pay transparency law requiring salary ranges in job postings. No requirement to disclose compensation ranges to applicants or employees.",
+      "statute_citation": "No Michigan statute",
+      "requirements": [
+        "STATEWIDE: No requirement to include salary ranges in job postings",
+        "STATEWIDE: No requirement to disclose pay ranges to applicants",
+        "STATEWIDE: No requirement to disclose pay ranges to current employees",
+        "STATEWIDE: No pay data reporting requirements",
+        "Federal equal pay laws apply",
+        "Employers may voluntarily disclose pay ranges"
+      ],
+      "effective_date": "N/A - No law enacted",
+      "confidence_level": "high",
+      "source_url": "https://www.paycor.com/resource-center/articles/pay-transparency-laws-by-state/",
+      "notes": "Michigan has not enacted pay transparency legislation."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Michigan has no statewide ban-the-box law for private employers. Employers may ask about criminal history on applications. Must comply with federal FCRA. Michigan courts have held that considering criminal history must be job-related and consistent with business necessity.",
+      "statute_citation": "Federal FCRA (15 U.S.C. \u00a7 1681); Michigan common law",
+      "requirements": [
+        "PRIVATE EMPLOYERS: Can ask about criminal history on applications",
+        "PRIVATE EMPLOYERS: No ban-the-box restrictions",
+        "FCRA: Must get written consent before background check",
+        "FCRA: Must provide pre-adverse action notice with copy of report",
+        "FCRA: Must provide final adverse action notice",
+        "FCRA: Seven-year lookback for most non-conviction records",
+        "FCRA: Ten-year lookback for bankruptcies",
+        "FCRA: No time limit on convictions",
+        "FCRA: $75,000+ positions exempt from lookback limits",
+        "Criminal history consideration must be job-related",
+        "Must consider: nature of crime, time elapsed, job duties, rehabilitation",
+        "Cannot discriminate based solely on arrest without conviction"
+      ],
+      "effective_date": "Federal FCRA ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.fcra.com/",
+      "notes": "Michigan has no ban-the-box law. Federal FCRA and anti-discrimination laws provide primary protections."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Michigan's Earned Sick Time Act (ESTA) requires employers to provide paid sick leave. Amended in February 2025, ESTA requires employees accrue 1 hour of paid sick time for every 30 hours worked. Employers with 10+ employees provide paid leave; smaller employers may provide unpaid. Maximum 72 hours per year (40 hours for small employers).",
+      "statute_citation": "Michigan Earned Sick Time Act (ESTA), M.C.L. \u00a7 408.961 et seq. (amended 2025)",
+      "requirements": [
+        "Applies to all Michigan employers",
+        "LARGE EMPLOYERS (10+ employees): Must provide PAID sick time",
+        "SMALL EMPLOYERS (fewer than 10): Must provide UNPAID sick time",
+        "Accrual: 1 hour per 30 hours worked",
+        "Maximum accrual: 72 hours per year (or 40 hours for small employers)",
+        "Can use after first day of employment (amended from 90-day wait)",
+        "Employers may cap usage at 72 hours (40 for small employers) per year",
+        "Employers may cap carryover at 72 hours (40 for small employers)",
+        "Front-loading permitted: Can provide 72 hours upfront instead of accrual",
+        "If front-loaded, no carryover required",
+        "New hires: Employers can require 120-day wait before using accrued leave",
+        "Notice: Employee must give notice 'as soon as practicable' for unforeseeable leave",
+        "Notice: Up to 7 days advance notice for foreseeable leave",
+        "Sick time does not accrue during employee's time off",
+        "Use allowed for: employee illness, family member care, medical appointments, domestic violence situations",
+        "NOT required to pay out unused sick time at termination",
+        "Records must be maintained for 3 years",
+        "Effective February 21, 2025"
+      ],
+      "effective_date": "2025-02-21",
+      "confidence_level": "high",
+      "source_url": "https://www.vorys.com/publication-michigan-legislature-amends-paid-sick-leave-and-minimum-wage-laws",
+      "notes": "ESTA was reinstated by Michigan Supreme Court and amended in 2025. Significant compliance requirement for all Michigan employers. Replaced earlier version that would have been more expansive."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Michigan generally enforces arbitration agreements under federal and state law. Follows Federal Arbitration Act. Agreements must be clear, mutual, and not unconscionable.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. \u00a7\u00a7 1-16); Michigan common law",
+      "requirements": [
+        "Arbitration agreements generally enforceable under FAA",
+        "Must be in writing and signed by both parties",
+        "Must have mutual agreement to arbitrate",
+        "Must identify claims subject to arbitration",
+        "Cannot be unconscionable",
+        "Must provide for neutral arbitrator",
+        "Adequate consideration required",
+        "Michigan courts favor arbitration",
+        "Class action waivers generally enforceable",
+        "Pre-dispute arbitration agreements enforceable",
+        "Can be challenged on contract grounds (fraud, duress, unconscionability)"
+      ],
+      "effective_date": "Ongoing under federal and state law",
+      "confidence_level": "high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Michigan follows federal policy favoring arbitration."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Michigan follows at-will employment doctrine. Either party can terminate employment at any time for any legal reason or no reason. Exceptions exist for discrimination, retaliation, public policy violations, and breach of contract.",
+      "statute_citation": "Common law doctrine; M.C.L. \u00a7 37.2101 et seq. (Elliott-Larsen Civil Rights Act - anti-discrimination)",
+      "requirements": [
+        "Default: Employment terminable at will by either party",
+        "No notice required unless contract/policy requires it",
+        "Final wages must be paid promptly",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, national origin, sex, age, disability, height, weight, marital status discrimination (Elliott-Larsen Act)",
+        "Cannot terminate for: Retaliation (workers' comp, jury duty, whistleblowing)",
+        "Cannot terminate for: Violation of public policy",
+        "Cannot terminate for: Breach of employment contract",
+        "Employment handbooks may create implied contracts if not properly disclaimed",
+        "Written employment contracts override at-will status",
+        "Union/collective bargaining agreements override at-will status",
+        "Michigan courts recognize implied contract exception"
+      ],
+      "effective_date": "Ongoing common law doctrine",
+      "confidence_level": "high",
+      "source_url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-37-2101.pdf",
+      "notes": "Michigan is at-will state with typical exceptions. Elliott-Larsen Act provides broad anti-discrimination protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Michigan has limited drug testing restrictions. Medical marijuana users have some protections under Michigan Medical Marihuana Act (MMMA), but employers can maintain drug-free workplace policies. Public employers may enforce zero-tolerance drug policies even for medical marijuana cardholders.",
+      "statute_citation": "M.C.L. \u00a7 333.26424(e) (Michigan Medical Marihuana Act); No general restriction statute",
+      "requirements": [
+        "STATEWIDE: No general restriction on drug testing",
+        "Pre-employment testing: Generally permitted",
+        "Random testing: Permitted for safety-sensitive positions",
+        "Reasonable suspicion testing: Permitted",
+        "Post-accident testing: Permitted",
+        "MEDICAL MARIJUANA: MMMA provides limited protections",
+        "MEDICAL MARIJUANA: Employers not required to accommodate on-site marijuana use",
+        "MEDICAL MARIJUANA: Employers can prohibit use or being under the influence at work",
+        "MEDICAL MARIJUANA: Michigan Supreme Court ruled public employers may enforce zero-tolerance policies (Eplee v. City of Lansing, 2019)",
+        "MEDICAL MARIJUANA: Private employer cases vary - some protection may exist",
+        "RECREATIONAL MARIJUANA: No workplace protections",
+        "Employers can maintain drug-free workplace policies",
+        "Federal DOT requirements apply to transportation positions",
+        "Recommended: Written drug testing policy"
+      ],
+      "effective_date": "MMMA: 2008; Recreational: 2018",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.millercanfield.com/resources-Zero-Tolerance-Drug-Policy-MMMA.html",
+      "notes": "Michigan medical marijuana law creates complexity. Public employers have broad latitude for zero-tolerance policies. Private employer obligations less clear."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-13",
+    "sources": "Michigan statutes (M.C.L.), federal laws, Michigan Supreme Court decisions, legal analysis",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "Michigan has moderate employment protections. ESTA (paid sick leave) is major compliance requirement as of 2025. Medical marijuana creates testing complexity.",
+    "enforcement_agencies": [
+      "Michigan Department of Labor and Economic Opportunity",
+      "Michigan Civil Rights Department",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor"
+    ],
+    "recent_developments": [
+      "Earned Sick Time Act amended February 21, 2025 - major change",
+      "Minimum wage increases ongoing through 2025",
+      "Medical marijuana workplace protections remain unclear for private employers"
+    ]
+  }
+}

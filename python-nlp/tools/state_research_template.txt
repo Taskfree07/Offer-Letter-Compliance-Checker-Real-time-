@@ -1,0 +1,98 @@
+STATE LAW RESEARCH TEMPLATE
+============================
+
+State: [STATE NAME]
+State Code: [XX]
+Research Date: [TODAY]
+Researcher: [YOUR NAME]
+
+OFFICIAL SOURCES (*.gov only)
+==============================
+1. State Labor Department: [URL]
+2. State Legislature/Statutes: [URL]
+3. Employer Handbook/Guide: [URL]
+
+LAWS FOUND
+==========
+
+1. NON-COMPETE RESTRICTIONS
+---------------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Summary: [1-2 sentence summary]
+Key Requirements:
+  -
+  -
+  -
+Effective Date: [Date]
+Severity: [error/warning/info]
+Notes: [Any special considerations]
+
+2. SALARY HISTORY BAN
+---------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Summary: [1-2 sentence summary]
+Prohibited: [Yes/No]
+Effective Date: [Date]
+Severity: [error/warning/info]
+
+3. PAY TRANSPARENCY
+-------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Summary: [1-2 sentence summary]
+Employer Size Threshold: [Number of employees]
+Requirements:
+  -
+  -
+Effective Date: [Date]
+Severity: [error/warning/info]
+
+4. BACKGROUND CHECK TIMING
+--------------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Ban-the-Box: [Yes/No]
+Timing Requirements: [When can you ask]
+Effective Date: [Date]
+Severity: [error/warning/info]
+
+5. PAID LEAVE REQUIREMENTS
+--------------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Types Required:
+  - Sick leave: [Hours/year]
+  - Family leave: [Details]
+  - Other: [Details]
+Effective Date: [Date]
+Severity: [warning/info]
+
+6. EXEMPT SALARY THRESHOLDS
+---------------------------
+Source URL: [.gov URL]
+Statute Citation: [Exact citation]
+Minimum Salary for Exempt: $[AMOUNT]/year
+Last Updated: [Date]
+Notes: [Any variations by region/size]
+Severity: [error]
+
+7. OTHER IMPORTANT LAWS
+-----------------------
+[Add any state-specific laws not covered above]
+
+VERIFICATION CHECKLIST
+======================
+[ ] All statute citations verified on official site
+[ ] Effective dates confirmed
+[ ] Severity levels assigned appropriately
+[ ] Source URLs are *.gov domains
+[ ] No reliance on secondary sources without verification
+[ ] Cross-checked with SHRM summary (if available)
+
+ACCURACY CONFIDENCE: [Low/Medium/High]
+
+NOTES
+=====
+[Any special considerations, ambiguities, or areas needing legal review]

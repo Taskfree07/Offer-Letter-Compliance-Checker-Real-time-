@@ -1,0 +1,205 @@
+{
+  "state": "South Carolina",
+  "state_code": "SC",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes ENFORCEABLE if reasonable",
+      "statute_citation": "South Carolina common law",
+      "requirements": [
+        "Non-competes ENFORCEABLE if reasonable",
+        "South Carolina enforces reasonable non-compete agreements protecting legitimate business interests. Courts apply reasonableness test for time, geography, and scope. Typically 2 years or less is reasonable. Blue-pencil doctrine applies.",
+        "Best practice: Keep duration to 2 years, reasonable geographic scope tied to business territory",
+        "Action required: Ensure reasonableness in time, geography, and scope"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina enforces reasonable non-compete agreements protecting legitimate business interests. Courts apply reasonableness test for time, geography, and scope. Typically 2 years or less is reasonable. Blue-pencil doctrine applies."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries are PERMITTED",
+      "statute_citation": "No statutory prohibition",
+      "requirements": [
+        "Salary history inquiries are PERMITTED",
+        "South Carolina has no state law prohibiting salary history questions",
+        "Action required: No restrictions - permitted"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina has no state law prohibiting salary history questions"
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency or salary disclosure requirements",
+      "statute_citation": "No statutory requirement",
+      "requirements": [
+        "NO pay transparency or salary disclosure requirements",
+        "South Carolina does not require salary range disclosure in job postings",
+        "Action required: No action required - optional"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina does not require salary range disclosure in job postings"
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted at any stage - NO ban-the-box law",
+      "statute_citation": "Federal FCRA only",
+      "requirements": [
+        "Background checks permitted at any stage - NO ban-the-box law",
+        "South Carolina has no statewide ban-the-box restrictions. Criminal history can be inquired about on applications. Must comply with federal FCRA requirements.",
+        "Action required: Follow federal FCRA procedures only"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina has no statewide ban-the-box restrictions. Criminal history can be inquired about on applications. Must comply with federal FCRA requirements."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED and ENCOURAGED",
+      "statute_citation": "South Carolina Drug-Free Workplace Program",
+      "requirements": [
+        "Drug testing PERMITTED and ENCOURAGED",
+        "South Carolina allows and encourages drug testing. Employers with certified drug-free workplace programs receive workers' compensation premium discounts (up to 5%).",
+        "Best practice: Drug testing is legal and provides workers' comp premium discounts",
+        "Action required: No restrictions - testing permitted"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina allows and encourages drug testing. Employers with certified drug-free workplace programs receive workers' compensation premium discounts (up to 5%)."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are ENFORCEABLE",
+      "statute_citation": "Federal Arbitration Act",
+      "requirements": [
+        "Arbitration agreements are ENFORCEABLE",
+        "South Carolina follows the Federal Arbitration Act. Mandatory arbitration clauses are generally enforceable if not unconscionable.",
+        "Best practice: Arbitration agreements are acceptable and enforceable",
+        "Action required: Ensure clause provides fair procedures"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina follows the Federal Arbitration Act. Mandatory arbitration clauses are generally enforceable if not unconscionable."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment STRONGLY PROTECTED",
+      "statute_citation": "South Carolina common law",
+      "requirements": [
+        "At-will employment STRONGLY PROTECTED",
+        "South Carolina is a strong at-will employment state with very limited exceptions. Employment is presumed at-will unless modified by clear contract.",
+        "Best practice: Strong at-will language is legally protective and recommended"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina is a strong at-will employment state with very limited exceptions. Employment is presumed at-will unless modified by clear contract."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "NO state minimum wage - federal $7.25/hour applies",
+      "statute_citation": "Federal FLSA (no state minimum)",
+      "requirements": [
+        "NO state minimum wage - federal $7.25/hour applies",
+        "South Carolina has no state minimum wage law. Federal minimum wage of $7.25/hour applies under FLSA.",
+        "Action required: Ensure compliance with federal minimum wage",
+        "Must meet federal minimum wage of $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina has no state minimum wage law. Federal minimum wage of $7.25/hour applies under FLSA."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid sick leave or paid family leave",
+      "statute_citation": "No state mandate",
+      "requirements": [
+        "NO state-mandated paid sick leave or paid family leave",
+        "South Carolina does not require employers to provide paid sick leave, paid family leave, or vacation time. Federal FMLA may apply for eligible employers (50+ employees).",
+        "Action required: No state requirements - federal FMLA only for eligible employers"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina does not require employers to provide paid sick leave, paid family leave, or vacation time. Federal FMLA may apply for eligible employers (50+ employees)."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final paycheck due within 48 hours or next payday",
+      "statute_citation": "South Carolina Payment of Wages Act",
+      "requirements": [
+        "Final paycheck due within 48 hours or next payday",
+        "Employers must pay final wages either within 48 hours of termination/resignation or by the next regular payday, whichever is later. Some exceptions apply.",
+        "Action required: Ensure timely final payment processing",
+        "Pay within 48 hours or next payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "Employers must pay final wages either within 48 hours of termination/resignation or by the next regular payday, whichever is later. Some exceptions apply."
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "South Carolina is a RIGHT TO WORK state",
+      "statute_citation": "South Carolina Code § 41-7-10 et seq.",
+      "requirements": [
+        "South Carolina is a RIGHT TO WORK state",
+        "Employees cannot be required to join or pay dues to a union as a condition of employment. Union membership and dues payment must be voluntary.",
+        "Action required: Cannot require union membership or dues payment"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "Employees cannot be required to join or pay dues to a union as a condition of employment. Union membership and dues payment must be voluntary."
+    },
+    {
+      "topic": "breaks",
+      "summary": "NO required meal or rest breaks for adults",
+      "statute_citation": "No state requirement",
+      "requirements": [
+        "NO required meal or rest breaks for adults",
+        "South Carolina does not require employers to provide meal breaks or rest breaks to adult employees. Federal law requires breaks under 20 minutes be paid if provided.",
+        "Action required: No state mandate - optional"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "South Carolina does not require employers to provide meal breaks or rest breaks to adult employees. Federal law requires breaks under 20 minutes be paid if provided."
+    },
+    {
+      "topic": "payment_of_wages",
+      "summary": "Must establish regular paydays and notify employees",
+      "statute_citation": "South Carolina Payment of Wages Act",
+      "requirements": [
+        "Must establish regular paydays and notify employees",
+        "Employers must establish regular paydays and notify employees of payday, pay rate, and deductions. Wages must be paid at least monthly on regularly scheduled paydays.",
+        "Action required: Establish and communicate regular pay schedule",
+        "Pay at least monthly on regular schedule"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://llr.sc.gov/",
+      "notes": "Employers must establish regular paydays and notify employees of payday, pay rate, and deductions. Wages must be paid at least monthly on regularly scheduled paydays."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "South Carolina Department of Labor, Licensing and Regulation",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "South Carolina employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

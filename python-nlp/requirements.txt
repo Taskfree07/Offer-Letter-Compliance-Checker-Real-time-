@@ -17,5 +17,14 @@ requests>=2.31.0
 docxtpl>=0.18.0
 PyPDF2>=3.0.1
 mammoth>=1.8.0
+
+# RAG + LLM Compliance System (Multi-Layer Analysis)
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+
 # Note: gliner is optional and will be installed/downloaded on first use if needed
 # This keeps the Docker build fast and under time limits
+
+# Note: Ollama must be installed separately (not a Python package)
+# Download from: https://ollama.ai/download
+# Then run: ollama pull phi3:mini

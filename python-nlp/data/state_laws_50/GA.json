@@ -1,0 +1,43 @@
+{
+  "state": "Georgia",
+  "state_code": "GA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "e Non-Competes Enforceable in California?\n\n\n\n\n\n\nBlogWhat to Know About California Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Florida Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Georgia Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Michigan Non-Disclosure Agreements\n\n\n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "e Non-Competes Enforceable in California?\n\n\n\n\n\n\nBlogWhat to Know About California Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Florida Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Georgia Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Michigan Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About New York Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Pennsylvania Non ees entering them earn at least twice the annual mean wage of the Florida county where the e",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "s.\n\n\n\r\n            State-wide Bans:\r\n            22\n\n\r\n            Local Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississip",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "s.\n\n\n\r\n            State-wide Bans:\r\n            22\n\n\r\n            Local Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSou nded.\nView the directive\n\n\nEffective date: June 30, 2024\nEmployers affected: All employers i",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

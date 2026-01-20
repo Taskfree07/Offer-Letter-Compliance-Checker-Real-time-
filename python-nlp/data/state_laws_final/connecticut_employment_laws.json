@@ -1,0 +1,180 @@
+{
+  "state": "Connecticut",
+  "state_code": "CT",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Employers are prohibited from asking applicants about wage or salary history or relying on such information when determining compensation.",
+      "statute_citation": "Conn. Gen. Stat. § 31-40z",
+      "requirements": [
+        "Cannot ask applicants about wage or salary history",
+        "Cannot rely on wage history when determining compensation",
+        "Applies to written, oral, or third-party inquiries",
+        "Applicants may voluntarily disclose salary history",
+        "Employers may verify only voluntarily disclosed salary history",
+        "Applies to all employers statewide"
+      ],
+      "effective_date": "2018-01-01",
+      "confidence_level": "high",
+      "source_url": "https://www.cga.ct.gov/current/pub/chap_557.htm#sec_31-40z",
+      "notes": "Violations may result in civil penalties and enforcement by CT Department of Labor."
+    },
+    {
+      "topic": "pay_transparency_and_pay_equity",
+      "summary": "Employers must disclose wage ranges to applicants and employees and must ensure equal pay for comparable work unless justified by lawful factors.",
+      "statute_citation": "Conn. Gen. Stat. § 31-40z; Connecticut Equal Pay Act",
+      "requirements": [
+        "Must provide wage range to applicant upon request",
+        "Must provide wage range before offer if not previously requested",
+        "Must provide wage range upon hire",
+        "Must provide wage range upon promotion or transfer",
+        "Employees cannot be prohibited from discussing wages",
+        "Pay differences must be based on bona fide factors (seniority, merit, education, experience, etc.)",
+        "Cannot retaliate against employees for wage disclosure"
+      ],
+      "effective_date": "2021-10-01",
+      "confidence_level": "high",
+      "source_url": "https://portal.ct.gov/dol/Newsroom/Pay-Equity-and-Transparency",
+      "notes": "Unlike CA/NY, salary ranges are not required in job postings, but must be disclosed pre-offer or upon request."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes are governed by common law reasonableness. Non-competes for physicians are statutorily prohibited.",
+      "statute_citation": "Conn. Gen. Stat. § 20-14p (physicians); common law",
+      "requirements": [
+        "Physician non-competes are void and unenforceable",
+        "Non-competes must be reasonable in scope, geography, and duration for other workers",
+        "Must protect legitimate business interest",
+        "Courts evaluate employer hardship vs employee burden",
+        "Overly broad clauses are commonly invalidated"
+      ],
+      "effective_date": "Physician ban since 2016; common law ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.cga.ct.gov/current/pub/chap_370.htm#sec_20-14p",
+      "notes": "No broad ban like California; enforcement depends heavily on courts."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Employers must follow anti-discrimination rules when using criminal history and must comply with federal FCRA procedures when using consumer reports.",
+      "statute_citation": "Conn. Gen. Stat. § 46a-80; Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Cannot deny employment solely due to criminal record",
+        "Must consider nature of offense, time elapsed, and job relevance",
+        "Must consider rehabilitation evidence",
+        "State agencies cannot ask criminal history on initial application",
+        "If using background check vendor: must obtain written consent",
+        "Must provide pre-adverse action notice if report may be used negatively",
+        "Must provide copy of report and rights before final adverse action",
+        "Must follow FCRA adverse action procedures"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.cga.ct.gov/current/pub/chap_814c.htm#sec_46a-80",
+      "notes": "Private employers must be cautious even without statewide ban-the-box."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Connecticut mandates paid sick leave and also protects certain statutory leaves such as jury duty, voting leave, and lactation accommodations.",
+      "statute_citation": "Conn. Gen. Stat. § 31-57r et seq.; § 51-247a (jury duty); § 31-51ll (lactation)",
+      "requirements": [
+        "Paid sick leave accrues at 1 hour per 30 hours worked",
+        "Employees can use up to 40 hours per year",
+        "Applies to increasing number of employers from 2024–2027",
+        "Employees must be allowed leave for jury duty",
+        "Employers cannot penalize employees for jury duty attendance",
+        "Employers must provide reasonable lactation accommodations",
+        "Employers must allow unpaid time off to vote if required"
+      ],
+      "effective_date": "Sick leave expansion 2024–2027",
+      "confidence_level": "high",
+      "source_url": "https://portal.ct.gov/dol/Division-of-Wage-and-Workplace-Standards/Paid-Sick-Leave",
+      "notes": "Offer letters should not contradict statutory leave entitlements."
+    },
+    {
+      "topic": "drug_screening_and_cannabis_protections",
+      "summary": "Connecticut prohibits discrimination against registered medical marijuana users and provides employment protections for off-duty cannabis use, with exceptions.",
+      "statute_citation": "Conn. Gen. Stat. § 21a-408p; Responsible and Equitable Regulation of Adult-Use Cannabis Act",
+      "requirements": [
+        "Cannot discriminate solely due to medical marijuana use",
+        "Cannot refuse employment solely due to off-duty cannabis use",
+        "Safety-sensitive positions may be exempt",
+        "Employers may prohibit impairment during work hours",
+        "Drug testing policies must be in writing",
+        "Policies must be applied consistently"
+      ],
+      "effective_date": "Medical protections 2012; recreational protections 2022",
+      "confidence_level": "high",
+      "source_url": "https://portal.ct.gov/cannabis/Knowledge-Base/Articles/Employment-Protections",
+      "notes": "Blanket zero-tolerance policies can easily violate CT law."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable but must be procedurally fair and not unconscionable.",
+      "statute_citation": "Federal Arbitration Act; Connecticut contract law",
+      "requirements": [
+        "Agreement must be voluntary and clear",
+        "Must not be one-sided",
+        "Must provide reasonable notice",
+        "Must allow neutral arbitrator",
+        "Unconscionable clauses may be struck by courts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Fairness is critical for enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Employment is presumed at-will but subject to numerous statutory and common law exceptions.",
+      "statute_citation": "Common law; Connecticut Fair Employment Practices Act (CFEPA)",
+      "requirements": [
+        "Employment is at-will unless contract states otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy violations create wrongful termination claims",
+        "Employee handbooks can create implied contracts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://portal.ct.gov/chro/Legal-Information/Employment-Discrimination-Laws",
+      "notes": "Offer letters must avoid language that undermines at-will status unintentionally."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Connecticut law prohibits discrimination and harassment based on a wide range of protected characteristics beyond federal law.",
+      "statute_citation": "Conn. Gen. Stat. § 46a-60 et seq. (CFEPA)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age (40+), disability, national origin, ancestry",
+        "Cannot discriminate based on pregnancy, marital status, veteran status",
+        "Harassment-free workplace required",
+        "Retaliation against complainants is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://portal.ct.gov/chro/Legal-Information/Employment-Discrimination-Laws",
+      "notes": "Offer letters and employment terms must not imply exclusion or preference."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Connecticut General Statutes, Connecticut Department of Labor, CHRO guidance, official state agency publications",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "full offer-letter compliance coverage"
+  },
+  "additional_notes": {
+    "general_guidance": "Connecticut is highly employee-protective. Employers must be cautious with compensation language, cannabis policies, and benefit disclosures.",
+    "enforcement_agencies": [
+      "Connecticut Department of Labor",
+      "Connecticut Commission on Human Rights and Opportunities (CHRO)",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Paid sick leave coverage expansion 2024–2027",
+      "Stronger cannabis employment protections",
+      "Increased enforcement of pay transparency",
+      "Continued litigation on non-compete enforceability"
+    ]
+  }
+}

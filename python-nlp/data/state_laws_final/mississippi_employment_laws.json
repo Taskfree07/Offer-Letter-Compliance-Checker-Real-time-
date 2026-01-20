@@ -1,0 +1,168 @@
+{
+  "state": "Mississippi",
+  "state_code": "MS",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes ENFORCEABLE if reasonable",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Non-competes ENFORCEABLE if reasonable",
+        "Mississippi enforces reasonable non-competes under common law. Must protect legitimate business interest. Reasonableness evaluated on case-by-case basis.",
+        "Best practice: Keep duration 2 years or less, reasonable geography",
+        "Action required: Ensure reasonableness standards met"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": "Mississippi enforces reasonable non-competes under common law. Must protect legitimate business interest. Reasonableness evaluated on case-by-case basis."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Mississippi has NO state minimum wage - federal $7.25 applies",
+      "statute_citation": "Federal FLSA (no state minimum)",
+      "requirements": [
+        "Mississippi has NO state minimum wage - federal $7.25 applies",
+        "Must pay federal minimum $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Drug testing PERMITTED",
+        "Drug-free workplace programs encouraged"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": "Drug-free workplace programs encouraged"
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due within reasonable time",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "Final wages due within reasonable time",
+        "No specific statute. Best practice is next regular payday.",
+        "Action required: Pay by next regular payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": "No specific statute. Best practice is next regular payday."
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Mississippi is RIGHT TO WORK state",
+      "statute_citation": "Mississippi Constitution § 258-A",
+      "requirements": [
+        "Mississippi is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "NO required meal or rest breaks for adults",
+      "statute_citation": "Mississippi common law",
+      "requirements": [
+        "NO required meal or rest breaks for adults"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mdes.ms.gov/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Mississippi Department of Employment Security",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Mississippi employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "state": "Virginia",
+  "state_code": "VA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "ring an electronic program, system, or application through which a health care worker may accept a shift as an independent contractor also may not require a health care worker to enter a non-compete.\nVirginia\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activiti",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "ring an electronic program, system, or application through which a health care worker may accept a shift as an independent contractor also may not require a health care worker to enter a non-compete.\nVirginia\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: Banned for “low-wage employees” – those whose ave geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: Ba",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n\nEffective date: Sept. 1, 2019\nEmployers affected: All employers\nEmployers may not refus mployers affected: All employers\nEmployers may not request applicants' pay history. If that",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

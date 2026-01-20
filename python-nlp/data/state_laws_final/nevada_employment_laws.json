@@ -1,0 +1,182 @@
+{
+  "state": "Nevada",
+  "state_code": "NV",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes RESTRICTED - statutory requirements apply",
+      "statute_citation": "Nevada Revised Statutes § 613.195 et seq.",
+      "requirements": [
+        "Non-competes RESTRICTED - statutory requirements apply",
+        "Nevada restricts non-competes: (1) employee must be provided consideration (salary/benefit) beyond continued employment, (2) cannot exceed 1 year for non-supervisory/non-executive employees earning less than statutory threshold, (3) must be reasonable in scope and necessary to protect legitimate business interest.",
+        "Best practice: Provide additional consideration, limit to 1 year for lower-earning employees",
+        "Action required: Ensure statutory requirements met: consideration provided, 1-year limit for non-executives under threshold"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Nevada restricts non-competes: (1) employee must be provided consideration (salary/benefit) beyond continued employment, (2) cannot exceed 1 year for non-supervisory/non-executive employees earning less than statutory threshold, (3) must be reasonable in scope and necessary to protect legitimate business interest."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "CANNOT seek salary history before making compensation offer",
+      "statute_citation": "Nevada Revised Statutes § 613.510",
+      "requirements": [
+        "CANNOT seek salary history before making compensation offer",
+        "Employers cannot seek wage or salary history from prospective employees. Can discuss salary expectations. After making offer, can confirm salary history.",
+        "Action required: Remove salary history questions from pre-offer process"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Employers cannot seek wage or salary history from prospective employees. Can discuss salary expectations. After making offer, can confirm salary history."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirement currently",
+      "statute_citation": "Nevada common law",
+      "requirements": [
+        "NO pay transparency requirement currently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Cannot require disclosure of criminal history on initial application",
+      "statute_citation": "Nevada Ban the Box Law",
+      "requirements": [
+        "Cannot require disclosure of criminal history on initial application",
+        "Cannot inquire about criminal history on initial employment application. Can inquire after determining applicant meets minimum qualifications.",
+        "Action required: Delay criminal history inquiry",
+        "Remove criminal history from initial applications"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Cannot inquire about criminal history on initial employment application. Can inquire after determining applicant meets minimum qualifications."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Nevada minimum wage: $12.00/hour (July 1, 2024+)",
+      "statute_citation": "Nevada Constitution & NRS § 608.250",
+      "requirements": [
+        "Nevada minimum wage: $12.00/hour (July 1, 2024+)",
+        "Nevada minimum wage is $12.00/hour regardless of health benefits offered (effective July 1, 2024). Adjusted annually based on CPI.",
+        "Action required: Track annual CPI adjustments",
+        "Must pay $12.00/hour minimum"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Nevada minimum wage is $12.00/hour regardless of health benefits offered (effective July 1, 2024). Adjusted annually based on CPI."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid sick leave currently",
+      "statute_citation": "Nevada common law",
+      "requirements": [
+        "NO state-mandated paid sick leave currently",
+        "Some local ordinances (e.g., certain Nevada counties) may have requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Some local ordinances (e.g., certain Nevada counties) may have requirements"
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Nevada common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Nevada common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Cannot refuse to hire based on positive marijuana test",
+      "statute_citation": "Nevada AB 132 (marijuana protections)",
+      "requirements": [
+        "Cannot refuse to hire based on positive marijuana test",
+        "Nevada prohibits refusing to hire prospective employees solely based on positive marijuana screening test. Exceptions for certain safety-sensitive positions and federal contractors.",
+        "Action required: Review drug testing policies for marijuana provisions",
+        "Cannot disqualify solely for marijuana-positive test"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Nevada prohibits refusing to hire prospective employees solely based on positive marijuana screening test. Exceptions for certain safety-sensitive positions and federal contractors."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due within 3 days (discharge) or next payday (resignation)",
+      "statute_citation": "Nevada Revised Statutes § 608.020",
+      "requirements": [
+        "Final wages due within 3 days (discharge) or next payday (resignation)",
+        "Discharge: within 3 days. Resignation with 7+ days notice: next payday. Resignation without notice: next payday or 7 days, whichever is earlier.",
+        "Action required: Ensure 3-day final payment capability",
+        "Pay within 3 days if terminated"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Discharge: within 3 days. Resignation with 7+ days notice: next payday. Resignation without notice: next payday or 7 days, whichever is earlier."
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Nevada is RIGHT TO WORK state",
+      "statute_citation": "Nevada Constitution Article 19 § 2",
+      "requirements": [
+        "Nevada is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "daily_overtime",
+      "summary": "Daily overtime required for 8+ hour shifts",
+      "statute_citation": "Nevada Revised Statutes § 608.018",
+      "requirements": [
+        "Daily overtime required for 8+ hour shifts",
+        "Overtime pay (1.5x) required for: (1) work over 40 hours per week, OR (2) work over 8 hours in a 24-hour period (if agreed rate less than 1.5x regular rate).",
+        "Action required: Ensure daily overtime tracking and payment",
+        "Pay overtime for 8+ hour days in addition to 40+ hour weeks"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.nv.gov/",
+      "notes": "Overtime pay (1.5x) required for: (1) work over 40 hours per week, OR (2) work over 8 hours in a 24-hour period (if agreed rate less than 1.5x regular rate)."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Nevada Office of the Labor Commissioner",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Nevada employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

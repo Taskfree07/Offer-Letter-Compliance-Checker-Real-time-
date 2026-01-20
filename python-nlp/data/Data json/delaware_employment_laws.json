@@ -1,0 +1,106 @@
+{
+  "state": "Delaware",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.delaware.gov/",
+      "title": "Delaware Department of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Delaware Code Title 19 \u00a7 4104",
+      "message": "Non-competes RESTRICTED - scrutinized closely",
+      "detailedExplanation": "Delaware courts closely scrutinize non-competes. Must be necessary to protect legitimate business interest, reasonable in scope/time/geography. Employee must receive something of value beyond continued employment.",
+      "suggestion": "Use narrowly tailored restrictions, 1 year maximum recommended",
+      "actionRequired": "Ensure narrow scope and adequate consideration provided",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "narrowly tailored confidentiality and non-solicitation provisions",
+      "source": "Delaware case law"
+    },
+    "salaryHistory": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Delaware Code Title 19 \u00a7 709B",
+      "message": "CANNOT inquire about salary history",
+      "detailedExplanation": "Employers cannot screen applicants based on wage history or require disclosure of wage history. Cannot seek wage history from current or former employers.",
+      "actionRequired": "Remove all salary history questions",
+      "flaggedPhrases": [
+        "previous salary",
+        "salary history",
+        "current compensation",
+        "prior wages"
+      ],
+      "alternativeLanguage": "What are your salary expectations for this role?",
+      "source": "Delaware Equal Pay Law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency mandate currently",
+      "actionRequired": "Optional",
+      "source": "No current requirement"
+    },
+    "backgroundChecks": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Delaware Ban the Box Law",
+      "message": "Cannot inquire about criminal history on initial application",
+      "detailedExplanation": "Employers with 4+ employees cannot ask about criminal convictions on initial employment application. Can inquire later in hiring process.",
+      "requirement": "Remove criminal history questions from applications",
+      "actionRequired": "Delay criminal history inquiry until after initial application",
+      "source": "Delaware Ban the Box"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Delaware Code Title 19 \u00a7 902",
+      "message": "Delaware minimum wage: $13.25/hour (2025), $15.00/hour (January 1, 2026)",
+      "requirement": "Must pay $15.00/hour effective January 1, 2026",
+      "actionRequired": "Ensure compliance with $15/hour minimum",
+      "source": "Delaware minimum wage increases"
+    },
+    "paidLeave": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Delaware Healthy Delaware Families Act",
+      "message": "PAID SICK LEAVE REQUIRED (2025)",
+      "detailedExplanation": "Employers with 10+ employees must provide paid sick leave. 1 hour per 30 hours worked, up to 40 hours per year.",
+      "requirement": "Provide paid sick leave accrual",
+      "actionRequired": "Implement paid sick leave policy",
+      "source": "Healthy Delaware Families Act"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Delaware law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing permitted",
+      "source": "Allowed"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Delaware Code Title 19 \u00a7 1103",
+      "message": "Final wages due next regular payday",
+      "requirement": "Pay by next regular payday",
+      "source": "Delaware wage law"
+    }
+  }
+}

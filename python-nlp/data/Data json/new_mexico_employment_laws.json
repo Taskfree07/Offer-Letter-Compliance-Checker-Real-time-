@@ -1,0 +1,95 @@
+{
+  "state": "New Mexico",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.dws.state.nm.us/",
+      "title": "New Mexico Department of Workforce Solutions",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "New Mexico common law",
+      "message": "Non-competes enforceable if reasonable",
+      "detailedExplanation": "New Mexico enforces reasonable non-competes under common law. Must protect legitimate business interest with reasonable time/scope/geography.",
+      "suggestion": "Keep duration 2 years or less, reasonable scope",
+      "actionRequired": "Ensure reasonableness standards met",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "source": "New Mexico case law"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "New Mexico Minimum Wage Act",
+      "message": "New Mexico minimum wage: $12.00/hour (2023+)",
+      "requirement": "Must pay $12.00/hour minimum",
+      "actionRequired": "Ensure minimum wage compliance",
+      "source": "New Mexico minimum wage law"
+    },
+    "paidLeave": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "New Mexico Healthy Workplaces Act",
+      "message": "PAID SICK LEAVE REQUIRED (effective July 1, 2022)",
+      "detailedExplanation": "All private employers must provide earned sick leave. 1 hour per 30 hours worked. Can cap at 64 hours per year.",
+      "requirement": "Provide 1 hour per 30 hours worked",
+      "actionRequired": "Implement earned sick leave policy",
+      "source": "NM Healthy Workplaces Act"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "New Mexico law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "New Mexico Cannabis Regulation Act",
+      "message": "Cannot discriminate against off-duty cannabis use",
+      "detailedExplanation": "Cannot refuse to hire, discharge, or take adverse action based on person's status as cannabis consumer (off-duty use). Exceptions for safety-sensitive positions and federal requirements.",
+      "requirement": "Cannot penalize off-duty cannabis use",
+      "actionRequired": "Review drug policies for cannabis compliance",
+      "source": "NM Cannabis Regulation Act"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "New Mexico common law",
+      "message": "Final wages due next regular payday",
+      "requirement": "Pay by next regular payday",
+      "source": "New Mexico practice"
+    }
+  }
+}

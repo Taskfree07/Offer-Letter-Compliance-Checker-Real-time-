@@ -1,0 +1,100 @@
+{
+  "state": "Illinois",
+  "state_code": "IL",
+  "last_updated": "2025-10-01",
+  "data_sources": [
+    {
+      "url": "https://www2.illinois.gov/idol/",
+      "title": "Illinois Department of Labor"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "Non-compete agreements restricted - $75,000 salary threshold required.",
+      "law_citation": "820 ILCS 90 - Illinois Freedom to Work Act",
+      "full_text": "Illinois prohibits non-competes for employees earning less than $75,000/year ($45,000 for non-solicitation). Must be reasonable in time, geography, scope and provide adequate consideration.",
+      "severity": "error",
+      "flagged_phrases": [
+        "restrictions on certain competitive and solicitation activities",
+        "competitive activities",
+        "non-compete",
+        "covenant not to compete",
+        "noncompete",
+        "restraint of trade",
+        "competing business"
+      ],
+      "suggestion": "Verify salary exceeds $75,000 threshold or use confidentiality agreement instead",
+      "source_url": "https://www2.illinois.gov/idol/",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Employers CANNOT ask about salary history.",
+      "law_citation": "820 ILCS 112/10 - Illinois Equal Pay Act",
+      "full_text": "Illinois prohibits employers from screening applicants based on wage/salary history or seeking such information from applicants or current/former employers.",
+      "severity": "error",
+      "flagged_phrases": [
+        "previous salary",
+        "current compensation",
+        "salary history",
+        "prior wages",
+        "what did you earn",
+        "compensation at previous job",
+        "past earnings"
+      ],
+      "suggestion": "Remove all salary history questions immediately. Ask 'What are your salary expectations for this role?' instead.",
+      "source_url": "https://www2.illinois.gov/idol/",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Must include salary range and benefits in ALL job postings (15+ employees).",
+      "law_citation": "820 ILCS 112/10 - Illinois Equal Pay Act (Effective Jan 1, 2025)",
+      "full_text": "Employers with 15+ employees (nationwide count) must include: wage/salary OR wage/salary range ('good faith' expected compensation), plus general description of benefits and other compensation (bonuses, stock, incentives). Applies to jobs performed at least in part in Illinois.",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary to be determined",
+        "competitive salary",
+        "compensation TBD",
+        "DOE",
+        "salary commensurate with experience",
+        "salary negotiable"
+      ],
+      "suggestion": "Include specific salary range and benefits: 'Salary Range: $XX,XXX - $XX,XXX per year. Benefits: [health insurance, 401(k), PTO, bonuses, etc.]'",
+      "source_url": "https://www2.illinois.gov/idol/",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Illinois requires paid leave for all employees.",
+      "law_citation": "820 ILCS 192 - Paid Leave for All Workers Act (Effective Jan 1, 2024)",
+      "full_text": "Accrual: 1 hour per 40 hours worked (up to 40 hours per year). Use: own illness, family care, safety reasons (domestic violence, sexual violence). Applies to ALL employees.",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "sick leave",
+        "time off"
+      ],
+      "suggestion": "State: 'You will accrue 1 hour of paid leave per 40 hours worked (up to 40 hours annually)'",
+      "source_url": "https://www2.illinois.gov/idol/",
+      "effective_date": "2024-01-01"
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Criminal background checks have restrictions under ban-the-box law.",
+      "law_citation": "775 ILCS 5/2-103",
+      "full_text": "Illinois prohibits asking about criminal history until after conditional offer or interview ('ban the box'). Must conduct individualized assessment. Chicago has additional ban-the-box requirements.",
+      "severity": "warning",
+      "flagged_phrases": [
+        "background check",
+        "criminal history",
+        "before offer",
+        "prior to interview"
+      ],
+      "suggestion": "Ensure background check occurs after conditional offer",
+      "source_url": "https://www2.illinois.gov/idol/",
+      "effective_date": "2025-01-01"
+    }
+  ]
+}

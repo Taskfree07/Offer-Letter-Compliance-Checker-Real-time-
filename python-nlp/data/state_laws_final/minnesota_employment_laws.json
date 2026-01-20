@@ -1,0 +1,173 @@
+{
+  "state": "Minnesota",
+  "state_code": "MN",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes SEVERELY RESTRICTED - disfavored by courts",
+      "statute_citation": "Minnesota Statutes § 181.988 & case law",
+      "requirements": [
+        "Non-competes SEVERELY RESTRICTED - disfavored by courts",
+        "Minnesota strongly disfavors non-competes. Only enforceable to protect trade secrets or when employer provides extraordinary training. Cannot restrict ordinary competitive activity. Blue-pencil doctrine does NOT apply.",
+        "Best practice: Use confidentiality and trade secret protection only",
+        "Action required: Remove non-compete OR limit strictly to trade secret protection"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Minnesota strongly disfavors non-competes. Only enforceable to protect trade secrets or when employer provides extraordinary training. Cannot restrict ordinary competitive activity. Blue-pencil doctrine does NOT apply."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED (statewide)",
+      "statute_citation": "Minnesota common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED (statewide)",
+        "No statewide prohibition. However, some cities (Minneapolis, St. Paul) have local bans.",
+        "Action required: Check local ordinances if applicable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "No statewide prohibition. However, some cities (Minneapolis, St. Paul) have local bans."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO statewide pay transparency requirement",
+      "statute_citation": "Minnesota common law",
+      "requirements": [
+        "NO statewide pay transparency requirement",
+        "Some local jurisdictions may have requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Some local jurisdictions may have requirements"
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Cannot consider arrests without convictions",
+      "statute_citation": "Minnesota Statutes § 364.021",
+      "requirements": [
+        "Cannot consider arrests without convictions",
+        "Employers cannot consider arrest records that did not result in conviction. Ban-the-box applies to government employers and some private employers.",
+        "Action required: Review background check policies for compliance",
+        "Do not consider arrests without convictions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Employers cannot consider arrest records that did not result in conviction. Ban-the-box applies to government employers and some private employers."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Minnesota minimum wage: $10.85/hour large employers, $8.85 small employers (2024)",
+      "statute_citation": "Minnesota Statutes § 177.24",
+      "requirements": [
+        "Minnesota minimum wage: $10.85/hour large employers, $8.85 small employers (2024)",
+        "Large employers (annual gross revenue $500k+): $10.85/hour. Small employers (under $500k): $8.85/hour. Indexed for inflation annually.",
+        "Action required: Ensure compliance with size-based minimum",
+        "Must pay applicable Minnesota minimum wage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Large employers (annual gross revenue $500k+): $10.85/hour. Small employers (under $500k): $8.85/hour. Indexed for inflation annually."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "EARNED SICK AND SAFE TIME REQUIRED (effective January 1, 2024)",
+      "statute_citation": "Minnesota Earned Sick and Safe Time (ESST) Law",
+      "requirements": [
+        "EARNED SICK AND SAFE TIME REQUIRED (effective January 1, 2024)",
+        "All employees accrue 1 hour per 30 hours worked, up to 48 hours per year. Can be used for illness, injury, health care, safety reasons.",
+        "Action required: Implement ESST policy and tracking",
+        "Provide 1 hour per 30 hours worked"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "All employees accrue 1 hour per 30 hours worked, up to 48 hours per year. Can be used for illness, injury, health care, safety reasons."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Minnesota common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Minnesota common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing REGULATED - specific procedures required",
+      "statute_citation": "Minnesota Statutes § 181.950-957",
+      "requirements": [
+        "Drug testing REGULATED - specific procedures required",
+        "Minnesota Drug and Alcohol Testing in the Workplace Act requires written policy, specific procedures, confirmatory testing, and employee rights protections.",
+        "Action required: Ensure drug testing policy complies with Minnesota requirements",
+        "Follow statutory testing procedures"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Minnesota Drug and Alcohol Testing in the Workplace Act requires written policy, specific procedures, confirmatory testing, and employee rights protections."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due within 24 hours if terminated, next payday if quit",
+      "statute_citation": "Minnesota Statutes § 181.14",
+      "requirements": [
+        "Final wages due within 24 hours if terminated, next payday if quit",
+        "Discharged employees: pay within 24 hours. Resigned employees: next regular payday (or within 20 days if no regular payday).",
+        "Action required: Ensure immediate payment capability for terminations",
+        "Pay within 24 hours if terminated"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Discharged employees: pay within 24 hours. Resigned employees: next regular payday (or within 20 days if no regular payday)."
+    },
+    {
+      "topic": "breaks",
+      "summary": "Meal and rest breaks REQUIRED",
+      "statute_citation": "Minnesota Statutes § 177.253-254",
+      "requirements": [
+        "Meal and rest breaks REQUIRED",
+        "Rest break: Paid 15-minute break for every 4 hours worked. Meal break: 20-minute unpaid break for 8-hour shift (must be provided within first 5 hours for 8+ hour shift).",
+        "Action required: Implement break policies complying with Minnesota law",
+        "Provide rest and meal breaks per statute"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dli.mn.gov/",
+      "notes": "Rest break: Paid 15-minute break for every 4 hours worked. Meal break: 20-minute unpaid break for 8-hour shift (must be provided within first 5 hours for 8+ hour shift)."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Minnesota Department of Labor and Industry",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Minnesota employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "state": "Utah",
+  "state_code": "UT",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Utah does not have a statewide law prohibiting employers from asking about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase discrimination risk under federal law",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/",
+      "notes": "While legal in Utah, many employers avoid salary history questions for equity and risk reduction."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Utah does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Utah statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may choose to disclose pay ranges voluntarily",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/divisions/utah-antidiscrimination-and-labor/",
+      "notes": "Some multi-state employers apply pay transparency nationwide as a policy choice."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Utah allows non-compete agreements but limits post-employment non-competes for employees to a maximum of one year.",
+      "statute_citation": "Utah Code § 34-51-101 et seq. (Post-Employment Restrictions Act)",
+      "requirements": [
+        "Post-employment non-competes generally limited to 1 year",
+        "Must be supported by consideration",
+        "Must protect legitimate business interests",
+        "Overly broad restrictions may be unenforceable",
+        "Employees terminated without cause may recover damages for enforcement attempts"
+      ],
+      "effective_date": "2016-05-10",
+      "confidence_level": "high",
+      "source_url": "https://le.utah.gov/xcode/Title34/Chapter51/34-51.html",
+      "notes": "Utah is more restrictive than many states but does not ban non-competes outright."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Utah does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Utah does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "Utah Code § 78B-1-116 (jury duty); § 20A-3a-105 (voting leave)",
+      "requirements": [
+        "Employers must allow leave for jury duty",
+        "Employers cannot retaliate against employees for jury service",
+        "Employees may take unpaid time to vote if outside working hours is not feasible",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Utah permits workplace drug testing and does not provide broad employment protections for recreational cannabis use.",
+      "statute_citation": "Utah Medical Cannabis Act; Utah Code Title 34",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may prohibit impairment during work",
+        "Recreational cannabis use is not protected in employment",
+        "Policies must be applied consistently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/divisions/utah-antidiscrimination-and-labor/",
+      "notes": "Utah is employer-friendly regarding drug testing and cannabis-related policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Utah if they meet fairness and contract law requirements.",
+      "statute_citation": "Federal Arbitration Act; Utah Uniform Arbitration Act",
+      "requirements": [
+        "Agreement must be voluntary and clearly written",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://le.utah.gov/xcode/Title78B/Chapter11/78B-11.html",
+      "notes": "Fairness and clarity are key to enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Utah follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Utah common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract provides otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks can create implied obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Utah law prohibits discrimination in employment based on protected characteristics and largely mirrors federal protections.",
+      "statute_citation": "Utah Antidiscrimination Act (Utah Code § 34A-5-101 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, sex, pregnancy, religion, national origin",
+        "Cannot discriminate based on age (40+)",
+        "Cannot discriminate based on disability",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://laborcommission.utah.gov/divisions/utah-antidiscrimination-and-labor/",
+      "notes": "Offer letters must avoid language implying exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Utah Labor Commission, Utah Code, Utah Antidiscrimination and Labor Division, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Utah is generally employer-friendly but has a clear statutory limit on non-compete duration and strong anti-discrimination protections.",
+    "enforcement_agencies": [
+      "Utah Labor Commission",
+      "Utah Antidiscrimination and Labor Division",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "Non-competes limited to one year under statute",
+      "No statewide paid sick leave mandate",
+      "Continued reliance on federal FCRA for background check compliance"
+    ]
+  }
+}

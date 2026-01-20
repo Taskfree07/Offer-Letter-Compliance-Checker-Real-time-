@@ -1,0 +1,94 @@
+{
+  "state": "California",
+  "state_code": "CA",
+  "last_updated": "2025-01-24",
+  "data_sources": [
+    {
+      "url": "https://advocacy.calchamber.com/2025/01/24/2025-compliance-checklist-key-hr-practices-for-employers",
+      "title": "CalChamber 2025 Compliance Checklist"
+    },
+    {
+      "url": "https://www.dir.ca.gov/dlse/",
+      "title": "California Department of Industrial Relations"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "Non-compete clauses are VOID and unenforceable in California. Any contract that restrains trade is prohibited.",
+      "law_citation": "California Business & Professions Code Section 16600",
+      "full_text": "California Business & Professions Code Section 16600 makes any contract that restrains trade void. This includes non-compete, non-solicitation of customers, and broadly written non-solicitation of employees. Courts will not enforce these clauses even if signed by the employee. Use only confidentiality obligations and protection of trade secrets in accordance with California law.",
+      "severity": "error",
+      "flagged_phrases": ["non-compete", "noncompete", "competitive activities", "restraint of trade", "covenant not to compete", "competing business", "solicit customers"],
+      "suggestion": "Remove all competitive restriction language. Use only confidentiality and trade secret protection.",
+      "source_url": "https://www.dir.ca.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Employers are prohibited from asking applicants about their salary history, either orally or in writing.",
+      "law_citation": "California Labor Code Section 432.3",
+      "full_text": "California prohibits employers from seeking salary history information from applicants, either orally or in writing, personally or through an agent. Employers also cannot use salary history in determining what compensation to offer. This law aims to prevent perpetuation of wage gaps.",
+      "severity": "error",
+      "flagged_phrases": ["previous salary", "current compensation", "salary history", "what did you earn", "compensation at previous job", "prior wages", "past earnings"],
+      "suggestion": "Remove any requests for previous compensation information. Focus on salary expectations instead.",
+      "source_url": "https://www.dir.ca.gov/dlse",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Criminal background checks can only occur AFTER conditional offer is made per the Fair Chance Act.",
+      "law_citation": "California Fair Chance Act (Labor Code Section 432.9)",
+      "full_text": "The Fair Chance Act requires employers to make a conditional offer before conducting criminal background checks, then conduct individualized assessment if issues are found. Employers must give applicants chance to provide additional information before making final decision.",
+      "severity": "error",
+      "flagged_phrases": ["background check before offer", "criminal history inquiry", "prior to employment offer"],
+      "suggestion": "Ensure background checks occur only after conditional offer. Include individualized assessment process.",
+      "source_url": "https://www.dir.ca.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Cannot discriminate against off-job cannabis use. Drug screenings must avoid testing for non-psychoactive cannabis metabolites.",
+      "law_citation": "California Government Code Section 12954 & Fair Employment and Housing Act",
+      "full_text": "Employers cannot discriminate against employees for off-duty cannabis use. Drug screenings must avoid testing for non-psychoactive cannabis metabolites. Work with drug screening vendors to ensure compliance with California cannabis protection laws.",
+      "severity": "warning",
+      "flagged_phrases": ["drug test", "substance screening", "marijuana test", "cannabis screening"],
+      "suggestion": "Specify compliance with California cannabis protection laws in drug screening policy.",
+      "source_url": "https://www.dfeh.ca.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Mandatory arbitration clauses have specific requirements and are scrutinized closely by California courts.",
+      "law_citation": "California Code of Civil Procedure Section 1281",
+      "full_text": "While arbitration clauses are generally enforceable, they cannot be unconscionable and must provide reasonable procedures. Courts scrutinize mandatory arbitration more closely. Consider making arbitration optional or ensure clause meets California fairness standards.",
+      "severity": "warning",
+      "flagged_phrases": ["mandatory arbitration", "exclusive remedy", "arbitration procedures", "disputes arising out of", "will be resolved using"],
+      "suggestion": "Consider making arbitration optional or ensure clause meets California fairness standards including neutral procedures.",
+      "source_url": "https://leginfo.legislature.ca.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Large employers must provide pay scale disclosure in job postings and upon request.",
+      "law_citation": "California Labor Code Section 432.3",
+      "full_text": "Employers with 15+ employees must provide pay scale for positions upon request or in job postings. Include specific salary range or amount. Avoid vague language like 'salary to be determined' or 'competitive salary'.",
+      "severity": "warning",
+      "flagged_phrases": ["salary to be determined", "competitive salary", "compensation TBD", "DOE", "salary commensurate with experience"],
+      "suggestion": "Include specific salary range showing minimum and maximum compensation.",
+      "source_url": "https://www.dir.ca.gov/dlse",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will language is acceptable in California and recommended for legal protection.",
+      "law_citation": "California Employment Law - General Principles",
+      "full_text": "At-will employment language is acceptable and recommended in California. Ensure language is clear and not contradicted by other contract terms. Standard language: 'Employment is at-will and may be terminated at any time by either party.'",
+      "severity": "info",
+      "flagged_phrases": ["at-will", "at will", "terminate employment at any time"],
+      "suggestion": "At-will language is legally protective and recommended. Ensure it's not contradicted elsewhere in the contract.",
+      "source_url": "https://www.dir.ca.gov",
+      "effective_date": "2025-01-01"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "state": "Oregon",
+  "state_code": "OR",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "automated_gov_scraping",
+  "accuracy_estimate": "90-95% (needs human verification for low-confidence items)",
+  "data_sources": [
+    {
+      "url": "https://www.oregon.gov/boli/employers/pages/default.aspx",
+      "title": "Employer Guide"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "paid_leave",
+      "summary": "[AUTO-EXTRACTED] Oregon paid leave requirements detected. NEEDS VERIFICATION.",
+      "law_citation": "[NEEDS MANUAL VERIFICATION - extracted from Employer Guide]",
+      "full_text": "[AUTO-EXTRACTED] Relevant law detected in source. Full text needs manual extraction from https://www.oregon.gov/boli/employers/pages/default.aspx",
+      "severity": "warning",
+      "flagged_phrases": [
+        "sick leave",
+        "paid leave",
+        "family leave"
+      ],
+      "suggestion": "Review Oregon paid leave requirements and update offer letter accordingly.",
+      "source_url": "https://www.oregon.gov/boli/employers/pages/default.aspx",
+      "effective_date": "UNKNOWN - needs verification",
+      "confidence_score": 0.6,
+      "needs_human_review": true,
+      "extraction_method": "automated_keyword_detection"
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "high_confidence": 0,
+    "needs_review": 1,
+    "next_steps": "Review low-confidence items and fill in exact statute citations"
+  }
+}

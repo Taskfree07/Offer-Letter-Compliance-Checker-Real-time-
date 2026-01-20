@@ -1,0 +1,170 @@
+{
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "New Jersey law does not impose a strict statewide ban on asking salary history, but employers are restricted from screening applicants based on wage history and retaliation is prohibited.",
+      "statute_citation": "N.J. Stat. § 34:6B-20",
+      "requirements": [
+        "Employers may not screen applicants based on wage history",
+        "Employers may not require wage history to meet minimum or maximum criteria",
+        "Applicants may voluntarily disclose wage history",
+        "Employers may verify wage history only after an offer of employment has been made",
+        "Retaliation against applicants who refuse to provide wage history is prohibited"
+      ],
+      "effective_date": "2020-01-01",
+      "confidence_level": "high",
+      "source_url": "https://www.nj.gov/labor/wagehour/content/wagehistory.shtml",
+      "notes": "New Jersey’s approach is functionally similar to a salary history ban in practice."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "New Jersey enacted a pay transparency law requiring covered employers to include salary or wage ranges in job postings.",
+      "statute_citation": "New Jersey Pay Transparency Act (P.L.2024, c.7)",
+      "requirements": [
+        "Employers with 10 or more employees must include salary or hourly wage range in job postings",
+        "Postings must include a general description of benefits and other compensation",
+        "Applies to internal and external job postings",
+        "Pay range must be a good-faith estimate",
+        "Retaliation against employees for requesting pay information is prohibited"
+      ],
+      "effective_date": "2025-06-01",
+      "confidence_level": "high",
+      "source_url": "https://www.nj.gov/labor/",
+      "notes": "This law aligns New Jersey with states like NY, CA, and MN on pay transparency."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in New Jersey if reasonable, but courts scrutinize them closely.",
+      "statute_citation": "New Jersey common law (e.g., Solari Industries, Inc. v. Malady)",
+      "requirements": [
+        "Must protect legitimate business interests",
+        "Must be reasonable in duration",
+        "Must be reasonable in geographic scope",
+        "Must not impose undue hardship on the employee",
+        "Must not be injurious to the public",
+        "Courts may modify or invalidate overly broad restrictions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.njcourts.gov/",
+      "notes": "New Jersey applies a three-part reasonableness test to restrictive covenants."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "New Jersey restricts criminal history inquiries under its ban-the-box law and requires FCRA compliance for third-party background checks.",
+      "statute_citation": "New Jersey Opportunity to Compete Act; Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Employers with 15+ employees cannot inquire into criminal history during initial application process",
+        "Criminal history inquiries generally permitted only after the first interview",
+        "If using a third-party background check, written consent is required",
+        "Pre-adverse action notice must be provided with copy of report and rights",
+        "Final adverse action notice must be provided if a negative decision is made"
+      ],
+      "effective_date": "2015-03-01",
+      "confidence_level": "high",
+      "source_url": "https://www.njoag.gov/opportunity-to-compete-act/",
+      "notes": "Applies to most private employers with 15 or more employees."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "New Jersey mandates paid sick leave and has robust family leave protections.",
+      "statute_citation": "New Jersey Earned Sick Leave Law; New Jersey Family Leave Act (NJFLA)",
+      "requirements": [
+        "Employees accrue up to 40 hours of paid sick leave per year",
+        "Accrual generally at 1 hour per 30 hours worked",
+        "Leave can be used for illness, preventive care, family care, and domestic violence issues",
+        "Employees are entitled to job-protected family leave under NJFLA",
+        "Jury duty leave is protected"
+      ],
+      "effective_date": "2018-10-29",
+      "confidence_level": "high",
+      "source_url": "https://www.nj.gov/labor/worker-protections/earnedsick/",
+      "notes": "Offer letters must not conflict with statutory paid sick leave rights."
+    },
+    {
+      "topic": "drug_screening_and_cannabis_protections",
+      "summary": "New Jersey legalizes recreational cannabis and provides strong employment protections for lawful off-duty use.",
+      "statute_citation": "New Jersey Cannabis Regulatory, Enforcement Assistance, and Marketplace Modernization Act (CREAMMA)",
+      "requirements": [
+        "Employers generally cannot refuse to hire or take adverse action based solely on off-duty cannabis use",
+        "Employers may prohibit impairment during working hours",
+        "Employers may use drug testing but must comply with statutory requirements",
+        "Safety-sensitive exceptions exist"
+      ],
+      "effective_date": "2021-02-22",
+      "confidence_level": "high",
+      "source_url": "https://www.nj.gov/cannabis/employment/",
+      "notes": "New Jersey has some of the strongest employee cannabis protections in the U.S."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in New Jersey if they meet contract law standards, but certain waivers of statutory rights are restricted.",
+      "statute_citation": "Federal Arbitration Act; Atalese v. U.S. Legal Services Group",
+      "requirements": [
+        "Arbitration clauses must clearly and unambiguously waive the right to sue in court",
+        "Agreements must be voluntary and clearly drafted",
+        "Must not be unconscionable",
+        "Courts scrutinize arbitration clauses in employment agreements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.njcourts.gov/",
+      "notes": "New Jersey courts require heightened clarity in arbitration clauses."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "New Jersey follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "New Jersey common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract specifies otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks can create implied contractual obligations unless properly disclaimed"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nj.gov/labor/",
+      "notes": "Clear at-will language and handbook disclaimers are important in New Jersey."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "New Jersey provides some of the strongest anti-discrimination protections in the United States.",
+      "statute_citation": "New Jersey Law Against Discrimination (N.J.S.A. 10:5-1 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age, disability, national origin, marital status",
+        "Cannot discriminate based on pregnancy, military status, domestic violence victim status",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/",
+      "notes": "NJ LAD is broader than federal law and aggressively enforced."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "New Jersey Department of Labor, New Jersey statutes, NJ Division on Civil Rights, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "New Jersey is highly employee-protective, with strong pay transparency rules, ban-the-box protections, paid sick leave, and cannabis employment protections. Offer letters must be carefully drafted for compliance.",
+    "enforcement_agencies": [
+      "New Jersey Department of Labor and Workforce Development",
+      "New Jersey Division on Civil Rights",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Pay transparency law effective June 1, 2025",
+      "Continued enforcement of ban-the-box restrictions",
+      "Strong protections for off-duty cannabis use",
+      "Ongoing aggressive enforcement of NJ Law Against Discrimination"
+    ]
+  }
+}

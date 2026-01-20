@@ -1,0 +1,107 @@
+{
+  "state": "Maine",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.maine.gov/labor/",
+      "title": "Maine Department of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Maine Revised Statutes Title 26 \u00a7 599-A",
+      "message": "Non-competes PROHIBITED for most employees",
+      "detailedExplanation": "Maine prohibits non-compete agreements except: (1) employees above 400% of federal poverty level (~$60,000/year for individual), (2) agreement disclosed before offer or 3 weeks notice given, (3) legitimate business interest, (4) 1 year maximum duration.",
+      "requirement": "Can only use if: salary >$60k, disclosed before offer, 1 year max, legitimate interest",
+      "actionRequired": "Remove OR ensure: salary >$60k, pre-offer disclosure, 1-year limit",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete",
+        "noncompete"
+      ],
+      "alternativeLanguage": "confidentiality obligations (non-compete restricted by Maine law)",
+      "source": "Maine Title 26 \u00a7 599-A"
+    },
+    "salaryHistory": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Maine Revised Statutes Title 26 \u00a7 628",
+      "message": "CANNOT seek salary history from applicants",
+      "detailedExplanation": "Employers cannot request, require, or screen applicants based on wage history. Cannot seek information from current/former employers.",
+      "actionRequired": "Remove all salary history questions",
+      "flaggedPhrases": [
+        "previous salary",
+        "salary history",
+        "wage history",
+        "prior compensation"
+      ],
+      "alternativeLanguage": "What are your compensation expectations?",
+      "source": "Maine Equal Pay Law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirement currently",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Maine Ban the Box Law",
+      "message": "Cannot inquire about criminal history on initial application",
+      "detailedExplanation": "Employers cannot request criminal history information on initial employment application. Can inquire after initial application stage.",
+      "requirement": "Remove criminal history from applications",
+      "actionRequired": "Delay criminal history inquiry",
+      "source": "Maine Ban the Box"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Maine Revised Statutes Title 26 \u00a7 664",
+      "message": "Maine minimum wage: $14.15/hour (2024), increases annually",
+      "requirement": "Must pay current Maine minimum wage",
+      "actionRequired": "Track annual increases",
+      "source": "Maine minimum wage law"
+    },
+    "paidLeave": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Maine Earned Paid Leave Law",
+      "message": "PAID LEAVE REQUIRED (effective January 1, 2021)",
+      "detailedExplanation": "Employers with 10+ employees must provide earned paid leave. 1 hour per 40 hours worked, up to 40 hours per year. Can be used for any reason.",
+      "requirement": "Provide 1 hour per 40 hours worked",
+      "actionRequired": "Implement earned paid leave policy",
+      "source": "Maine Earned Paid Leave"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Maine law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing permitted with restrictions",
+      "detailedExplanation": "Must have written policy. Testing must be job-related.",
+      "source": "Maine law"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "error",
+      "lawReference": "Maine Revised Statutes Title 26 \u00a7 626",
+      "message": "Final wages due next regular payday",
+      "requirement": "Pay by next regular payday",
+      "source": "Maine wage law"
+    }
+  }
+}

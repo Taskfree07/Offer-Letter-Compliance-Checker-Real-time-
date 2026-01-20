@@ -1,0 +1,169 @@
+{
+  "state": "Vermont",
+  "state_code": "VT",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Vermont prohibits employers from asking applicants about wage or salary history and from relying on such information to determine compensation.",
+      "statute_citation": "21 V.S.A. § 495m",
+      "requirements": [
+        "Employers may not inquire into an applicant’s wage or salary history",
+        "Employers may not seek wage history from current or former employers",
+        "Applicants may voluntarily disclose wage history without prompting",
+        "Employers may confirm wage history only if the applicant voluntarily discloses it",
+        "Retaliation for refusing to disclose wage history is prohibited"
+      ],
+      "effective_date": "2018-07-01",
+      "confidence_level": "high",
+      "source_url": "https://legislature.vermont.gov/statutes/section/21/005/00495m",
+      "notes": "This is a strict statewide salary history ban."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Vermont requires covered employers to include compensation or a compensation range in job advertisements.",
+      "statute_citation": "21 V.S.A. § 495n (Pay Transparency Law)",
+      "requirements": [
+        "Employers must include the compensation or compensation range in job advertisements",
+        "Postings must be made in good faith",
+        "Applies to internal and external postings",
+        "Employers may not prohibit employees from discussing wages",
+        "Retaliation for wage discussion or pay inquiries is prohibited"
+      ],
+      "effective_date": "2023-07-01",
+      "confidence_level": "high",
+      "source_url": "https://labor.vermont.gov/fair-employment-practices/pay-transparency",
+      "notes": "Vermont is among the states that mandate pay ranges in job postings."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Vermont restricts non-compete agreements for low-wage employees and applies reasonableness standards for others.",
+      "statute_citation": "21 V.S.A. § 495h",
+      "requirements": [
+        "Non-competes are prohibited for employees earning at or below the Vermont minimum wage",
+        "Non-competes must protect legitimate business interests",
+        "Must be reasonable in time, geographic scope, and job scope",
+        "Overly broad restrictions may be unenforceable",
+        "Courts scrutinize restrictive covenants closely"
+      ],
+      "effective_date": "2018-07-01",
+      "confidence_level": "high",
+      "source_url": "https://legislature.vermont.gov/statutes/section/21/005/00495h",
+      "notes": "Vermont is relatively employee-protective regarding restrictive covenants."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Vermont restricts criminal history inquiries under its ban-the-box law and requires FCRA compliance for third-party background checks.",
+      "statute_citation": "21 V.S.A. § 495j; Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Employers generally may not inquire into criminal history on initial job applications",
+        "Criminal history inquiries may occur later in the hiring process",
+        "If using third-party background checks, written consent is required",
+        "Pre-adverse action notice must be provided with report and rights",
+        "Final adverse action notice must be provided if a negative decision is made"
+      ],
+      "effective_date": "2017-07-01",
+      "confidence_level": "high",
+      "source_url": "https://labor.vermont.gov/fair-employment-practices/criminal-history",
+      "notes": "Vermont has a statewide ban-the-box law applicable to private employers."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Vermont mandates paid sick leave and protects various statutory leave rights.",
+      "statute_citation": "21 V.S.A. § 481 et seq. (Earned Sick Time)",
+      "requirements": [
+        "Employees accrue at least 1 hour of paid sick leave per 52 hours worked",
+        "Employers must allow use of at least 40 hours of paid sick leave per year",
+        "Leave covers illness, preventive care, family care, and safe leave purposes",
+        "Employees must be allowed jury duty leave without retaliation",
+        "Offer letters must not conflict with statutory paid leave rights"
+      ],
+      "effective_date": "2019-01-01",
+      "confidence_level": "high",
+      "source_url": "https://labor.vermont.gov/leave/earned-sick-time",
+      "notes": "Paid sick leave is mandatory for most Vermont employers."
+    },
+    {
+      "topic": "drug_screening_and_cannabis_protections",
+      "summary": "Vermont legalizes recreational cannabis, but employment protections for off-duty use are limited.",
+      "statute_citation": "18 V.S.A. § 4230a; Vermont labor guidance",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may prohibit impairment during working hours",
+        "Employers may take action based on positive drug tests depending on policy",
+        "Policies must be applied consistently and in compliance with anti-discrimination laws"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://labor.vermont.gov/",
+      "notes": "Unlike some states, Vermont does not provide broad statutory employment protections for cannabis use."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Vermont if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Vermont contract law",
+      "requirements": [
+        "Agreement must be voluntary and clearly written",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate unfair or one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Clear drafting improves enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Vermont follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Vermont common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract specifies otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.vermont.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Vermont law prohibits employment discrimination on a broad range of protected characteristics.",
+      "statute_citation": "21 V.S.A. § 495 et seq. (Vermont Fair Employment Practices Act)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age, disability, national origin, ancestry",
+        "Cannot discriminate based on marital status or domestic violence victim status",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.vermont.gov/fair-employment-practices",
+      "notes": "Vermont provides broader civil rights protections than federal law in several areas."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Vermont Statutes, Vermont Department of Labor, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Vermont is employee-protective, with mandatory pay transparency, salary history bans, paid sick leave, and statewide ban-the-box protections. Offer letters and hiring practices must be carefully structured for compliance.",
+    "enforcement_agencies": [
+      "Vermont Department of Labor",
+      "Vermont Human Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Pay transparency law effective July 2023",
+      "Ongoing enforcement of salary history ban",
+      "Continued enforcement of earned sick time law",
+      "Continued enforcement of ban-the-box protections"
+    ]
+  }
+}

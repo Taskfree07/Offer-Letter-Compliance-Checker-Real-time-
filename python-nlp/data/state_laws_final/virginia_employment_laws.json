@@ -1,0 +1,150 @@
+{
+  "state": "Virginia",
+  "state_code": "VA",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Virginia enforces reasonable non-compete agreements under common law. Non-competes must protect legitimate business interests and be reasonable in scope, duration (typically 1-2 years), and geography. Virginia courts will modify overly broad agreements to make them reasonable (blue pencil doctrine). Generally employer-friendly on non-competes.",
+      "effective_date": "Low-wage restriction: 2020-07-01; Common law ongoing",
+      "source_url": "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-28.7:7/",
+      "notes": "Virginia is generally employer-friendly on non-competes but prohibits them for low-wage workers. Federal FTC ban blocked in 2024.",
+      "law_citation": "Common law; Va. Code § 40.1-28.7:7 (low-wage worker restriction)",
+      "full_text": "Must protect legitimate business interest (trade secrets, confidential information, customer relationships)\nMust be reasonable in duration (typically 1-2 years maximum)\nMust be reasonable in geographic scope\nMust be reasonable in scope of prohibited activities\nMust be supported by adequate consideration\nVirginia courts will blue-pencil (modify) unreasonable provisions\nLOW-WAGE WORKERS: Cannot enforce non-competes for employees earning less than median wage\nLow-wage restriction: Va. Code § 40.1-28.7:7 prohibits non-competes for workers earning less than median wage for Virginia or their locality\nException: Sale of business non-competes still enforceable\nCourts balance employer interests with employee mobility\nNon-solicitation agreements generally easier to enforce than full non-competes",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review Virginia non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Virginia has NO statewide salary history ban. However, state agencies are prohibited from asking about salary history under executive directive. Private employers may ask about and consider salary history. Richmond and other localities may have local restrictions.",
+      "effective_date": "2019 (state agencies); N/A for private employers",
+      "source_url": "https://www.bakerdonelson.com/easy-guide-virginia",
+      "notes": "Virginia has not enacted statewide salary history ban for private employers. Only state government agencies restricted.",
+      "law_citation": "Executive Directive 6 (2019) for state agencies; No statewide private employer statute",
+      "full_text": "STATE AGENCIES: Cannot ask about salary history (Executive Directive 6)\nPRIVATE EMPLOYERS: No restriction on asking salary history\nPrivate employers may ask applicants about prior compensation\nPrivate employers may use salary history in setting compensation\nSome localities may have local restrictions\nFederal equal pay laws still apply\nMany employers voluntarily avoid asking for equity reasons",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review Virginia salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Virginia PROPOSED pay transparency legislation (SB 1132 in 2024) but it was VETOED by the governor. As of January 2026, Virginia has NO pay transparency law requiring salary ranges in job postings. Employers are not required to disclose compensation ranges.",
+      "effective_date": "N/A - No law enacted",
+      "source_url": "https://www.sixfifty.com/blog/virginia-pay-transparency-law-requirements/",
+      "notes": "Virginia proposed but did not enact pay transparency law. Governor vetoed SB 1132 in 2024.",
+      "law_citation": "Proposed SB 1132 (vetoed 2024); No enacted statute",
+      "full_text": "STATEWIDE: No requirement to include salary ranges in job postings\nSTATEWIDE: No requirement to disclose pay ranges to applicants\nSTATEWIDE: No requirement to disclose pay ranges to current employees\nSTATEWIDE: No pay data reporting requirements\nSB 1132 was vetoed in March 2024\nFederal equal pay laws still apply\nEmployers may voluntarily disclose pay ranges",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review Virginia pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Virginia has limited ban-the-box protections. State agencies cannot ask about criminal history on initial applications. Private employers generally can ask about criminal history at any stage but must comply with federal FCRA. Richmond has local ban-the-box ordinance.",
+      "effective_date": "State agencies: 2021; FCRA ongoing",
+      "source_url": "https://www.bakerdonelson.com/easy-guide-virginia",
+      "notes": "Virginia is employer-friendly with minimal state restrictions. Federal FCRA provides primary regulation.",
+      "law_citation": "Va. Code § 2.2-2817.2 (state agencies); Federal FCRA (15 U.S.C. § 1681); Richmond ordinance for city contractors",
+      "full_text": "STATE AGENCIES: Cannot ask about criminal history on initial application\nPRIVATE EMPLOYERS: Generally can ask about criminal history on applications\nPRIVATE EMPLOYERS: Must comply with federal FCRA\nRICHMOND: City contractors subject to ban-the-box ordinance\nFCRA: Must get written consent before background check\nFCRA: Must provide pre-adverse action notice with copy of report\nFCRA: Must provide final adverse action notice\nFCRA: Seven-year lookback for most non-conviction records\nFCRA: Ten-year lookback for bankruptcies\nFCRA: No time limit on convictions\nFCRA: $75,000+ salary positions exempt from lookback limits\nMust consider: nature of crime, time elapsed, job duties, rehabilitation\nCannot discriminate based solely on arrest without conviction",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review Virginia background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Virginia has NO statewide paid sick leave or paid leave mandate for private employers. No state law requires employers to provide paid or unpaid sick leave beyond federal FMLA. Employers may voluntarily offer paid leave benefits.",
+      "effective_date": "N/A - No state law",
+      "source_url": "https://www.peoplekeep.com/resources/virginia-hr-compliance",
+      "notes": "Virginia has no paid leave mandates. One of more employer-friendly states on leave policies.",
+      "law_citation": "No Virginia statute; Federal FMLA (29 U.S.C. § 2601)",
+      "full_text": "STATEWIDE: No requirement for paid sick leave\nSTATEWIDE: No requirement for unpaid sick leave beyond federal FMLA\nPrivate employers not required to provide sick leave benefits\nFederal FMLA applies to employers with 50+ employees: up to 12 weeks unpaid leave\nFMLA requirements: employee worked 1,250 hours in past 12 months, employed 12+ months, employer has 50+ employees within 75 miles\nEmployers may establish own sick leave policies\nNo state penalties for lack of paid leave",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review Virginia paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Virginia generally enforces arbitration agreements under federal and state law. Follows Federal Arbitration Act. Virginia has enacted Uniform Arbitration Act. Agreements must be clear, mutual, and not unconscionable. Courts favor arbitration.",
+      "effective_date": "Ongoing under federal and state law",
+      "source_url": "https://law.lis.virginia.gov/vacode/title8.01/chapter20.1/",
+      "notes": "Virginia is arbitration-friendly. Courts enforce valid arbitration agreements.",
+      "law_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); Va. Code § 8.01-577 et seq. (Uniform Arbitration Act)",
+      "full_text": "Arbitration agreements generally enforceable under FAA and Virginia Uniform Arbitration Act\nMust be in writing and signed by both parties\nMust have mutual agreement to arbitrate\nMust identify claims subject to arbitration\nCannot be unconscionable\nMust provide for neutral arbitrator\nAdequate consideration required\nVirginia courts favor arbitration\nClass action waivers generally enforceable\nPre-dispute arbitration agreements enforceable\nCan be challenged on contract grounds (fraud, duress, unconscionability)\nFederal policy favoring arbitration applies",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review Virginia arbitration requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Virginia follows at-will employment doctrine. Either party can terminate employment at any time for any legal reason or no reason. Exceptions exist for discrimination, retaliation, public policy violations, and breach of contract. Virginia is generally employer-friendly.",
+      "effective_date": "Ongoing common law doctrine",
+      "source_url": "https://www.bakerdonelson.com/easy-guide-virginia",
+      "notes": "Virginia is at-will employment state with typical exceptions. Generally employer-friendly. Handbook disclaimers recommended.",
+      "law_citation": "Common law doctrine; Va. Code § 2.2-3900 et seq. (Virginia Human Rights Act - anti-discrimination)",
+      "full_text": "Default: Employment terminable at will by either party\nNo notice required unless contract/policy requires it\nFinal wages must be paid by next regular payday\nEXCEPTIONS - Cannot terminate for: Race, color, religion, national origin, sex, pregnancy, childbirth, age, marital status, disability, genetic information (Virginia Human Rights Act)\nCannot terminate for: Retaliation (workers' comp claim, jury duty, military service, National Guard duty)\nCannot terminate for: Violation of public policy (refusing to violate law)\nCannot terminate for: Breach of employment contract (written or implied)\nEmployment handbooks may create implied contracts if not properly disclaimed\nWritten employment contracts override at-will status\nUnion/collective bargaining agreements override at-will status\nVirginia courts narrowly construe at-will exceptions",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review Virginia at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Virginia has NO state statute restricting private employer drug testing. Employers may conduct pre-employment, random, reasonable suspicion, and post-accident testing. Recommended to have written policy. Workers' compensation benefits may be affected by positive drug tests.",
+      "effective_date": "Workers' comp provisions ongoing",
+      "source_url": "https://law.lis.virginia.gov/vacode/title65.2/chapter3/section65.2-306/",
+      "notes": "Virginia is very employer-friendly on drug testing with no state restrictions. Drug testing significantly impacts workers' comp claims.",
+      "law_citation": "Va. Code § 65.2-306 (workers' comp drug testing provisions); No general restriction statute",
+      "full_text": "STATEWIDE: No restriction on private employer drug testing\nPre-employment testing: Permitted\nRandom testing: Permitted\nReasonable suspicion testing: Permitted\nPost-accident testing: Permitted\nWorkers' comp: Positive drug test creates rebuttable presumption that intoxication was sole proximate cause of injury\nWorkers' comp: Employee must rebut presumption to receive benefits\nWorkers' comp: Test must be conducted within 12 hours of accident\nRecommended: Written drug testing policy applied consistently\nFederal DOT requirements apply to transportation/safety-sensitive positions\nNo state protections for medical or recreational marijuana users (marijuana illegal in Virginia for non-medical use)\nMedical marijuana: Limited program exists but no workplace protections",
+      "severity": "warning",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review Virginia drug screening requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 8,
+    "needs_verification": 0,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

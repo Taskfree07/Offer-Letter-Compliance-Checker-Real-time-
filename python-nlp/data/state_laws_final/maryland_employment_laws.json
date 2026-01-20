@@ -1,0 +1,167 @@
+{
+  "state": "Maryland",
+  "state_code": "MD",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Maryland prohibits employers from asking applicants about wage or salary history and from relying on such information in determining compensation.",
+      "statute_citation": "Md. Code, Labor & Employment § 3-304.2",
+      "requirements": [
+        "Employers may not seek or rely on an applicant's wage history",
+        "Applies to oral, written, or third-party inquiries",
+        "Applicants may voluntarily disclose salary history",
+        "Employers may confirm salary history only after a job offer with compensation has been made",
+        "Retaliation for refusing to disclose salary history is prohibited"
+      ],
+      "effective_date": "2020-02-06",
+      "confidence_level": "high",
+      "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gle&section=3-304.2",
+      "notes": "This is a strict statewide salary history ban."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Maryland requires employers to disclose wage ranges in job postings and provide pay range information to applicants and employees under certain circumstances.",
+      "statute_citation": "Md. Code, Labor & Employment § 3-304.1 (as amended by 2022 pay transparency law)",
+      "requirements": [
+        "Job postings must include the wage range for the position",
+        "Postings must include a general description of benefits and compensation offered",
+        "Employers must provide wage range to applicants upon request",
+        "Employers must provide wage range to employees for their position upon request",
+        "Retaliation for wage discussion or requests is prohibited"
+      ],
+      "effective_date": "2022-10-01",
+      "confidence_level": "high",
+      "source_url": "https://www.dllr.state.md.us/labor/wagepay/wage-transparency.shtml",
+      "notes": "Maryland requires pay ranges directly in job advertisements."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Maryland restricts non-compete agreements for low-wage employees and applies reasonableness standards for others.",
+      "statute_citation": "Md. Code, Labor & Employment § 3-716",
+      "requirements": [
+        "Non-competes are prohibited for employees earning less than 150% of the state minimum wage",
+        "Non-competes must be reasonable in duration and geographic scope for higher earners",
+        "Must protect legitimate business interests",
+        "Overly broad restrictions may be unenforceable"
+      ],
+      "effective_date": "2020-10-01",
+      "confidence_level": "high",
+      "source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gle&section=3-716",
+      "notes": "Maryland has a statutory income threshold for enforceable non-competes."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Maryland restricts criminal history inquiries and requires compliance with federal FCRA procedures when using background check vendors.",
+      "statute_citation": "Md. Code, State Gov’t § 20-602 (Ban-the-box for certain employers); Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Certain employers cannot inquire into criminal history before an interview",
+        "If using a third-party background check, written consent is required",
+        "Must provide pre-adverse action notice with report and rights",
+        "Must provide final adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mccr.maryland.gov/Pages/BanTheBox.aspx",
+      "notes": "Maryland has statewide ban-the-box rules applicable to covered employers."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Maryland mandates paid sick and safe leave for covered employers and protects certain civic leave rights.",
+      "statute_citation": "Maryland Healthy Working Families Act (Md. Code, Labor & Employment § 3-1301 et seq.)",
+      "requirements": [
+        "Employers with 15+ employees must provide paid sick and safe leave",
+        "Accrual generally at 1 hour per 30 hours worked",
+        "Up to 40 hours of leave per year required",
+        "Covers illness, preventive care, family care, and domestic violence situations",
+        "Employees must be allowed leave for jury duty without retaliation"
+      ],
+      "effective_date": "2018-02-11",
+      "confidence_level": "high",
+      "source_url": "https://www.dllr.state.md.us/paidleave/",
+      "notes": "Offer letters should not contradict statutory sick and safe leave entitlements."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Maryland permits workplace drug testing. Recreational cannabis use has limited employment protections depending on circumstances.",
+      "statute_citation": "Maryland Labor and Employment guidance; Maryland cannabis legislation",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may prohibit impairment during work",
+        "Drug testing policies should be applied consistently",
+        "Some local or industry-specific rules may impose additional limits"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.dllr.state.md.us/labor/empm.shtml",
+      "notes": "Maryland employers should carefully draft drug testing policies, especially for safety-sensitive roles."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Maryland if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Maryland Uniform Arbitration Act",
+      "requirements": [
+        "Agreement must be voluntary and clearly written",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Clear drafting improves enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Maryland follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Maryland common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract states otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Handbooks or policies may create implied obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dllr.state.md.us/labor/empm.shtml",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Maryland law prohibits discrimination in employment on a broad range of protected characteristics, often broader than federal law.",
+      "statute_citation": "Maryland Fair Employment Practices Act (Md. Code, State Gov’t § 20-601 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, gender identity, sexual orientation",
+        "Cannot discriminate based on age, disability, national origin, marital status",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://mccr.maryland.gov/Pages/Employment.aspx",
+      "notes": "Offer letters and terms must not imply exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Maryland General Assembly statutes, Maryland Department of Labor, Maryland Commission on Civil Rights, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Maryland is relatively employee-protective, with mandatory pay transparency, salary history bans, paid sick leave, and income-based non-compete restrictions.",
+    "enforcement_agencies": [
+      "Maryland Department of Labor",
+      "Maryland Commission on Civil Rights",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Pay transparency rules require salary ranges in job postings",
+      "Continued enforcement of salary history ban",
+      "Ongoing enforcement of paid sick and safe leave obligations",
+      "Income thresholds continue to limit non-compete enforceability"
+    ]
+  }
+}

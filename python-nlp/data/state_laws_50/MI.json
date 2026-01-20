@@ -1,0 +1,43 @@
+{
+  "state": "Michigan",
+  "state_code": "MI",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "w About California Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Florida Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Georgia Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Michigan Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About New York Non-Disclosure Agreements\n\n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "w About California Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Florida Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Georgia Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Michigan Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About New York Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Pennsylvania Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About Texas Non-Di fore effective date\nExceptions: Banned for non-exempt employees, broadcasters, physicians, ",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": " Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsy",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": " Bans:\r\n            24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary hist . They can, however, confirm prior history if volunteered by the applicant or if an offer h",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

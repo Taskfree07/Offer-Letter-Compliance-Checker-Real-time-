@@ -1,0 +1,164 @@
+{
+  "state": "South Dakota",
+  "state_code": "SD",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "South Dakota does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase discrimination risk under federal law",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/employment_laws.aspx",
+      "notes": "Although legal, many employers avoid salary history questions to reduce Title VII and Equal Pay Act risk."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "South Dakota does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose compensation information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/employment_laws.aspx",
+      "notes": "Multi-state employers may still disclose pay ranges to comply with other state laws."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in South Dakota if reasonable in duration, geography, and scope and if they protect legitimate business interests.",
+      "statute_citation": "South Dakota common law",
+      "requirements": [
+        "Must protect legitimate business interests",
+        "Must be reasonable in duration",
+        "Must be reasonable in geographic scope",
+        "Cannot impose undue hardship on the employee",
+        "Overly broad restrictive covenants may be invalidated by courts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://ujs.sd.gov/Supreme_Court/default.aspx",
+      "notes": "South Dakota courts generally apply reasonableness standards similar to many employer-friendly states."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "South Dakota does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "South Dakota does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "S.D. Codified Laws § 16-13-10.6 (jury duty); § 12-3-5 (voting leave)",
+      "requirements": [
+        "Employees must be allowed leave for jury duty",
+        "Employers cannot penalize employees for jury service",
+        "Employees must be allowed time off to vote if work schedule conflicts with polling hours",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/employment_laws.aspx",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "South Dakota permits workplace drug testing. Recreational cannabis use is illegal and not protected in employment.",
+      "statute_citation": "South Dakota Codified Laws Title 60; criminal law provisions on marijuana",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Drug testing policies should be applied consistently",
+        "Employers may discipline or refuse hire based on positive marijuana tests",
+        "Employers may prohibit impairment during work"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/employment_laws.aspx",
+      "notes": "South Dakota is employer-friendly regarding drug testing and cannabis-related policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in South Dakota if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; South Dakota contract law",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Standard enforceability principles apply."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "South Dakota follows the at-will employment doctrine, subject to contractual, statutory, and public policy exceptions.",
+      "statute_citation": "South Dakota common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract provides otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/employment_laws.aspx",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "South Dakota law prohibits discrimination in employment based on protected characteristics and largely mirrors federal civil rights protections.",
+      "statute_citation": "South Dakota Human Relations Act (S.D. Codified Laws § 20-13-1 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dlr.sd.gov/human_rights.aspx",
+      "notes": "Offer letters must avoid language implying exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "South Dakota Department of Labor and Regulation, South Dakota Codified Laws, South Dakota Division of Human Rights, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "South Dakota is generally employer-friendly, with few statutory hiring restrictions beyond federal law, but strict adherence to anti-discrimination and FCRA requirements is still critical.",
+    "enforcement_agencies": [
+      "South Dakota Department of Labor and Regulation",
+      "South Dakota Division of Human Rights",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Continued reliance on federal FCRA for background check compliance"
+    ]
+  }
+}

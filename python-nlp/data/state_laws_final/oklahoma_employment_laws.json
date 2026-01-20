@@ -1,0 +1,168 @@
+{
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes VOID except in very limited circumstances",
+      "statute_citation": "Oklahoma Statutes Title 15 § 219A",
+      "requirements": [
+        "Non-competes VOID except in very limited circumstances",
+        "Oklahoma law makes non-compete agreements void except: (1) sale of business or dissolution of partnership, (2) protection of trade secrets (narrowly defined), (3) employees with access to confidential information who earn $100k+ (executive/management), (4) physicians under specific conditions.",
+        "Action required: Remove non-compete OR verify exception applies (business sale, trade secrets, exec $100k+)",
+        "Can only use for: business sale, trade secrets, executives earning $100k+, or physicians"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": "Oklahoma law makes non-compete agreements void except: (1) sale of business or dissolution of partnership, (2) protection of trade secrets (narrowly defined), (3) employees with access to confidential information who earn $100k+ (executive/management), (4) physicians under specific conditions."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Oklahoma follows federal minimum: $7.25/hour",
+      "statute_citation": "Oklahoma Statutes Title 40 § 197.5",
+      "requirements": [
+        "Oklahoma follows federal minimum: $7.25/hour",
+        "Must pay federal minimum $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED and ENCOURAGED",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "Drug testing PERMITTED and ENCOURAGED",
+        "Oklahoma Standards for Workplace Drug and Alcohol Testing Act provides liability protections"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": "Oklahoma Standards for Workplace Drug and Alcohol Testing Act provides liability protections"
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Oklahoma common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next regular payday",
+      "statute_citation": "Oklahoma Statutes Title 40 § 165.3",
+      "requirements": [
+        "Final wages due next regular payday",
+        "Pay by next regular payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Oklahoma is RIGHT TO WORK state",
+      "statute_citation": "Oklahoma Constitution Article 23 § 1A",
+      "requirements": [
+        "Oklahoma is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "Meal and rest breaks required for minors, recommended for adults",
+      "statute_citation": "Oklahoma Statutes Title 40 § 165.1",
+      "requirements": [
+        "Meal and rest breaks required for minors, recommended for adults",
+        "Minors under 16: rest breaks required. Adults: not required but recommended. Federal law requires breaks under 20 minutes be paid if provided."
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://oklahoma.gov/odol.html",
+      "notes": "Minors under 16: rest breaks required. Adults: not required but recommended. Federal law requires breaks under 20 minutes be paid if provided."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Oklahoma Department of Labor",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Oklahoma employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

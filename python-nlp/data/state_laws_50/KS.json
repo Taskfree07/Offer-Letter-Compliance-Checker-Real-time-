@@ -1,0 +1,43 @@
+{
+  "state": "Kansas",
+  "state_code": "KS",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned for healthcare agency workers; limited for physicians\nKansas\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned for healthcare agency workers; limited for physicians\nKansas\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Limited f",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": " law\n\n\n\n\nMississippi\n\nJackson\n\nEffective date: June 13, 2019\nEmployers affected: The city \nApplications for employment with the city shall not inquire about salary history.\nView the law\n\n\n\n\nMissouri\n\nKansas City\n\nEffective date: July 26, 2018 \nEmployers affected: The city \nThe city may not ask appli",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": " law\n\n\n\n\nMississippi\n\nJackson\n\nEffective date: June 13, 2019\nEmployers affected: The city \nApplications for employment with the city shall not inquire about salary history.\nView the law\n\n\n\n\nMissouri\n\nKansas City\n\nEffective date: July 26, 2018 \nEmployers affected: The city \nThe city may not ask applicants for their pay history until they have been hired at an agreed-upon salary.\nView the law\n\n\nEffective ",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

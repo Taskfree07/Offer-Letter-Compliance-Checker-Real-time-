@@ -1,0 +1,150 @@
+{
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "New Jersey restricts non-compete agreements through case law. Non-competes must protect legitimate business interests and be reasonable in scope, duration (typically 1 year), and geography. Courts carefully scrutinize non-competes and will not enforce overly broad agreements. New Jersey is generally employee-friendly on non-competes.",
+      "effective_date": "Ongoing common law",
+      "source_url": "https://caselaw.findlaw.com/nj-supreme-court/1453642.html",
+      "notes": "New Jersey is employee-friendly on non-competes. Courts scrutinize carefully and require strong justification. Federal FTC ban blocked in 2024.",
+      "law_citation": "Common law; Solari Industries v. Malady, 55 N.J. 571 (1970) and subsequent case law",
+      "full_text": "Must protect legitimate business interest (trade secrets, confidential information, specialized training)\nMust be reasonable in temporal scope (typically maximum 1 year)\nMust be reasonable in geographic scope (limited to area of actual competition)\nMust be reasonable in scope of prohibited activities\nMust be supported by adequate consideration\nCannot be oppressive or unduly burdensome on employee\nMust not harm public interest\nCourts apply three-part test: protects legitimate interest, reasonable, not harmful to public\nNew Jersey courts strictly construe non-competes against employers\nCourts generally will NOT blue-pencil unreasonable provisions\nLower-level employees rarely subject to enforceable non-competes\nTrend toward narrower enforcement in recent years",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review New Jersey non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "New Jersey prohibits employers from asking about salary history. Employers cannot screen applicants based on salary history, ask about prior compensation, or use salary history in setting compensation. One of the strongest salary history bans in the country.",
+      "effective_date": "2020-01-01",
+      "source_url": "https://www.nj.gov/labor/wageandhour/tools-resources/laws-regulations/diane-b-allen-equal-pay-act/",
+      "notes": "New Jersey has one of the strongest salary history bans. Part of comprehensive equal pay legislation.",
+      "law_citation": "N.J.S.A. 34:11-5.12 et seq. (Diane B. Allen Equal Pay Act)",
+      "full_text": "Employers cannot ask about applicant's salary history\nCannot screen applicants based on salary history\nCannot require salary history disclosure\nCannot use prior salary history to set compensation\nCannot search public records for salary history\nApplicant may voluntarily disclose salary history without prompting\nIf voluntarily disclosed, employer may consider but cannot rely solely on it\nApplies to all New Jersey employers\nEmployers must post notice of employees' right to equal pay\nViolations can result in civil penalties and damages\nEffective January 1, 2020",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review New Jersey salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "New Jersey does NOT currently require salary ranges in job postings. However, under the Diane B. Allen Equal Pay Act, employers must provide pay range information to employees who are promoted or transferred, and to employees upon request for their current position. No general posting requirement exists.",
+      "effective_date": "2020-01-01",
+      "source_url": "https://www.nj.gov/labor/wageandhour/tools-resources/laws-regulations/diane-b-allen-equal-pay-act/",
+      "notes": "New Jersey has limited pay transparency requirements focused on current employees, not job postings.",
+      "law_citation": "N.J.S.A. 34:11-5.12 (Diane B. Allen Equal Pay Act)",
+      "full_text": "Must provide pay range to employees upon request for their current position\nMust provide pay range for position when promoting or transferring employee\nNOT required to include salary ranges in external job postings\nEmployees have right to discuss wages without retaliation\nEmployers cannot prohibit employees from discussing compensation\nViolations can result in civil penalties\nApplies to all New Jersey employers",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review New Jersey pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "New Jersey has comprehensive 'ban the box' law (Fair Chance in Housing Act and Opportunity to Compete Act). Employers cannot ask about criminal history on initial applications. Cannot inquire about criminal history until after first interview. Strict limitations on what can be asked and considered.",
+      "effective_date": "2015 (original); Expanded 2018, 2021",
+      "source_url": "https://www.nj.gov/labor/wageandhour/tools-resources/laws-regulations/opportunity-to-compete-act/",
+      "notes": "New Jersey has one of strongest ban-the-box laws. Cannot ask about criminal history until after first interview.",
+      "law_citation": "N.J.S.A. 34:6B-14 (Opportunity to Compete Act); N.J.S.A. 2A:168A-1 (Fair Chance in Housing Act)",
+      "full_text": "Cannot ask about criminal history on initial application\nCannot inquire about criminal history until after FIRST INTERVIEW\nCannot ask about: arrests not resulting in conviction, participation in diversion/treatment programs, expunged/sealed records\nAfter conditional offer: may conduct background check\nMust provide applicant with copy of background check\nMust conduct individualized assessment if taking adverse action\nMust consider: nature of offense, time elapsed, job duties, rehabilitation\nMust provide written notice of adverse action with opportunity to respond\nCannot automatically disqualify based on criminal record\nExceptions: positions where law prohibits hiring people with certain records\nApplies to employers with 15+ employees (later expanded to all employers)\nViolations enforced by Attorney General - civil penalties up to $5,000 first offense, $10,000 subsequent",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review New Jersey background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "New Jersey requires employers to provide earned sick leave. Employees accrue 1 hour of paid sick leave for every 30 hours worked, up to 40 hours per year. Applies to all employers regardless of size.",
+      "effective_date": "2018-10-29",
+      "source_url": "https://www.nj.gov/labor/wageandhour/tools-resources/laws-regulations/new-jersey-earned-sick-leave-law/",
+      "notes": "New Jersey earned sick leave applies to ALL employers with no size exemption. One of more comprehensive state sick leave laws.",
+      "law_citation": "N.J.S.A. 34:11D-1 et seq. (New Jersey Earned Sick Leave Law)",
+      "full_text": "Applies to ALL New Jersey employers (no size threshold)\nEmployees accrue 1 hour per 30 hours worked\nMaximum 40 hours per year\nCan begin using after 120th calendar day of employment\nEmployers may cap accrual at 40 hours\nMust allow carryover of unused time year-to-year\nMay cap usage at 40 hours per year\nUse allowed for: employee illness/injury, family member care, medical appointments, domestic/sexual violence situations, school closures for public health emergency\nCan use for child's school-related conferences, meetings, events\nEmployers may require up to 7 days advance notice for foreseeable absences\nNOT required to pay out unused sick leave at termination\nMust provide written notice of sick leave rights\nRecords must be maintained for 5 years\nViolations: civil penalties, retaliation prohibited\nEffective October 29, 2018",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review New Jersey paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "New Jersey enforces arbitration agreements but with some restrictions. Follows Federal Arbitration Act generally. Courts scrutinize arbitration agreements for unconscionability more closely than many states. Must be fair, mutual, and not waive substantive rights.",
+      "effective_date": "Ongoing under federal and state law",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "New Jersey courts more willing to find arbitration agreements unconscionable than some states. Must be procedurally fair.",
+      "law_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); New Jersey common law",
+      "full_text": "Arbitration agreements generally enforceable under FAA\nMust be in writing and clearly presented\nMust have mutual agreement to arbitrate\nMust identify claims subject to arbitration\nCannot be procedurally or substantively unconscionable\nMust allow meaningful opportunity to review before signing\nCannot impose unreasonable costs on employee\nMust provide for neutral arbitrator\nAdequate consideration required\nNew Jersey courts scrutinize arbitration agreements more carefully than many states\nClass action waivers generally enforceable but subject to challenge\nPre-dispute arbitration agreements enforceable if fair\nCan be challenged on unconscionability grounds",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review New Jersey arbitration requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "New Jersey follows at-will employment doctrine with significant exceptions. Either party can terminate employment, but New Jersey recognizes broader exceptions than many states including implied covenant of good faith and fair dealing in some contexts.",
+      "effective_date": "Ongoing common law and statutory",
+      "source_url": "https://www.nj.gov/oag/dcr/index.html",
+      "notes": "New Jersey has stronger employee protections than many at-will states. NJLAD is one of broadest anti-discrimination laws. Handbook disclaimers critical.",
+      "law_citation": "Common law doctrine; N.J.S.A. 10:5-1 et seq. (New Jersey Law Against Discrimination - NJLAD)",
+      "full_text": "Default: Employment terminable at will by either party\nNo notice required unless contract/policy requires it\nFinal wages must be paid by next regular payday\nEXCEPTIONS - Cannot terminate for: Race, creed, color, national origin, ancestry, age, marital status, civil union status, domestic partnership status, affectional/sexual orientation, gender identity/expression, sex, pregnancy, disability, atypical hereditary cellular/blood trait, genetic information, military service (NJLAD - very broad)\nCannot terminate for: Retaliation (whistleblowing, workers' comp, jury duty, military service)\nCannot terminate for: Violation of public policy (Pierce v. Ortho - refusing to violate professional ethics)\nCannot terminate for: Breach of employment contract or handbook provisions\nEmployment handbooks create enforceable obligations if not properly disclaimed\nNew Jersey recognizes implied covenant of good faith in certain long-term employment relationships\nWritten employment contracts override at-will status\nUnion/collective bargaining agreements override at-will status\nNew Jersey is more employee-friendly than many states on wrongful termination",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review New Jersey at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "New Jersey prohibits employment discrimination against cannabis users under the Cannabis Regulatory, Enforcement Assistance, and Marketplace Modernization Act (CREAMMA). Employers cannot take adverse action based solely on cannabis use outside work hours. Complex testing requirements with Workplace Impairment Recognition Expert (WIRE) procedures.",
+      "effective_date": "2021-02-22 (CREAMMA enacted)",
+      "source_url": "https://www.nj.gov/cannabis/businesses/employment-resources/",
+      "notes": "New Jersey has most complex cannabis workplace protections in country. WIRE requirement creates significant compliance obligations. Employers cannot rely solely on positive drug test.",
+      "law_citation": "N.J.S.A. 24:6I-1 et seq. (CREAMMA - Cannabis Act)",
+      "full_text": "Cannot discriminate against employees for cannabis use outside work hours\nCannot refuse to hire applicants solely based on positive cannabis test\nPre-employment testing permitted but cannot be sole basis for hiring decision\nTo take action for suspected workplace impairment: must use scientifically valid drug test\nIf positive for cannabinoids: must use Workplace Impairment Recognition Expert (WIRE) for physical evaluation\nWIRE must conduct standardized evaluation to determine actual impairment\nCan test for: reasonable suspicion of workplace use, observable signs of impairment, regular screening during work hours, random testing for safety-sensitive positions, post-accident investigation\nMust have written drug testing policy\nCannot test based solely on smell of cannabis\nPositive test + lack of physical impairment signs = cannot take adverse action\nSafety-sensitive positions may have additional testing latitude\nFederal contractors must comply with federal drug-free workplace requirements\nComplex compliance - consultation with employment counsel recommended",
+      "severity": "error",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review New Jersey drug screening requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 8,
+    "needs_verification": 0,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

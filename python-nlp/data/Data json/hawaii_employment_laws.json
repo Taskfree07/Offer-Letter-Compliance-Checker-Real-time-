@@ -1,0 +1,109 @@
+{
+  "state": "Hawaii",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.hawaii.gov/",
+      "title": "Hawaii Department of Labor and Industrial Relations",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Hawaii Revised Statutes \u00a7 480-4(c)",
+      "message": "Non-competes PROHIBITED for most tech/creative workers",
+      "detailedExplanation": "Hawaii prohibits non-compete agreements for technology workers and employees earning less than $100,000/year (effective 2022). Enforceable only for executive/management earning $100k+ or if business is sold.",
+      "requirement": "Can only use for executives earning $100k+ or business sale",
+      "actionRequired": "Remove non-compete OR verify employee earns $100k+ and is executive",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete",
+        "noncompete"
+      ],
+      "alternativeLanguage": "confidentiality and trade secret protection (non-compete prohibited by Hawaii law)",
+      "source": "Hawaii HRS \u00a7 480-4(c)"
+    },
+    "salaryHistory": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Hawaii Revised Statutes \u00a7 378-2.3",
+      "message": "CANNOT inquire about salary history",
+      "detailedExplanation": "Employers cannot inquire about prospective employee's compensation history or require that history satisfies minimum/maximum criteria.",
+      "actionRequired": "Remove all salary history questions",
+      "flaggedPhrases": [
+        "previous salary",
+        "salary history",
+        "prior compensation"
+      ],
+      "alternativeLanguage": "What is your desired compensation for this position?",
+      "source": "Hawaii Equal Pay Law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirement currently",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Hawaii Fair Chance Law",
+      "message": "Cannot inquire about convictions until after conditional offer",
+      "detailedExplanation": "Employers cannot ask about or consider arrest or criminal records until after conditional job offer made.",
+      "requirement": "Delay criminal history inquiry until after conditional offer",
+      "actionRequired": "Ensure background check occurs post-offer",
+      "source": "Hawaii Ban the Box"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Hawaii Revised Statutes \u00a7 387-2",
+      "message": "Hawaii minimum wage: $14.00/hour (2024-2027), $18.00/hour by 2028",
+      "requirement": "Must pay $14.00/hour currently",
+      "actionRequired": "Track future increases to $18/hour by 2028",
+      "source": "Hawaii minimum wage schedule"
+    },
+    "paidLeave": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Hawaii Family Leave Law & Temp Disability Insurance",
+      "message": "Temporary Disability Insurance (TDI) and family leave required",
+      "detailedExplanation": "Hawaii requires TDI coverage providing partial wage replacement. Family leave available for certain employees.",
+      "requirement": "Provide TDI coverage and family leave rights",
+      "actionRequired": "Ensure TDI compliance and family leave policies",
+      "source": "Hawaii TDI program"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies with some exceptions",
+      "bestPractice": "Include clear disclaimer",
+      "source": "Hawaii law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Hawaii medical cannabis protections",
+      "message": "Cannot discriminate against medical cannabis users",
+      "detailedExplanation": "Hawaii protects medical cannabis patients from discrimination. Cannot refuse to hire or penalize for lawful medical cannabis use.",
+      "actionRequired": "Review drug testing policies for medical cannabis compliance",
+      "source": "Hawaii medical cannabis law"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Hawaii Revised Statutes \u00a7 388-3",
+      "message": "Final wages due immediately or next business day",
+      "requirement": "Pay immediately upon discharge or next working day",
+      "source": "Hawaii wage law"
+    }
+  }
+}

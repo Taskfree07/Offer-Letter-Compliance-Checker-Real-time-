@@ -1,0 +1,154 @@
+{
+  "state": "Wyoming",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://dws.wyo.gov/",
+      "title": "Wyoming Department of Workforce Services",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Wyoming Statutes \u00a7 1-23-104",
+      "message": "Non-competes ENFORCEABLE if reasonable",
+      "detailedExplanation": "Wyoming enforces reasonable non-compete agreements. Must protect legitimate business interest with reasonable time, geography, and scope limitations. Courts will assess reasonableness on case-by-case basis. Typically 1-2 years considered reasonable.",
+      "suggestion": "Keep duration to 1-2 years, reasonable geographic scope",
+      "actionRequired": "Ensure reasonableness standards are met",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competitive activities",
+        "competing business"
+      ],
+      "alternativeLanguage": "reasonable non-compete restrictions protecting legitimate business interests",
+      "source": "Wyoming statutes and case law"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "No statutory prohibition",
+      "message": "Salary history inquiries are PERMITTED",
+      "detailedExplanation": "Wyoming has no law restricting salary history questions",
+      "actionRequired": "No restrictions",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No statutory requirement",
+      "message": "NO pay transparency requirements",
+      "detailedExplanation": "No requirement to disclose salary ranges in job postings",
+      "actionRequired": "Optional",
+      "source": "No state mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Federal FCRA only",
+      "message": "Background checks permitted at any stage",
+      "detailedExplanation": "No ban-the-box law. Criminal history can be inquired about on applications. Must comply with federal FCRA.",
+      "actionRequired": "Federal FCRA compliance only",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Wyoming Statutes \u00a7 27-4-202",
+      "message": "Wyoming follows federal minimum wage: $7.25/hour",
+      "detailedExplanation": "Wyoming state minimum wage is $5.15/hour, but federal minimum of $7.25/hour applies to most employers under FLSA.",
+      "requirement": "Must pay federal minimum wage of $7.25/hour",
+      "actionRequired": "Ensure compliance with federal minimum wage",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state mandate",
+      "message": "NO state-mandated paid leave",
+      "detailedExplanation": "Wyoming does not require paid sick leave, paid family leave, or vacation time",
+      "actionRequired": "No state requirements",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "No restrictions",
+      "message": "Drug testing PERMITTED",
+      "detailedExplanation": "Wyoming allows pre-employment, random, reasonable suspicion, and post-accident drug testing with no specific restrictions.",
+      "actionRequired": "No restrictions - testing permitted",
+      "flaggedPhrases": [
+        "drug test",
+        "drug screening"
+      ],
+      "suggestion": "Drug testing is legal and unrestricted",
+      "source": "Permitted by Wyoming law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "lawReference": "Wyoming Statutes \u00a7 27-9-105",
+      "message": "At-will employment STRONGLY PROTECTED",
+      "detailedExplanation": "Wyoming is a strong at-will employment state. Employment is presumed at-will with very limited exceptions.",
+      "bestPractice": "Include clear at-will disclaimer for maximum protection",
+      "flaggedPhrases": [
+        "at-will",
+        "at will"
+      ],
+      "suggestion": "Strong at-will language is recommended and legally protective",
+      "source": "Wyoming employment law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Federal Arbitration Act",
+      "message": "Arbitration agreements are ENFORCEABLE",
+      "detailedExplanation": "Wyoming follows FAA. Arbitration clauses generally enforceable.",
+      "actionRequired": "Ensure fair procedures",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Wyoming Statutes \u00a7 27-4-104",
+      "message": "Final wages due within 5 working days or next regular payday",
+      "detailedExplanation": "Discharged employees: within 5 working days of discharge. Resigned employees: next regular payday or 15 days, whichever is shorter.",
+      "requirement": "Pay within 5 working days if terminated",
+      "actionRequired": "Ensure 5-day final payment capability for terminations",
+      "source": "Wyoming wage payment law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Wyoming Constitution Article 1 \u00a7 22",
+      "message": "Wyoming is a RIGHT TO WORK state",
+      "detailedExplanation": "Union membership and dues payment cannot be required as condition of employment",
+      "actionRequired": "Cannot require union membership or dues",
+      "source": "Wyoming Constitution"
+    },
+    "breaks": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state requirement",
+      "message": "NO required meal or rest breaks for adults",
+      "detailedExplanation": "Wyoming does not mandate meal or rest breaks for adult employees. Federal law requires breaks under 20 minutes be paid if provided.",
+      "actionRequired": "No state mandate - optional",
+      "bestPractice": "Consider providing breaks for employee wellbeing",
+      "source": "No state law"
+    },
+    "payFrequency": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Wyoming Statutes \u00a7 27-4-301",
+      "message": "Must pay employees at least semi-monthly",
+      "detailedExplanation": "Wages must be paid at least semi-monthly (twice per month) on regular paydays. Employers must designate regular paydays.",
+      "requirement": "Pay at least semi-monthly (twice per month)",
+      "actionRequired": "Establish and communicate semi-monthly or more frequent pay schedule",
+      "source": "Wyoming wage payment law"
+    }
+  }
+}

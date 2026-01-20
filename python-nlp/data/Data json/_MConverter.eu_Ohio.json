@@ -1,0 +1,163 @@
+{
+  "state": "Ohio",
+  "state_code": "OH",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Ohio does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase risk under federal anti-discrimination laws",
+        "Best practice is to avoid salary history inquiries to reduce bias risk"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://com.ohio.gov/divisions-and-programs/industrial-compliance/wage-and-hour",
+      "notes": "Many employers voluntarily avoid salary history questions for pay equity reasons."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Ohio does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Ohio statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose pay information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://com.ohio.gov/divisions-and-programs/industrial-compliance/wage-and-hour",
+      "notes": "Multi-state employers may still choose to include pay ranges for consistency."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in Ohio if reasonable in duration, geography, and scope.",
+      "statute_citation": "Ohio common law (e.g., Raimonde v. Van Vlerah, 42 Ohio St.2d 21)",
+      "requirements": [
+        "Must protect a legitimate business interest",
+        "Must be reasonable in time duration",
+        "Must be reasonable in geographic scope",
+        "Must not impose undue hardship on employee",
+        "Courts may modify overly broad restrictions rather than void them entirely"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.supremecourt.ohio.gov/",
+      "notes": "Ohio courts commonly apply a balancing test and may rewrite overbroad clauses."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Ohio does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using third-party background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue final adverse action notice if decision is finalized",
+        "Criminal history must be used in a non-discriminatory manner"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "FCRA compliance is mandatory whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Ohio does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "Ohio Rev. Code § 2313.19 (jury duty); § 3501.02 (voting leave)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty without retaliation",
+        "Employees must be allowed reasonable time off to vote if schedule conflicts with polling hours",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://codes.ohio.gov/",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Ohio permits workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Ohio Rev. Code Title 37; Ohio employment law guidance",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may discipline or refuse to hire based on positive drug tests",
+        "Recreational cannabis use is not protected in employment",
+        "Policies should be applied consistently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://com.ohio.gov/divisions-and-programs/industrial-compliance",
+      "notes": "Ohio is employer-friendly regarding drug testing policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Ohio if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Ohio Revised Code Chapter 2711",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://codes.ohio.gov/ohio-revised-code/chapter-2711",
+      "notes": "Fair drafting is important for enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Ohio follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Ohio common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract specifies otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://civilrights.ohio.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Ohio law prohibits employment discrimination on protected characteristics similar to federal law.",
+      "statute_citation": "Ohio Civil Rights Act (Ohio Rev. Code § 4112)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://civilrights.ohio.gov/",
+      "notes": "Offer letters must avoid language implying exclusion or bias."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Ohio Revised Code, Ohio Department of Commerce, Ohio Civil Rights Commission, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Ohio is generally employer-friendly, with few state-specific hiring restrictions beyond federal law, but non-competes must be reasonable and anti-discrimination and FCRA compliance are critical.",
+    "enforcement_agencies": [
+      "Ohio Department of Commerce",
+      "Ohio Civil Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Continued reliance on common law for non-competes"
+    ]
+  }
+}

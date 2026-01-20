@@ -1,0 +1,164 @@
+{
+  "state": "North Dakota",
+  "state_code": "ND",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "North Dakota does not have a statewide law prohibiting employers from asking about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may create discrimination risk under federal law",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nd.gov/labor/",
+      "notes": "While legal in ND, many employers avoid salary history questions to reduce risk under Title VII and Equal Pay Act."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "North Dakota does not require employers to disclose pay ranges in job postings or offer letters.",
+      "statute_citation": "No current statute mandating pay transparency",
+      "requirements": [
+        "Pay range disclosure is not legally required",
+        "Employers may voluntarily include compensation information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nd.gov/labor/wage-and-hour-topics",
+      "notes": "Future legislation may change this area; monitoring recommended."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are largely prohibited in North Dakota, with limited statutory exceptions.",
+      "statute_citation": "N.D. Cent. Code § 9-08-06",
+      "requirements": [
+        "Contracts restraining lawful profession, trade, or business are void",
+        "Limited exceptions exist for sale of business goodwill",
+        "Limited exceptions exist for dissolution of partnership",
+        "Employment-related non-competes are generally unenforceable",
+        "Non-solicitation clauses may also be unenforceable if overly restrictive"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ndlegis.gov/cencode/t09c08.pdf",
+      "notes": "North Dakota is one of the most restrictive states regarding non-compete enforcement, similar to California."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "North Dakota does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "North Dakota does not mandate paid sick leave statewide but protects certain civic leave rights.",
+      "statute_citation": "N.D. Cent. Code § 27-09.1-17 (jury duty); § 16.1-01-02.1 (voting leave)",
+      "requirements": [
+        "Employees must be allowed leave for jury duty",
+        "Employers cannot penalize employees for jury service",
+        "Employees may take time off to vote if necessary",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nd.gov/labor/wage-and-hour-topics",
+      "notes": "Offer letters should not conflict with statutory civic leave protections."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "North Dakota allows workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "North Dakota Century Code Title 34",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Drug testing policies should be applied consistently",
+        "Cannabis remains illegal for recreational use under state law",
+        "Employers may discipline based on positive drug tests"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ndlegis.gov/cencode/t34.html",
+      "notes": "North Dakota is employer-friendly regarding drug testing policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in North Dakota if they meet fairness and contract law requirements.",
+      "statute_citation": "Federal Arbitration Act; North Dakota contract law",
+      "requirements": [
+        "Agreement must be voluntary and clear",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.law.cornell.edu/uscode/text/9",
+      "notes": "Standard FAA principles apply."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "North Dakota is an at-will employment state, subject to statutory and public policy exceptions.",
+      "statute_citation": "North Dakota common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract provides otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot terminate for retaliation",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nd.gov/labor/employment-relations",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "North Dakota law prohibits discrimination in employment based on protected characteristics.",
+      "statute_citation": "North Dakota Human Rights Act (N.D. Cent. Code § 14-02.4-01 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on age (40+)",
+        "Cannot discriminate based on disability",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.nd.gov/hrc/",
+      "notes": "Offer letters should avoid language implying bias or exclusion."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "North Dakota Department of Labor, North Dakota Century Code, North Dakota Human Rights Commission, official state guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "North Dakota is highly restrictive on non-competes but otherwise relatively employer-friendly in hiring compliance.",
+    "enforcement_agencies": [
+      "North Dakota Department of Labor and Human Rights",
+      "North Dakota Human Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "Continued strict statutory ban on most non-competes",
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide paid sick leave mandate",
+      "Ongoing federal enforcement for background checks and discrimination"
+    ]
+  }
+}

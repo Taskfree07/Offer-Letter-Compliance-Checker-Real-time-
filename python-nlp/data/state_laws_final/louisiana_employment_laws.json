@@ -1,0 +1,168 @@
+{
+  "state": "Louisiana",
+  "state_code": "LA",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes ENFORCEABLE under specific statutory requirements",
+      "statute_citation": "Louisiana Revised Statutes § 23:921",
+      "requirements": [
+        "Non-competes ENFORCEABLE under specific statutory requirements",
+        "Louisiana statute provides specific requirements for enforceable non-competes: employee must have access to confidential information or trade secrets, geographic limitation to parishes where employee worked, time limit of 2 years from termination.",
+        "Best practice: Follow statutory requirements strictly: confidential info access, parish limitation, 2-year max",
+        "Action required: Ensure statutory requirements met"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": "Louisiana statute provides specific requirements for enforceable non-competes: employee must have access to confidential information or trade secrets, geographic limitation to parishes where employee worked, time limit of 2 years from termination."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Louisiana has NO state minimum wage - federal $7.25 applies",
+      "statute_citation": "Federal FLSA (no state minimum)",
+      "requirements": [
+        "Louisiana has NO state minimum wage - federal $7.25 applies",
+        "Must pay federal minimum $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "Drug testing PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due within 15 days or next regular payday",
+      "statute_citation": "Louisiana Revised Statutes § 23:631",
+      "requirements": [
+        "Final wages due within 15 days or next regular payday",
+        "Action required: Ensure timely final payment",
+        "Pay within 15 days of termination or next payday, whichever is earlier"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Louisiana is RIGHT TO WORK state",
+      "statute_citation": "Louisiana Constitution Article 1 § 12",
+      "requirements": [
+        "Louisiana is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "NO required meal or rest breaks (under 18 exception)",
+      "statute_citation": "Louisiana common law",
+      "requirements": [
+        "NO required meal or rest breaks (under 18 exception)",
+        "No break requirements for adults. Minors under 18 have specific break requirements."
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.laworks.net/",
+      "notes": "No break requirements for adults. Minors under 18 have specific break requirements."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Louisiana Workforce Commission",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Louisiana employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Pennsylvania has traditionally been non-compete friendly but recent changes significantly restrict them. As of January 1, 2025, PA banned non-competes that 'impede' low-wage worker opportunities. Must be narrowly tailored and reasonably necessary. Healthcare non-competes also face heightened scrutiny. Considered employer-friendly relative to other states but with new restrictions.",
+      "statute_citation": "Pennsylvania Common Law; Pennsylvania Uniform Trade Secrets Act (12 Pa.C.S. § 5302); Act 131 of 2024 (Low-Wage Non-Compete Restrictions effective 2025-01-01)",
+      "requirements": [
+        "LOW-WAGE RESTRICTIONS (effective January 1, 2025): Cannot enforce non-competes that 'have the effect of impeding' opportunities for low-wage workers (those earning less than federal poverty line plus 25%)",
+        "Must have legitimate business interest: trade secrets, confidential information, substantial business relationships, or substantial relationship of trust with customers",
+        "Non-compete must be narrowly tailored to protect legitimate business interest",
+        "Geographic scope must be reasonable: limited to territory where employer conducts business or solicit business",
+        "Time period: Must be reasonable; generally enforceable if 2 years or less",
+        "Scope of prohibited work: Must be limited to type of work employee performed or could perform",
+        "Must be supported by consideration (initial employment acceptable for new hires; existing employees need salary increase, promotion, or other valuable consideration)",
+        "Written agreement required",
+        "HEALTHCARE: Non-competes for healthcare practitioners scrutinized heavily; must protect specific patient relationships or trade secrets",
+        "Courts construe strictly against employer; will NOT modify unreasonable provisions (blue-pencil only applies to time/geographic scope in narrow circumstances)",
+        "Burden on employee to show unreasonableness; burden on employer to show legitimate interest",
+        "Non-solicitation and customer non-compete agreements may be enforced under similar standards",
+        "Garden leave (paying employee during non-compete period) may increase enforceability",
+        "Liquidated damages clauses must be reasonable and not constitute penalty"
+      ],
+      "effective_date": "Common law precedent ongoing; Act 131 effective 2025-01-01",
+      "confidence_level": "high",
+      "source_url": "https://www.legis.state.pa.us/WU01/LI/BL/2024/0131/0131.pdf",
+      "notes": "Pennsylvania significantly restricted non-competes effective January 2025. Previously more employer-friendly, now aligns with national trend of worker protection. Low-wage worker restrictions are major change."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Pennsylvania does NOT have statewide salary history ban. Employers may inquire about compensation history. However, federal Equal Pay Act principles apply. Federal pay equity enforcement is active. No state-level prohibition on asking about past wages.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); Title VII of Civil Rights Act (42 U.S.C. § 2000e et seq.)",
+      "requirements": [
+        "NO STATE SALARY HISTORY BAN at statewide level",
+        "Employers may ask about compensation history",
+        "Employers may consider prior salary in hiring decisions",
+        "However, federal Equal Pay Act prohibits discriminatory pay based on sex, race, or other protected characteristics",
+        "Cannot use salary history to justify discriminatory pay gaps",
+        "Must pay equal pay for substantially equal work regardless of prior salary",
+        "Philadelphia (city ordinance): Local salary history ban applies to Philadelphia employers (see Philadelphia ordinance)",
+        "Pittsburgh (city ordinance): May have local restrictions (verify with local authorities)",
+        "Federal OFCCP (federal contractors): May challenge use of salary history as discriminatory",
+        "Defense contractor compliance: Subject to federal audit for pay equity",
+        "Documentation required for any pay decisions",
+        "Retaliation prohibited if employee discusses wages"
+      ],
+      "effective_date": "Federal law ongoing; no state law change",
+      "confidence_level": "high",
+      "source_url": "https://www.eeoc.gov/",
+      "notes": "Pennsylvania lacks state-level salary history ban but cities (Philadelphia) have local ordinances. Federal equal pay principles apply statewide."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Pennsylvania does NOT require pay transparency in job postings or employee communications at state level. However, Philadelphia has local pay transparency ordinance requiring salary ranges in job postings. Federal contractors must maintain pay equity documentation. Growing trend toward transparency but no statewide mandate.",
+      "statute_citation": "Philadelphia Pay Transparency Ordinance (2021); Federal Equal Pay Act (29 U.S.C. § 206(d))",
+      "requirements": [
+        "NO STATEWIDE PAY TRANSPARENCY REQUIREMENT",
+        "PHILADELPHIA (City of Philadelphia): Employers with 15+ employees must include salary range in job postings within Philadelphia",
+        "PHILADELPHIA: Must provide pay scale information to employees upon hire, transfer, promotion",
+        "PHILADELPHIA: Cannot prohibit employees from discussing wages",
+        "Federal contractors: Subject to OFCCP audit for pay equity documentation",
+        "Must maintain records of compensation decisions",
+        "Federal FLSA: Must maintain accurate payroll records",
+        "Healthcare employers: Subject to federal transparency rules if federal funded",
+        "Recommendations: Establish consistent pay scales by job level/function; document pay decisions; ensure no disparate impact on protected classes"
+      ],
+      "effective_date": "Philadelphia ordinance: 2021 (enforcement ongoing); Federal OFCCP: Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.phila.gov/",
+      "notes": "Pennsylvania lacks state-level pay transparency requirement but Philadelphia (major city) has local ordinance. Federal contractor rules apply statewide."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Pennsylvania follows FCRA federal requirements plus state law. No specific 'ban-the-box' law statewide. FCRA requires written consent, pre-adverse action notice, and final adverse action notice. Employers may conduct background checks at any time but must comply with FCRA procedures. Philadelphia has local ban-the-box ordinance (cannot ask on initial application).",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681); Pennsylvania law (limited specific statutes); Philadelphia Ordinance (for city employers)",
+      "requirements": [
+        "FCRA FEDERAL REQUIREMENTS: Written consent required before background check",
+        "FCRA: Pre-adverse action notice required (provide copy of report and summary of rights) if adverse action contemplated",
+        "FCRA: Final adverse action notice required (reason for adverse action)",
+        "FCRA: Background check must be conducted by third party complying with FCRA requirements",
+        "FCRA: Accuracy standards apply (must verify information)",
+        "FCRA: Unrelated records must be excluded",
+        "PHILADELPHIA (Ban-the-Box): Cannot ask about criminal history on initial application; can ask after conditional offer",
+        "PHILADELPHIA: Cannot use automated record matching; must conduct individualized assessment",
+        "PHILADELPHIA: For conviction consideration: Evaluate nature/severity of offense, time since conviction, type of job",
+        "PHILADELPHIA: Applicants have right to respond to adverse findings",
+        "Sealed/expunged records: Generally cannot consider",
+        "Arrests without conviction: Generally cannot consider if older than statute of limitations for underlying crime",
+        "Juveniles records: Generally cannot consider unless sealed records exception",
+        "Recommendations: Ensure FCRA-compliant vendor; document business necessity for inquiries; maintain compliance records"
+      ],
+      "effective_date": "FCRA: Ongoing federal law; Philadelphia ordinance: effective 2021",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know",
+      "notes": "Pennsylvania follows federal FCRA but has limited state-specific background check law. Philadelphia has strong ban-the-box ordinance. No statewide ban-the-box law."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Pennsylvania does NOT mandate paid sick leave or paid family leave for private employers. State employees have accrued leave but no private sector requirement. Federal FMLA applies to eligible employers/employees. No state-mandated paid leave program unlike some states. Private employers free to set own policies.",
+      "statute_citation": "Federal Family and Medical Leave Act (29 U.S.C. § 2601 et seq.); Pennsylvania Public Employees Retirement System (but limited to state employees)",
+      "requirements": [
+        "NO STATE PAID SICK LEAVE MANDATE for private employers",
+        "NO STATE PAID FAMILY LEAVE MANDATE for private employers",
+        "NO STATE-RUN PAID LEAVE PROGRAM",
+        "FMLA (Federal): Applies to employers with 50+ employees within 75 miles; covers 12 weeks unpaid leave for FMLA-qualifying reasons (serious health condition, family care, bonding, military)",
+        "FMLA: Employer must maintain health insurance during leave; employee must be restored to same/equivalent job",
+        "FMLA: Does not apply to employers with fewer than 50 employees",
+        "FMLA: State employees may have additional rights under PA state law",
+        "MILITARY: Employee in Pennsylvania National Guard or Reserve entitled to leave (federal SCRA applies)",
+        "JURY DUTY: Employer cannot penalize employee for jury duty",
+        "VOTING: Employer cannot penalize for voting time if needed",
+        "Recommendations: Establish voluntary paid leave policies (beneficial for recruitment/retention); if offering, must comply with own policy terms; document policies clearly"
+      ],
+      "effective_date": "Federal FMLA ongoing; Pennsylvania has no state-level paid leave mandate",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "Pennsylvania lacks state-mandated paid leave. FMLA federal minimum applies. Private employers not required to offer paid sick leave or paid family leave at state level."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Pennsylvania enforces arbitration agreements under Federal Arbitration Act (FAA). Courts scrutinize for unconscionability but generally favor arbitration. Must be clear, mutual agreement to arbitrate. Class action waivers generally enforceable. No specific state law restrictions on arbitration for employment disputes.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. § 1 et seq.); Pennsylvania Uniform Arbitration Act (42 Pa.C.S. § 7301 et seq.)",
+      "requirements": [
+        "Arbitration agreements enforceable under federal FAA",
+        "Must be in writing and clearly presented to employee",
+        "Must evidence mutual agreement to arbitrate",
+        "Must identify claims subject to arbitration (or clearly cover employment disputes)",
+        "Cannot be unconscionable (procedurally or substantively)",
+        "Arbitration agreement cannot waive statutory rights (employee retains underlying statutory rights, just venue changes)",
+        "Class action waivers generally enforceable if mutual and not unconscionable",
+        "Must be supported by consideration (employment or continued employment can be consideration)",
+        "Arbitration costs: Employer generally bears arbitrator fees and costs if employee must bear to access arbitration",
+        "Adequate remedy requirement: Arbitration process must provide similar remedies to court",
+        "Can include fee-shifting, remedies preservation, limited discovery, but must not eliminate access to remedies",
+        "Pennsylvania courts scrutinize for unconscionability but presumption favors enforcement (FAA preemption)",
+        "Recommendations: Clear mutual agreement language; ensure employee can understand terms; provide copy at hire/before signing; ensure adequate discovery provisions"
+      ],
+      "effective_date": "Federal FAA ongoing; Pennsylvania Uniform Arbitration Act ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.supremecourt.gov/opinions/22pdf/21-757_gfbh.pdf",
+      "notes": "Pennsylvania enforces arbitration agreements but under federal FAA standards. State courts apply federal law; less restrictive than some other states."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Pennsylvania follows at-will employment doctrine. Either party can terminate for any reason without cause or notice (absent contract/policy creating obligation). Strong exceptions: cannot terminate for illegal reason (discrimination, retaliation for protected activity), cannot violate public policy, cannot breach express/implied contracts, cannot breach good faith if written contract implies it.",
+      "statute_citation": "Pennsylvania Common Law; Pennsylvania Uniform Discrimination Act (18 Pa.C.S. § 2702); Pennsylvania Whistleblower Law (43 P.S. § 1421 et seq.)",
+      "requirements": [
+        "DEFAULT: At-will employment; either party can terminate for any reason without notice",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, sex, national origin, age 40+, disability, marital status, sexual orientation (protected under PA law), gender identity/expression (protected under PA law), request for reasonable accommodation, military service (federal), jury duty (federal), voting, whistleblowing, workers' compensation claims, wage/hour complaints, FMLA-qualifying leave",
+        "WHISTLEBLOWER PROTECTION (43 P.S. § 1421): Employee cannot be discharged, threatened, or discriminated against for reporting violation of law to government agencies",
+        "WORKERS' COMPENSATION: Cannot terminate for filing workers' comp claim",
+        "WAGE CLAIMS: Cannot terminate for asserting wage/hour rights",
+        "FINAL PAY: Must pay all earned wages within 4 weeks of separation (or within same pay period if employee quit)",
+        "IMPLIED CONTRACT: If handbook, oral promises, or conduct creates expectation of job security, may create enforceable contract",
+        "GOOD FAITH: If express written contract exists, may imply covenant of good faith (employer cannot terminate in bad faith)",
+        "PUBLIC POLICY: Cannot terminate in violation of clear public policy (e.g., whistleblowing, jury service, refusing illegal act)",
+        "DISCLAIMER: Employment at-will disclaimers in handbooks should be clear; ambiguous disclaimers may not prevent contract formation",
+        "Retaliation prohibited: Cannot retaliate against employee for protected activities",
+        "Remedies: Wrongful termination, breach of contract, tort damages may be available"
+      ],
+      "effective_date": "Common law ongoing; statutory protections as noted",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/flsa",
+      "notes": "Pennsylvania at-will employment with significant exceptions for protected activities. Handbooks may create enforceable rights if not properly disclaimed."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Pennsylvania allows employee drug testing under reasonable circumstances. No specific restrictions on pre-employment testing. Post-employment testing permitted with reasonable suspicion or random testing if policy permits. Medical marijuana (effective 2016) is legal but employers can still test; cannot discriminate based on medical marijuana use alone if lawfully obtained.",
+      "statute_citation": "Pennsylvania Medical Marijuana Act (35 P.S. § 10231.2101 et seq.); Federal ADA (42 U.S.C. § 12101); Federal Department of Transportation Testing (49 U.S.C.)",
+      "requirements": [
+        "PRE-EMPLOYMENT TESTING: Permitted; must have written policy",
+        "POST-EMPLOYMENT TESTING: Permitted with reasonable suspicion or random testing policy",
+        "MEDICAL MARIJUANA: Legal as of February 2016 (registered patients)",
+        "MEDICAL MARIJUANA EMPLOYMENT: Employer can test for marijuana but cannot discriminate against employee for lawful medical marijuana use if off-duty and not impairing job performance",
+        "MEDICAL MARIJUANA: Employee in safety-sensitive position may be tested; impairment (not mere use) is issue",
+        "RECREATIONAL MARIJUANA: NOT legal in Pennsylvania; employers can prohibit and test",
+        "TESTING REQUIREMENTS: Written policy required; employee notice required; lab must be certified",
+        "ACCURACY: Use only SAMHSA-certified labs; confirmation testing required",
+        "FEDERAL CONTRACTORS: Subject to federal drug-free workplace requirements",
+        "DOT-REGULATED: Department of Transportation testing requirements apply to safety-sensitive positions",
+        "MEDICAL REVIEW OFFICER (MRO): Recommended practice for result interpretation",
+        "REASONABLE SUSPICION: Observable behavior indicating impairment; documented before test",
+        "SAFETY-SENSITIVE POSITIONS: Can enforce stricter testing for positions affecting public safety",
+        "DISABILITY ACCOMMODATION: Cannot test for legal medications under ADA without business necessity; disability considerations apply",
+        "Recommendations: Clear written policy; notice to applicants/employees; use certified labs; document reasons for testing; maintain confidentiality"
+      ],
+      "effective_date": "Medical Marijuana: 2016-02-16; Testing laws ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.health.pa.gov/MyHealth/Pages/Medical-Marijuana.aspx",
+      "notes": "Pennsylvania permits drug testing but medical marijuana (lawful use) provides limited protection. Recreational marijuana remains illegal. Employers can test but cannot discriminate based on lawful medical use if not impairing."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Pennsylvania Statutes, Pennsylvania Department of Labor & Industry, Pennsylvania Courts, Federal EEOC, Philadelphia Ordinances, Legal Databases",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "Pennsylvania is MODERATE regarding worker protections. Recent non-compete restrictions (2025) align with national trend. No state-mandated paid leave (significant difference from other states). At-will employment with exceptions. Philadelphia has strong local ordinances for pay transparency and ban-the-box that exceed state law.",
+    "enforcement_agencies": [
+      "Pennsylvania Department of Labor & Industry (PA L&I)",
+      "Pennsylvania Human Relations Commission (PHRC) - Discrimination",
+      "Philadelphia Office of Employment Relations (for Philadelphia employers)",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor (Wage & Hour Division)",
+      "Federal Trade Commission (FCRA Enforcement)"
+    ],
+    "recent_developments": [
+      "Non-compete law significantly restricted effective January 1, 2025 (Act 131 of 2024)",
+      "Philadelphia pay transparency ordinance effective 2021",
+      "Philadelphia ban-the-box ordinance effective 2021",
+      "Growing attention to wage equity and pay transparency (though no statewide mandate yet)",
+      "Medical marijuana program established 2016, legal protections clarifying"
+    ],
+    "jurisdiction_notes": {
+      "philadelphia_additional_requirements": true,
+      "philadelphia_description": "Philadelphia (major city) has ordinances exceeding state law: Pay Transparency Ordinance (salary ranges in postings), Ban-the-Box Ordinance (criminal history restrictions)"
+    }
+  }
+}

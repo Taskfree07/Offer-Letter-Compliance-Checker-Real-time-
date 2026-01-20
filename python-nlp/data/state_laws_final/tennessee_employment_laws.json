@@ -1,0 +1,179 @@
+{
+  "state": "Tennessee",
+  "state_code": "TN",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Tennessee enforces non-compete agreements if reasonable. T.C.A. § 47-25-101 provides statutory framework. Non-compete must protect legitimate business interest (trade secrets, confidential information, customer relationships) and be reasonable in duration, geography, and scope. Courts apply reasonableness test; will modify overly broad provisions. Employer-friendly overall but with increasing worker protections movement.",
+      "statute_citation": "T.C.A. § 47-25-101 (Restrictive Covenants); T.C.A. § 47-25-701 (Certain Restrictive Covenants Void)",
+      "requirements": [
+        "LEGITIMATE BUSINESS INTEREST required: Trade secrets, confidential business/professional information, substantial relationships with prospective/existing customers, substantial relationships of trust/confidence",
+        "TIME PERIOD: Must be reasonable; generally 1-3 years considered reasonable, but context-dependent",
+        "GEOGRAPHIC SCOPE: Must be limited to area where employer operated or customer relationships existed",
+        "SCOPE OF PROHIBITED ACTIVITIES: Cannot be broader than necessary to protect legitimate interest",
+        "CONSIDERATION: For existing employees, must provide additional consideration (salary increase, promotion, etc.)",
+        "WRITTEN AGREEMENT required",
+        "BLUE-PENCIL: Tennessee courts will modify overly broad provisions to reasonable scope",
+        "HEALTHCARE: Healthcare professionals subject to reasonableness standard; must show protectable relationships/trade secrets",
+        "NON-SOLICITATION: Similar enforceability standards as non-competes",
+        "VOIDABLE: Non-competes deemed void if no legitimate business interest or unreasonably restrictive",
+        "EMPLOYEE AT-WILL: No additional consideration needed for at-will employees at hire, but may need consideration if applied to existing at-will employees"
+      ],
+      "effective_date": "T.C.A. § 47-25-101 ongoing; courts interpreting reasonableness",
+      "confidence_level": "high",
+      "source_url": "https://www.capitol.tn.gov/",
+      "notes": "Tennessee enforces non-competes with reasonableness standard. Employer-friendly with blue-pencil modification available. Growing political discussion about restrictions."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Tennessee does NOT have statewide salary history ban. Employers may inquire about compensation history. Federal equal pay principles apply (cannot use to justify discriminatory gaps). No local ordinances in major cities. No current state-level salary history restriction.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); Tennessee law lacks specific ban",
+      "requirements": [
+        "NO STATE SALARY HISTORY BAN in Tennessee",
+        "Employers may inquire about prior compensation",
+        "Employers may consider salary history in hiring",
+        "Federal Equal Pay Act: Cannot use salary history to justify discriminatory pay based on sex",
+        "Must document pay decisions",
+        "Retaliation prohibited for discussing wages"
+      ],
+      "effective_date": "Federal law ongoing; Tennessee has no state ban",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/equal-pay",
+      "notes": "Tennessee currently permits salary history inquiries. Federal equal pay principles prevent use for discrimination."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Tennessee does NOT require pay transparency in job postings or employee communications at state level. No state-level pay range requirement. Federal contractors subject to OFCCP audit requirements. No local ordinances. Growing national trend but not yet adopted in Tennessee.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); OFCCP regulations for federal contractors",
+      "requirements": [
+        "NO STATE PAY TRANSPARENCY REQUIREMENT",
+        "Employers NOT required to disclose salary ranges in postings",
+        "Federal contractors: Subject to OFCCP pay equity audit requirements",
+        "Must maintain payroll records",
+        "Recommendations: Establish pay scales; document decisions"
+      ],
+      "effective_date": "Federal contractor rules ongoing; Tennessee has no state requirement",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/flsa",
+      "notes": "Tennessee lacks state pay transparency requirement."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Tennessee follows federal FCRA requirements. No state-specific ban-the-box law. Employers may conduct background checks at any time subject to FCRA compliance (written consent, pre-adverse and final adverse action notices). Courts permit if job-related and non-discriminatory.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "FCRA Federal: Written consent required before background check",
+        "FCRA: Pre-adverse and final adverse action notices required",
+        "FCRA: Third-party vendor must comply with FCRA",
+        "NO STATE BAN-THE-BOX LAW statewide",
+        "Employers may ask about criminal history on application",
+        "Sealed/expunged/arrest without conviction: Generally cannot consider",
+        "ADA CONSIDERATIONS: Cannot discriminate based on disability",
+        "Recommendations: Ensure FCRA-compliant vendor; document job-related business necessity"
+      ],
+      "effective_date": "FCRA ongoing; Tennessee has no additional state law",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know",
+      "notes": "Tennessee follows federal FCRA with no state-specific restrictions."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Tennessee does NOT mandate paid sick leave or paid family leave for private employers. Federal FMLA applies to employers with 50+ employees. No state-run paid leave program. Private employers free to set own policies.",
+      "statute_citation": "Federal Family and Medical Leave Act (29 U.S.C. § 2601 et seq.); Tennessee law lacks mandate",
+      "requirements": [
+        "NO STATE PAID SICK LEAVE MANDATE",
+        "NO STATE PAID FAMILY LEAVE MANDATE",
+        "NO STATE-RUN PAID LEAVE PROGRAM",
+        "FMLA (Federal): Applies to employers with 50+ employees; 12 weeks unpaid leave for FMLA reasons",
+        "FMLA: Must maintain health insurance; restore to same/equivalent position",
+        "JURY DUTY: Cannot penalize",
+        "VOTING: Cannot penalize",
+        "Recommendations: Establish voluntary paid leave (beneficial for recruitment)"
+      ],
+      "effective_date": "Federal FMLA ongoing; Tennessee has no state mandate",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "Tennessee lacks state-mandated paid leave."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Tennessee enforces arbitration agreements under Federal Arbitration Act (FAA). Courts apply federal standards with Tennessee law interpretation. Arbitration must be mutual agreement in writing. Class action waivers generally enforceable.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. § 1 et seq.); T.C.A. § 29-5-101 et seq. (Uniform Arbitration Act)",
+      "requirements": [
+        "Arbitration agreements enforceable under FAA",
+        "Must be in writing; clear mutual agreement",
+        "Cannot be unconscionable",
+        "Must be supported by consideration",
+        "Class action waivers generally enforceable if mutual",
+        "Cannot eliminate statutory rights; must preserve remedies",
+        "Costs: Employer generally bears arbitrator/forum fees if employee cannot afford",
+        "Federal FAA preemption: Tennessee applies FAA"
+      ],
+      "effective_date": "Federal FAA ongoing; T.C.A. § 29-5-101 ongoing",
+      "confidence_level": "high",
+      "source_url": "https://codes.tn.gov/",
+      "notes": "Tennessee enforces arbitration under federal FAA standards."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Tennessee follows at-will employment doctrine. Either party can terminate for any reason without cause or notice (absent contract/policy). Exceptions: cannot terminate for illegal reason, cannot violate public policy, cannot breach contract, cannot breach good faith covenant.",
+      "statute_citation": "Tennessee Common Law; T.C.A. § 49-5-101 (Whistleblower Protection); Federal Laws",
+      "requirements": [
+        "DEFAULT: At-will employment; either party can terminate without cause/notice",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, sex, national origin, age 40+, disability, military service (federal), jury duty (federal), voting, workers' compensation claim, wage claim, whistleblowing, public policy violation",
+        "WHISTLEBLOWER PROTECTION (T.C.A. § 49-5-101): Employee cannot be discharged for reporting law violation or refusing unlawful act",
+        "IMPLIED CONTRACT: Handbook or conduct may create enforceable contract",
+        "GOOD FAITH COVENANT: Implied in all employment",
+        "PUBLIC POLICY EXCEPTION: Cannot terminate for public policy activity (e.g., whistleblowing)",
+        "FINAL PAY: Final wages must be paid timely",
+        "AT-WILL DISCLAIMER: Should be clear; ambiguous language may not override contract"
+      ],
+      "effective_date": "Common law ongoing; statutory protections as noted",
+      "confidence_level": "high",
+      "source_url": "https://codes.tn.gov/",
+      "notes": "Tennessee at-will employment with exceptions for protected activities and public policy."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Tennessee allows drug testing under reasonable circumstances. No specific restrictions on pre-employment testing. Post-employment testing permitted with reasonable suspicion or random policy. Marijuana (recreational and medical) NOT legal in Tennessee; employers can prohibit and test. Employer-friendly on drug testing.",
+      "statute_citation": "Tennessee law lacks comprehensive drug testing statute; Federal Drug-Free Workplace Act (41 U.S.C. § 8101); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "PRE-EMPLOYMENT TESTING: Permitted; no state restriction",
+        "POST-EMPLOYMENT TESTING: Permitted with reasonable suspicion or random testing if policy provides",
+        "MARIJUANA: NOT legal in Tennessee (neither recreational nor medical); employers can test and prohibit",
+        "TESTING REQUIREMENTS: Written policy recommended; notice to employees; certified lab (SAMHSA)",
+        "CONFIRMATION: Positive screening should be confirmed",
+        "FEDERAL CONTRACTORS: Subject to federal drug-free workplace requirements",
+        "DOT-REGULATED: DOT testing requirements apply",
+        "REASONABLE SUSPICION: Observable evidence of impairment; document before testing",
+        "PRESCRIBED MEDICATIONS: Cannot test positive for validly prescribed medication; ADA may limit action",
+        "Recommendations: Clear written policy; notice to applicants; certified labs; document reasonable suspicion"
+      ],
+      "effective_date": "Ongoing; no significant state law changes",
+      "confidence_level": "high",
+      "source_url": "https://www.tn.gov/",
+      "notes": "Tennessee very employer-friendly on drug testing. Marijuana not legal. Employers have broad discretion."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Tennessee Code, Tennessee Department of Labor & Workforce Development, Tennessee Courts, Federal EEOC, Legal Databases",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "Tennessee is EMPLOYER-FRIENDLY regarding worker protections. Enforces non-competes with reasonableness standard, no salary history ban, no pay transparency requirement, no state-mandated paid leave, permissive on background checks and drug testing. At-will employment with exceptions. Marijuana not legal.",
+    "enforcement_agencies": [
+      "Tennessee Department of Labor & Workforce Development",
+      "Tennessee Human Rights Commission",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor (Wage & Hour)"
+    ],
+    "recent_developments": [
+      "Continued enforcement of non-competes",
+      "Growing political discussion about non-compete restrictions (following national trend)",
+      "No recent significant worker protection expansions",
+      "Federal OFCCP audit requirements apply to federal contractors"
+    ]
+  }
+}

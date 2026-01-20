@@ -1,0 +1,126 @@
+{
+  "state": "Nevada",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.nv.gov/",
+      "title": "Nevada Office of the Labor Commissioner",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Nevada Revised Statutes \u00a7 613.195 et seq.",
+      "message": "Non-competes RESTRICTED - statutory requirements apply",
+      "detailedExplanation": "Nevada restricts non-competes: (1) employee must be provided consideration (salary/benefit) beyond continued employment, (2) cannot exceed 1 year for non-supervisory/non-executive employees earning less than statutory threshold, (3) must be reasonable in scope and necessary to protect legitimate business interest.",
+      "suggestion": "Provide additional consideration, limit to 1 year for lower-earning employees",
+      "actionRequired": "Ensure statutory requirements met: consideration provided, 1-year limit for non-executives under threshold",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "non-compete restrictions per Nevada NRS \u00a7 613.195 (with consideration and time limits)",
+      "source": "Nevada NRS \u00a7 613.195"
+    },
+    "salaryHistory": {
+      "prohibited": true,
+      "severity": "error",
+      "lawReference": "Nevada Revised Statutes \u00a7 613.510",
+      "message": "CANNOT seek salary history before making compensation offer",
+      "detailedExplanation": "Employers cannot seek wage or salary history from prospective employees. Can discuss salary expectations. After making offer, can confirm salary history.",
+      "actionRequired": "Remove salary history questions from pre-offer process",
+      "flaggedPhrases": [
+        "previous salary",
+        "salary history",
+        "current compensation",
+        "prior wages"
+      ],
+      "alternativeLanguage": "What are your salary expectations for this position?",
+      "source": "Nevada equal pay law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirement currently",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Nevada Ban the Box Law",
+      "message": "Cannot require disclosure of criminal history on initial application",
+      "detailedExplanation": "Cannot inquire about criminal history on initial employment application. Can inquire after determining applicant meets minimum qualifications.",
+      "requirement": "Remove criminal history from initial applications",
+      "actionRequired": "Delay criminal history inquiry",
+      "source": "Nevada Ban the Box"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Nevada Constitution & NRS \u00a7 608.250",
+      "message": "Nevada minimum wage: $12.00/hour (July 1, 2024+)",
+      "detailedExplanation": "Nevada minimum wage is $12.00/hour regardless of health benefits offered (effective July 1, 2024). Adjusted annually based on CPI.",
+      "requirement": "Must pay $12.00/hour minimum",
+      "actionRequired": "Track annual CPI adjustments",
+      "source": "Nevada minimum wage law"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid sick leave currently",
+      "detailedExplanation": "Some local ordinances (e.g., certain Nevada counties) may have requirements",
+      "source": "No statewide mandate"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Nevada law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Nevada AB 132 (marijuana protections)",
+      "message": "Cannot refuse to hire based on positive marijuana test",
+      "detailedExplanation": "Nevada prohibits refusing to hire prospective employees solely based on positive marijuana screening test. Exceptions for certain safety-sensitive positions and federal contractors.",
+      "requirement": "Cannot disqualify solely for marijuana-positive test",
+      "actionRequired": "Review drug testing policies for marijuana provisions",
+      "source": "Nevada marijuana employment protections"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "error",
+      "lawReference": "Nevada Revised Statutes \u00a7 608.020",
+      "message": "Final wages due within 3 days (discharge) or next payday (resignation)",
+      "detailedExplanation": "Discharge: within 3 days. Resignation with 7+ days notice: next payday. Resignation without notice: next payday or 7 days, whichever is earlier.",
+      "requirement": "Pay within 3 days if terminated",
+      "actionRequired": "Ensure 3-day final payment capability",
+      "source": "Nevada wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Nevada Constitution Article 19 \u00a7 2",
+      "message": "Nevada is RIGHT TO WORK state",
+      "source": "State Constitution"
+    },
+    "dailyOvertime": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Nevada Revised Statutes \u00a7 608.018",
+      "message": "Daily overtime required for 8+ hour shifts",
+      "detailedExplanation": "Overtime pay (1.5x) required for: (1) work over 40 hours per week, OR (2) work over 8 hours in a 24-hour period (if agreed rate less than 1.5x regular rate).",
+      "requirement": "Pay overtime for 8+ hour days in addition to 40+ hour weeks",
+      "actionRequired": "Ensure daily overtime tracking and payment",
+      "source": "Nevada daily overtime law"
+    }
+  }
+}

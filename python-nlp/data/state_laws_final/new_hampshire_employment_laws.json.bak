@@ -1,0 +1,106 @@
+{
+  "state": "New Hampshire",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.nh.gov/labor/",
+      "title": "New Hampshire Department of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "New Hampshire RSA 275:70 et seq.",
+      "message": "Non-competes RESTRICTED - statutory requirements (effective 2020)",
+      "detailedExplanation": "New Hampshire law requires: (1) non-compete must be in writing signed by employee, (2) employee paid during restricted period OR other consideration provided, (3) specific protectable interest identified, (4) presented before job acceptance or with new consideration if during employment.",
+      "suggestion": "Provide consideration, present before job offer, limit reasonably",
+      "actionRequired": "Ensure: written agreement, consideration provided, protectable interest stated, proper timing",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "non-compete provisions per NH RSA 275:70 (with required consideration)",
+      "source": "New Hampshire RSA 275:70"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "New Hampshire RSA 279:21",
+      "message": "New Hampshire follows federal minimum: $7.25/hour",
+      "requirement": "Must pay federal minimum $7.25/hour",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "New Hampshire law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing permitted",
+      "source": "Allowed"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "New Hampshire RSA 275:44",
+      "message": "Final wages due within 72 hours or next payday",
+      "detailedExplanation": "Must pay within 72 hours of termination or by next regular payday, whichever is sooner.",
+      "requirement": "Pay within 72 hours or next payday",
+      "actionRequired": "Ensure timely final payment",
+      "source": "New Hampshire wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "New Hampshire RSA 275:1-a",
+      "message": "New Hampshire is RIGHT TO WORK state",
+      "source": "State statute"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "New Hampshire RSA 275:30-a",
+      "message": "30-minute meal break REQUIRED for 5+ hour shifts",
+      "detailedExplanation": "Employees working 5+ consecutive hours must be given 30-minute meal break. Unpaid if completely relieved of duties.",
+      "requirement": "Provide 30-minute break for 5+ hour shifts",
+      "actionRequired": "Ensure meal break policy complies",
+      "source": "New Hampshire break law"
+    }
+  }
+}

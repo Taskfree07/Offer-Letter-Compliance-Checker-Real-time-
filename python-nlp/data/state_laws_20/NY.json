@@ -1,0 +1,121 @@
+{
+  "state": "New York",
+  "state_code": "NY",
+  "last_updated": "2025-10-01",
+  "data_sources": [
+    {
+      "url": "https://dol.ny.gov/system/files/documents/2021/03/ls59.pdf",
+      "title": "NY Department of Labor - Wage Theft Prevention Act"
+    },
+    {
+      "url": "https://labor.ny.gov",
+      "title": "New York State Department of Labor"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "Non-compete agreements are heavily restricted and scrutinized in New York. Courts require them to be reasonable in scope, time, and geography.",
+      "law_citation": "New York common law - reasonableness standard",
+      "full_text": "NY courts require non-competes to be reasonable in scope, time, and geography. They must protect legitimate business interest and cannot be oppressive. Courts frequently invalidate overly broad restrictions. Use narrow restrictions, limit to 1 year maximum, reasonable geography only. Consider confidentiality agreements instead.",
+      "severity": "warning",
+      "flagged_phrases": [
+        "restrictions on certain competitive and solicitation activities",
+        "competitive activities",
+        "restraint of trade",
+        "covenant not to compete",
+        "competing business",
+        "non-compete",
+        "noncompete",
+        "solicit customers"
+      ],
+      "suggestion": "Use narrow restrictions, limit to 1 year maximum, reasonable geography only. Consider confidentiality agreements instead.",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Employers CANNOT ask about salary history. New York State and NYC prohibit employers from asking job applicants about their salary history.",
+      "law_citation": "New York Labor Law Section 194-a",
+      "full_text": "New York State and NYC prohibit employers from asking job applicants about their salary history, including compensation and benefits. Cannot rely on salary history in determining compensation.",
+      "severity": "error",
+      "flagged_phrases": [
+        "previous salary",
+        "current compensation",
+        "salary history",
+        "what did you earn",
+        "compensation at previous job",
+        "prior wages",
+        "past earnings",
+        "previous pay"
+      ],
+      "suggestion": "Remove all salary history questions immediately. Ask 'What are your salary expectations for this role?' instead.",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Must include salary range in job postings for employers with 4+ employees.",
+      "law_citation": "NY State Pay Transparency Law (Sept 2023) & NYC Local Law 32 (Nov 2022)",
+      "full_text": "Employers with 4+ employees must disclose salary range (minimum to maximum) in all job postings, both external and internal, including promotions and transfers.",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary to be determined",
+        "competitive salary",
+        "compensation TBD",
+        "salary commensurate with experience",
+        "DOE",
+        "salary negotiable"
+      ],
+      "suggestion": "Include specific salary range: 'Salary Range: $XX,XXX - $XX,XXX per year'",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2023-09-01"
+    },
+    {
+      "topic": "exempt_threshold",
+      "summary": "Exempt employees must meet NY salary threshold (higher than federal).",
+      "law_citation": "New York Labor Law",
+      "full_text": "NY minimum for exempt status: NYC/LI/Westchester: $64,350/year ($1,237.50/week), Rest of NY: $60,405.80/year ($1,161.65/week). Increases to $66,300 and $62,353.20 on Jan 1, 2026.",
+      "severity": "error",
+      "flagged_phrases": [
+        "exempt",
+        "salaried exempt",
+        "exempt from overtime"
+      ],
+      "suggestion": "Verify salary meets NY threshold or classify as non-exempt",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Criminal background check restrictions under Clean Slate Act and NYC Fair Chance Act.",
+      "law_citation": "NY Clean Slate Act (Effective Nov 16, 2024) & NYC Fair Chance Act",
+      "full_text": "Automatically sealed convictions cannot be accessed or used. NYC Fair Chance Act (4+ employees): Cannot inquire about criminal history until after conditional offer. Must conduct individualized assessment if issues found.",
+      "severity": "error",
+      "flagged_phrases": [
+        "background check",
+        "criminal history",
+        "criminal record",
+        "prior to employment offer"
+      ],
+      "suggestion": "Ensure background check occurs after conditional offer made",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2024-11-16"
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Must provide paid prenatal leave (20 hours), paid sick leave, and paid family leave.",
+      "law_citation": "NY Paid Prenatal Leave (Effective Jan 1, 2025) & Paid Sick Leave",
+      "full_text": "Paid Prenatal Leave: 20 hours per 52 weeks (effective 1/1/25). Paid Sick Leave: 56 hours (100+ employees), 40 hours (5-99 employees), 40 hours unpaid (0-4 employees). Paid Family Leave: up to 12 weeks.",
+      "severity": "warning",
+      "flagged_phrases": [
+        "sick leave",
+        "family leave",
+        "prenatal leave"
+      ],
+      "suggestion": "Include paid leave benefits information in offer",
+      "source_url": "https://labor.ny.gov",
+      "effective_date": "2025-01-01"
+    }
+  ]
+}

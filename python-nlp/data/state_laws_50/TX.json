@@ -1,0 +1,28 @@
+{
+  "state": "Texas",
+  "state_code": "TX",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "hallenging the Rule. Until now, those lawsuits had given mixed and confusing signals about whether employers would need to comply with the Rule by September 4.\nThat changed on August 20, 2024, when a Texas federal court in Ryan, LLC v. FTC found that the Rule was unlawful and said the FTC can’t enfo",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "hallenging the Rule. Until now, those lawsuits had given mixed and confusing signals about whether employers would need to comply with the Rule by September 4.\nThat changed on August 20, 2024, when a Texas federal court in Ryan, LLC v. FTC found that the Rule was unlawful and said the FTC can’t enforce the Rule anywhere in the nation.\nOf course, this ruling is likely to be appealed, but in the meantime out Michigan Non-Disclosure Agreements\n\n\n\n\n\n\nBlogWhat to Know About New York Non-Disclosure Ag",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "needs_verification": 1,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "state": "Colorado",
+  "state_code": "CO",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "automated_gov_scraping",
+  "accuracy_estimate": "90-95% (needs human verification for low-confidence items)",
+  "data_sources": [
+    {
+      "url": "https://cdle.colorado.gov/employers",
+      "title": "Employer Resources"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "paid_leave",
+      "summary": "[AUTO-EXTRACTED] Colorado paid leave requirements detected. NEEDS VERIFICATION.",
+      "law_citation": "[NEEDS MANUAL VERIFICATION - extracted from Employer Resources]",
+      "full_text": "...n I learn more or ask questions about paid leave, discrimination/accommodation, or workplace safety?Will I lose my unemployment benefits if I don't return to work?For these questions about returning to work, unemployment benefit eligibility and paid sick leave Read our FAQs Offers of Work by Employers / Returning to WorkIf you are prepared to bring your workers back and have offered an individual work that was then turned down, please report that to us. ​ Report a Job Refusal Return to Work Guid...",
+      "severity": "warning",
+      "flagged_phrases": [
+        "sick leave",
+        "paid leave",
+        "family leave"
+      ],
+      "suggestion": "Review Colorado paid leave requirements and update offer letter accordingly.",
+      "source_url": "https://cdle.colorado.gov/employers",
+      "effective_date": "UNKNOWN - needs verification",
+      "confidence_score": 0.8999999999999999,
+      "needs_human_review": false,
+      "extraction_method": "automated_keyword_detection"
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 1,
+    "high_confidence": 1,
+    "needs_review": 0,
+    "next_steps": "Review low-confidence items and fill in exact statute citations"
+  }
+}

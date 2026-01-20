@@ -1,0 +1,43 @@
+{
+  "state": "North Carolina",
+  "state_code": "NC",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "ent: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned for medical professionals.\nNorth Carolina\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and ac",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "ent: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned for medical professionals.\nNorth Carolina\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Generally",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "alifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirgini",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "alifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n\n  or agent thereof\nEmployers may not request information about previous wages. Only un",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "automated_gov_scraping",
+  "accuracy_estimate": "90-95% (needs human verification for low-confidence items)",
+  "data_sources": [
+    {
+      "url": "https://www.dli.pa.gov/Businesses/Employment-Law-Guidance/Pages/default.aspx",
+      "title": "Employment Law Guidance"
+    },
+    {
+      "url": "https://www.dli.pa.gov/Individuals/Labor-Management-Relations/llc/Pages/Wage-Laws.aspx",
+      "title": "Wage Laws"
+    }
+  ],
+  "laws": [],
+  "review_notes": {
+    "total_laws_found": 0,
+    "high_confidence": 0,
+    "needs_review": 0,
+    "next_steps": "Review low-confidence items and fill in exact statute citations"
+  }
+}

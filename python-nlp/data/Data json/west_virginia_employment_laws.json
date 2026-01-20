@@ -1,0 +1,155 @@
+{
+  "state": "West Virginia",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.wv.gov/",
+      "title": "West Virginia Division of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "West Virginia Code \u00a7 47-11E-1 et seq.",
+      "message": "Non-competes ENFORCEABLE under statutory guidelines",
+      "detailedExplanation": "West Virginia Uniform Trade Secrets Act and common law allow reasonable non-competes. Must protect legitimate business interest (trade secrets, customer relationships, specialized training). Reasonableness based on time, geography, and scope. Typically 1-2 years reasonable.",
+      "suggestion": "Limit to 1-2 years, reasonable geographic scope, protect legitimate interests",
+      "actionRequired": "Ensure reasonableness in time, geography, and scope",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competitive activities",
+        "competing business"
+      ],
+      "alternativeLanguage": "reasonable non-compete restrictions protecting legitimate business interests for up to 2 years",
+      "source": "West Virginia case law and statutes"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "No statutory prohibition",
+      "message": "Salary history inquiries are PERMITTED",
+      "detailedExplanation": "West Virginia has no law prohibiting salary history questions",
+      "actionRequired": "No restrictions",
+      "bestPractice": "Consider avoiding for pay equity",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No statutory requirement",
+      "message": "NO pay transparency requirements",
+      "detailedExplanation": "No requirement to disclose salary ranges",
+      "actionRequired": "Optional",
+      "source": "No state mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Federal FCRA only",
+      "message": "Background checks permitted at any stage",
+      "detailedExplanation": "No ban-the-box law. Criminal history inquiries permitted on applications. Follow federal FCRA requirements.",
+      "actionRequired": "Federal FCRA compliance only",
+      "process": [
+        "Provide disclosure and obtain authorization",
+        "Follow pre-adverse and adverse action procedures"
+      ],
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "West Virginia Code \u00a7 21-5C-2",
+      "message": "West Virginia minimum wage: $8.75/hour (2016-present)",
+      "detailedExplanation": "West Virginia state minimum wage is $8.75/hour, higher than federal minimum. Applies to employers with 6 or more employees.",
+      "requirement": "Must pay $8.75/hour minimum (for employers with 6+ employees)",
+      "actionRequired": "Ensure compliance with state minimum wage",
+      "source": "West Virginia Minimum Wage Act"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state mandate",
+      "message": "NO state-mandated paid leave",
+      "detailedExplanation": "West Virginia does not require paid sick leave, paid family leave, or vacation",
+      "actionRequired": "No state requirement",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "West Virginia Drug-Free Workplace Act",
+      "message": "Drug testing PERMITTED and ENCOURAGED",
+      "detailedExplanation": "West Virginia allows drug testing. Drug-free workplace programs provide workers' compensation premium discounts.",
+      "actionRequired": "No restrictions",
+      "bestPractice": "Consider certified drug-free workplace program for workers' comp discounts",
+      "source": "West Virginia Drug-Free Workplace Act"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "lawReference": "West Virginia common law",
+      "message": "At-will employment applies",
+      "detailedExplanation": "West Virginia recognizes at-will employment with limited exceptions",
+      "bestPractice": "Include clear at-will disclaimer",
+      "flaggedPhrases": [
+        "at-will",
+        "at will"
+      ],
+      "suggestion": "At-will language is legally protective",
+      "source": "West Virginia employment law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Federal Arbitration Act",
+      "message": "Arbitration agreements are ENFORCEABLE",
+      "detailedExplanation": "Arbitration clauses generally enforceable under FAA",
+      "actionRequired": "Ensure fair procedures",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "West Virginia Code \u00a7 21-5-4",
+      "message": "Final wages due next regular payday or within 72 hours",
+      "detailedExplanation": "Discharged employees: within 72 hours. Resigned employees: next regular payday.",
+      "requirement": "Pay within 72 hours if terminated, next payday if quit",
+      "actionRequired": "Ensure timely final payment capability",
+      "source": "West Virginia Wage Payment and Collection Act"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "West Virginia Code \u00a7 21-1G-1 et seq.",
+      "message": "West Virginia is a RIGHT TO WORK state (2016)",
+      "detailedExplanation": "Union membership and dues payment cannot be required as condition of employment",
+      "actionRequired": "Cannot require union membership",
+      "source": "West Virginia Workplace Freedom Act"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "West Virginia Code \u00a7 21-3-10a",
+      "message": "Meal breaks REQUIRED for 6+ hour shifts",
+      "detailedExplanation": "Employees working 6+ consecutive hours must receive at least 20-minute meal break. Break period is unpaid if employee is completely relieved of duties.",
+      "requirement": "Provide 20-minute meal break for 6+ hour shifts",
+      "actionRequired": "Ensure meal break policy complies with state law",
+      "source": "West Virginia meal break law"
+    },
+    "payFrequency": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "West Virginia Code \u00a7 21-5-3",
+      "message": "Must pay employees at least semi-monthly",
+      "detailedExplanation": "Regular employees must be paid at least twice per month (semi-monthly). Manual laborers and certain workers must be paid weekly or bi-weekly.",
+      "requirement": "Pay at least semi-monthly (twice per month)",
+      "actionRequired": "Establish semi-monthly or more frequent pay schedule",
+      "source": "West Virginia wage payment law"
+    }
+  }
+}

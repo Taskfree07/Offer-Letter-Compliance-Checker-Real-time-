@@ -1,0 +1,150 @@
+{
+  "state": "Colorado",
+  "state_code": "CO",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Colorado heavily restricts non-compete agreements. C.R.S. § 8-2-113 generally prohibits non-competes except for: (1) executives earning $112,500+ (threshold adjusted for inflation), (2) purchase/sale of business, (3) recovery of training expenses for specialized training (max 2 years), (4) trade secrets protection. Colorado is very employee-friendly on non-competes.",
+      "effective_date": "1983 (original); Amended 2022 (executive threshold added)",
+      "source_url": "https://leg.colorado.gov/sites/default/files/images/olls/crs2022-title-08.pdf",
+      "notes": "Colorado is most restrictive state on non-competes. Very narrow exceptions. Federal FTC ban blocked but Colorado law already more restrictive.",
+      "law_citation": "C.R.S. § 8-2-113 (Covenant Not to Compete); C.R.S. § 8-2-113.5 (Medical Non-Competes)",
+      "full_text": "GENERAL RULE: Non-competes are VOID and unenforceable\nEXCEPTION 1: Executives and professional staff earning threshold amount or more (2026: approx. $112,500 adjusted annually for inflation)\nEXCEPTION 2: Purchase and sale of business or business assets\nEXCEPTION 3: Recovery of training expenses for specialized training (max 2 years if education/training costs paid by employer)\nEXCEPTION 4: Protect trade secrets (narrow exception)\nPHYSICIANS: Medical non-competes further restricted by C.R.S. § 8-2-113.5 - can only enforce upon sale of practice or in limited circumstances\nNon-solicitation agreements: Generally more enforceable than full non-competes, but still scrutinized\nCustomer non-solicitation: May be enforceable if reasonable\nEmployee non-solicitation: May be enforceable if reasonable\nConfidentiality agreements: Enforceable\nCourts will NOT blue-pencil unreasonable agreements - void entirely if overreaching\nViolators may face damages and attorney fees",
+      "severity": "error",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review Colorado non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Colorado prohibits employers from asking about salary history. Under the Equal Pay for Equal Work Act, employers cannot seek wage history from applicants or rely on it in determining compensation. Applies to all Colorado employers.",
+      "effective_date": "2021-01-01",
+      "source_url": "https://cdle.colorado.gov/equalpaytransparency",
+      "notes": "Colorado salary history ban is part of comprehensive pay equity law.",
+      "law_citation": "C.R.S. § 8-5-201 et seq. (Equal Pay for Equal Work Act)",
+      "full_text": "Employers cannot seek wage rate history from job applicants\nCannot screen applicants based on wage history\nCannot require wage history disclosure\nCannot rely on wage history to determine wages\nCannot retaliate against employees for discussing wages\nApplicant may voluntarily disclose without prompting\nIf voluntarily disclosed, employer may verify and consider but cannot rely solely on it\nApplies to all Colorado employers regardless of size\nViolations subject to civil penalties\nEffective January 1, 2021",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review Colorado salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Colorado has STRONG pay transparency requirements under the Equal Pay for Equal Work Act. Employers must include compensation and benefits in ALL job postings (including remote positions). Must notify employees of promotional opportunities. Must disclose pay rates upon request.",
+      "effective_date": "2021-01-01",
+      "source_url": "https://cdle.colorado.gov/equalpaytransparency",
+      "notes": "Colorado has one of strongest pay transparency laws in U.S. Applies to remote positions. Many national employers post salary ranges to comply.",
+      "law_citation": "C.R.S. § 8-5-201 et seq. (Equal Pay for Equal Work Act)",
+      "full_text": "ALL JOB POSTINGS must include: hourly rate or salary compensation (or range), general description of bonuses/commissions/other compensation, general description of benefits\nApplies to ALL Colorado employers with at least 1 employee in Colorado\nIncludes remote positions if employee will work in Colorado\nPromotional opportunities: Must notify all current employees of job openings before making hiring decision\nCareer progression: Employers with 15+ employees must make reasonable efforts to inform employees of career progression opportunities\nUpon request or job offer: Must disclose compensation range and benefits for position\nPay range must be what employer 'reasonably and in good faith believes' it will pay\nCannot have different ranges for substantially similar work unless justified by seniority, merit, geographic location, education/training/experience, or travel requirements\nAnnual reporting: Employers with 50+ employees must keep records and may be required to report compensation data\nViolations: Civil penalties, employee right to sue for damages and attorney fees\nEffective January 1, 2021",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review Colorado pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Colorado has ban-the-box protections. Employers cannot ask about criminal history on initial application. Cannot inquire until later in hiring process. Must comply with federal FCRA and Colorado's fair credit reporting requirements.",
+      "effective_date": "Ban-the-box: ongoing; FCRA ongoing",
+      "source_url": "https://leg.colorado.gov/sites/default/files/images/olls/crs2022-title-08.pdf",
+      "notes": "Colorado has ban-the-box protections. Cannot ask about arrests without conviction. Federal FCRA also applies.",
+      "law_citation": "C.R.S. § 8-2-108 (Criminal History in Applications); C.R.S. § 8-3-108 (Arrests Without Conviction); Federal FCRA (15 U.S.C. § 1681)",
+      "full_text": "Cannot include questions about criminal history on initial employment application\nCannot inquire about criminal history until after application is submitted\nCannot inquire about arrests that did not result in conviction (C.R.S. § 8-3-108)\nTiming: Can ask about criminal history during interview or after conditional offer\nMust provide notice before conducting background check\nMust get written authorization for background check\nFCRA: Must provide pre-adverse action notice with copy of report\nFCRA: Must provide final adverse action notice\nFCRA: Seven-year lookback for most non-conviction records\nMust conduct individualized assessment\nMust consider: nature/gravity of offense, time elapsed, nature of job\nExceptions: Positions where law prohibits hiring with certain convictions\nViolations: Civil penalties, damages",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review Colorado background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Colorado has comprehensive paid family and medical leave through FAMLI (Family and Medical Leave Insurance). Provides up to 12 weeks paid leave for most reasons, 16 weeks for pregnancy complications. Funded through payroll tax. Colorado also has Healthy Families and Workplaces Act requiring paid sick leave.",
+      "effective_date": "FAMLI: 2024-01-01; Healthy Families: 2021-01-01",
+      "source_url": "https://famli.colorado.gov/",
+      "notes": "Colorado has comprehensive paid leave system. FAMLI is state-run insurance program. Very employee-friendly.",
+      "law_citation": "C.R.S. § 8-13.3-501 et seq. (FAMLI); C.R.S. § 8-13.3-401 et seq. (Healthy Families and Workplaces Act)",
+      "full_text": "FAMLI (effective January 1, 2024): Provides up to 12 weeks paid leave per year\nFAMLI: 16 weeks for pregnancy/childbirth complications\nFAMLI: Covers: serious health condition, family member care, childbirth, adoption, safe leave (domestic violence, stalking, sexual assault), military family leave\nFAMLI: Employees earn 90% of average weekly wage up to cap\nFAMLI: Funded by payroll tax (approximately 0.9% split between employer/employee)\nFAMLI: Applies to most Colorado employees who earned $2,500+ in previous year\nFAMLI: Employers with 10+ employees must participate (smaller employers may opt in)\nHEALTHY FAMILIES ACT: Employers must provide paid sick leave\nHEALTHY FAMILIES ACT: Employees accrue 1 hour per 30 hours worked\nHEALTHY FAMILIES ACT: Employers with 16+ employees: up to 48 hours per year\nHEALTHY FAMILIES ACT: Employers with fewer than 16: up to 48 hours per year\nHEALTHY FAMILIES ACT: Can use after first day of work (no waiting period)\nHEALTHY FAMILIES ACT: Use for: illness, injury, medical care, public health emergency, domestic violence situations\nRecords must be maintained\nRetaliation prohibited",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review Colorado paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Colorado enforces arbitration agreements under federal and state law but with some employee protections. Follows Federal Arbitration Act. Colorado Uniform Arbitration Act governs. Must be fair and not waive substantive rights.",
+      "effective_date": "Ongoing under federal and state law",
+      "source_url": "https://leg.colorado.gov/sites/default/files/images/olls/crs2022-title-13.pdf",
+      "notes": "Colorado enforces arbitration but with employee protections. Must be procedurally fair.",
+      "law_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); C.R.S. § 13-22-201 et seq. (Uniform Arbitration Act)",
+      "full_text": "Arbitration agreements generally enforceable under FAA\nMust be in writing and clearly presented\nMust have mutual agreement to arbitrate\nMust identify claims subject to arbitration\nCannot be unconscionable\nMust provide for neutral arbitrator\nCannot impose unreasonable costs on employee\nAdequate consideration required\nColorado courts scrutinize arbitration agreements for fairness\nClass action waivers generally enforceable but may be challenged\nPre-dispute arbitration agreements enforceable if fair\nCan be challenged on unconscionability grounds\nFederal policy favoring arbitration applies",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review Colorado arbitration requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Colorado follows at-will employment doctrine with exceptions. Either party can terminate employment for any legal reason. Exceptions exist for discrimination, retaliation, public policy violations, and breach of contract. Colorado has strong anti-discrimination protections.",
+      "effective_date": "Ongoing common law and statutory",
+      "source_url": "https://leg.colorado.gov/sites/default/files/images/olls/crs2022-title-24.pdf",
+      "notes": "Colorado has broader employee protections than many at-will states. Protections for off-duty lawful activities including marijuana use.",
+      "law_citation": "Common law doctrine; C.R.S. § 24-34-401 et seq. (Colorado Anti-Discrimination Act - CADA)",
+      "full_text": "Default: Employment terminable at will by either party\nNo notice required unless contract/policy requires it\nFinal wages must be paid immediately if terminated, or by next payday if employee quits\nEXCEPTIONS - Cannot terminate for: Disability, race, creed, color, sex, sexual orientation, gender identity, gender expression, religion, age 40+, national origin, ancestry, pregnancy, childbirth (CADA - very broad)\nCannot terminate for: Retaliation (whistleblowing, workers' comp, wage claims, jury duty, voting, military service)\nCannot terminate for: Lawful off-duty activities (C.R.S. § 24-34-402.5 - smoking, lawful products, lawful activities)\nCannot terminate for: Marijuana use outside work (with exceptions for safety-sensitive positions or federal requirements)\nCannot terminate for: Violation of public policy\nCannot terminate for: Breach of employment contract\nEmployment handbooks may create enforceable obligations\nWritten employment contracts override at-will status\nUnion/collective bargaining agreements override at-will status",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review Colorado at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Colorado restricts drug testing for marijuana. C.R.S. § 24-34-402.5 protects lawful off-duty activities including marijuana use. Employers cannot discriminate based on off-duty marijuana use unless it affects job performance or safety. Exceptions for safety-sensitive positions and federal requirements.",
+      "effective_date": "Marijuana protections: 2012 (Amendment 64); Clarified through case law and guidance",
+      "source_url": "https://leg.colorado.gov/sites/default/files/images/olls/crs2022-title-24.pdf",
+      "notes": "Colorado has strongest marijuana employee protections. Cannot discriminate for off-duty use unless safety-sensitive. Testing must show impairment, not just use. Coats v. Dish Network (2015) initially allowed termination but law evolved.",
+      "law_citation": "C.R.S. § 24-34-402.5 (Lawful Off-Duty Activities); Amendment 64 (marijuana legalization)",
+      "full_text": "Cannot terminate for lawful off-duty marijuana use (with exceptions)\nEXCEPTIONS: Can prohibit marijuana use and test for: safety-sensitive positions, positions subject to federal background checks/federal contracts/federal licensing, positions requiring operation of vehicles/machinery, positions where impairment could adversely affect safety\nMust have reasonable suspicion of impairment to test during work hours\nPre-employment testing: Allowed but positive marijuana test alone cannot be sole basis for rejection (unless exception applies)\nRandom testing: Limited to safety-sensitive positions\nCannot test based solely on smell of marijuana\nMust establish observable impairment, not just positive test\nTesting technology issue: Tests detect past use, not current impairment\nFederal contractors: Must comply with Drug-Free Workplace Act\nDOT-regulated positions: Must follow federal testing requirements\nRecommended: Clear written policy defining safety-sensitive positions\nMedical marijuana: Same protections as recreational\nWorkers' comp: May be affected by positive drug test",
+      "severity": "error",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review Colorado drug screening requirements and ensure compliance.",
+      "confidence": 0.85,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 8,
+    "needs_verification": 0,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

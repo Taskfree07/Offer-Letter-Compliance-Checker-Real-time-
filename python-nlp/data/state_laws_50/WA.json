@@ -1,0 +1,43 @@
+{
+  "state": "Washington",
+  "state_code": "WA",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "r employees to sign a non-compete. Luckily, for employers, this ban would only apply to agreements made after the bill’s effective date, leaving any non-competes executed before that date unaffected.\nWashington\nSigned by Governor Inslee on March 13, 2024, Senate Bill 5935 expands the definition of n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "r employees to sign a non-compete. Luckily, for employers, this ban would only apply to agreements made after the bill’s effective date, leaving any non-competes executed before that date unaffected.\nWashington\nSigned by Governor Inslee on March 13, 2024, Senate Bill 5935 expands the definition of non-competition covenants and limits the use of non-solicitation agreements to only those that prohibit employe rom accepting business from current customers is considered a void non-competition agreem th an attorney before signing the agreement.If an employee wins a lawsuit against their employer over a non-compete or non-solicitation agreement, the employer must pay the employeeâs attorney fees.Washington DCThe D.C. Ban on Noncompete Agreements Amendment Act of 2020 took effect on April 1, 2022, prohibiting employers from requiring or requesting non-compete clauses in employee contracts. The Act also ",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "a\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\n",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "a\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n\nEffective date: Sept. 1, 2019\nEmployers affected: All employers\nEmployers may not refuse to hire,  an Resource Management will introduce an updated application for state jobs that eliminat",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

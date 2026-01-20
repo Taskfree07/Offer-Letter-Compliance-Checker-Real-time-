@@ -1,0 +1,150 @@
+{
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Massachusetts regulates non-compete agreements through the Massachusetts Noncompetition Agreement Act (MNAA). Non-competes are enforceable if: (1) in writing and signed by both parties, (2) provided with offer or 10 business days before employment, (3) employee notified of right to consult attorney, (4) supported by garden leave (50% salary) or other consideration, (5) reasonable in scope and duration (max 1 year for most employees). Certain professions are prohibited: physicians, nurses, psychologists, social workers, broadcasters, lawyers, non-exempt employees under FLSA, employees terminated without cause.",
+      "effective_date": "2018-10-01",
+      "source_url": "https://www.mass.gov/info-details/massachusetts-law-about-noncompetition-agreements",
+      "notes": "Federal FTC ban was blocked in 2024. Massachusetts law continues to govern. Recent SJC case Miele v. Foundation Medicine (2025) narrowed scope - non-solicitation agreements with forfeiture provisions may be subject to MNAA requirements.",
+      "law_citation": "M.G.L. c. 149, § 24L (Massachusetts Noncompetition Agreement Act)",
+      "full_text": "Must be in writing and signed by employer and employee\nMust be presented at formal offer or 10 business days before employment start\nEmployee must be advised of right to consult counsel\nMust provide garden leave (50% highest annual salary during restriction) or other mutually agreed consideration\nMaximum duration of 1 year for most workers\nMust be reasonable in geographic scope\nMust protect legitimate business interest (trade secrets, confidential information)\nCannot be used for non-exempt FLSA employees\nCannot be used for employees terminated without cause or laid off\nSpecific professions banned: physicians (c. 112 §12X), nurses (c. 112 §74D), psychologists (c. 112 §129B), social workers (c. 112 §135C), broadcasters (c. 149 §186), lawyers (Mass. R. Prof. C. 5.6)",
+      "severity": "error",
+      "flagged_phrases": [
+        "non-compete",
+        "non-compete"
+      ],
+      "suggestion": "Review Massachusetts non-compete requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Massachusetts prohibits employers from seeking salary history information from job applicants until after extending an offer with compensation. Employers cannot screen applicants based on salary history or require disclosure of prior wages. This is part of the Massachusetts Equal Pay Act.",
+      "effective_date": "2016-07-01",
+      "source_url": "https://www.mass.gov/info-details/massachusetts-law-about-hiring-employees",
+      "notes": "One of the first salary history ban laws in the United States. Designed to address gender and racial wage gaps.",
+      "law_citation": "M.G.L. c. 149, §§ 105A-105D (Massachusetts Equal Pay Act)",
+      "full_text": "Employers may not ask about wage or salary history until AFTER making an offer of employment with compensation\nCannot require applicants to disclose salary history\nCannot screen applicants based on salary history\nCannot use prior salary alone to justify pay differences\nApplies to all private employers in Massachusetts",
+      "severity": "error",
+      "flagged_phrases": [
+        "salary history",
+        "salary-history"
+      ],
+      "suggestion": "Review Massachusetts salary history requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Massachusetts requires employers with 25+ employees to disclose salary ranges in job postings and to employees upon request. The Salary Range Transparency Law aims to increase equity and close wage gaps.",
+      "effective_date": "2025-10-29",
+      "source_url": "https://www.mass.gov/info-details/pay-transparency-in-massachusetts",
+      "notes": "Signed into law July 31, 2024. No private right of action - enforced exclusively by Attorney General. Employers with 100+ employees must also file EEO-1 reports to Secretary of Commonwealth by Feb 1 annually.",
+      "law_citation": "M.G.L. c. 149, § 105F (An Act Relative to Salary Range Transparency)",
+      "full_text": "Applies to employers with 25+ employees whose primary place of work is Massachusetts\nMust include annual salary range or hourly wage range in ALL job postings\nPay range = what employer 'reasonably and in good faith expects to pay at that time'\nMust disclose range to employees offered promotion/transfer to new position\nMust provide range to current employees for their position upon request\nMust disclose for positions that can be performed remotely to MA worksite\nFor commission/piece rate positions: must include commission or piece rate range\nRemote employees whose primary place of work is MA are covered\nAnti-retaliation protections for employees requesting pay information\nFirst offense: warning | Second: up to $500 fine | Third: up to $1,000 | Fourth+: $7,500-$25,000\n2-business day grace period to cure violations (until October 29, 2027)",
+      "severity": "warning",
+      "flagged_phrases": [
+        "pay transparency",
+        "pay-transparency"
+      ],
+      "suggestion": "Review Massachusetts pay transparency requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Massachusetts has a comprehensive 'Ban the Box' law that prohibits employers from asking about criminal history on initial job applications. Criminal record inquiries are restricted to later stages of hiring with specific limitations on what can be asked and how records can be used.",
+      "effective_date": "2010-11-04 (original), 2018-10-13 (amendments)",
+      "source_url": "https://www.mass.gov/guides/guide-to-criminal-records-in-employment-and-housing",
+      "notes": "Massachusetts was second state (after Hawaii) to ban both public and private employers from criminal history questions on applications. Attorney General enforces - can impose $5,000 fines. Civil Rights Division handles complaints.",
+      "law_citation": "M.G.L. c. 151B, § 4(9½) (Ban the Box); M.G.L. c. 6, §§ 167-178B (CORI Law)",
+      "full_text": "Cannot ask about criminal history on initial written job application\nCannot ask about arrests, detentions, or dispositions that did not result in conviction\nCannot ask about misdemeanors older than 3 years (changed from 5 years in 2018)\nCannot ask about first convictions for certain misdemeanors\nCannot ask about sealed or expunged records\nFelony convictions: limited to 7 years lookback\nMust provide copy of criminal records before taking adverse action\nMust conduct individualized assessment - cannot automatically reject applicants with records\nExceptions for positions legally prohibited from hiring people with records (childcare, some financial)\nMust notify employee of right to review CORI before adverse action\nCORI background checks (Criminal Offender Record Information) show MA state court records only",
+      "severity": "error",
+      "flagged_phrases": [
+        "background checks",
+        "background-checks"
+      ],
+      "suggestion": "Review Massachusetts background checks requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Massachusetts Earned Sick Time Law requires most employers to provide up to 40 hours of earned sick time per year. Employees earn 1 hour for every 30 hours worked. Sick time is paid for employers with 11+ employees, unpaid for smaller employers.",
+      "effective_date": "2015-07-01 (expanded November 2024 for pregnancy loss)",
+      "source_url": "https://www.mass.gov/info-details/earned-sick-time",
+      "notes": "Passed by ballot measure in 2014. Does not apply to: certain public employees, independent contractors, employees in work-study programs. Attorney General's Fair Labor Division enforces. SJC ruled accrued sick time is NOT 'wages' under Wage Act.",
+      "law_citation": "M.G.L. c. 149, §§ 148C and 148D (Massachusetts Earned Sick Time Law)",
+      "full_text": "Employers with 11+ employees: must provide PAID sick time\nEmployers with 10 or fewer employees: must provide UNPAID sick time\nEmployees earn at least 1 hour sick time per 30 hours worked\nMaximum 40 hours earned sick time per year\nSick time begins accruing from first hour worked\nCannot use sick time until after 90 days of employment\nMust allow carryover of up to 40 hours year-to-year (not required to allow more)\nCan use for: employee illness/injury, medical appointments, child/spouse/parent/spouse's parent illness\nCan use for domestic violence situations affecting employee or children\nCan use for pregnancy loss or failed assisted reproduction/adoption/surrogacy (added 2024)\nEmployers can require up to 7 days notice for planned absences\nMust post Notice of Employee Rights in workplace\nNOT required to pay out unused sick time at termination\nRecords must be maintained for 3 years",
+      "severity": "warning",
+      "flagged_phrases": [
+        "paid leave",
+        "paid-leave"
+      ],
+      "suggestion": "Review Massachusetts paid leave requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Massachusetts generally enforces arbitration agreements but has specific requirements. For employment discrimination claims, arbitration agreements must explicitly cite the specific types of claims (e.g., gender discrimination) to be arbitrable. Courts apply federal law favoring arbitration but with state-specific limitations.",
+      "effective_date": "1960 (statute); case law ongoing",
+      "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter251",
+      "notes": "Massachusetts is minority jurisdiction requiring explicit mention of discrimination claims in arbitration agreements. Employers adding arbitration mid-contract may face enforceability challenges. Must have written agreement - unwritten agreements not enforceable per Crean v. Morgan Stanley (2023).",
+      "law_citation": "M.G.L. c. 251 (Uniform Arbitration Act for Commercial Disputes)",
+      "full_text": "Arbitration agreements must be in writing\nFor discrimination claims: agreement must explicitly cite specific claim types to be arbitrable\nBroad arbitration clauses may not cover statutory employment discrimination claims without explicit mention\nCourt must find agreement 'valid, enforceable and irrevocable'\nEmployer can waive right to compel arbitration through litigation conduct\nWarfield v. Beth Israel Deaconess (2009): employee can proceed to court if agreement doesn't explicitly cite discrimination\nMassachusetts public policy strongly favors arbitration for commercial disputes\nFor certain professions: collective bargaining agreements may mandate grievance arbitration\nAgreement terms can be challenged on unconscionability grounds (though rarely successful)",
+      "severity": "warning",
+      "flagged_phrases": [
+        "arbitration",
+        "arbitration"
+      ],
+      "suggestion": "Review Massachusetts arbitration requirements and ensure compliance.",
+      "confidence": 0.75,
+      "needs_verification": true
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Massachusetts follows at-will employment doctrine - either party can terminate employment at any time for any legal reason or no reason. However, numerous exceptions protect employees from wrongful termination including discrimination, retaliation, public policy violations, and implied contracts.",
+      "effective_date": "Common law - ongoing",
+      "source_url": "https://www.mass.gov/info-details/massachusetts-law-about-employment-termination",
+      "notes": "While doctrine is straightforward, Robert S. Mantell notes 'validity is dwarfed by its numerous exceptions.' MCAD (Massachusetts Commission Against Discrimination) and EEOC enforce discrimination protections. Public policy exception crafted by MA courts protects whistleblowers.",
+      "law_citation": "Common law doctrine with statutory exceptions under M.G.L. c. 151B (anti-discrimination), M.G.L. c. 149 (wage/hour protections)",
+      "full_text": "Default rule: employment can be terminated at any time by employer or employee\nNo requirement for notice or cause UNLESS contract/policy states otherwise\nDischarged employees must be paid in full on day of discharge (M.G.L. c. 149, § 148)\nVoluntary resignation: paid on next regular payday\nEXCEPTIONS - Cannot terminate for: discrimination (race, gender, age 40+, disability, religion, national origin, sexual orientation, gender identity, genetic info, pregnancy); retaliation for protected activities (workers comp claim, jury duty, whistleblowing, reporting violations, refusing illegal acts); violation of public policy (reporting employer illegal conduct, refusing to break law); breach of implied contract (employee handbook promises, verbal assurances of job security)\nUnion/collective bargaining agreements override at-will status\nEmployees with written employment contracts have additional protections",
+      "severity": "warning",
+      "flagged_phrases": [
+        "at will employment",
+        "at-will-employment"
+      ],
+      "suggestion": "Review Massachusetts at will employment requirements and ensure compliance.",
+      "confidence": 0.95,
+      "needs_verification": false
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Massachusetts has no statute directly regulating private employer drug testing. Case law (Webster v. Motorola) establishes that drug testing must balance employer business interests against employee privacy rights. Random testing limited to safety-sensitive positions. Medical marijuana users have some protections; recreational users have minimal workplace protections.",
+      "effective_date": "1996 (Webster case); 2017 (Barbuto case); ongoing",
+      "source_url": "https://caselaw.findlaw.com/ma-supreme-judicial-court/1054095.html",
+      "notes": "Medical marijuana legal since 2012, recreational since 2016. Marijuana remains federally illegal. Testing technology cannot determine current impairment - only past use. Webster v. Motorola key case: upheld testing for sales rep driving 25,000 mi/year but not for technical writer with no safety concerns. Barbuto case requires interactive process for medical marijuana accommodation. Proposed bills would prohibit pre-employment marijuana testing starting 2025-2026.",
+      "law_citation": "No specific statute; governed by case law - Webster v. Motorola, 423 Mass. 425 (1996); Barbuto v. Advantage Sales, 477 Mass. 456 (2017)",
+      "full_text": "Pre-employment testing: Generally allowed if applied consistently to all applicants in similar roles\nPost-hire testing: Must be job-related and consistent with business necessity\nRandom testing: Limited to safety-sensitive positions (e.g., driving company vehicles, operating machinery, positions affecting public safety)\nBlanket random testing without distinguishing job types is NOT permitted\nMust balance employer's business/safety interests vs. employee privacy rights\nMEDICAL MARIJUANA: Employers must provide reasonable accommodation for off-duty medical marijuana use (unless impairs job performance)\nMedical marijuana patients protected under disability discrimination law (M.G.L. c. 151B)\nOn-site marijuana use is never protected - employers can prohibit\nRECREATIONAL MARIJUANA: No workplace protections for recreational users\nEmployers can maintain zero-tolerance policies and terminate for positive tests, even for off-duty use\nPending legislation (H.2179, H.3751) may ban pre-employment marijuana testing except for safety-sensitive positions\nFederal contractors must comply with federal drug-free workplace requirements",
+      "severity": "warning",
+      "flagged_phrases": [
+        "drug screening",
+        "drug-screening"
+      ],
+      "suggestion": "Review Massachusetts drug screening requirements and ensure compliance.",
+      "confidence": 0.85,
+      "needs_verification": false
+    }
+  ],
+  "data_collection_method": "manual_high_quality",
+  "last_updated": "2026-01-13",
+  "review_notes": {
+    "total_laws_found": 8,
+    "high_confidence": 7,
+    "needs_verification": 1,
+    "next_steps": "Data is high quality and ready for production use"
+  }
+}

@@ -18,6 +18,8 @@ import FormExtraction from './FormExtraction';
 import UserMenu from './UserMenu';
 import enhancedPdfService from '../services/enhancedPdfService';
 import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
+import { analyzeCompliance } from '../services/complianceService';
+import SearchableStateDropdown from './SearchableStateDropdown';
 import * as pdfjs from 'pdfjs-dist';
 import '../styles/preview.css';
 
@@ -56,6 +58,9 @@ const EmailEditor = ({ template, onBack }) => {
   // ONLYOFFICE states
   const [onlyofficeDocId, setOnlyofficeDocId] = useState(null);
   const [useOnlyOffice, setUseOnlyOffice] = useState(false);
+  // Backend AI analysis states
+  const [isAnalyzingBackend, setIsAnalyzingBackend] = useState(false);
+  const [backendAnalysisResults, setBackendAnalysisResults] = useState(null);
   // Use refs to store PDF data to avoid async state issues
   const importedPdfBytesRef = useRef(null);
   const isPdfImportedRef = useRef(false);
@@ -137,9 +142,56 @@ const EmailEditor = ({ template, onBack }) => {
   const enhancedPdfViewerRef = useRef(null);
 
   const US_STATES = [
-    { code: 'CA', name: 'California' }, { code: 'NY', name: 'New York' }, 
-    { code: 'TX', name: 'Texas' }, { code: 'FL', name: 'Florida' },
-    { code: 'WA', name: 'Washington' }, { code: 'IL', name: 'Illinois' }
+    { code: 'AL', name: 'Alabama' },
+    { code: 'AK', name: 'Alaska' },
+    { code: 'AZ', name: 'Arizona' },
+    { code: 'AR', name: 'Arkansas' },
+    { code: 'CA', name: 'California' },
+    { code: 'CO', name: 'Colorado' },
+    { code: 'CT', name: 'Connecticut' },
+    { code: 'DE', name: 'Delaware' },
+    { code: 'FL', name: 'Florida' },
+    { code: 'GA', name: 'Georgia' },
+    { code: 'HI', name: 'Hawaii' },
+    { code: 'ID', name: 'Idaho' },
+    { code: 'IL', name: 'Illinois' },
+    { code: 'IN', name: 'Indiana' },
+    { code: 'IA', name: 'Iowa' },
+    { code: 'KS', name: 'Kansas' },
+    { code: 'KY', name: 'Kentucky' },
+    { code: 'LA', name: 'Louisiana' },
+    { code: 'ME', name: 'Maine' },
+    { code: 'MD', name: 'Maryland' },
+    { code: 'MA', name: 'Massachusetts' },
+    { code: 'MI', name: 'Michigan' },
+    { code: 'MN', name: 'Minnesota' },
+    { code: 'MS', name: 'Mississippi' },
+    { code: 'MO', name: 'Missouri' },
+    { code: 'MT', name: 'Montana' },
+    { code: 'NE', name: 'Nebraska' },
+    { code: 'NV', name: 'Nevada' },
+    { code: 'NH', name: 'New Hampshire' },
+    { code: 'NJ', name: 'New Jersey' },
+    { code: 'NM', name: 'New Mexico' },
+    { code: 'NY', name: 'New York' },
+    { code: 'NC', name: 'North Carolina' },
+    { code: 'ND', name: 'North Dakota' },
+    { code: 'OH', name: 'Ohio' },
+    { code: 'OK', name: 'Oklahoma' },
+    { code: 'OR', name: 'Oregon' },
+    { code: 'PA', name: 'Pennsylvania' },
+    { code: 'RI', name: 'Rhode Island' },
+    { code: 'SC', name: 'South Carolina' },
+    { code: 'SD', name: 'South Dakota' },
+    { code: 'TN', name: 'Tennessee' },
+    { code: 'TX', name: 'Texas' },
+    { code: 'UT', name: 'Utah' },
+    { code: 'VT', name: 'Vermont' },
+    { code: 'VA', name: 'Virginia' },
+    { code: 'WA', name: 'Washington' },
+    { code: 'WV', name: 'West Virginia' },
+    { code: 'WI', name: 'Wisconsin' },
+    { code: 'WY', name: 'Wyoming' }
   ];
 
   // Professional PDF generation with enhanced error handling
@@ -1004,6 +1056,56 @@ useEffect(() => {
     setStateConfig(prev => ({ ...prev, selectedState: state }));
   };
 
+  // Handle backend AI compliance analysis
+  const handleBackendAnalysis = async () => {
+    if (!extractedPdfText || isAnalyzingBackend) return;
+
+    setIsAnalyzingBackend(true);
+    setBackendAnalysisResults(null);
+
+    try {
+      console.log('🤖 Starting backend AI analysis for state:', stateConfig.selectedState);
+      console.log('📄 Document length:', extractedPdfText.length, 'characters');
+
+      const results = await analyzeCompliance(
+        extractedPdfText,
+        stateConfig.selectedState,
+        { minConfidence: 0.3 }
+      );
+
+      console.log('✅ Backend analysis complete:', results);
+      setBackendAnalysisResults(results);
+
+      if (results.success && results.violations?.length > 0) {
+        console.log(`🔍 Found ${results.violations.length} potential violations via AI`);
+      }
+    } catch (error) {
+      console.error('❌ Backend analysis failed:', error);
+      setBackendAnalysisResults({
+        success: false,
+        error: error.message,
+        violations: []
+      });
+    } finally {
+      setIsAnalyzingBackend(false);
+    }
+  };
+
+  // Automatic backend analysis trigger when document or state changes
+  useEffect(() => {
+    // Only trigger if we have document text and not already analyzing
+    if (!extractedPdfText || extractedPdfText.length < 50) return;
+
+    // Debounce the analysis to avoid excessive calls
+    const timeoutId = setTimeout(() => {
+      console.log('🔄 Auto-triggering backend AI analysis (multi-layer approach)');
+      handleBackendAnalysis();
+    }, 500); // 500ms debounce
+
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [extractedPdfText, stateConfig.selectedState]);
+
   // Handle variables detected from imported PDF
   const handleVariablesDetected = (detectedVariables) => {
     setVariables(prev => ({ ...prev, ...detectedVariables }));
@@ -1555,28 +1657,22 @@ useEffect(() => {
             <label style={{ fontWeight: '500', marginBottom: '8px', display: 'block', fontSize: '14px', color: '#374151' }}>
               Select state for legal compliance check:
             </label>
-            <select
+            <SearchableStateDropdown
               value={stateConfig.selectedState}
-              onChange={(e) => handleStateChange(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #d1d5db',
-                borderRadius: '6px',
-                fontSize: '14px',
-                backgroundColor: '#fff',
-                cursor: 'pointer'
-              }}
-            >
-              {US_STATES.map(state => (
-                <option key={state.code} value={state.code}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
+              onChange={handleStateChange}
+              placeholder="Search or select a state..."
+              id="compliance-state-select"
+              style={{ marginBottom: '12px' }}
+            />
 
-            <div style={{ marginTop: '8px', color: '#6b7280', fontSize: '12px' }}>
-              Rules Last Updated: {currentRules[stateConfig.selectedState]?.lastUpdated || 'Default'}
+            <div style={{ marginTop: '8px', color: '#6b7280', fontSize: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>Rules Last Updated: {currentRules[stateConfig.selectedState]?.lastUpdated || 'Default'}</span>
+              {isAnalyzingBackend && (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#4f46e5' }}>
+                  <RefreshCw size={12} style={{ animation: 'spin 1s linear infinite' }} />
+                  AI analyzing...
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -1705,6 +1801,110 @@ useEffect(() => {
             summary={getComplianceSummary()}
             selectedState={stateConfig.selectedState}
           />
+
+          {/* Backend AI Analysis Results - Only show if there are violations or errors */}
+          {backendAnalysisResults && (backendAnalysisResults.violations?.length > 0 || !backendAnalysisResults.success) && (
+            <div style={{
+              marginTop: '20px',
+              padding: '16px',
+              backgroundColor: backendAnalysisResults.success ? '#fef2f2' : '#fef2f2',
+              border: `1px solid ${backendAnalysisResults.success ? '#fecaca' : '#fecaca'}`,
+              borderRadius: '8px'
+            }}>
+              <h4 style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                marginBottom: '12px',
+                color: '#991b1b',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <Shield size={16} />
+                AI Analysis Results (RAG + LLM) - {backendAnalysisResults.violations?.length || 0} Issues Found
+              </h4>
+
+              {backendAnalysisResults.success ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {backendAnalysisResults.violations.map((violation, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        padding: '12px',
+                        backgroundColor: '#fff',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '6px',
+                        borderLeft: `3px solid ${
+                          violation.severity === 'error' ? '#dc2626' :
+                          violation.severity === 'warning' ? '#f59e0b' : '#3b82f6'
+                        }`
+                      }}
+                    >
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start',
+                        marginBottom: '8px'
+                      }}>
+                        <span style={{
+                          fontSize: '12px',
+                          fontWeight: '600',
+                          color: violation.severity === 'error' ? '#dc2626' :
+                            violation.severity === 'warning' ? '#d97706' : '#2563eb',
+                          textTransform: 'uppercase'
+                        }}>
+                          {violation.severity || 'info'}
+                        </span>
+                        {violation.confidence && (
+                          <span style={{ fontSize: '11px', color: '#6b7280' }}>
+                            Confidence: {Math.round(violation.confidence * 100)}%
+                          </span>
+                        )}
+                      </div>
+
+                      {violation.law_citation && (
+                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
+                          <strong>Law Reference:</strong> {violation.law_citation}
+                        </div>
+                      )}
+
+                      {violation.violation_text && (
+                        <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px' }}>
+                          <strong>Issue:</strong> {violation.violation_text}
+                        </div>
+                      )}
+
+                      {violation.explanation && (
+                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
+                          {violation.explanation}
+                        </div>
+                      )}
+
+                      {violation.suggestion && (
+                        <div style={{
+                          fontSize: '12px',
+                          color: '#059669',
+                          padding: '8px',
+                          backgroundColor: '#ecfdf5',
+                          borderRadius: '4px',
+                          marginTop: '8px'
+                        }}>
+                          <strong>Suggestion:</strong> {violation.suggestion}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ color: '#991b1b', fontSize: '13px' }}>
+                  <strong>Analysis Error:</strong> {backendAnalysisResults.error || 'Unknown error'}
+                  <div style={{ marginTop: '8px', fontSize: '12px', color: '#6b7280' }}>
+                    Make sure the backend server is running (python-nlp Flask API) and Ollama is started.
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Flagged Sentences */}
@@ -1972,6 +2172,7 @@ useEffect(() => {
       // Set template content and variables
       const documentText = variablesResult.data.text || '';
       setTemplateContent(documentText);
+      setExtractedPdfText(documentText); // Store for backend AI analysis (multi-layer)
       setTemplateLoaded(true);
 
       // Extract and analyze sentences for compliance
@@ -2057,8 +2258,9 @@ useEffect(() => {
                     if (extractData.success && extractData.data.text) {
                       const documentText = extractData.data.text;
                       setTemplateContent(documentText);
+                      setExtractedPdfText(documentText); // Store for backend AI analysis (multi-layer)
                       setTemplateLoaded(true);
-                      
+
                       // Extract and analyze sentences for compliance
                       const splitSentences = documentText
                         .split(/[.!?]+/)
@@ -2179,6 +2381,7 @@ useEffect(() => {
       // Set template content as text (for variable detection and compliance)
       const documentText = variablesResult.data.text || '';
       setTemplateContent(documentText);
+      setExtractedPdfText(documentText); // Store for backend AI analysis (multi-layer)
       setTemplateLoaded(true);
 
       // Extract and analyze sentences for compliance

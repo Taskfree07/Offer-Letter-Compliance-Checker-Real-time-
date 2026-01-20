@@ -1,0 +1,103 @@
+{
+  "state": "Idaho",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.idaho.gov/",
+      "title": "Idaho Department of Labor",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Idaho Code \u00a7 44-2701 et seq.",
+      "message": "Non-competes ENFORCEABLE if reasonable",
+      "detailedExplanation": "Idaho enforces reasonable non-competes protecting legitimate business interests. Statutory provisions govern enforceability. Maximum 18 months for non-solicitation in certain situations.",
+      "suggestion": "Keep duration reasonable (18-24 months), limited geography",
+      "actionRequired": "Ensure compliance with reasonableness standards",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "reasonable non-compete restrictions per Idaho Code \u00a7 44-2701",
+      "source": "Idaho Code"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA only"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Idaho Code \u00a7 44-1502",
+      "message": "Idaho follows federal minimum wage: $7.25/hour",
+      "requirement": "Must pay at least $7.25/hour",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED",
+      "bestPractice": "Drug-free workplace programs encouraged",
+      "source": "Allowed"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Idaho law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Idaho Code \u00a7 45-606",
+      "message": "Final wages due next payday or within 10 days",
+      "requirement": "Pay by next regular payday or within 10 days",
+      "actionRequired": "Ensure timely final payment",
+      "source": "Idaho wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Idaho Code \u00a7 44-2001",
+      "message": "Idaho is RIGHT TO WORK state",
+      "source": "Idaho Constitution"
+    },
+    "breaks": {
+      "required": false,
+      "severity": "info",
+      "message": "NO required meal or rest breaks for adults",
+      "detailedExplanation": "Idaho does not mandate breaks for employees 18+",
+      "source": "No state requirement"
+    }
+  }
+}

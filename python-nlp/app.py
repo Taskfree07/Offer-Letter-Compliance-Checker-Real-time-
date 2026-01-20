@@ -116,6 +116,16 @@ except Exception as e:
     get_jwt_identity = lambda: None
     socketio = None
 
+# ====== Multi-Layer Compliance System (RAG + LLM) ======
+try:
+    from compliance_bp import compliance_bp
+    app.register_blueprint(compliance_bp)
+    logger.info("✅ Compliance API v2 (RAG + LLM) registered at /api/v2/*")
+except Exception as e:
+    logger.warning(f"⚠️  Compliance API v2 not available: {e}")
+    logger.warning("   Install dependencies: pip install chromadb sentence-transformers")
+    logger.warning("   Then run: python load_all_states.py")
+
 # ONLYOFFICE Configuration
 # OnlyOffice server URL - auto-detects for Azure or uses local default
 def get_onlyoffice_url():

@@ -1,0 +1,170 @@
+{
+  "state": "Kentucky",
+  "state_code": "KY",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes ENFORCEABLE if reasonable",
+      "statute_citation": "Kentucky Revised Statutes § 365.350 et seq.",
+      "requirements": [
+        "Non-competes ENFORCEABLE if reasonable",
+        "Kentucky enforces reasonable non-competes. Blue-pencil doctrine applies. Courts will modify overly broad restrictions. Typically 2 years or less reasonable.",
+        "Best practice: Limit to 2 years, reasonable geographic scope",
+        "Action required: Ensure reasonableness standards met"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": "Kentucky enforces reasonable non-competes. Blue-pencil doctrine applies. Courts will modify overly broad restrictions. Typically 2 years or less reasonable."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Kentucky follows federal minimum: $7.25/hour",
+      "statute_citation": "Kentucky Revised Statutes § 337.275",
+      "requirements": [
+        "Kentucky follows federal minimum: $7.25/hour",
+        "Must pay $7.25/hour minimum"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED and ENCOURAGED",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "Drug testing PERMITTED and ENCOURAGED",
+        "Kentucky Drug-Free Workplace programs provide workers' comp discounts"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": "Kentucky Drug-Free Workplace programs provide workers' comp discounts"
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Kentucky common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next regular payday or within 14 days",
+      "statute_citation": "Kentucky Revised Statutes § 337.055",
+      "requirements": [
+        "Final wages due next regular payday or within 14 days",
+        "Pay by next payday or within 14 days, whichever is later"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Kentucky is RIGHT TO WORK state",
+      "statute_citation": "Kentucky Constitution § 241",
+      "requirements": [
+        "Kentucky is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "Meal break REQUIRED for 3-5 hour shifts",
+      "statute_citation": "Kentucky Revised Statutes § 337.355",
+      "requirements": [
+        "Meal break REQUIRED for 3-5 hour shifts",
+        "Reasonable meal period must be provided between 3rd and 5th hour of work. Rest breaks under 20 minutes must be paid.",
+        "Action required: Ensure meal break compliance",
+        "Provide meal break for shifts 3-5 hours"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.ky.gov/",
+      "notes": "Reasonable meal period must be provided between 3rd and 5th hour of work. Rest breaks under 20 minutes must be paid."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Kentucky Labor Cabinet",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Kentucky employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

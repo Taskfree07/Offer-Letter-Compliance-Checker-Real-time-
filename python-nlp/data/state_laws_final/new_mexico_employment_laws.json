@@ -1,0 +1,149 @@
+{
+  "state": "New Mexico",
+  "state_code": "NM",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes enforceable if reasonable",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "Non-competes enforceable if reasonable",
+        "New Mexico enforces reasonable non-competes under common law. Must protect legitimate business interest with reasonable time/scope/geography.",
+        "Best practice: Keep duration 2 years or less, reasonable scope",
+        "Action required: Ensure reasonableness standards met"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": "New Mexico enforces reasonable non-competes under common law. Must protect legitimate business interest with reasonable time/scope/geography."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "New Mexico minimum wage: $12.00/hour (2023+)",
+      "statute_citation": "New Mexico Minimum Wage Act",
+      "requirements": [
+        "New Mexico minimum wage: $12.00/hour (2023+)",
+        "Action required: Ensure minimum wage compliance",
+        "Must pay $12.00/hour minimum"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "PAID SICK LEAVE REQUIRED (effective July 1, 2022)",
+      "statute_citation": "New Mexico Healthy Workplaces Act",
+      "requirements": [
+        "PAID SICK LEAVE REQUIRED (effective July 1, 2022)",
+        "All private employers must provide earned sick leave. 1 hour per 30 hours worked. Can cap at 64 hours per year.",
+        "Action required: Implement earned sick leave policy",
+        "Provide 1 hour per 30 hours worked"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": "All private employers must provide earned sick leave. 1 hour per 30 hours worked. Can cap at 64 hours per year."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Cannot discriminate against off-duty cannabis use",
+      "statute_citation": "New Mexico Cannabis Regulation Act",
+      "requirements": [
+        "Cannot discriminate against off-duty cannabis use",
+        "Cannot refuse to hire, discharge, or take adverse action based on person's status as cannabis consumer (off-duty use). Exceptions for safety-sensitive positions and federal requirements.",
+        "Action required: Review drug policies for cannabis compliance",
+        "Cannot penalize off-duty cannabis use"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": "Cannot refuse to hire, discharge, or take adverse action based on person's status as cannabis consumer (off-duty use). Exceptions for safety-sensitive positions and federal requirements."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next regular payday",
+      "statute_citation": "New Mexico common law",
+      "requirements": [
+        "Final wages due next regular payday",
+        "Pay by next regular payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dws.state.nm.us/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "New Mexico Department of Workforce Solutions",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "New Mexico employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

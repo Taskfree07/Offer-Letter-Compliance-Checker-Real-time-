@@ -1,0 +1,165 @@
+{
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Wisconsin does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Use of salary history may increase risk under federal anti-discrimination laws",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/",
+      "notes": "Although permitted, many employers avoid salary history questions to reduce Equal Pay Act and Title VII risk."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Wisconsin does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Wisconsin statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose compensation information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/laborstandards/",
+      "notes": "Some employers voluntarily disclose pay ranges for consistency with other states."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are enforceable in Wisconsin only if they are reasonable and narrowly tailored under strict statutory standards.",
+      "statute_citation": "Wis. Stat. § 103.465",
+      "requirements": [
+        "Must be reasonably necessary to protect employer's legitimate business interests",
+        "Must be reasonable in duration",
+        "Must be reasonable in geographic scope",
+        "Must not be harsh, oppressive, or unconscionable",
+        "Overly broad non-competes are void in their entirety (courts do not rewrite them)"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://docs.legis.wisconsin.gov/statutes/statutes/103/465",
+      "notes": "Wisconsin is one of the strictest states on non-competes. Overbroad clauses are completely unenforceable."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Wisconsin does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using third-party background check vendors.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history use must be non-discriminatory"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "Applies whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Wisconsin does not mandate paid sick leave statewide but protects certain civic and statutory leave rights.",
+      "statute_citation": "Wis. Stat. § 756.255 (jury duty); § 6.76 (voting leave); § 103.10 (Wisconsin Family and Medical Leave Act)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty without retaliation",
+        "Employees must be allowed up to 3 consecutive hours off to vote if schedule conflicts with polling hours",
+        "Wisconsin FMLA provides job-protected unpaid leave to eligible employees",
+        "No statewide paid sick leave mandate"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/fmla/",
+      "notes": "Offer letters should not conflict with statutory civic leave or WI FMLA rights."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Wisconsin permits workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Wisconsin Statutes Title 111; criminal statutes governing marijuana",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may discipline or refuse to hire based on positive drug tests",
+        "Cannabis remains illegal for recreational use in Wisconsin",
+        "Drug testing policies should be applied consistently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/laborstandards/",
+      "notes": "Wisconsin is employer-friendly regarding drug testing policies."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Wisconsin if consistent with contract law and federal arbitration principles.",
+      "statute_citation": "Federal Arbitration Act; Wisconsin Uniform Arbitration Act (Wis. Stat. § 788.01 et seq.)",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice",
+        "Courts may invalidate overly one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://docs.legis.wisconsin.gov/statutes/statutes/788",
+      "notes": "Fairness and clarity are key for enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Wisconsin follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.",
+      "statute_citation": "Wisconsin common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract provides otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Wisconsin law prohibits discrimination in employment based on protected characteristics.",
+      "statute_citation": "Wisconsin Fair Employment Act (Wis. Stat. § 111.31 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Cannot discriminate based on sexual orientation",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://dwd.wisconsin.gov/er/discrimination_civilrights/",
+      "notes": "Wisconsin explicitly protects sexual orientation under state law."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Wisconsin Department of Workforce Development, Wisconsin Statutes, official state agency guidance",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Wisconsin is employer-friendly in many areas but very strict on non-compete drafting; overbroad clauses are void entirely.",
+    "enforcement_agencies": [
+      "Wisconsin Department of Workforce Development",
+      "Wisconsin Equal Rights Division",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Continued strict enforcement of non-compete statute"
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "state": "Missouri",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.mo.gov/",
+      "title": "Missouri Department of Labor and Industrial Relations",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Missouri common law - House Springs v. Schneider",
+      "message": "Non-competes VERY EMPLOYER-FRIENDLY - broadly enforceable",
+      "detailedExplanation": "Missouri courts are very employer-friendly regarding non-competes. Statewide geographic scope often upheld. 2 years typically reasonable. Blue-pencil doctrine applies.",
+      "suggestion": "Non-competes strongly enforceable - use reasonable 2-year limit",
+      "actionRequired": "Ensure basic reasonableness standards met",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "non-compete restrictions (enforceable in Missouri with reasonable duration)",
+      "source": "Missouri case law"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Missouri Revised Statutes \u00a7 290.502",
+      "message": "Missouri minimum wage: $12.30/hour (2024), $13.75 (2025), $15.00 (2026)",
+      "detailedExplanation": "Minimum wage increases annually through 2026. January 1, 2025: $13.75/hour. January 1, 2026: $15.00/hour.",
+      "requirement": "Must pay $13.75/hour (2025) or $15.00 (2026)",
+      "actionRequired": "Track scheduled increases",
+      "source": "Missouri minimum wage schedule"
+    },
+    "paidLeave": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Missouri Proposition A (approved November 2024)",
+      "message": "EARNED PAID SICK TIME REQUIRED (effective May 1, 2025)",
+      "detailedExplanation": "Employers with 15+ employees must provide earned paid sick time. 1 hour per 30 hours worked. Can accrue up to 56 hours per year (15+ employees) or 40 hours (fewer than 15 employees).",
+      "requirement": "Provide 1 hour per 30 hours worked (effective May 1, 2025)",
+      "actionRequired": "Implement earned sick time policy by May 1, 2025",
+      "source": "Missouri Prop A - Earned Sick Time"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Missouri law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED",
+      "source": "Allowed"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Missouri Revised Statutes \u00a7 290.110",
+      "message": "Final wages due immediately if terminated, next payday if quit",
+      "detailedExplanation": "Involuntary termination: immediately. Voluntary resignation: next regular payday.",
+      "requirement": "Immediate pay if terminated",
+      "actionRequired": "Ensure capability for immediate final payment",
+      "source": "Missouri wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Missouri Constitution Article I \u00a7 29",
+      "message": "Missouri is RIGHT TO WORK state",
+      "source": "State Constitution"
+    }
+  }
+}

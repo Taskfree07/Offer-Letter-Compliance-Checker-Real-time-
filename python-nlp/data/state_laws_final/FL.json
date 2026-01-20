@@ -1,0 +1,104 @@
+{
+  "state": "Florida",
+  "state_code": "FL",
+  "last_updated": "2025-10-01",
+  "data_sources": [
+    {
+      "url": "http://www.leg.state.fl.us/statutes/",
+      "title": "Florida Statutes"
+    },
+    {
+      "url": "https://floridajobs.org",
+      "title": "Florida Department of Economic Opportunity"
+    }
+  ],
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "Non-compete agreements are ENFORCEABLE in Florida with reasonable restrictions.",
+      "law_citation": "Florida Statute 542.335",
+      "full_text": "Florida statute presumes non-competes reasonable if 6 months or less. Up to 2 years acceptable with legitimate business interest. Must be reasonable in time, geography, and scope. Keep time restriction to 2 years or less, reasonable geographic scope, protect legitimate business interest.",
+      "severity": "info",
+      "flagged_phrases": [
+        "non-compete",
+        "competitive activities",
+        "restraint of trade"
+      ],
+      "suggestion": "Non-compete is ENFORCEABLE in Florida - ensure time/geography limits are reasonable (6 months to 2 years)",
+      "source_url": "http://www.leg.state.fl.us/statutes/",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Florida does NOT prohibit salary history inquiries.",
+      "law_citation": "No state law restriction",
+      "full_text": "Florida has no state law restricting salary history questions. Employers may ask about previous compensation. While legal, consider avoiding salary history questions to promote pay equity.",
+      "severity": "info",
+      "flagged_phrases": [],
+      "suggestion": "While legal, consider avoiding salary history questions to promote pay equity",
+      "source_url": "https://floridajobs.org",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "medical_freedom",
+      "summary": "CANNOT require COVID-19 vaccination, testing, or mask-wearing.",
+      "law_citation": "Florida Medical Freedom Act",
+      "full_text": "Florida law prohibits requiring COVID-19 vaccination, COVID-19 testing, mandating mask-wearing, or discriminating based on vaccination/immunity status.",
+      "severity": "error",
+      "flagged_phrases": [
+        "COVID-19 vaccination",
+        "COVID vaccination required",
+        "proof of vaccination",
+        "COVID test",
+        "mask requirement",
+        "vaccination status"
+      ],
+      "suggestion": "Remove all COVID-19 related requirements",
+      "source_url": "https://floridajobs.org",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing is PERMITTED in Florida.",
+      "law_citation": "Florida Statute 440.102",
+      "full_text": "Florida allows pre-employment, reasonable suspicion, and random drug testing when properly implemented. Drug-free workplace policies encouraged.",
+      "severity": "info",
+      "flagged_phrases": [
+        "drug test",
+        "drug screening",
+        "substance test"
+      ],
+      "suggestion": "Drug testing is legal and acceptable in Florida. Ensure drug-free workplace policy is documented.",
+      "source_url": "https://floridajobs.org",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Florida minimum wage increases throughout 2025.",
+      "law_citation": "Florida Minimum Wage Act (Fla. Stat. § 448.110)",
+      "full_text": "Through 9/29/25: $13.00/hour. 9/30/25-9/29/26: $14.00/hour. 9/30/26: $15.00/hour. Tipped employees: Cash wage $9.98 (through 9/29/25), $10.98 (9/30/25-9/29/26), $11.98 (9/30/26).",
+      "severity": "info",
+      "flagged_phrases": [
+        "minimum wage",
+        "hourly rate"
+      ],
+      "suggestion": "Ensure compensation meets current minimum wage based on effective date",
+      "source_url": "https://floridajobs.org",
+      "effective_date": "2025-01-01"
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Florida has NO statewide ban-the-box law. Can inquire about criminal history on application.",
+      "law_citation": "Federal FCRA",
+      "full_text": "Can inquire about criminal history on application. Must follow federal FCRA requirements: disclosure, authorization, pre-adverse action, adverse action notices.",
+      "severity": "info",
+      "flagged_phrases": [
+        "background check",
+        "criminal history"
+      ],
+      "suggestion": "Background checks are permitted. Ensure FCRA compliance: standalone disclosure, written authorization, proper notices.",
+      "source_url": "https://floridajobs.org",
+      "effective_date": "2025-01-01"
+    }
+  ]
+}

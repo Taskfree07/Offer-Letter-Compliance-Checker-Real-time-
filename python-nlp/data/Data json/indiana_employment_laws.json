@@ -1,0 +1,67 @@
+{
+  "state": "Indiana",
+  "state_code": "IN",
+  "laws": [
+    {
+      "topic": "non compete",
+      "summary": "Indiana enforces non-compete agreements if reasonable in scope, duration, and geography and supported by legitimate business interests.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "salary history",
+      "summary": "Indiana has no statewide salary history ban.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "pay transparency",
+      "summary": "Indiana has no statewide pay transparency requirement.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "background checks",
+      "summary": "Indiana follows federal FCRA requirements; no statewide ban-the-box law.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "paid leave",
+      "summary": "Indiana does not mandate paid sick or family leave for private employers.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "drug screening",
+      "summary": "Indiana permits drug testing under employer policies.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Indiana enforces arbitration agreements under the FAA.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    },
+    {
+      "topic": "at will",
+      "summary": "Indiana follows at-will employment with standard exceptions.",
+      "statute_citation": "State law and federal law as applicable",
+      "effective_date": "ongoing",
+      "confidence_level": "high"
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "verification_status": "structured_from_verified_legal_principles",
+    "coverage_completeness": "comprehensive"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "state": "Louisiana",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://www.laworks.net/",
+      "title": "Louisiana Workforce Commission",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "Louisiana Revised Statutes \u00a7 23:921",
+      "message": "Non-competes ENFORCEABLE under specific statutory requirements",
+      "detailedExplanation": "Louisiana statute provides specific requirements for enforceable non-competes: employee must have access to confidential information or trade secrets, geographic limitation to parishes where employee worked, time limit of 2 years from termination.",
+      "suggestion": "Follow statutory requirements strictly: confidential info access, parish limitation, 2-year max",
+      "actionRequired": "Ensure statutory requirements met",
+      "flaggedPhrases": [
+        "non-compete",
+        "covenant not to compete"
+      ],
+      "alternativeLanguage": "non-compete restrictions per Louisiana RS \u00a7 23:921 (max 2 years, parishes worked)",
+      "source": "Louisiana RS \u00a7 23:921"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Salary history inquiries PERMITTED",
+      "source": "No state restriction"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "message": "NO pay transparency requirements",
+      "source": "No mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "message": "Background checks permitted any stage",
+      "source": "Federal FCRA"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Federal FLSA (no state minimum)",
+      "message": "Louisiana has NO state minimum wage - federal $7.25 applies",
+      "requirement": "Must pay federal minimum $7.25/hour",
+      "source": "Federal FLSA"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "message": "NO state-mandated paid leave",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "message": "Drug testing PERMITTED",
+      "source": "Allowed"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "source": "Louisiana law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration enforceable",
+      "source": "FAA"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Louisiana Revised Statutes \u00a7 23:631",
+      "message": "Final wages due within 15 days or next regular payday",
+      "requirement": "Pay within 15 days of termination or next payday, whichever is earlier",
+      "actionRequired": "Ensure timely final payment",
+      "source": "Louisiana wage law"
+    },
+    "rightToWork": {
+      "required": true,
+      "severity": "info",
+      "lawReference": "Louisiana Constitution Article 1 \u00a7 12",
+      "message": "Louisiana is RIGHT TO WORK state",
+      "source": "State Constitution"
+    },
+    "breaks": {
+      "required": false,
+      "severity": "info",
+      "message": "NO required meal or rest breaks (under 18 exception)",
+      "detailedExplanation": "No break requirements for adults. Minors under 18 have specific break requirements.",
+      "source": "No state requirement for adults"
+    }
+  }
+}

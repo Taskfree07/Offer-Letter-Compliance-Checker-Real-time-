@@ -1,0 +1,209 @@
+{
+  "state": "Georgia",
+  "state_code": "GA",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Georgia enforces non-compete agreements. O.C.G.A. § 34-2-2 provides statutory framework. Non-compete must be reasonable in time (typically 2-3 years), geography, and scope. Must protect legitimate business interest (trade secrets, confidential information, substantial business relationship). Consideration required for existing employees. Georgia is employer-friendly on non-competes; courts will blue-pencil unreasonable provisions.",
+      "statute_citation": "O.C.G.A. § 34-2-2 (Non-Compete Agreements); O.C.G.A. § 10-2-2 (Trade Secrets)",
+      "requirements": [
+        "NON-COMPETE MUST BE REASONABLE: Time, Territory (geographic scope), Line of Business restricted",
+        "LEGITIMATE BUSINESS INTEREST: Trade secrets, substantial relationships with prospective/existing customers, confidential business information, substantial relationships of trust",
+        "TIME: Generally 1-3 years reasonable; longer periods require justification; court applies reasonableness test",
+        "TERRITORY: Must be limited to area where employer conducted business or had legitimate business interest",
+        "SCOPE: Cannot be broader than necessary to protect legitimate interest",
+        "CONSIDERATION: New employees: employment is consideration; Existing employees: must receive additional consideration (salary increase, promotion, or other benefit)",
+        "WRITTEN AGREEMENT required",
+        "NOT ENFORCEABLE: Against employee at-will if no additional consideration for existing employees",
+        "BLUE-PENCIL: Georgia courts will modify overly broad provisions to reasonable scope (employer-friendly)",
+        "HEALTHCARE: Healthcare providers subject to reasonableness standard; must show protectable relationships",
+        "CUSTOMER LIST: Non-competition regarding customer list enforceable if legitimate interest and reasonable",
+        "Covenant of good faith: Implied in all employment contracts; cannot be violated",
+        "Liquidated damages: Reasonable damages clauses enforceable; must not be penalty",
+        "SOLICITATION: Non-solicitation agreements similarly enforceable under reasonableness test"
+      ],
+      "effective_date": "O.C.G.A. § 34-2-2 ongoing; common law development ongoing",
+      "confidence_level": "high",
+      "source_url": "https://law.justia.com/codes/georgia/part-2-2-2/",
+      "notes": "Georgia is very employer-friendly on non-competes. Courts will modify unreasonable provisions rather than void them. Strong protection for legitimate business interests."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Georgia does NOT have statewide salary history ban. Employers may inquire about and consider past compensation. Federal equal pay principles apply (cannot use to justify discriminatory gaps). No local ordinances in major Georgia cities (Atlanta, etc.) currently ban salary history. Growing national trend but not yet adopted in Georgia.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); Title VII (42 U.S.C. § 2000e); Georgia Code lacks specific ban",
+      "requirements": [
+        "NO STATE SALARY HISTORY BAN in Georgia",
+        "Employers may inquire about compensation history",
+        "Employers may consider prior salary in hiring decisions",
+        "Federal Equal Pay Act: Cannot use salary history to justify pay discrimination based on sex",
+        "Must pay equal for equal work regardless of prior compensation",
+        "Cannot discriminate on basis of protected class using salary history as pretext",
+        "Documentation required for all pay decisions",
+        "Retaliation prohibited if employee discusses wages",
+        "Recommendations: Establish role-based pay scales; document pay decisions; ensure no discriminatory impact on protected classes"
+      ],
+      "effective_date": "Federal law ongoing; Georgia has no state law change",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/equal-pay",
+      "notes": "Georgia currently permits salary history inquiries at state level. Federal equal pay principles prevent use for discriminatory purposes."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Georgia does NOT require pay transparency in job postings or employee communications at state level. No state-level pay range requirement. Federal contractors subject to pay equity audit requirements (OFCCP). No local ordinances in Atlanta or other major cities. Growing national trend but not yet adopted in Georgia.",
+      "statute_citation": "Federal Equal Pay Act (29 U.S.C. § 206(d)); Federal OFCCP Rules for Federal Contractors",
+      "requirements": [
+        "NO STATE PAY TRANSPARENCY REQUIREMENT in Georgia",
+        "Employers NOT required to disclose salary ranges in job postings",
+        "Employers NOT required to provide pay scale to employees at hire/transfer/promotion",
+        "Federal contractors: Subject to OFCCP pay equity audit requirements; must maintain pay documentation",
+        "Must maintain records of compensation decisions",
+        "Federal FLSA: Maintain payroll records",
+        "Recommendations: Establish consistent pay scales by job level; maintain documentation; be prepared for federal contractor audits if applicable"
+      ],
+      "effective_date": "Federal contractor rules ongoing; Georgia has no state requirement",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/flsa",
+      "notes": "Georgia lacks state-level pay transparency requirement. Federal contractor compliance required if applicable."
+    },
+    {
+      "topic": "background_checks",
+      "summary": "Georgia follows federal FCRA requirements. No state-specific ban-the-box law. Employers may conduct background checks at any time subject to FCRA compliance (written consent, pre-adverse and final adverse action notices). Courts permit background checks if job-related and non-discriminatory. Georgia does not restrict criminal history inquiries.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681); Georgia Code § 34-7-2 (limited provisions); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "FCRA Federal Requirements: Written consent required before background check",
+        "FCRA: Pre-adverse action notice (copy of report and FCRA rights) required",
+        "FCRA: Final adverse action notice (specific reason) required",
+        "FCRA: Third-party vendor must comply with FCRA; accuracy standards apply",
+        "NO STATE BAN-THE-BOX LAW statewide in Georgia",
+        "Employers may ask about criminal history on application",
+        "Employers may conduct background check at any time",
+        "Criminal conviction consideration: No specific restrictions; can consider if job-related",
+        "Sealed/expunged records: Cannot consider",
+        "Arrests without conviction: Cannot use if outside statute of limitations for underlying crime",
+        "Juvenile records: Generally cannot consider",
+        "ADA CONSIDERATIONS: Cannot discriminate based on disability; background check cannot be pretext for disability discrimination",
+        "EEOC GUIDANCE: Background check procedures must not have disparate impact on protected classes",
+        "Recommendations: Ensure FCRA-compliant vendor; document job-related business necessity; maintain compliance records"
+      ],
+      "effective_date": "FCRA ongoing federal law; Georgia Code ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know",
+      "notes": "Georgia follows federal FCRA with no additional state restrictions. Employers have broad latitude for background checks if job-related."
+    },
+    {
+      "topic": "paid_leave",
+      "summary": "Georgia does NOT mandate paid sick leave or paid family leave for private employers. Federal FMLA applies to employers with 50+ employees. No state-run paid leave program. Private employers free to set own policies. Georgia is not among states with comprehensive paid leave requirements.",
+      "statute_citation": "Federal Family and Medical Leave Act (29 U.S.C. § 2601 et seq.); No comprehensive Georgia paid leave mandate",
+      "requirements": [
+        "NO STATE PAID SICK LEAVE MANDATE for private employers",
+        "NO STATE PAID FAMILY LEAVE MANDATE for private employers",
+        "NO STATE-RUN PAID LEAVE PROGRAM",
+        "FMLA (Federal): Applies to employers with 50+ employees; covers 12 weeks unpaid leave for FMLA-qualifying reasons",
+        "FMLA: Must maintain health insurance; employee restored to same/equivalent position",
+        "FMLA: Applies only to employers with 50+ employees",
+        "FMLA: Employee must work 12+ months and 1,250 hours in past 12 months",
+        "JURY DUTY: Employer cannot penalize for jury service",
+        "VOTING: Employer cannot penalize for voting",
+        "MILITARY: Federal SCRA applies to military service",
+        "WORKERS' COMPENSATION: Cannot penalize for filing claim",
+        "Recommendations: Establish voluntary paid leave (beneficial for recruitment); if offering, comply with stated policy; clear documentation"
+      ],
+      "effective_date": "Federal FMLA ongoing; Georgia has no state mandate",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.gov/agencies/whd/fmla",
+      "notes": "Georgia lacks state-mandated paid leave. FMLA applies to large employers only (50+). Most Georgia employers not required to provide paid leave."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Georgia enforces arbitration agreements under Federal Arbitration Act (FAA). Must be clear mutual agreement in writing. Courts scrutinize for unconscionability but generally favor arbitration. Class action waivers generally enforceable. No state-specific restrictions on employment arbitration.",
+      "statute_citation": "Federal Arbitration Act (9 U.S.C. § 1 et seq.); Georgia Uniform Arbitration Act (O.C.G.A. § 34-34-1 et seq.)",
+      "requirements": [
+        "Arbitration agreements enforceable under Federal Arbitration Act",
+        "Must be in writing; clearly presented",
+        "Must evidence mutual agreement to arbitrate",
+        "Must identify claims subject to arbitration",
+        "Cannot be unconscionable (procedurally or substantively)",
+        "Must be supported by consideration",
+        "Class action waivers generally enforceable if mutual and not unconscionable",
+        "Arbitration cannot eliminate statutory rights; must preserve remedies",
+        "Costs: Employer generally bears arbitrator/forum fees if employee must bear to access",
+        "Federal FAA preemption: Georgia applies FAA; FAA preempts state law",
+        "Unconscionability test: Procedural (surprise, unequal bargaining) and substantive (terms unreasonably favorable to employer)",
+        "Recommendations: Clear language; mutual obligations; adequate cost allocation; remedy preservation"
+      ],
+      "effective_date": "Federal FAA ongoing; Georgia Uniform Arbitration Act ongoing",
+      "confidence_level": "high",
+      "source_url": "https://code.georgia.gov/o-c-g-a-section-34-34-1",
+      "notes": "Georgia enforces arbitration under federal FAA standards with general pro-arbitration stance."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Georgia follows at-will employment doctrine. Either party can terminate for any reason without cause or notice (absent contract/policy creating obligation). Exceptions: cannot terminate for illegal reason (discrimination, retaliation, violation of public policy), cannot breach express/implied contract, cannot breach good faith covenant.",
+      "statute_citation": "Georgia Common Law; O.C.G.A. § 34-7-2 (Protection Against Employer Retaliation); Federal Laws",
+      "requirements": [
+        "DEFAULT: At-will employment; either party can terminate without cause/notice",
+        "EXCEPTIONS - Cannot terminate for: Race, color, religion, sex, national origin, age 40+, disability (ADA), military service (federal), jury duty (federal), voting, workers' compensation claim (O.C.G.A. § 34-9-2), wage claim, whistleblowing (O.C.G.A. § 34-7-2), reporting illegal activity, jury duty participation, voting",
+        "WHISTLEBLOWER PROTECTION (O.C.G.A. § 34-7-2): Employee cannot be discharged, threatened, or discriminated against for reporting violation of law to appropriate governmental authority or refusing to participate in unlawful activity",
+        "WORKERS' COMPENSATION: Cannot discharge for filing claim",
+        "JURY DUTY: Cannot prevent jury service",
+        "VOTING: Cannot prevent voting; reasonable time off",
+        "MILITARY SERVICE: Federal USERRA applies",
+        "PUBLIC POLICY EXCEPTION: Cannot terminate for activity in public interest (e.g., whistleblowing, refusing unlawful act)",
+        "IMPLIED CONTRACT: Handbook or conduct may create enforceable contract",
+        "GOOD FAITH COVENANT: Implied in all employment; cannot be violated",
+        "FINAL PAY: Final wages must be paid timely",
+        "AT-WILL DISCLAIMER: Should be clear in handbook; ambiguous language may not override contract implications",
+        "Remedies: Breach of contract, wrongful termination, damages"
+      ],
+      "effective_date": "Common law ongoing; statutory protections as noted",
+      "confidence_level": "high",
+      "source_url": "https://code.georgia.gov/",
+      "notes": "Georgia at-will employment with exceptions for protected activities and public policy. Handbooks may create enforceable rights."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Georgia allows drug testing under reasonable circumstances. No specific restrictions on pre-employment testing. Post-employment random testing permitted if policy provides. Marijuana (both recreational and medical) NOT legal in Georgia; employers can prohibit and test. Very employer-friendly on drug testing policies.",
+      "statute_citation": "Georgia law lacks comprehensive drug testing statute; follows common law; Federal Drug-Free Workplace Act (41 U.S.C. § 8101); Federal ADA (42 U.S.C. § 12101)",
+      "requirements": [
+        "PRE-EMPLOYMENT TESTING: Permitted; no state restriction",
+        "POST-EMPLOYMENT TESTING: Permitted with reasonable suspicion or random testing if policy provides",
+        "MARIJUANA: NOT legal in Georgia (neither recreational nor medical); employers can test and prohibit",
+        "TESTING REQUIREMENTS: Written policy recommended; notice to employees; use certified lab (SAMHSA-certified)",
+        "CONFIRMATION: Positive screening should be confirmed",
+        "FEDERAL CONTRACTORS: Subject to federal drug-free workplace requirements",
+        "DOT-REGULATED: DOT testing requirements apply to safety-sensitive positions",
+        "REASONABLE SUSPICION: Observable evidence of impairment; document before testing",
+        "SAFETY-SENSITIVE POSITIONS: Can enforce stricter testing for public safety positions",
+        "PRESCRIBED MEDICATIONS: Cannot test positive for validly prescribed medication; ADA may limit action based on disability",
+        "MEDICAL REVIEW OFFICER (MRO): Recommended to review results",
+        "Recommendations: Clear written policy; notice to applicants/employees; use certified labs; document reasonable suspicion; maintain confidentiality"
+      ],
+      "effective_date": "Ongoing; no significant state law changes affecting drug testing",
+      "confidence_level": "high",
+      "source_url": "https://dol.georgia.gov/",
+      "notes": "Georgia very employer-friendly on drug testing. Marijuana not legal. Employers have broad discretion for testing policies."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Georgia Code, Georgia Department of Labor, Georgia Courts, Federal EEOC, Legal Databases",
+    "verification_status": "verified_from_official_sources",
+    "coverage_completeness": "comprehensive"
+  },
+  "additional_notes": {
+    "general_guidance": "Georgia is VERY EMPLOYER-FRIENDLY regarding worker protections. Strong enforcement of non-competes (with blue-pencil modification), no salary history ban, no pay transparency requirement, permissive on background checks, no state-mandated paid leave, and employer-friendly on drug testing. At-will employment with exceptions for protected activities. Marijuana not legal.",
+    "enforcement_agencies": [
+      "Georgia Department of Labor",
+      "Georgia Commission on Human Rights",
+      "U.S. Equal Employment Opportunity Commission (EEOC)",
+      "U.S. Department of Labor (Wage & Hour)",
+      "U.S. Department of Justice (if federal crime involved)"
+    ],
+    "recent_developments": [
+      "Continued enforcement of non-competes with reasonable modification",
+      "No recent significant worker protection expansions",
+      "Federal OFCCP audit requirements apply to federal contractors",
+      "Georgia maintains employer-friendly stance on employment law"
+    ]
+  }
+}

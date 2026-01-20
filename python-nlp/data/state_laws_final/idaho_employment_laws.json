@@ -1,0 +1,168 @@
+{
+  "state": "Idaho",
+  "state_code": "ID",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes ENFORCEABLE if reasonable",
+      "statute_citation": "Idaho Code § 44-2701 et seq.",
+      "requirements": [
+        "Non-competes ENFORCEABLE if reasonable",
+        "Idaho enforces reasonable non-competes protecting legitimate business interests. Statutory provisions govern enforceability. Maximum 18 months for non-solicitation in certain situations.",
+        "Best practice: Keep duration reasonable (18-24 months), limited geography",
+        "Action required: Ensure compliance with reasonableness standards"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": "Idaho enforces reasonable non-competes protecting legitimate business interests. Statutory provisions govern enforceability. Maximum 18 months for non-solicitation in certain situations."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Salary history inquiries PERMITTED",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "Salary history inquiries PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirements",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "NO pay transparency requirements"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Background checks permitted any stage",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "Background checks permitted any stage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Idaho follows federal minimum wage: $7.25/hour",
+      "statute_citation": "Idaho Code § 44-1502",
+      "requirements": [
+        "Idaho follows federal minimum wage: $7.25/hour",
+        "Must pay at least $7.25/hour"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "NO state-mandated paid leave",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "NO state-mandated paid leave"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing PERMITTED",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "Drug testing PERMITTED"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next payday or within 10 days",
+      "statute_citation": "Idaho Code § 45-606",
+      "requirements": [
+        "Final wages due next payday or within 10 days",
+        "Action required: Ensure timely final payment",
+        "Pay by next regular payday or within 10 days"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "right_to_work",
+      "summary": "Idaho is RIGHT TO WORK state",
+      "statute_citation": "Idaho Code § 44-2001",
+      "requirements": [
+        "Idaho is RIGHT TO WORK state"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": ""
+    },
+    {
+      "topic": "breaks",
+      "summary": "NO required meal or rest breaks for adults",
+      "statute_citation": "Idaho common law",
+      "requirements": [
+        "NO required meal or rest breaks for adults",
+        "Idaho does not mandate breaks for employees 18+"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://labor.idaho.gov/",
+      "notes": "Idaho does not mandate breaks for employees 18+"
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Idaho Department of Labor",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Idaho employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

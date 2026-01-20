@@ -1,0 +1,43 @@
+{
+  "state": "Minnesota",
+  "state_code": "MN",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": " non-compete agreements any time. \nOverview\n\nBy: Adam Wright, General Counsel and VP of Legal Product, SixFifty\nBoth the federal and state governments continued the assault on non-compete agreements. Minnesota became the fourth state to completely ban non-compete agreements with employees. On July 1",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": " non-compete agreements any time. \nOverview\n\nBy: Adam Wright, General Counsel and VP of Legal Product, SixFifty\nBoth the federal and state governments continued the assault on non-compete agreements. Minnesota became the fourth state to completely ban non-compete agreements with employees. On July 1, 2023, Minnesota will join California, North Dakota, and Oklahoma in the small (but growing) group of states fty\nBoth the federal and state governments continued the assault on non-compete agreements",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "           24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPu",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "           24\n\n\n\n\nSelect a state or commonwealth\nAlabama\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nGeorgia\nHawaii\nIllinois\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban en ployer or search public records databases to ascertain an applicant's current or previous ",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}

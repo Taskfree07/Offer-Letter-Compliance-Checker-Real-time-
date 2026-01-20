@@ -1,0 +1,137 @@
+{
+  "state": "Alaska",
+  "lastUpdated": "2026-01-16",
+  "sources": [
+    {
+      "url": "https://labor.alaska.gov/",
+      "title": "Alaska Department of Labor and Workforce Development",
+      "dateAccessed": "2026-01-16"
+    },
+    {
+      "url": "https://labor.alaska.gov/lss/",
+      "title": "Alaska Labor Standards and Safety",
+      "dateAccessed": "2026-01-16"
+    }
+  ],
+  "rules": {
+    "nonCompete": {
+      "restricted": true,
+      "severity": "warning",
+      "lawReference": "Alaska Statute \u00a7 45.50.910 (Trade Secret Act)",
+      "message": "Non-competes DISFAVORED - very limited enforceability",
+      "detailedExplanation": "Alaska courts strongly disfavor non-compete agreements and will only enforce them in very limited circumstances to protect trade secrets or extraordinary investments in training. Must be extremely narrow in scope and duration.",
+      "suggestion": "Use confidentiality and trade secret protection instead of non-compete",
+      "actionRequired": "Remove non-compete OR ensure extremely narrow scope protecting only trade secrets",
+      "flaggedPhrases": [
+        "non-compete",
+        "noncompete",
+        "covenant not to compete",
+        "competitive activities",
+        "competing business"
+      ],
+      "alternativeLanguage": "confidentiality obligations and protection of trade secrets in accordance with Alaska law",
+      "source": "Alaska case law - strong disfavor"
+    },
+    "salaryHistory": {
+      "prohibited": false,
+      "severity": "info",
+      "lawReference": "No statutory prohibition",
+      "message": "Salary history inquiries PERMITTED",
+      "detailedExplanation": "Alaska has no law prohibiting salary history inquiries",
+      "actionRequired": "No restrictions",
+      "source": "No state law"
+    },
+    "payTransparency": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No statutory requirement",
+      "message": "NO pay transparency requirements",
+      "detailedExplanation": "No requirement to disclose salary ranges",
+      "actionRequired": "Optional",
+      "source": "No state mandate"
+    },
+    "backgroundChecks": {
+      "timing": "anytime",
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "Federal FCRA",
+      "message": "Background checks permitted at any stage",
+      "detailedExplanation": "No ban-the-box restrictions. Follow federal FCRA requirements.",
+      "actionRequired": "Federal FCRA compliance only",
+      "source": "Federal law"
+    },
+    "minimumWage": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Alaska Statute \u00a7 23.10.065",
+      "message": "Alaska minimum wage: $11.91/hour (2026)",
+      "detailedExplanation": "Alaska minimum wage adjusts annually for inflation. 2026 rate is $11.91/hour (effective January 1, 2026). Higher than federal minimum.",
+      "requirement": "Must pay at least $11.91/hour (2026)",
+      "actionRequired": "Ensure all employees paid Alaska minimum wage",
+      "source": "Alaska minimum wage law"
+    },
+    "breaks": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Alaska Statute \u00a7 23.10.065",
+      "message": "30-minute meal break REQUIRED for 5+ hour shifts",
+      "detailedExplanation": "Employers must provide at least 30-minute meal break for shifts longer than 5 hours. Break is unpaid if employee is completely relieved of duties.",
+      "requirement": "Provide 30-minute meal break for 5+ hour shifts",
+      "actionRequired": "Ensure meal break policies comply",
+      "bestPractice": "Document break policies clearly",
+      "source": "Alaska labor law"
+    },
+    "paidLeave": {
+      "required": false,
+      "severity": "info",
+      "lawReference": "No state mandate",
+      "message": "NO state-mandated paid leave",
+      "detailedExplanation": "No state requirement for paid sick leave or paid family leave",
+      "actionRequired": "No state requirement",
+      "source": "No mandate"
+    },
+    "drugScreening": {
+      "restricted": false,
+      "severity": "info",
+      "lawReference": "No restrictions",
+      "message": "Drug testing PERMITTED",
+      "detailedExplanation": "Pre-employment, random, and reasonable suspicion testing allowed",
+      "actionRequired": "No restrictions",
+      "source": "Permitted"
+    },
+    "finalPay": {
+      "required": true,
+      "severity": "error",
+      "lawReference": "Alaska Statute \u00a7 23.05.140",
+      "message": "Final wages due within 3 WORKING DAYS of termination",
+      "detailedExplanation": "Employers must pay all wages due within 3 working days of termination or resignation, regardless of reason. Failure to pay timely may result in penalties.",
+      "requirement": "Pay final wages within 3 working days",
+      "actionRequired": "Ensure final paycheck processed within 3 working days",
+      "source": "Alaska wage law"
+    },
+    "atWill": {
+      "acceptable": true,
+      "severity": "info",
+      "message": "At-will employment applies",
+      "bestPractice": "Include clear at-will disclaimer",
+      "source": "Alaska employment law"
+    },
+    "arbitration": {
+      "prohibited": false,
+      "severity": "info",
+      "message": "Arbitration agreements enforceable",
+      "detailedExplanation": "Generally enforceable under FAA",
+      "source": "Federal Arbitration Act"
+    },
+    "payFrequency": {
+      "required": true,
+      "severity": "warning",
+      "lawReference": "Alaska Statute \u00a7 23.05.140",
+      "message": "Must pay employees semi-monthly or monthly",
+      "detailedExplanation": "Wages must be paid at least semi-monthly (twice per month) on regular paydays designated in advance.",
+      "requirement": "Pay at least semi-monthly",
+      "actionRequired": "Ensure pay frequency meets state requirements",
+      "source": "Alaska wage payment law"
+    }
+  }
+}

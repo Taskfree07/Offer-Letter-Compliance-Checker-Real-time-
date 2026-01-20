@@ -1,0 +1,219 @@
+{
+  "note": "Comprehensive employment law database for offer letter compliance - Pennsylvania through Oregon",
+  "states": [
+    {
+      "state": "Pennsylvania",
+      "state_code": "PA",
+      "laws": [
+        {
+          "topic": "non-compete",
+          "summary": "Pennsylvania restricts non-compete agreements for healthcare practitioners through the Fair Contracting for Health Care Practitioners Act. For healthcare workers (physicians, osteopaths, CRNAs, CRNPs, physician assistants), non-competes longer than 1 year entered after Jan 1, 2025 are void and unenforceable. Even 1-year non-competes become void if employer terminates the practitioner (even for cause). Non-competes tied to practice sales remain enforceable. For non-healthcare workers, Pennsylvania still allows reasonable non-competes under common law with no statutory restrictions.",
+          "statute_citation": "Act No. 74 of 2024 (H.B. 1633) - Fair Contracting for Health Care Practitioners Act",
+          "requirements": [
+            "Healthcare practitioners: Non-competes longer than 1 year are void after Jan 1, 2025",
+            "Healthcare practitioners: 1-year non-competes only enforceable if practitioner voluntarily resigns",
+            "Healthcare practitioners: Non-competes void if employer terminates (even for cause)",
+            "Healthcare practitioners covered: physicians, osteopaths, certified registered nurse anesthetists, certified registered nurse practitioners, physician assistants",
+            "Exception: Non-competes connected to sale of ownership interest or practice assets remain enforceable",
+            "Employers may recover reasonable relocation, training, patient acquisition costs within 3 years if practitioner voluntarily leaves",
+            "Patient notification required within 90 days: must notify patients practitioner has left, explain record transfer process, offer assignment to new practitioner",
+            "Applies to practitioners with ongoing patient relationships (2+ years, seen within past year)",
+            "Non-healthcare workers: No statutory restrictions, common law reasonableness applies",
+            "Pre-Jan 1, 2025 agreements remain unaffected by new law"
+          ],
+          "effective_date": "2025-01-01",
+          "confidence_level": "high",
+          "source_url": "https://www.jacksonlewis.com/insights/pennsylvania-bans-most-non-compete-agreements-healthcare-practitioners",
+          "notes": "Pennsylvania was previously unrestricted for non-competes. New law only applies to healthcare practitioners. FTC non-compete ban blocked in court, so state law governs. Broad definition may affect patient non-solicitation agreements."
+        },
+        {
+          "topic": "salary_history",
+          "summary": "Philadelphia (not statewide) prohibits employers from asking about or relying on applicant salary history when setting compensation. Enforcement began September 1, 2020. Statewide, Pennsylvania has proposed but not yet enacted salary history ban legislation (H.B. 630).",
+          "statute_citation": "Philadelphia Wage Equity Ordinance (Philadelphia Code § 9-1131); Proposed H.B. 630 (not yet law)",
+          "requirements": [
+            "PHILADELPHIA ONLY: Employers cannot ask about salary history",
+            "PHILADELPHIA ONLY: Cannot rely on salary history to set compensation",
+            "PHILADELPHIA ONLY: Applies to all positions in Philadelphia",
+            "PHILADELPHIA ONLY: Exceptions for internal transfers/promotions (can use current employer salary data)",
+            "PHILADELPHIA ONLY: Voluntary disclosure by applicant is permitted",
+            "PHILADELPHIA ONLY: Can use market salary data and surveys",
+            "PHILADELPHIA ONLY: Enforced by Philadelphia Commission on Human Relations",
+            "STATEWIDE: H.B. 630 proposes similar ban statewide but NOT YET LAW",
+            "Proposed statewide law would prohibit 'gag orders' on employee pay discussions",
+            "At state level, only notification requirements exist (must provide wage info at hire)"
+          ],
+          "effective_date": "2020-09-01 (Philadelphia only)",
+          "confidence_level": "high",
+          "source_url": "https://www.phila.gov/media/20210423162135/Wage-equity-ordinance-faqs.pdf",
+          "notes": "Only Philadelphia has enacted salary history ban. Statewide legislation pending. Penalties for violations include fines and potential lawsuits. Does not prevent asking about salary expectations."
+        },
+        {
+          "topic": "pay_transparency",
+          "summary": "Pennsylvania has PROPOSED but not enacted pay transparency law (H.B. 560). If passed, employers with 15+ employees would need to provide pay ranges when offering positions, promotions, or transfers, and notify current employees annually. As of Jan 2026, this is NOT YET LAW. Pennsylvania only requires wage notification at time of hire.",
+          "statute_citation": "Proposed H.B. 560 (not yet law); 43 P.S. § 260.3 (Wage Payment and Collection Law - notification only)",
+          "requirements": [
+            "PROPOSED (NOT LAW): H.B. 560 would apply to employers with 15+ employees",
+            "PROPOSED (NOT LAW): Must provide pay range when offering new role, promotion, or transfer",
+            "PROPOSED (NOT LAW): Annual written notification to employees of their pay range",
+            "PROPOSED (NOT LAW): Transparency for jobs requiring similar skill, effort, responsibility",
+            "PROPOSED (NOT LAW): Would take effect 60 days after passage",
+            "PROPOSED (NOT LAW): Does NOT require salary ranges in job postings",
+            "CURRENT LAW: Must notify employees of rate of pay at time of hire",
+            "CURRENT LAW: Must notify of time/place of payment",
+            "CURRENT LAW: Can post information conspicuously or provide individual notice",
+            "CURRENT LAW: Must notify before changes to pay rate or payment details"
+          ],
+          "effective_date": "Proposed for 2025-2026 session (not yet enacted)",
+          "confidence_level": "medium",
+          "source_url": "https://www.meainfo.org/blog/pennsylvania-pay-transparency-law-proposed/",
+          "notes": "Pennsylvania does NOT currently have pay transparency law requiring salary ranges in postings. H.B. 560 introduced Feb 2025 but status uncertain. Only basic wage notification required at hire under existing law."
+        },
+        {
+          "topic": "background_checks",
+          "summary": "Pennsylvania has state-level protections under CHRIA and local 'ban the box' laws in Philadelphia and Pittsburgh. State law prohibits considering arrests without conviction, requires job-relatedness assessment, and bars discrimination based on criminal history. Philadelphia has most restrictive ban-the-box law requiring employers wait until conditional offer to inquire about criminal history.",
+          "statute_citation": "18 Pa.C.S. § 9125 (CHRIA - Criminal History Record Information Act); Philadelphia Code Chapter 9-3500 (FCRSSO); Pittsburgh Code § 161.16A",
+          "requirements": [
+            "STATEWIDE: Cannot consider arrests without conviction",
+            "STATEWIDE: Cannot consider juvenile adjudications",
+            "STATEWIDE: Cannot consider summary offenses",
+            "STATEWIDE: Convictions must be job-related and affect suitability",
+            "STATEWIDE: Must consider: nature of offense, time elapsed, job duties, rehabilitation",
+            "STATEWIDE: Must provide written explanation if rejected based on record",
+            "PHILADELPHIA: Cannot ask about criminal history on initial application",
+            "PHILADELPHIA: Can only inquire after conditional offer of employment",
+            "PHILADELPHIA: Cannot consider convictions older than 7 years (4 years for misdemeanors after Jan 6, 2026)",
+            "PHILADELPHIA: Cannot consider summary offenses at all",
+            "PHILADELPHIA: Must conduct individualized assessment",
+            "PHILADELPHIA: Must provide copy of background report and 10 business days to respond before final decision",
+            "PHILADELPHIA: Must notify of specific convictions considered",
+            "PHILADELPHIA: Amendments effective Jan 6, 2026 strengthen protections",
+            "PITTSBURGH: City contractors cannot ask about convictions until after applicant deemed qualified",
+            "PUBLIC EMPLOYERS: Statewide ban-the-box for state government jobs (2017)",
+            "Exceptions: Positions legally required to exclude certain convictions (childcare, financial services)"
+          ],
+          "effective_date": "CHRIA: ongoing; Philadelphia: 2012 (amended 2016, 2025); Pittsburgh: enacted; State public sector: 2017",
+          "confidence_level": "high",
+          "source_url": "https://business.phila.gov/ban-the-box/",
+          "notes": "Philadelphia has strongest protections. CHRIA applies statewide but doesn't prohibit asking - just limits use. Recent Philadelphia amendments (Jan 2026) reduce misdemeanor lookback to 4 years, add enhanced notification requirements."
+        },
+        {
+          "topic": "paid_leave",
+          "summary": "Pennsylvania has NO statewide paid sick leave or paid leave mandate for private employers. Pittsburgh enacted local paid sick leave ordinance in 2020 requiring up to 40 hours for employers with 15+ employees. Philadelphia proposed but has not enacted paid sick leave. Most PA private employers have no paid leave requirements.",
+          "statute_citation": "Pittsburgh Code § 626.01 et seq. (Paid Sick Days Act); No statewide statute",
+          "requirements": [
+            "STATEWIDE: No paid sick leave or paid leave requirement for private employers",
+            "PITTSBURGH ONLY: Employers with 15+ employees must provide paid sick leave",
+            "PITTSBURGH ONLY: Accrue 1 hour per 35 hours worked, up to 40 hours per year",
+            "PITTSBURGH ONLY: Can use for own illness, family care, domestic violence situations",
+            "PITTSBURGH ONLY: Carries over year to year",
+            "PITTSBURGH ONLY: Effective since 2020",
+            "PITTSBURGH ONLY: Employers with fewer than 15 employees exempt",
+            "PHILADELPHIA: No paid sick leave ordinance (proposed but not enacted)",
+            "Federal FMLA applies to employers with 50+ employees (unpaid leave)",
+            "Workers' compensation covers work-related injuries",
+            "Unemployment compensation available for eligible workers"
+          ],
+          "effective_date": "Pittsburgh: 2020; Statewide: No requirement",
+          "confidence_level": "high",
+          "source_url": "https://www.ament.law/pennsylvanias-employment-laws-what-every-business-owner-should-know-2025-update",
+          "notes": "Pennsylvania has very limited paid leave requirements. Only Pittsburgh has local ordinance. Most private employers not required to provide paid sick leave. Philadelphia's paid sick leave ordinance has been proposed multiple times but never passed."
+        },
+        {
+          "topic": "arbitration",
+          "summary": "Pennsylvania generally enforces arbitration agreements under common law and federal law. No specific state statute restricts employment arbitration agreements for private employers. Courts apply Federal Arbitration Act (FAA) and favor arbitration. However, agreements must be clear, mutual, and not unconscionable.",
+          "statute_citation": "Federal Arbitration Act (9 U.S.C. §§ 1-16); Pennsylvania common law",
+          "requirements": [
+            "Arbitration agreements generally enforceable under FAA",
+            "Must be in writing and signed by both parties",
+            "Must have mutual agreement to arbitrate",
+            "Agreement must provide for neutral arbitrator",
+            "Cannot be unconscionable or one-sided",
+            "Must clearly identify what claims are subject to arbitration",
+            "Courts apply federal policy favoring arbitration",
+            "Employee must receive adequate consideration",
+            "Employer can waive arbitration right by engaging in litigation",
+            "Pre-dispute arbitration agreements are enforceable",
+            "Class action waivers generally enforceable in employment arbitration",
+            "NLRA protections: cannot prohibit concerted activity discussions",
+            "Must comply with due process requirements"
+          ],
+          "effective_date": "Ongoing under federal and common law",
+          "confidence_level": "high",
+          "source_url": "https://www.law.cornell.edu/uscode/text/9",
+          "notes": "Pennsylvania has no specific state restrictions on employment arbitration. FAA governs. Courts generally enforce arbitration agreements if procedurally and substantively fair. Some challenges on unconscionability grounds possible."
+        },
+        {
+          "topic": "at_will_employment",
+          "summary": "Pennsylvania follows at-will employment doctrine. Either party can terminate employment at any time for any lawful reason or no reason. However, numerous exceptions protect against wrongful termination including discrimination, retaliation, public policy violations, and breach of implied contract.",
+          "statute_citation": "Common law doctrine; 43 P.S. § 260.1 et seq. (Wage Payment); 43 P.S. § 951 et seq. (PHRA - anti-discrimination)",
+          "requirements": [
+            "Default: Employment terminable at will by either party",
+            "No notice required unless contract/policy provides otherwise",
+            "Discharged employees must receive final pay on termination date",
+            "Voluntary resignation: paid on next regular payday",
+            "EXCEPTIONS - Cannot terminate for: Race, color, religion, national origin, sex, age 40+, disability, ancestry discrimination (PHRA)",
+            "Cannot terminate for: Retaliation (workers' comp claim, jury duty, whistleblowing)",
+            "Cannot terminate for: Violation of public policy (refusing illegal acts, reporting violations)",
+            "Cannot terminate for: Breach of implied contract (handbook promises, oral assurances)",
+            "Must provide UC-1609 form (unemployment information) at separation",
+            "Written employment contracts override at-will status",
+            "Collective bargaining agreements override at-will status",
+            "Employee handbooks may create implied contracts if not properly disclaimed"
+          ],
+          "effective_date": "Ongoing common law doctrine",
+          "confidence_level": "high",
+          "source_url": "https://www.ament.law/pennsylvanias-employment-laws-what-every-business-owner-should-know-2025-update",
+          "notes": "While at-will is default, many exceptions exist. PHRA provides broad anti-discrimination protections. Public policy exception protects whistleblowers. Handbook disclaimers critical to maintain at-will status."
+        },
+        {
+          "topic": "drug_screening",
+          "summary": "Pennsylvania has NO state statute regulating private employer drug testing. Testing is generally permitted but must be reasonable and job-related. No statewide requirement or restriction. Medical marijuana users may have some protections under disability law, but recreational users have minimal protections. Testing programs must comply with federal laws for certain industries.",
+          "statute_citation": "No specific Pennsylvania statute; Medical Marijuana Act (35 P.S. § 10231.2103); Federal requirements for DOT/safety-sensitive positions",
+          "requirements": [
+            "STATEWIDE: No statute restricting private employer drug testing",
+            "Pre-employment testing: Generally permitted, apply consistently",
+            "Random testing: Permitted, especially for safety-sensitive positions",
+            "Reasonable suspicion testing: Permitted with documented basis",
+            "Post-accident testing: Permitted for workplace incidents",
+            "Must have written drug testing policy",
+            "Must apply testing consistently within job categories",
+            "Medical marijuana: Employers cannot discriminate against medical marijuana cardholders unless use creates safety concerns or violates federal law",
+            "Medical marijuana: Cannot terminate solely for positive test if off-duty use",
+            "Medical marijuana: May prohibit on-site use and impairment at work",
+            "Recreational marijuana: No workplace protections, employers can maintain zero-tolerance",
+            "DOT-regulated positions: Must follow federal testing requirements",
+            "Federal contractors: Must maintain drug-free workplace policies",
+            "Must maintain confidentiality of test results"
+          ],
+          "effective_date": "Medical Marijuana Act: 2016; No general testing statute",
+          "confidence_level": "medium-high",
+          "source_url": "https://www.ament.law/pennsylvanias-employment-laws-what-every-business-owner-should-know-2025-update",
+          "notes": "Pennsylvania is employer-friendly on drug testing with no statewide restrictions. Medical marijuana creates limited protections but not absolute bar to testing. Recreational users have no protections. Safety-sensitive positions have broad testing latitude."
+        }
+      ],
+      "data_quality": {
+        "last_updated": "2026-01-13",
+        "sources": "Pennsylvania state statutes, Philadelphia and Pittsburgh municipal codes, case law, legal analysis from major firms",
+        "verification_status": "verified_from_official_sources",
+        "coverage_completeness": "comprehensive"
+      },
+      "additional_notes": {
+        "general_guidance": "Pennsylvania is generally employer-friendly with limited statewide employment regulations. Most restrictions are at local level (Philadelphia, Pittsburgh). No statewide pay transparency, salary history ban, or paid leave mandates currently in effect.",
+        "enforcement_agencies": [
+          "Pennsylvania Department of Labor & Industry",
+          "Pennsylvania Human Relations Commission (PHRC)",
+          "Philadelphia Commission on Human Relations",
+          "U.S. Equal Employment Opportunity Commission (EEOC)",
+          "U.S. Department of Labor"
+        ],
+        "recent_developments": [
+          "Healthcare practitioner non-compete restrictions effective Jan 1, 2025",
+          "Philadelphia ban-the-box amendments effective Jan 6, 2026",
+          "Pay transparency legislation (H.B. 560) proposed but not enacted",
+          "Salary history ban (H.B. 630) proposed but not enacted",
+          "Federal FTC non-compete ban blocked, state law governs"
+        ]
+      }
+    }
+  ]
+}

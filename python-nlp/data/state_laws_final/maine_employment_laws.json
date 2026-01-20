@@ -1,0 +1,152 @@
+{
+  "state": "Maine",
+  "state_code": "ME",
+  "laws": [
+    {
+      "topic": "non-compete",
+      "summary": "Non-competes PROHIBITED for most employees",
+      "statute_citation": "Maine Revised Statutes Title 26 § 599-A",
+      "requirements": [
+        "Non-competes PROHIBITED for most employees",
+        "Maine prohibits non-compete agreements except: (1) employees above 400% of federal poverty level (~$60,000/year for individual), (2) agreement disclosed before offer or 3 weeks notice given, (3) legitimate business interest, (4) 1 year maximum duration.",
+        "Action required: Remove OR ensure: salary >$60k, pre-offer disclosure, 1-year limit",
+        "Can only use if: salary >$60k, disclosed before offer, 1 year max, legitimate interest"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": "Maine prohibits non-compete agreements except: (1) employees above 400% of federal poverty level (~$60,000/year for individual), (2) agreement disclosed before offer or 3 weeks notice given, (3) legitimate business interest, (4) 1 year maximum duration."
+    },
+    {
+      "topic": "salary_history",
+      "summary": "CANNOT seek salary history from applicants",
+      "statute_citation": "Maine Revised Statutes Title 26 § 628",
+      "requirements": [
+        "CANNOT seek salary history from applicants",
+        "Employers cannot request, require, or screen applicants based on wage history. Cannot seek information from current/former employers.",
+        "Action required: Remove all salary history questions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": "Employers cannot request, require, or screen applicants based on wage history. Cannot seek information from current/former employers."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "NO pay transparency requirement currently",
+      "statute_citation": "Maine common law",
+      "requirements": [
+        "NO pay transparency requirement currently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Cannot inquire about criminal history on initial application",
+      "statute_citation": "Maine Ban the Box Law",
+      "requirements": [
+        "Cannot inquire about criminal history on initial application",
+        "Employers cannot request criminal history information on initial employment application. Can inquire after initial application stage.",
+        "Action required: Delay criminal history inquiry",
+        "Remove criminal history from applications"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": "Employers cannot request criminal history information on initial employment application. Can inquire after initial application stage."
+    },
+    {
+      "topic": "minimum_wage",
+      "summary": "Maine minimum wage: $14.15/hour (2024), increases annually",
+      "statute_citation": "Maine Revised Statutes Title 26 § 664",
+      "requirements": [
+        "Maine minimum wage: $14.15/hour (2024), increases annually",
+        "Action required: Track annual increases",
+        "Must pay current Maine minimum wage"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "PAID LEAVE REQUIRED (effective January 1, 2021)",
+      "statute_citation": "Maine Earned Paid Leave Law",
+      "requirements": [
+        "PAID LEAVE REQUIRED (effective January 1, 2021)",
+        "Employers with 10+ employees must provide earned paid leave. 1 hour per 40 hours worked, up to 40 hours per year. Can be used for any reason.",
+        "Action required: Implement earned paid leave policy",
+        "Provide 1 hour per 40 hours worked"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": "Employers with 10+ employees must provide earned paid leave. 1 hour per 40 hours worked, up to 40 hours per year. Can be used for any reason."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "At-will employment applies",
+      "statute_citation": "Maine common law",
+      "requirements": [
+        "At-will employment applies"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration enforceable",
+      "statute_citation": "Maine common law",
+      "requirements": [
+        "Arbitration enforceable"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": ""
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Drug testing permitted with restrictions",
+      "statute_citation": "Maine common law",
+      "requirements": [
+        "Drug testing permitted with restrictions",
+        "Must have written policy. Testing must be job-related."
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": "Must have written policy. Testing must be job-related."
+    },
+    {
+      "topic": "final_pay",
+      "summary": "Final wages due next regular payday",
+      "statute_citation": "Maine Revised Statutes Title 26 § 626",
+      "requirements": [
+        "Final wages due next regular payday",
+        "Pay by next regular payday"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.maine.gov/labor/",
+      "notes": ""
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-16",
+    "sources": "Maine Department of Labor",
+    "verification_status": "converted_from_rules_format",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Maine employment law compliance data.",
+    "enforcement_agencies": [],
+    "recent_developments": []
+  }
+}

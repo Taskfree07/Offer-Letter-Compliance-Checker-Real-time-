@@ -1,0 +1,164 @@
+{
+  "state": "Kansas",
+  "state_code": "KS",
+  "laws": [
+    {
+      "topic": "salary_history",
+      "summary": "Kansas does not have a statewide law prohibiting employers from asking applicants about salary history.",
+      "statute_citation": "No statewide statute",
+      "requirements": [
+        "Employers may legally ask about prior salary",
+        "Reliance on salary history may increase risk under federal anti-discrimination laws",
+        "Best practice is to avoid salary history inquiries"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.ks.gov/",
+      "notes": "Although permitted, many employers avoid salary history questions to reduce Equal Pay Act and Title VII risk."
+    },
+    {
+      "topic": "pay_transparency",
+      "summary": "Kansas does not require employers to disclose wage ranges in job postings or offer letters.",
+      "statute_citation": "No current Kansas statute mandating pay transparency",
+      "requirements": [
+        "Wage range disclosure is not legally required",
+        "Employers may voluntarily disclose pay information",
+        "Federal equal pay and anti-discrimination laws still apply"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.ks.gov/laws",
+      "notes": "Multi-state employers often choose voluntary disclosure for consistency."
+    },
+    {
+      "topic": "non-compete",
+      "summary": "Non-compete agreements are generally enforceable in Kansas if reasonable in scope, duration, and geographic area and if they protect legitimate business interests.",
+      "statute_citation": "Kansas common law (e.g., Weber v. Tillman, 913 P.2d 84 (Kan. 1996))",
+      "requirements": [
+        "Must protect a legitimate business interest",
+        "Must be reasonable in time duration",
+        "Must be reasonable in geographic scope",
+        "Cannot impose undue hardship on employee",
+        "Courts may modify or invalidate overly broad restrictions"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.kscourts.org/",
+      "notes": "Kansas courts apply a reasonableness balancing test for restrictive covenants."
+    },
+    {
+      "topic": "background_checks_and_fcra",
+      "summary": "Kansas does not have a statewide ban-the-box law for private employers, but federal FCRA requirements apply when using third-party background check providers.",
+      "statute_citation": "Fair Credit Reporting Act (15 U.S.C. § 1681)",
+      "requirements": [
+        "Written consent required before conducting third-party background checks",
+        "Must provide pre-adverse action notice before taking negative action",
+        "Must provide copy of report and summary of rights",
+        "Must issue adverse action notice if decision is finalized",
+        "Criminal history must be used in a non-discriminatory manner"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act",
+      "notes": "These requirements apply whenever a consumer reporting agency is used."
+    },
+    {
+      "topic": "paid_leave_and_required_time_off",
+      "summary": "Kansas does not mandate paid sick leave statewide but requires protection for civic leave such as jury duty and voting.",
+      "statute_citation": "K.S.A. § 43-173 (jury duty); K.S.A. § 25-418 (voting leave)",
+      "requirements": [
+        "Employers must allow employees to attend jury duty",
+        "Employers cannot retaliate against employees for jury service",
+        "Employees must be allowed time off to vote if work schedule conflicts with polling hours",
+        "No statewide paid sick leave requirement"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.ks.gov/laws",
+      "notes": "Offer letters should not contradict statutory civic leave rights."
+    },
+    {
+      "topic": "drug_screening",
+      "summary": "Kansas permits workplace drug testing and does not provide employment protections for recreational cannabis use.",
+      "statute_citation": "Kansas common law; criminal statutes governing marijuana",
+      "requirements": [
+        "Employers may maintain drug-free workplace policies",
+        "Employers may discipline or refuse to hire based on positive drug tests",
+        "Cannabis remains illegal under Kansas law",
+        "Drug testing policies should be applied consistently"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.ks.gov/",
+      "notes": "Kansas is employer-friendly regarding drug testing and cannabis-related employment decisions."
+    },
+    {
+      "topic": "arbitration",
+      "summary": "Arbitration agreements are generally enforceable in Kansas if they comply with contract law principles and federal arbitration law.",
+      "statute_citation": "Federal Arbitration Act; Kansas Uniform Arbitration Act (K.S.A. § 5-401 et seq.)",
+      "requirements": [
+        "Agreement must be clear and voluntary",
+        "Must not be unconscionable",
+        "Must provide reasonable notice to the employee",
+        "Courts may invalidate unfair or one-sided clauses"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "medium-high",
+      "source_url": "https://www.ksrevisor.org/statutes/ksa_ch05.html",
+      "notes": "Fair drafting is important for enforceability."
+    },
+    {
+      "topic": "at_will_employment",
+      "summary": "Kansas follows the at-will employment doctrine, subject to exceptions for contracts, statutory protections, and public policy.",
+      "statute_citation": "Kansas common law",
+      "requirements": [
+        "Employment is presumed at-will unless contract states otherwise",
+        "Cannot terminate for discriminatory reasons",
+        "Cannot retaliate for protected activity",
+        "Public policy exceptions apply",
+        "Employee handbooks may create implied contractual obligations"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.dol.ks.gov/",
+      "notes": "Clear at-will language in offer letters is recommended."
+    },
+    {
+      "topic": "anti_discrimination_and_harassment",
+      "summary": "Kansas law prohibits discrimination in employment based on protected characteristics.",
+      "statute_citation": "Kansas Act Against Discrimination (K.S.A. § 44-1001 et seq.)",
+      "requirements": [
+        "Cannot discriminate based on race, color, religion, sex, or national origin",
+        "Cannot discriminate based on disability",
+        "Cannot discriminate based on age (40+)",
+        "Harassment is prohibited",
+        "Retaliation for protected activity is prohibited"
+      ],
+      "effective_date": "Ongoing",
+      "confidence_level": "high",
+      "source_url": "https://www.khrc.net/",
+      "notes": "Offer letters must avoid language implying exclusion or discriminatory conditions."
+    }
+  ],
+  "data_quality": {
+    "last_updated": "2026-01-14",
+    "sources": "Kansas Department of Labor, Kansas Statutes Annotated, Kansas Human Rights Commission, official state guidance",
+    "verification_status": "verified_from-official-sources",
+    "coverage_completeness": "comprehensive for offer-letter and hiring compliance"
+  },
+  "additional_notes": {
+    "general_guidance": "Kansas is generally employer-friendly, with few state-specific hiring restrictions beyond federal law, but strong anti-discrimination and FCRA compliance remain critical.",
+    "enforcement_agencies": [
+      "Kansas Department of Labor",
+      "Kansas Human Rights Commission",
+      "U.S. Department of Labor",
+      "Equal Employment Opportunity Commission (EEOC)"
+    ],
+    "recent_developments": [
+      "No statewide pay transparency law enacted as of 2026",
+      "No statewide salary history ban",
+      "No statewide paid sick leave mandate",
+      "Continued reliance on common law for non-competes"
+    ]
+  }
+}

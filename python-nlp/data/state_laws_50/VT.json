@@ -1,0 +1,43 @@
+{
+  "state": "Vermont",
+  "state_code": "VT",
+  "last_updated": "2025-01-12",
+  "data_collection_method": "aggregator_scraping_phi3_structured",
+  "laws": [
+    {
+      "topic": "non_compete",
+      "summary": "ices, trainees, and those who are non-exempt under the FLSA.\nNotice requirement: Employers must post a copy of the state’s non-compete law at the workplace\nExceptions: Generally banned for physicians\nVermont\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activitie",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "ices, trainees, and those who are non-exempt under the FLSA.\nNotice requirement: Employers must post a copy of the state’s non-compete law at the workplace\nExceptions: Generally banned for physicians\nVermont\n\nReasonableness requirement: Must be reasonable in duration, geographic scope, and activities prohibited\nSpecific duration limit: n/a\nWage threshold: n/a\nNotice requirement: n/a\nExceptions: Banned fo",
+      "severity": "warning",
+      "flagged_phrases": [
+        "non compete"
+      ],
+      "suggestion": "Review non compete requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    },
+    {
+      "topic": "salary_history",
+      "summary": "Kentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohib",
+      "law_citation": "[NEEDS VERIFICATION - extracted from aggregator]",
+      "full_text": "Kentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nNevada\nNew Jersey\nNew York\nNorth Carolina\nOhio\nOregon\nPennsylvania\nPuerto Rico\nRhode Island\nSouth Carolina\nUtah\nVermont\nVirginia\nWashington\nWisconsin\n\n\nKey\n\nSalary history ban enacted\n\n\nSalary history bans prohibited\n\n\n\nAlabama\n\nState-wide\n\nEffective date: Sept. 1, 2019\nEmployers affected: All employers\nEmployers may  iring process are prohibited from asking an applicant about their salary history.  If an app",
+      "severity": "warning",
+      "flagged_phrases": [
+        "salary history"
+      ],
+      "suggestion": "Review salary history requirements",
+      "source_url": "",
+      "effective_date": "Unknown",
+      "confidence": 0.6,
+      "needs_verification": true
+    }
+  ],
+  "review_notes": {
+    "total_laws_found": 2,
+    "needs_verification": 2,
+    "next_steps": "Verify statute citations and effective dates"
+  }
+}
