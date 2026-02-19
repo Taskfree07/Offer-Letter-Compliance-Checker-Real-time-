@@ -26,6 +26,9 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     highlightVariable: (variableName) => {
       highlightVariableInDocument(variableName);
     },
+    scrollToText: (text, severity) => {
+      scrollToTextInDocument(text, severity);
+    },
     isEditorReady: () => {
       return docEditorRef.current !== null && !loading;
     }
@@ -174,6 +177,67 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
     }
   };
 
+  // Relay iframe ref — bridges the origin gap between React (port 3000)
+  // and OnlyOffice (port 8080) using a relay page served from OnlyOffice's origin
+  const relayIframeRef = useRef(null);
+  const relayReadyRef = useRef(false);
+
+  // Create the relay iframe when the editor config loads
+  const setupRelay = (documentServerUrl) => {
+    if (relayIframeRef.current) return; // Already set up
+
+    const relayUrl = `${documentServerUrl}/sdkjs-plugins/compliance-search/relay.html`;
+    console.log('🔌 Setting up compliance relay at:', relayUrl);
+
+    const iframe = document.createElement('iframe');
+    iframe.src = relayUrl;
+    iframe.style.display = 'none';
+    iframe.id = 'compliance-relay-frame';
+    iframe.onload = () => {
+      relayReadyRef.current = true;
+      console.log('✅ Compliance relay iframe loaded and ready');
+    };
+    document.body.appendChild(iframe);
+    relayIframeRef.current = iframe;
+  };
+
+  const scrollToTextInDocument = async (text, severity = 'medium') => {
+    if (!docEditorRef.current || loading) {
+      console.warn('⚠️ Editor not ready for scrolling');
+      return;
+    }
+
+    if (!relayReadyRef.current || !relayIframeRef.current) {
+      console.warn('⚠️ Relay not ready yet, waiting...');
+      // Wait a bit and try again
+      setTimeout(() => scrollToTextInDocument(text, severity), 500);
+      return;
+    }
+
+    try {
+      console.log('🔍 Triggering compliance search via relay:', text);
+      console.log('🎯 Severity:', severity);
+
+      // Send message to the relay iframe (on OnlyOffice origin)
+      // The relay will write to localStorage which the plugin reads
+      const message = {
+        type: 'complianceSearch',
+        data: {
+          type: 'searchText',
+          text: text,
+          severity: severity
+        }
+      };
+
+      console.log('📡 Posting message to relay iframe:', message);
+      relayIframeRef.current.contentWindow.postMessage(JSON.stringify(message), '*');
+      console.log('✅ Message sent to relay - plugin should trigger search');
+      
+    } catch (error) {
+      console.error('❌ Error sending search to relay:', error);
+    }
+  };
+
   // Create editor container dynamically to avoid React DOM conflicts
   useEffect(() => {
     if (!containerRef.current) return;
@@ -256,6 +320,9 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
           }
           throw new Error(data.error || 'Failed to load configuration');
         }
+
+        // Set up the relay iframe for compliance search plugin communication
+        setupRelay(data.documentServerUrl);
 
         // Load ONLYOFFICE API script with retry logic
         if (!window.DocsAPI) {
@@ -345,8 +412,10 @@ const OnlyOfficeViewerComponent = forwardRef(({ documentId, onSave, onVariablesU
         editorConfig: {
           ...(data.config.editorConfig || {}),
           plugins: {
-            autostart: [],
-            pluginsData: []
+            autostart: ["asc.{B5E5F0F1-C1A2-4D3E-9F4A-6B7C8D9E0F1A}"],
+            pluginsData: [
+              data.documentServerUrl + "/sdkjs-plugins/compliance-search/config.json"
+            ]
           },
           customization: {
             ...(data.config.editorConfig?.customization || {}),

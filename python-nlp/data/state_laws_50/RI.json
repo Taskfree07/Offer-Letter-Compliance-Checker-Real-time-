@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific, reasonable limitations, such as: \"Employee agrees not to engage in competing activities within a 50-mile radius of Rhode Island for a period of 6 months following termination.\" This revised language complies with Rhode Island law by being reasonable in duration, geographic scope, and activities prohibited. Alternatively, consider removing the non-compete clause entirely and relying on confidentiality and trade secret protection clauses to protect business interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Rhode Island law prohibits requesting or requiring disclosure of prior salary history.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

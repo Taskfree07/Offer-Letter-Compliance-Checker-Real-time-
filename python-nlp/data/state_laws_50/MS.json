@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Mississippi law for certain employees as of July 1, 2023, for all employees, but since Mississippi requires reasonableness, consider: \"The employee agrees not to engage in any competing activities within a 50-mile radius of their work location for a period of 6 months after termination, which the parties agree is reasonable in scope and duration.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Mississippi law, which restricts inquiries into an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

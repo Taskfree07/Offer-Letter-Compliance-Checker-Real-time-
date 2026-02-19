@@ -18,8 +18,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Download spaCy model
 RUN python -m spacy download en_core_web_sm
 
-# Copy application code
+# Copy application code (vector_store excluded - already deployed in container)
 COPY python-nlp/ ./
+
+# Create vector_store directory placeholder (will use existing data from mounted volume or previous deployment)
+RUN mkdir -p /app/vector_store && \
+    echo "Vector store directory created (using existing deployed data)"
+
+# Verify state laws data is included
+RUN echo "Checking state laws data..." && \
+    ls /app/data/state_laws_final/*.json | wc -l && \
+    echo "State laws data included!"
 
 # GLiNER model will be downloaded on first use (cached in container)
 # This avoids build timeouts and keeps the image build fast
@@ -27,11 +36,16 @@ COPY python-nlp/ ./
 # Create uploads directory for persistent storage
 RUN mkdir -p /app/uploads/sessions
 
+# Set environment variables for production
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_ENV=production
+ENV DEBUG=False
+
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:5000/health || exit 1
 
 EXPOSE 5000
 
-# Use gunicorn for production with 2 workers and longer timeout
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "300", "--worker-class", "sync", "app:app"]
+# Use gunicorn for production with eventlet for WebSocket support
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "300", "--worker-class", "eventlet", "app:app"]

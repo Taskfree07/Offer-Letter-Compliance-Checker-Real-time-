@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific reasonable limitations, such as: \"The non-compete provision shall be limited to a duration of 2 years, a geographic scope of Colorado, and activities directly related to the employee's job duties.\" Alternatively, consider removing the non-compete clause entirely and using only confidentiality and trade secret protection clauses instead, as Colorado law voids non-competes that are not reasonable in duration, geographic scope, and activity.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Colorado law, which prohibits employers from inquiring about an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past earnings.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "For North Carolina, modify the non-compete clause to include specific, reasonable limitations, such as: \"The employee agrees not to engage in competing activities within a 50-mile radius of the company's headquarters for a period of 12 months following termination.\" This ensures the clause is reasonable in duration, geographic scope, and activities prohibited, as required under North Carolina law. Remove this clause entirely for medical professionals, and instead consider using a non-disclosure or non-solicitation agreement.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role in North Carolina,' to comply with the state's law restricting employer inquiries into applicant salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

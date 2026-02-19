@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-solicitation agreement to include a notice provision: \"Please note that this non-solicitation agreement will be effective 14 days after you receive this notice, as required by Connecticut law, and you acknowledge that you have received this notice prior to accepting this offer.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Connecticut law, which prohibits employers from inquiring about an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

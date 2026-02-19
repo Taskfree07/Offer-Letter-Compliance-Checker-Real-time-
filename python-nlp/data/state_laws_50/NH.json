@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific, reasonable limitations, such as: \"Employee agrees not to engage in competing activities within a 50-mile radius of New Hampshire for a period of 12 months following termination.\" This ensures compliance with New Hampshire law, which requires reasonableness in duration, geographic scope, and activities prohibited. Alternatively, consider removing the non-compete clause entirely and relying on confidentiality and trade secret protection clauses to protect business interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

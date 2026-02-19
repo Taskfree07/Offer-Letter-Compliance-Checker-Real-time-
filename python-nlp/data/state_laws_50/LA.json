@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is subject to reasonableness requirements under Louisiana law. Replace with: 'Employee agrees not to engage in activities that compete with the Company's business in the state of Louisiana for a reasonable duration, as determined by the Company, following termination of employment.' Alternatively, use only confidentiality and trade secret protection clauses to protect the Company's interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Louisiana law, which restricts inquiries into an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

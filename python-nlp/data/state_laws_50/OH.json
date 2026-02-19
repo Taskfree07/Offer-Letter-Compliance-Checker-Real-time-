@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to ensure it is reasonable in duration, geographic scope, and activities prohibited under Ohio law. Replace with: \"The employee agrees not to engage in any competing activities within a 50-mile radius of the company's headquarters in Ohio for a period of 12 months following termination of employment.\" Remove this clause entirely for broadcast employees, as non-competes are banned for this group under Ohio law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Ohio law prohibits requesting or relying on prior salary history in determining compensation.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

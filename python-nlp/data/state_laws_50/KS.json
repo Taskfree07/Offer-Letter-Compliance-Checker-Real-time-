@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to ensure it is reasonable in duration, geographic scope, and activities under Kansas law. Replace with: \"The employee agrees not to engage in activities that compete with the company's business in the state of Kansas for a period of [insert time frame, e.g., 12 months] after termination of employment.\" Remove this clause entirely for healthcare agency workers and limit its scope for physicians to comply with Kansas law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Since Kansas law does not explicitly ban salary history inquiries, the language is acceptable under Kansas law. Ensure it's not contradicted elsewhere in the contract. However, to be proactive, consider replacing salary history questions with: 'Please provide your salary expectations for this role' to align with neighboring states' laws and best practices.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

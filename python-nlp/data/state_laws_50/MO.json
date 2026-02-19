@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific duration, geographic scope, and activities prohibited, such as: \"The employee agrees not to engage in any competing business within the state of Missouri for a period of 12 months following termination of employment.\" Ensure the scope is reasonable and tailored to the company's legitimate business interests under Missouri law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Missouri law prohibits requesting or requiring disclosure of prior salaries.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

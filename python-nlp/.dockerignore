@@ -1,0 +1,43 @@
+# Python virtual environments
+.venv/
+venv/
+myenv/
+ENV/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Test files
+test_*.py
+*_test.py
+verify_*.py
+check_*.py
+
+# Uploads (will use persistent volume in Azure)
+uploads/
+
+# Documentation
+*.md
+
+# Scripts
+*.bat
+*.ps1
+*.sh

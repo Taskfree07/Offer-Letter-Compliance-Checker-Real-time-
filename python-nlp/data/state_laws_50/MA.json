@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "For non-compete clauses in Massachusetts, modify the language to: \"This non-compete agreement applies only to employees earning at least $350,000 per year providing direct patient care, and is reasonable in duration, geographic scope, and act.\" Alternatively, consider removing this clause entirely for medical professionals and attorneys, and instead use confidentiality and trade secret protection clauses to protect company interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Massachusetts law, which prohibits inquiries into an applicant's salary history. This revised language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

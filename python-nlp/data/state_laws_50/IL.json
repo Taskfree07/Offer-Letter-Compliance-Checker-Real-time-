@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Illinois law for employees earning $75,000 or less, as per HB 5385 considerations. Use only confidentiality and trade secret protection clauses instead, such as: \"Employee agrees to maintain confidentiality of all Illinois company trade secrets and proprietary information.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Illinois law prohibits requesting or requiring disclosure of prior wages.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

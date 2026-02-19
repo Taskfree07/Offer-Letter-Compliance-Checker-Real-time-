@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Vermont law for certain employees, such as those non-exempt under the FLSA. Use only confidentiality and trade secret protection clauses instead, and ensure to post a copy of Vermont's non-compete law at the workplace as required. For exempt employees, modify the non-compete clause to be reasonable in duration, geographic scope, and activities, such as: \"Employee agrees not to engage in competing activities within Vermont for a period of 6 months after termination.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Vermont law prohibits requesting or relying on prior salary history in determining compensation.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

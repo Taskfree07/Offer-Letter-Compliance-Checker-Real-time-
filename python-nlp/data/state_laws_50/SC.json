@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is restricted under South Carolina law for non-exempt employees, student interns, employees age 18 or younger, and certain medical professionals. For exempt employees, modify the non-compete clause to include specific reasonable duration, geographic scope, and activity restrictions, such as: \"The employee agrees not to engage in any competing business within a 50-mile radius of South Carolina for a period of 12 months after termination.\" Ensure the clause is tailored to the employee's position and responsibilities.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role in South Carolina,' to comply with the state's salary history ban, which prohibits employers from inquiring about a candidate's prior salary history.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

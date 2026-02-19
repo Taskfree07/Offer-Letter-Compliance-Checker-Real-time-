@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific duration, geographic scope, and activities prohibited, as Delaware law requires reasonableness in these aspects. Replace with: \"The employee agrees not to engage in competing activities within the state of Delaware for a period of [insert time frame, e.g., 12 months] from the date of termination.\" Ensure the scope is reasonable and limited to activities directly related to the employee's job duties.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Delaware law, which prohibits employers from requesting or requiring salary history from job applicants.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Nevada law for certain healthcare practitioners. For other employees, modify the non-compete clause to include specific reasonable limitations, such as: \"Employee agrees not to engage in competing activities within the state of Nevada for a period of 12 months following termination.\" Use only confidentiality and trade secret protection clauses for healthcare practitioners, including dentists, osteopathic physicians, physicians, podiatrists, certified registered nurses, and anesthetists.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Nevada law prohibits requesting or relying on salary history in determining compensation.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

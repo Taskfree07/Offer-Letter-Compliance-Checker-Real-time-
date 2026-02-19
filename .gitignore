@@ -1,52 +1,91 @@
-# Node
+############################
+# Node / Frontend
+############################
 node_modules/
 build/
+dist/
+npm-debug.log*
+yarn-error.log*
 
-# Env
+############################
+# Environment / Secrets
+############################
 .env
+.env.*
 **/.env
 
+############################
 # Python
-.venv/
-**/.venv/
+############################
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.venv/
+**/.venv/
+venv/
+ENV/
+env/
 
-# Python virtual environment (never track)
-python-nlp/.venv/
+############################
+# Python Project Specific
+############################
+# Local databases (never commit)
+*.db
 
-# ChromaDB Vector Store (regenerated from JSON files)
+# Vector stores / regenerated data
 python-nlp/vector_store/
 vector_store/
 
-# Runtime / uploads
+# Uploads / runtime files
 python-nlp/uploads/
-python-nlp/uploads/**
 uploads/
 
-# Temp
+############################
+# Temp / Cache
+############################
 tmpclaude-*
 **/tmpclaude-*
 nul
 
-# Claude Code
+############################
+# Claude Code (local only)
+############################
 .claude/
 
-# IDE
+############################
+# Docker / Build Artifacts
+############################
+frontend-build/
+*.tar
+
+############################
+# IDE / Editor
+############################
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# OS
+############################
+# OS Files
+############################
 .DS_Store
 Thumbs.db
 
+############################
 # Logs
+############################
 *.log
-npm-debug.log*
 
-# Note: python-nlp/data/state_laws_final/*.json files ARE tracked (50 states employment laws)# Local-only configs
-.claude/settings.local.json
+############################
+
+# Test / output JSONs
+compliance_*result*.json
+final_result.json
+detailed_result.json
+test_*.json
+
+# Scraped raw data & experiments
+python-nlp/data/scraped_laws/
+python-nlp/data/test_*.py

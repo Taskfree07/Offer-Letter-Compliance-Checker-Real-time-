@@ -91,7 +91,7 @@ const UserMenu = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .user-menu-container {
           position: relative;
         }

@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include the following language: 'A copy of the non-compete agreement will be provided to you at least 3 days prior to the date it must be signed, as required by Maryland law.' Additionally, ensure the non-compete agreement is reasonable in duration, geographic scope, and activities, as mandated by Maryland law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Maryland law, which restricts inquiries into an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

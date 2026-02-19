@@ -1,27 +1,37 @@
 # Node modules (not needed for backend, but package files needed for frontend)
 node_modules/
 npm-debug.log*
+package-lock.json
+
+# Local build directories (not needed - ACR builds fresh)
+build/
+frontend-build/
+
+# Test result files (not needed in production)
+compliance_*.json
+*_result*.json
+test_*.json
+response.json
+
+# Vector store - already deployed, no need to re-upload (3.5MB)
+python-nlp/vector_store/
+vector_store/
 
 # Python virtual environments (EXCLUDE - these are huge!)
-**/.venv/
 **/.venv
-**/venv/
 **/venv
-**/myenv/
 **/myenv
-**/ENV/
 **/ENV
-**/env/
 **/env
-.venv/
+**/*venv*
 .venv
-venv/
 venv
-myenv/
 myenv
-python-nlp/.venv/
-python-nlp/venv/
-python-nlp/myenv/
+python-nlp/.venv
+python-nlp/venv
+python-nlp/myenv
+**/Lib/site-packages
+**/Scripts
 
 # Python cache
 **/__pycache__/
@@ -70,9 +80,9 @@ check_*.py
 deploy*.py
 update*.py
 
-# Docker files (not needed inside container)
+# Docker files (not needed inside container, but keep Dockerfiles for ACR build)
 docker-compose.yml
-Dockerfile*
+# Note: Don't exclude Dockerfile* - ACR build needs them!
 .dockerignore
 
 # Environment files (will be set via container env vars)

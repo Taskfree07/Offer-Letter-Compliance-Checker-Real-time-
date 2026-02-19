@@ -13,6 +13,7 @@ services:
     volumes:
       - onlyoffice_data:/var/www/onlyoffice/Data
       - onlyoffice_logs:/var/log/onlyoffice
+      - ./onlyoffice-plugin/compliance-search:/var/www/onlyoffice/documentserver/sdkjs-plugins/compliance-search
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"

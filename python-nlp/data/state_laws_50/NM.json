@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific reasonable terms: \"This non-compete agreement is limited to a duration of [X] years, a geographic scope of [Y] miles, and activities that are substantially similar to those performed by the employee during their employment with the company, and only applies to employees earning above 200% of the federal minimum wage.\" Alternatively, consider removing the clause for certain professions, such as physicians and podiatrists, as they are generally exempt under New Mexico law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

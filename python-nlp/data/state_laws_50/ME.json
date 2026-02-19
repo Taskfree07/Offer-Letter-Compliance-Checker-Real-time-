@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Maine law for employees hired after January 1, 2023. Use only confidentiality and trade secret protection clauses instead. Alternatively, for employees hired before January 1, 2023, modify the non-compete clause to include individualized notice requirements, such as: \"Employee acknowledges receipt of this non-compete agreement and understands its terms, as required by Maine law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role in Maine,' to comply with Maine law restricting inquiries into salary history. This alternative language focuses on the candidate's expectations rather than their past compensation.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

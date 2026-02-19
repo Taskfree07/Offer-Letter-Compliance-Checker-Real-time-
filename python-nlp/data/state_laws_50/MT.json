@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific duration and geographic scope limitations, such as: \"The employee agrees not to engage in competing activities within the state of Montana for a period of one year following termination of employment.\" This language is presumed reasonable under Montana law, ensuring compliance with the state's requirements for non-compete agreements.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

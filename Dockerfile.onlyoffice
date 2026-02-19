@@ -1,0 +1,17 @@
+# Custom OnlyOffice Dockerfile with Compliance Search Plugin
+# This builds on the official image and adds the compliance plugin
+
+FROM onlyoffice/documentserver:latest
+
+# Copy the compliance search plugin
+COPY onlyoffice-plugin/compliance-search /var/www/onlyoffice/documentserver/sdkjs-plugins/compliance-search
+
+# Set permissions
+RUN chmod -R 755 /var/www/onlyoffice/documentserver/sdkjs-plugins/compliance-search
+
+# Environment variables (disable JWT for simplicity)
+ENV JWT_ENABLED=false
+ENV WOPI_ENABLED=false
+ENV USE_UNAUTHORIZED_STORAGE=true
+ENV ALLOW_PRIVATE_IP_ADDRESS=true
+ENV ALLOW_META_IP_ADDRESS=true

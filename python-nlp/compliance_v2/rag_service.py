@@ -43,7 +43,7 @@ class RAGService:
 
         # Set up paths
         self.base_dir = Path(__file__).parent.parent
-        self.data_path = Path(data_path) if data_path else self.base_dir / "data" / "state_laws_20"
+        self.data_path = Path(data_path) if data_path else self.base_dir / "data" / "state_laws_final"
         self.chroma_persist_dir = chroma_persist_dir or str(self.base_dir / "vector_store")
 
         # Create directories

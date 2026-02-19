@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific reasonable limitations, such as: \"The employee agrees not to engage in competing activities within the state of Utah for a period of one year following termination of employment, limited to the specific job duties and geographic area of their employment with the company.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Utah law prohibits requesting or relying on prior salary history in determining compensation.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

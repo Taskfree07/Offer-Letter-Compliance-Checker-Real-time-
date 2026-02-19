@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is banned for employees of technology businesses under Idaho law. Use only confidentiality and trade secret protection clauses instead, such as: \"Employee agrees not to disclose confidential information, including trade secrets, during or after employment with the Company.\" This approach ensures compliance with Idaho's reasonableness requirements for non-compete agreements.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

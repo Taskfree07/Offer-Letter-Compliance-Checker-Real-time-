@@ -1,22 +1,16 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { extractTextWithNLP, generateTemplateFromPDF } from '../services/pdfContentExtractor';
+/* eslint-disable no-unused-vars, react-hooks/exhaustive-deps */
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { extractTextWithNLP } from '../services/pdfContentExtractor';
 import { syncCompliancePhrases } from '../services/legalDictionary';
-import { ensureComplianceClauses, buildVariablesFromEntities } from '../services/complianceAutoInsert';
 import { API_BASE_URL } from '../config/constants';
 // Full-Featured EmailEditor with Professional Preview and Exact Positioning
-import { Download, FileText, Settings, AlertCircle, RefreshCw, Shield, Edit3, ArrowLeft, BookOpen, CheckCircle } from 'lucide-react';
+import { FileText, AlertCircle, RefreshCw, Shield, BookOpen } from 'lucide-react';
 import pdfTemplateService from '../services/pdfTemplateService';
-import ComplianceAnalysis from './compliance/ComplianceAnalysis';
 import { COMPLIANCE_RULES } from './compliance/complianceRules';
-import EnhancedPDFViewer from './EnhancedPDFViewer';
 import DynamicPDFViewer from './DynamicPDFViewer';
-import EntitiesPanel from './EntitiesPanel';
 import WordDocumentEditor from './WordDocumentEditor';
 import OnlyOfficeViewer from './OnlyOfficeViewer';
-import VariablePanel from './VariablePanel';
-import FormExtraction from './FormExtraction';
 import UserMenu from './UserMenu';
-import enhancedPdfService from '../services/enhancedPdfService';
 import { enableInputMonitoring, disableInputMonitoring } from '../utils/inputAutoResize';
 import { analyzeCompliance } from '../services/complianceService';
 import SearchableStateDropdown from './SearchableStateDropdown';
@@ -26,6 +20,88 @@ import '../styles/preview.css';
 // Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
+/**
+ * Generate smart suggestions based on rule type and severity
+ * Used as fallback when rules don't have specific suggestions
+ */
+const generateSmartSuggestion = (ruleType, severity, state = '') => {
+  const ruleKey = ruleType?.toLowerCase().replace(/[_\s]+/g, '_') || '';
+
+  // Specific suggestions based on rule type
+  const suggestionMap = {
+    // Non-compete related
+    'non_compete': `Review this clause carefully. ${state ? `${state} may have restrictions on non-compete agreements.` : 'Many states restrict non-compete clauses.'} Consider limiting scope, duration, and geography or removing entirely.`,
+    'noncompete': `Review this clause carefully. ${state ? `${state} may have restrictions on non-compete agreements.` : 'Many states restrict non-compete clauses.'} Consider limiting scope, duration, and geography or removing entirely.`,
+
+    // Arbitration
+    'arbitration': `Arbitration clause is generally enforceable. Ensure it specifies: (1) governing rules (AAA, JAMS), (2) cost-sharing provisions, (3) location, and (4) that it doesn't waive protected statutory rights.`,
+
+    // At-will employment
+    'at_will': `At-will language is acceptable. Ensure it's not contradicted elsewhere in the contract (e.g., by progressive discipline policies or termination-for-cause provisions).`,
+    'at_will_employment': `At-will language is acceptable. Ensure it's not contradicted elsewhere in the contract (e.g., by progressive discipline policies or termination-for-cause provisions).`,
+
+    // Salary history
+    'salary_history': `Remove any questions about prior salary or compensation. Instead, ask about salary expectations for this role.`,
+    'salary_history_ban': `Remove references to salary history. Focus on the candidate's salary expectations for this position instead.`,
+
+    // Background checks
+    'background_check': `Ensure background check timing complies with state law. Some states require conditional offers before checks. Include required notices and obtain proper consent.`,
+    'criminal_history': `Review timing of criminal history inquiry. Many states have "ban the box" laws requiring delays until after initial screening or conditional offer.`,
+
+    // Benefits
+    'benefits': `Verify benefits description is accurate and complies with state-mandated benefit requirements.`,
+    'health_insurance': `Ensure health insurance terms comply with state and federal requirements (ACA, state mandates).`,
+
+    // Leave policies
+    'paid_leave': `Verify paid leave policy meets state minimum requirements for sick leave, family leave, or PTO.`,
+    'sick_leave': `Ensure sick leave policy meets state-mandated minimums for accrual rates and permitted uses.`,
+
+    // Drug testing
+    'drug_screening': `Review drug testing policy for compliance with state cannabis laws and testing restrictions.`,
+    'drug_testing': `Review drug testing policy for compliance with state cannabis laws and testing restrictions.`,
+
+    // Intellectual property
+    'intellectual_property': `Review IP assignment scope. Some states limit assignment of inventions created outside work or without company resources.`,
+    'ip_assignment': `Review IP assignment scope. Some states limit assignment of inventions created outside work or without company resources.`,
+
+    // Confidentiality
+    'confidentiality': `Confidentiality clause is generally acceptable. Ensure it doesn't restrict protected activities like reporting violations or discussing wages.`,
+    'nda': `Non-disclosure terms are generally acceptable. Ensure they don't restrict whistleblowing or wage discussions.`,
+
+    // Discrimination
+    'anti_discrimination': `Include required anti-discrimination notices and ensure compliance with federal and state protected classes.`,
+
+    // Wage/compensation
+    'wage_payment': `Verify compensation terms comply with state wage payment laws (frequency, method, final pay requirements).`,
+    'overtime': `Ensure overtime classification and pay comply with state requirements, which may exceed federal standards.`,
+
+    // Termination
+    'termination': `Review termination provisions for compliance with state notice requirements and final pay deadlines.`,
+    'severance': `Severance terms appear acceptable. Ensure any release language complies with OWBPA for age-related waivers.`
+  };
+
+  // Check for exact match
+  if (suggestionMap[ruleKey]) {
+    return suggestionMap[ruleKey];
+  }
+
+  // Check for partial match
+  for (const [key, suggestion] of Object.entries(suggestionMap)) {
+    if (ruleKey.includes(key) || key.includes(ruleKey)) {
+      return suggestion;
+    }
+  }
+
+  // Severity-based fallback
+  if (severity === 'error') {
+    return `This clause may violate ${state || 'state'} employment law. Review with legal counsel and consider removing or significantly modifying this provision.`;
+  } else if (severity === 'warning') {
+    return `This clause should be reviewed for compliance with ${state || 'state'} requirements. Consider modifying language to ensure full compliance.`;
+  } else {
+    return `This clause is generally acceptable. Verify it aligns with your company policies and ${state || 'state'} requirements.`;
+  }
+};
+
 const EmailEditor = ({ template, onBack }) => {
   const [templateContent, setTemplateContent] = useState(template?.content || '');
   const [extractedPdfText, setExtractedPdfText] = useState('');
@@ -33,7 +109,7 @@ const EmailEditor = ({ template, onBack }) => {
   const [extractedEntities, setExtractedEntities] = useState([]);
   const [variables, setVariables] = useState({});
   const [stateConfig, setStateConfig] = useState({
-    selectedState: 'CA',
+    selectedState: '',  // Start with no state selected - user must choose
     stateBlocks: {}
   });
   const [isGenerating, setIsGenerating] = useState(false);
@@ -759,6 +835,9 @@ const EmailEditor = ({ template, onBack }) => {
   // Sync compliance phrases for the selected state into the backend (EntityRuler)
 // This ensures your LEGAL_POLICY detections match the rules in COMPLIANCE_RULES.
 useEffect(() => {
+  // Skip if no state selected
+  if (!stateConfig.selectedState) return;
+
   let cancelled = false;
   (async () => {
     try {
@@ -778,6 +857,13 @@ useEffect(() => {
 }, [stateConfig.selectedState]);
 
   useEffect(() => {
+    // Skip if no state selected
+    if (!stateConfig.selectedState) {
+      console.log('⏳ No state selected - waiting for state selection');
+      setComplianceFlags({});
+      return;
+    }
+
     console.log('🔍 Compliance analysis running:', {
       sentencesCount: sentences.length,
       selectedState: stateConfig.selectedState,
@@ -1054,11 +1140,20 @@ useEffect(() => {
 
   const handleStateChange = (state) => {
     setStateConfig(prev => ({ ...prev, selectedState: state }));
+    // Clear old backend analysis results when state changes
+    setBackendAnalysisResults(null);
+    console.log(`🔄 State changed to ${state}, cleared previous analysis results`);
   };
 
   // Handle backend AI compliance analysis
   const handleBackendAnalysis = async () => {
-    if (!extractedPdfText || isAnalyzingBackend) return;
+    // Don't run if no state selected, no text, or already analyzing
+    if (!stateConfig.selectedState || !extractedPdfText || isAnalyzingBackend) {
+      if (!stateConfig.selectedState) {
+        console.log('⏳ Waiting for state selection before AI analysis...');
+      }
+      return;
+    }
 
     setIsAnalyzingBackend(true);
     setBackendAnalysisResults(null);
@@ -1074,6 +1169,15 @@ useEffect(() => {
       );
 
       console.log('✅ Backend analysis complete:', results);
+
+      // Sort violations by severity: error first, then warning, then info
+      if (results.success && results.violations?.length > 0) {
+        const severityOrder = { error: 0, warning: 1, info: 2 };
+        results.violations.sort((a, b) =>
+          (severityOrder[a.severity] ?? 3) - (severityOrder[b.severity] ?? 3)
+        );
+      }
+
       setBackendAnalysisResults(results);
 
       if (results.success && results.violations?.length > 0) {
@@ -1093,8 +1197,10 @@ useEffect(() => {
 
   // Automatic backend analysis trigger when document or state changes
   useEffect(() => {
-    // Only trigger if we have document text and not already analyzing
-    if (!extractedPdfText || extractedPdfText.length < 50) return;
+    // Only trigger if we have document text, state selected, and not already analyzing
+    if (!extractedPdfText || extractedPdfText.length < 50 || !stateConfig.selectedState) {
+      return;
+    }
 
     // Debounce the analysis to avoid excessive calls
     const timeoutId = setTimeout(() => {
@@ -1178,8 +1284,35 @@ useEffect(() => {
 
   // Professional Compliance Summary Component
   const ComplianceSummaryPanel = ({ summary, selectedState }) => {
+    // Show prompt to select state if none selected
+    if (!selectedState) {
+      return (
+        <div style={{
+          backgroundColor: '#f0f9ff',
+          border: '1px solid #bae6fd',
+          color: '#0369a1',
+          padding: '16px',
+          borderRadius: '8px',
+          margin: '12px 0',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <Shield size={20} style={{ color: '#0284c7' }} />
+          <div>
+            <span style={{ fontWeight: '600', display: 'block' }}>
+              Select a state to begin compliance check
+            </span>
+            <span style={{ fontSize: '12px', color: '#0369a1', marginTop: '4px', display: 'block' }}>
+              Choose a state from the dropdown above to analyze your document for legal compliance
+            </span>
+          </div>
+        </div>
+      );
+    }
+
     const total = summary.error + summary.warning + summary.info;
-    
+
     if (total === 0) {
       return (
         <div style={{
@@ -1802,85 +1935,208 @@ useEffect(() => {
             selectedState={stateConfig.selectedState}
           />
 
-          {/* Backend AI Analysis Results - Only show if there are violations or errors */}
-          {backendAnalysisResults && (backendAnalysisResults.violations?.length > 0 || !backendAnalysisResults.success) && (
+          {/* Unified Compliance Issues Report - Only show when state is selected */}
+          {stateConfig.selectedState && (backendAnalysisResults?.violations?.length > 0 || !backendAnalysisResults?.success || Object.keys(complianceFlags).length > 0) && (
             <div style={{
               marginTop: '20px',
               padding: '16px',
-              backgroundColor: backendAnalysisResults.success ? '#fef2f2' : '#fef2f2',
-              border: `1px solid ${backendAnalysisResults.success ? '#fecaca' : '#fecaca'}`,
+              backgroundColor: (() => {
+                // Dynamic background based on most severe issue
+                const allViolations = [
+                  ...(backendAnalysisResults?.violations || []),
+                  ...Object.values(complianceFlags).flat()
+                ];
+                const hasError = allViolations.some(v => v.severity === 'error');
+                const hasWarning = allViolations.some(v => v.severity === 'warning');
+                if (hasError) return '#fef2f2'; // Red for errors
+                if (hasWarning) return '#fffbeb'; // Amber for warnings
+                return '#eff6ff'; // Blue for info
+              })(),
+              border: (() => {
+                const allViolations = [
+                  ...(backendAnalysisResults?.violations || []),
+                  ...Object.values(complianceFlags).flat()
+                ];
+                const hasError = allViolations.some(v => v.severity === 'error');
+                const hasWarning = allViolations.some(v => v.severity === 'warning');
+                if (hasError) return '1px solid #fecaca';
+                if (hasWarning) return '1px solid #fde68a';
+                return '1px solid #bfdbfe';
+              })(),
               borderRadius: '8px'
             }}>
               <h4 style={{
                 fontSize: '14px',
                 fontWeight: '600',
                 marginBottom: '12px',
-                color: '#991b1b',
+                color: (() => {
+                  const allViolations = [
+                    ...(backendAnalysisResults?.violations || []),
+                    ...Object.values(complianceFlags).flat()
+                  ];
+                  const hasError = allViolations.some(v => v.severity === 'error');
+                  const hasWarning = allViolations.some(v => v.severity === 'warning');
+                  if (hasError) return '#991b1b';
+                  if (hasWarning) return '#92400e';
+                  return '#1e40af';
+                })(),
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px'
               }}>
                 <Shield size={16} />
-                AI Analysis Results (RAG + LLM) - {backendAnalysisResults.violations?.length || 0} Issues Found
+                Compliance Issues Detected
               </h4>
 
-              {backendAnalysisResults.success ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {backendAnalysisResults.violations.map((violation, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: '12px',
-                        backgroundColor: '#fff',
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '6px',
-                        borderLeft: `3px solid ${
-                          violation.severity === 'error' ? '#dc2626' :
-                          violation.severity === 'warning' ? '#f59e0b' : '#3b82f6'
-                        }`
-                      }}
-                    >
-                      <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        marginBottom: '8px'
+              {/* Error message if backend failed */}
+              {backendAnalysisResults && !backendAnalysisResults.success && (
+                <div style={{ color: '#991b1b', fontSize: '13px', marginBottom: '16px' }}>
+                  <strong>Analysis Error:</strong> {backendAnalysisResults.error || 'Unknown error'}
+                  <div style={{ marginTop: '8px', fontSize: '12px', color: '#6b7280' }}>
+                    Make sure the backend server is running (python-nlp Flask API) and Ollama is started.
+                  </div>
+                </div>
+              )}
+
+              {/* Merged violations list */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {/* Backend violations */}
+                {backendAnalysisResults?.success && backendAnalysisResults.violations?.map((violation, idx) => (
+                  <div
+                    key={`backend-${idx}`}
+                    title="Compliance issue"
+                    style={{
+                      padding: '12px',
+                      backgroundColor: '#fff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '6px',
+                      borderLeft: `3px solid ${
+                        violation.severity === 'error' ? '#dc2626' :
+                        violation.severity === 'warning' ? '#f59e0b' : '#3b82f6'
+                      }`,
+                      cursor: violation.violation_text ? 'pointer' : 'default',
+                      transition: 'box-shadow 0.15s ease'
+                    }}
+                    onClick={() => {
+                      if (violation.violation_text && onlyofficeViewerRef.current) {
+                        onlyofficeViewerRef.current.scrollToText(violation.violation_text, violation.severity || 'warning');
+                      }
+                    }}
+                    onMouseEnter={(e) => { if (violation.violation_text) e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
+                  >
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      marginBottom: '8px'
+                    }}>
+                      <span style={{
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        color: violation.severity === 'error' ? '#dc2626' :
+                          violation.severity === 'warning' ? '#d97706' : '#2563eb',
+                        textTransform: 'uppercase'
                       }}>
-                        <span style={{
-                          fontSize: '12px',
-                          fontWeight: '600',
-                          color: violation.severity === 'error' ? '#dc2626' :
-                            violation.severity === 'warning' ? '#d97706' : '#2563eb',
-                          textTransform: 'uppercase'
-                        }}>
-                          {violation.severity || 'info'}
-                        </span>
-                        {violation.confidence && (
-                          <span style={{ fontSize: '11px', color: '#6b7280' }}>
-                            Confidence: {Math.round(violation.confidence * 100)}%
-                          </span>
-                        )}
+                        {violation.severity === 'error' ? 'CRITICAL' : violation.severity || 'info'}
+                      </span>
+                    </div>
+
+                    {violation.violation_text && (
+                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', fontWeight: '600' }}>
+                        {violation.violation_text}
                       </div>
+                    )}
 
-                      {violation.law_citation && (
+                    {violation.law_citation && (
+                      <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
+                        <strong>Law Reference:</strong> {violation.law_citation}
+                      </div>
+                    )}
+
+                    {violation.explanation && (
+                      <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
+                        {violation.explanation}
+                      </div>
+                    )}
+
+                    <div style={{
+                      fontSize: '12px',
+                      color: '#059669',
+                      padding: '8px',
+                      backgroundColor: '#ecfdf5',
+                      borderRadius: '4px',
+                      marginTop: '8px'
+                    }}>
+                      <strong>Suggested Action:</strong> {violation.suggestion || generateSmartSuggestion(violation.violation_text || violation.law_citation, violation.severity, stateConfig.selectedState)}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Pattern matching violations */}
+                {sentences
+                  .filter(sentence => complianceFlags[sentence.id])
+                  .map(sentence => {
+                    const flags = complianceFlags[sentence.id];
+                    return flags.map((flag, flagIdx) => (
+                      <div
+                        key={`pattern-${sentence.id}-${flagIdx}`}
+                        title="Compliance issue"
+                        onClick={() => {
+                          if (onlyofficeViewerRef.current) {
+                            onlyofficeViewerRef.current.scrollToText(sentence.text, flag.severity || 'warning');
+                          }
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
+                        style={{
+                          padding: '12px',
+                          backgroundColor: '#fff',
+                          border: '1px solid #e5e7eb',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          transition: 'box-shadow 0.15s ease',
+                          borderLeft: `3px solid ${
+                            flag.severity === 'error' ? '#dc2626' :
+                            flag.severity === 'warning' ? '#f59e0b' : '#3b82f6'
+                          }`
+                        }}
+                      >
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-start',
+                          marginBottom: '8px'
+                        }}>
+                          <span style={{
+                            fontSize: '12px',
+                            fontWeight: '600',
+                            color: flag.severity === 'error' ? '#dc2626' :
+                              flag.severity === 'warning' ? '#d97706' : '#2563eb',
+                            textTransform: 'uppercase'
+                          }}>
+                            {flag.severity === 'error' ? 'CRITICAL' : flag.severity.toUpperCase()}
+                          </span>
+                        </div>
+
+                        <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', fontWeight: '600' }}>
+                          {flag.type}
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '8px', fontStyle: 'italic', backgroundColor: '#f9fafb', padding: '8px', borderRadius: '4px' }}>
+                          "{sentence.text}"
+                        </div>
+
+                        {flag.lawReference && (
+                          <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
+                            <strong>Law Reference:</strong> {flag.lawReference}
+                          </div>
+                        )}
+
                         <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                          <strong>Law Reference:</strong> {violation.law_citation}
+                          {flag.message}
                         </div>
-                      )}
 
-                      {violation.violation_text && (
-                        <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px' }}>
-                          <strong>Issue:</strong> {violation.violation_text}
-                        </div>
-                      )}
-
-                      {violation.explanation && (
-                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                          {violation.explanation}
-                        </div>
-                      )}
-
-                      {violation.suggestion && (
                         <div style={{
                           fontSize: '12px',
                           color: '#059669',
@@ -1889,120 +2145,15 @@ useEffect(() => {
                           borderRadius: '4px',
                           marginTop: '8px'
                         }}>
-                          <strong>Suggestion:</strong> {violation.suggestion}
+                          <strong>Suggested Action:</strong> {flag.suggestion || generateSmartSuggestion(flag.type, flag.severity, stateConfig.selectedState)}
                         </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div style={{ color: '#991b1b', fontSize: '13px' }}>
-                  <strong>Analysis Error:</strong> {backendAnalysisResults.error || 'Unknown error'}
-                  <div style={{ marginTop: '8px', fontSize: '12px', color: '#6b7280' }}>
-                    Make sure the backend server is running (python-nlp Flask API) and Ollama is started.
-                  </div>
-                </div>
-              )}
+                      </div>
+                    ));
+                  }).flat()}
+              </div>
             </div>
           )}
         </div>
-
-        {/* Flagged Sentences */}
-        {Object.keys(complianceFlags).length > 0 && (
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#374151' }}>
-              Flagged sentences ({Object.keys(complianceFlags).length} issues found):
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {sentences
-                .filter(sentence => complianceFlags[sentence.id])
-                .map(sentence => {
-                  const flags = complianceFlags[sentence.id];
-                  return (
-                    <div
-                      key={sentence.id}
-                      style={{
-                        padding: '14px',
-                        backgroundColor: '#fff',
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '8px',
-                        borderLeft: `3px solid ${
-                          flags.some(f => f.severity === 'error') ? '#dc2626' :
-                          flags.some(f => f.severity === 'warning') ? '#f59e0b' : '#3b82f6'
-                        }`,
-                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
-                      }}
-                    >
-                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '10px', lineHeight: '1.6' }}>
-                        {sentence.text}
-                      </div>
-                      {flags.map((flag, idx) => (
-                        <div
-                          key={idx}
-                          style={{
-                            marginTop: idx > 0 ? '10px' : '0',
-                            padding: '10px',
-                            backgroundColor: flag.severity === 'error' ? '#fef2f2' :
-                              flag.severity === 'warning' ? '#fefce8' : '#eff6ff',
-                            borderRadius: '6px',
-                            border: `1px solid ${
-                              flag.severity === 'error' ? '#fee2e2' :
-                              flag.severity === 'warning' ? '#fef3c7' : '#dbeafe'
-                            }`
-                          }}
-                        >
-                          <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            marginBottom: '6px'
-                          }}>
-                            <span style={{
-                              fontSize: '10px',
-                              fontWeight: '700',
-                              padding: '3px 8px',
-                              borderRadius: '4px',
-                              backgroundColor: flag.severity === 'error' ? '#dc2626' :
-                                flag.severity === 'warning' ? '#f59e0b' : '#3b82f6',
-                              color: 'white',
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.5px'
-                            }}>
-                              {flag.severity === 'error' ? 'CRITICAL' : flag.severity.toUpperCase()}
-                            </span>
-                            <span style={{ fontSize: '13px', fontWeight: '600', color: '#111827' }}>
-                              {flag.type}
-                            </span>
-                          </div>
-                          <div style={{ fontSize: '13px', color: '#374151', marginBottom: '6px', lineHeight: '1.5' }}>
-                            {flag.message}
-                          </div>
-                          {flag.lawReference && (
-                            <div style={{ fontSize: '11px', color: '#6b7280', fontStyle: 'italic', marginTop: '4px' }}>
-                              Reference: {flag.lawReference}
-                            </div>
-                          )}
-                          {flag.suggestion && (
-                            <div style={{
-                              marginTop: '8px',
-                              padding: '8px',
-                              backgroundColor: '#ecfdf5',
-                              borderRadius: '4px',
-                              fontSize: '12px',
-                              color: '#047857',
-                              border: '1px solid #d1fae5'
-                            }}>
-                              <strong>Suggestion:</strong> {flag.suggestion}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

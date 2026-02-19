@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include the required notice and reasonableness language: \"Please note that this non-compete agreement is subject to Wisconsin law and must be reasonable in duration, geographic scope, and activity, and you must earn more than $123,394.17 annually for this clause to be applicable; by signing below, you acknowledge receipt of the terms of this non-compete agreement prior to accepting this employment offer.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Wisconsin law prohibits inquiries into prior salary history.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

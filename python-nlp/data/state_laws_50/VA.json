@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is void under Virginia law for healthcare workers accepting shifts as independent contractors through electronic programs. Use only confidentiality and trade secret protection clauses instead. For other employees, modify the non-compete clause to ensure it is reasonable in duration, geographic scope, and activities, such as: \"The employee agrees not to engage in competing activities within a 50-mile radius of the company's headquarters for a period of 12 months following termination.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role in Virginia,' to comply with Virginia's salary history ban, which prohibits employers from asking about an applicant's previous salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

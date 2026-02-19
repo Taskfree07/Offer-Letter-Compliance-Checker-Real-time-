@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is subject to reasonableness requirements under Arizona law. Replace with: 'Employee agrees not to engage in activities that directly compete with the Company's business in Arizona for a period of [insert reasonable time frame, e.g., 6-12 months], and only to the extent such activities are substantially similar to those performed for the Company.' Alternatively, consider using a narrower confidentiality and trade secret protection clause to protect the Company's interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

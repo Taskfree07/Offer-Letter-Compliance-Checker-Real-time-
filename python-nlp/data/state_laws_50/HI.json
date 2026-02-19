@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to include specific reasonable limitations, such as: \"Employee agrees not to engage in competing activities within the State of Hawaii for a period of six months following termination of employment, limited to activities that are substantially similar to those performed for the Company.\" This revised language aims to meet Hawaii's reasonableness requirement for non-compete agreements.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as Hawaii law prohibits inquiries into prior salary history.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

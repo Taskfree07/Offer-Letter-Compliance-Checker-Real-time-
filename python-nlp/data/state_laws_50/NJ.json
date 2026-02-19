@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Modify the non-compete clause to a non-solicitation provision, replacing the existing language with: \"The employee agrees not to solicit business from customers with whom they had a direct business relationship during their employment with the company, for a period of [insert reasonable duration, e.g., 6-12 months] after termination of employment.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as New Jersey law prohibits inquiries into prior salary history.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

@@ -2048,55 +2048,64 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Md. Code, Labor & Employment § 3-304.2',
         message: 'Maryland prohibits employers from asking applicants about wage or salary history and from relying on such information in determining compensation.',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Remove any salary history questions. Ask about salary expectations for this role instead.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Md. Code, Labor & Employment § 3-304.1 (as amended by 2022 pay transparency law)',
         message: 'Maryland requires employers to disclose wage ranges in job postings and provide pay range information to applicants and employees under certain circumstances.',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'Include specific salary range in offer letter to comply with pay transparency requirements.'
       },
       non_compete: {
         severity: 'info',
         lawReference: 'Md. Code, Labor & Employment § 3-716',
         message: 'Maryland restricts non-compete agreements for low-wage employees and applies reasonableness standards for others.',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Verify employee salary exceeds threshold. For low-wage employees, use confidentiality agreements instead of non-competes.'
       },
       background_checks_and_fcra: {
         severity: 'info',
-        lawReference: 'Md. Code, State Gov’t § 20-602 (Ban-the-box for certain employers); Fair Credit Reporting Act (15 U.S.C. § 1681)',
+        lawReference: 'Md. Code, State Govt § 20-602 (Ban-the-box for certain employers); Fair Credit Reporting Act (15 U.S.C. § 1681)',
         message: 'Maryland restricts criminal history inquiries and requires compliance with federal FCRA procedures when using background check vendors.',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Conduct background checks only after conditional offer. Ensure FCRA-compliant notices and authorization forms.'
       },
       paid_leave_and_required_time_off: {
         severity: 'info',
         lawReference: 'Maryland Healthy Working Families Act (Md. Code, Labor & Employment § 3-1301 et seq.)',
         message: 'Maryland mandates paid sick and safe leave for covered employers and protects certain civic leave rights.',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'Ensure sick leave policy meets Maryland minimum requirements (1 hour per 30 hours worked).'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Maryland Labor and Employment guidance; Maryland cannabis legislation',
         message: 'Maryland permits workplace drug testing. Recreational cannabis use has limited employment protections depending on circumstances.',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted. Consider updating policy for cannabis with Maryland recreational use laws.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Federal Arbitration Act; Maryland Uniform Arbitration Act',
         message: 'Arbitration agreements are generally enforceable in Maryland if consistent with contract law and federal arbitration principles.',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is acceptable. Ensure it specifies governing rules (AAA/JAMS), cost-sharing, and does not waive statutory rights.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Maryland common law',
         message: 'Maryland follows the at-will employment doctrine, subject to statutory, contractual, and public policy exceptions.',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure it is not contradicted elsewhere in the offer letter or employee handbook.'
       },
       anti_discrimination_and_harassment: {
         severity: 'info',
-        lawReference: 'Maryland Fair Employment Practices Act (Md. Code, State Gov’t § 20-601 et seq.)',
+        lawReference: 'Maryland Fair Employment Practices Act (Md. Code, State Govt § 20-601 et seq.)',
         message: 'Maryland law prohibits discrimination in employment on a broad range of protected characteristics, often broader than federal law.',
-        flaggedPhrases: ['anti discrimination and harassment']
+        flaggedPhrases: ['anti discrimination and harassment'],
+        suggestion: 'Include required anti-discrimination notices. Maryland protects additional classes beyond federal law.'
       },
     }
   },
@@ -2110,42 +2119,50 @@ export const COMPLIANCE_RULES = {
       non_compete: {
         severity: 'warning',
         message: 'Michigan enforces reasonable non-compete agreements under common law. The Michigan Antitrust Reform Act (MARA) prohibits certain non-competes for some healthcare professionals. Non-competes must be re',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-compete is enforceable if reasonable. Ensure time limit (1-2 years max), geographic scope, and business interest justification are clearly defined.'
       },
       salary_history: {
         severity: 'info',
         message: 'Michigan has NO statewide salary history ban. Employers may ask about and consider applicant salary history. No state-level restrictions on salary history inquiries.',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted in Michigan. Consider best practice of focusing on salary expectations instead.'
       },
       pay_transparency: {
         severity: 'info',
         message: 'Michigan has NO statewide pay transparency law requiring salary ranges in job postings. No requirement to disclose compensation ranges to applicants or employees.',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Michigan. Including salary range is optional but recommended for attracting candidates.'
       },
       background_checks: {
         severity: 'warning',
         message: 'Michigan has no statewide ban-the-box law for private employers. Employers may ask about criminal history on applications. Must comply with federal FCRA. Michigan courts have held that considering cri',
-        flaggedPhrases: ['background checks']
+        flaggedPhrases: ['background checks'],
+        suggestion: 'Background checks are permitted. Ensure FCRA compliance with proper authorization and adverse action notices.'
       },
       paid_leave: {
         severity: 'info',
         message: 'Michigan\'s Earned Sick Time Act (ESTA) requires employers to provide paid sick leave. Amended in February 2025, ESTA requires employees accrue 1 hour of paid sick time for every 30 hours worked. Empl',
-        flaggedPhrases: ['paid leave']
+        flaggedPhrases: ['paid leave'],
+        suggestion: 'Ensure sick leave policy complies with Michigan ESTA requirements (1 hour per 30 hours worked).'
       },
       arbitration: {
         severity: 'warning',
         message: 'Michigan generally enforces arbitration agreements under federal and state law. Follows Federal Arbitration Act. Agreements must be clear, mutual, and not unconscionable.',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure agreement is mutual, clear, and specifies fair procedures and cost-sharing.'
       },
       at_will_employment: {
         severity: 'info',
         message: 'Michigan follows at-will employment doctrine. Either party can terminate employment at any time for any legal reason or no reason. Exceptions exist for discrimination, retaliation, public policy viola',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure it is not contradicted by other terms in offer letter or handbook.'
       },
       drug_screening: {
         severity: 'info',
         message: 'Michigan has limited drug testing restrictions. Medical marijuana users have some protections under Michigan Medical Marihuana Act (MMMA), but employers can maintain drug-free workplace policies. Publ',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted. Note that medical marijuana users have limited protections under MMMA.'
       },
     }
   },
@@ -2160,67 +2177,78 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Minnesota Statutes § 181.988 & case law',
         message: 'Non-competes SEVERELY RESTRICTED - disfavored by courts',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-competes are disfavored in Minnesota. Consider using confidentiality agreements instead or remove non-compete clause entirely.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'Minnesota common law',
         message: 'Salary history inquiries PERMITTED (statewide)',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted. Consider best practice of asking about salary expectations instead.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Minnesota common law',
         message: 'NO statewide pay transparency requirement',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement. Including salary range is optional but recommended.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'Minnesota Statutes § 364.021',
         message: 'Cannot consider arrests without convictions',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Background checks permitted but cannot consider arrests without convictions. Ensure FCRA compliance.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'Minnesota Statutes § 177.24',
         message: 'Minnesota minimum wage: $10.85/hour large employers, $8.85 small employers (2024)',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Verify compensation meets Minnesota minimum wage requirements based on employer size.'
       },
       paid_leave_and_required_time_off: {
         severity: 'warning',
         lawReference: 'Minnesota Earned Sick and Safe Time (ESST) Law',
         message: 'EARNED SICK AND SAFE TIME REQUIRED (effective January 1, 2024)',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'Ensure sick leave policy complies with Minnesota ESST requirements (1 hour per 30 hours worked).'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Minnesota common law',
         message: 'At-will employment applies',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure consistency with other contract terms and policies.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Minnesota common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure it specifies governing rules and fair procedures.'
       },
       drug_screening: {
         severity: 'warning',
         lawReference: 'Minnesota Statutes § 181.950-957',
         message: 'Drug testing REGULATED - specific procedures required',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is regulated in Minnesota. Ensure testing follows required statutory procedures and notices.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'Minnesota Statutes § 181.14',
         message: 'Final wages due within 24 hours if terminated, next payday if quit',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Ensure final pay procedures comply with Minnesota timing requirements (24 hours if terminated).'
       },
       breaks: {
         severity: 'warning',
         lawReference: 'Minnesota Statutes § 177.253-254',
         message: 'Meal and rest breaks REQUIRED',
-        flaggedPhrases: ['breaks']
+        flaggedPhrases: ['breaks'],
+        suggestion: 'Minnesota requires meal and rest breaks. Ensure break policy complies with state requirements.'
       },
     }
   },
@@ -2235,73 +2263,85 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Non-competes ENFORCEABLE if reasonable',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-compete is enforceable in Mississippi. Ensure reasonable time, geographic scope, and business interest justification.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Salary history inquiries PERMITTED',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted in Mississippi.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'NO pay transparency requirements',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Mississippi. Including salary range is optional.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Background checks permitted any stage',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Background checks are permitted at any stage. Ensure FCRA compliance with proper notices.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'Federal FLSA (no state minimum)',
         message: 'Mississippi has NO state minimum wage - federal $7.25 applies',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Federal minimum wage of $7.25/hour applies. Verify compensation meets federal requirements.'
       },
       paid_leave_and_required_time_off: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'NO state-mandated paid leave',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'No state-mandated paid leave in Mississippi. Company policy governs leave benefits.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Drug testing PERMITTED',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted in Mississippi without significant restrictions.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'At-will employment applies',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable and recommended in Mississippi.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure fair procedures and cost-sharing provisions.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'Mississippi common law',
         message: 'Final wages due within reasonable time',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Final pay should be provided within a reasonable time after separation.'
       },
       right_to_work: {
         severity: 'info',
         lawReference: 'Mississippi Constitution § 258-A',
         message: 'Mississippi is RIGHT TO WORK state',
-        flaggedPhrases: ['right to work']
+        flaggedPhrases: ['right to work'],
+        suggestion: 'Mississippi is a right-to-work state. Union membership cannot be required as condition of employment.'
       },
       breaks: {
         severity: 'warning',
         lawReference: 'Mississippi common law',
         message: 'NO required meal or rest breaks for adults',
-        flaggedPhrases: ['breaks']
+        flaggedPhrases: ['breaks'],
+        suggestion: 'No required breaks for adults in Mississippi. Company policy governs break times.'
       },
     }
   },
@@ -2316,67 +2356,78 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Missouri common law - House Springs v. Schneider',
         message: 'Non-competes VERY EMPLOYER-FRIENDLY - broadly enforceable',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-competes are broadly enforceable in Missouri. Ensure reasonable scope and legitimate business interest.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'Salary history inquiries PERMITTED',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted in Missouri.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'NO pay transparency requirements',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Missouri. Including salary range is optional.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'Background checks permitted any stage',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Background checks are permitted at any stage. Ensure FCRA compliance.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'Missouri Revised Statutes § 290.502',
         message: 'Missouri minimum wage: $12.30/hour (2024), $13.75 (2025), $15.00 (2026)',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Verify compensation meets Missouri minimum wage requirements (increasing annually to $15 in 2026).'
       },
       paid_leave_and_required_time_off: {
         severity: 'warning',
         lawReference: 'Missouri Proposition A (approved November 2024)',
         message: 'EARNED PAID SICK TIME REQUIRED (effective May 1, 2025)',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'Ensure sick leave policy complies with Missouri Proposition A requirements effective May 2025.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'At-will employment applies',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable and recommended in Missouri.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure agreement specifies fair procedures.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Missouri common law',
         message: 'Drug testing PERMITTED',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted in Missouri without significant restrictions.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'Missouri Revised Statutes § 290.110',
         message: 'Final wages due immediately if terminated, next payday if quit',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Ensure final pay procedures comply with Missouri timing (immediate if terminated, next payday if quit).'
       },
       right_to_work: {
         severity: 'info',
         lawReference: 'Missouri Constitution Article I § 29',
         message: 'Missouri is RIGHT TO WORK state',
-        flaggedPhrases: ['right to work']
+        flaggedPhrases: ['right to work'],
+        suggestion: 'Missouri is a right-to-work state. Union membership cannot be required as condition of employment.'
       },
     }
   },
@@ -2391,67 +2442,78 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Montana Code Annotated § 28-2-703 to 705',
         message: 'Non-competes HEAVILY RESTRICTED - very limited enforceability',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-competes are heavily restricted in Montana. Consider using confidentiality agreements instead.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'Montana common law',
         message: 'Salary history inquiries PERMITTED',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted in Montana.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Montana common law',
         message: 'NO pay transparency requirements',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Montana. Including salary range is optional.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'Montana Code § 49-2-312',
         message: 'Criminal history restrictions apply',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Criminal history restrictions apply. Ensure FCRA compliance and proper timing of inquiries.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'Montana Code § 39-3-404',
         message: 'Montana minimum wage: $10.30/hour (2024), adjusted annually',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Verify compensation meets Montana minimum wage (adjusted annually for inflation).'
       },
       paid_leave_and_required_time_off: {
         severity: 'info',
         lawReference: 'Montana common law',
         message: 'NO state-mandated paid sick leave',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'No state-mandated paid sick leave in Montana. Company policy governs leave benefits.'
       },
       wrongful_discharge: {
         severity: 'warning',
         lawReference: 'Montana Wrongful Discharge from Employment Act (WDEA)',
         message: 'Montana is NOT at-will - good cause required after probation',
-        flaggedPhrases: ['wrongful discharge']
+        flaggedPhrases: ['wrongful discharge'],
+        suggestion: 'IMPORTANT: Montana requires good cause for termination after probation period. Ensure clear probationary period definition.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Montana WDEA',
         message: 'At-will employment LIMITED to probationary period only',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'IMPORTANT: Montana limits at-will to probationary period only. Define clear probation period (typically 6 months). After probation, good cause required for termination.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Montana common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure fair procedures and cost-sharing provisions.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Montana common law',
         message: 'Drug testing permitted with policy',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted with written policy. Maintain consistent testing procedures.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'Montana Code § 39-3-205',
         message: 'Final wages due immediately upon discharge or within 4 business days',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Final wages due immediately upon discharge or within 4 business days. Ensure timely payment procedures.'
       },
     }
   },
@@ -2466,55 +2528,64 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'No statewide prohibition; federal anti-discrimination laws apply',
         message: 'Nebraska does not have a statewide salary history ban. Employers may ask about wage history, but such practices can increase discrimination risk under federal law.',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted. Consider best practice of asking about salary expectations instead.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'No current Nebraska statute mandating pay transparency',
         message: 'Nebraska does not currently require employers to disclose wage ranges in job postings or offer letters.',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Nebraska. Including salary range is optional but recommended.'
       },
       non_compete: {
         severity: 'info',
         lawReference: 'Nebraska common law (e.g., H & R Block Tax Services, Inc. v. Circle A Enterprises, Inc.)',
         message: 'Non-compete agreements are generally enforceable in Nebraska if reasonable in scope, geography, and duration, and if they protect legitimate business interests.',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-compete is enforceable if reasonable. Ensure scope, geography, and duration are clearly defined and limited.'
       },
       background_checks_and_fcra: {
         severity: 'warning',
         lawReference: 'Fair Credit Reporting Act (15 U.S.C. § 1681)',
         message: 'Nebraska does not have a statewide ban-the-box law for private employers, but employers must follow federal FCRA procedures when using background check vendors.',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Background checks are permitted. Ensure FCRA compliance with proper authorization and adverse action notices.'
       },
       paid_leave_and_required_time_off: {
         severity: 'warning',
         lawReference: 'Neb. Rev. Stat. § 48-837 (jury duty); § 32-922 (voting leave)',
         message: 'Nebraska does not mandate paid sick leave statewide. However, employers must comply with required leave such as jury duty protections and voting leave.',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'No state-mandated paid sick leave. Ensure compliance with jury duty and voting leave requirements.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Nebraska common law; Nebraska Revised Statutes Title 48',
         message: 'Nebraska permits workplace drug testing. Nebraska does not provide employment protections for recreational cannabis use.',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted without significant restrictions in Nebraska.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Federal Arbitration Act; Nebraska contract law',
         message: 'Arbitration agreements are generally enforceable in Nebraska if not unconscionable and consistent with federal arbitration law.',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure agreement is mutual and specifies fair procedures.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Nebraska common law',
         message: 'Nebraska follows the at-will employment doctrine, subject to exceptions for contracts, discrimination, and public policy.',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure consistency with other contract terms.'
       },
       anti_discrimination_and_harassment: {
         severity: 'info',
         lawReference: 'Nebraska Fair Employment Practice Act (Neb. Rev. Stat. § 48-1101 et seq.)',
         message: 'Nebraska law prohibits discrimination in employment based on protected characteristics and mirrors federal civil rights protections.',
-        flaggedPhrases: ['anti discrimination and harassment']
+        flaggedPhrases: ['anti discrimination and harassment'],
+        suggestion: 'Include required anti-discrimination notices. Nebraska protections mirror federal civil rights law.'
       },
     }
   },
@@ -2529,73 +2600,85 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'Nevada Revised Statutes § 613.195 et seq.',
         message: 'Non-competes RESTRICTED - statutory requirements apply',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-competes have statutory requirements in Nevada. Ensure compliance with NRS 613.195 including notice requirements.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'Nevada Revised Statutes § 613.510',
         message: 'CANNOT seek salary history before making compensation offer',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Remove salary history questions. Nevada prohibits seeking salary history before making a compensation offer.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'Nevada common law',
         message: 'NO pay transparency requirement currently',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in Nevada currently. Including salary range is optional.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'Nevada Ban the Box Law',
         message: 'Cannot require disclosure of criminal history on initial application',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Nevada has ban-the-box requirements. Delay criminal history inquiries until after initial application screening.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'Nevada Constitution & NRS § 608.250',
         message: 'Nevada minimum wage: $12.00/hour (July 1, 2024+)',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Verify compensation meets Nevada minimum wage of $12.00/hour.'
       },
       paid_leave_and_required_time_off: {
         severity: 'info',
         lawReference: 'Nevada common law',
         message: 'NO state-mandated paid sick leave currently',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'No state-mandated paid sick leave in Nevada. Company policy governs leave benefits.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'Nevada common law',
         message: 'At-will employment applies',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure consistency with other contract terms.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'Nevada common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure fair procedures and cost-sharing provisions.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'Nevada AB 132 (marijuana protections)',
         message: 'Cannot refuse to hire based on positive marijuana test',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'IMPORTANT: Nevada prohibits refusing to hire based on positive marijuana test (AB 132). Update drug testing policy accordingly.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'Nevada Revised Statutes § 608.020',
         message: 'Final wages due within 3 days (discharge) or next payday (resignation)',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Final wages due within 3 days if discharged, next payday if resigned.'
       },
       right_to_work: {
         severity: 'info',
         lawReference: 'Nevada Constitution Article 19 § 2',
         message: 'Nevada is RIGHT TO WORK state',
-        flaggedPhrases: ['right to work']
+        flaggedPhrases: ['right to work'],
+        suggestion: 'Nevada is a right-to-work state. Union membership cannot be required as condition of employment.'
       },
       daily_overtime: {
         severity: 'warning',
         lawReference: 'Nevada Revised Statutes § 608.018',
         message: 'Daily overtime required for 8+ hour shifts',
-        flaggedPhrases: ['daily overtime']
+        flaggedPhrases: ['daily overtime'],
+        suggestion: 'Nevada requires daily overtime for shifts over 8 hours. Ensure overtime policy complies with state requirements.'
       },
     }
   },
@@ -2610,73 +2693,85 @@ export const COMPLIANCE_RULES = {
         severity: 'info',
         lawReference: 'New Hampshire RSA 275:70 et seq.',
         message: 'Non-competes RESTRICTED - statutory requirements (effective 2020)',
-        flaggedPhrases: ['non compete']
+        flaggedPhrases: ['non compete'],
+        suggestion: 'Non-competes have statutory requirements in NH. Ensure compliance with RSA 275:70 including advance notice and disclosure requirements.'
       },
       salary_history: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'Salary history inquiries PERMITTED',
-        flaggedPhrases: ['salary history']
+        flaggedPhrases: ['salary history'],
+        suggestion: 'Salary history inquiries are permitted in New Hampshire.'
       },
       pay_transparency: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'NO pay transparency requirements',
-        flaggedPhrases: ['pay transparency']
+        flaggedPhrases: ['pay transparency'],
+        suggestion: 'No pay transparency requirement in New Hampshire. Including salary range is optional.'
       },
       background_checks_and_fcra: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'Background checks permitted any stage',
-        flaggedPhrases: ['background checks and fcra']
+        flaggedPhrases: ['background checks and fcra'],
+        suggestion: 'Background checks are permitted at any stage. Ensure FCRA compliance.'
       },
       minimum_wage: {
         severity: 'info',
         lawReference: 'New Hampshire RSA 279:21',
         message: 'New Hampshire follows federal minimum: $7.25/hour',
-        flaggedPhrases: ['minimum wage']
+        flaggedPhrases: ['minimum wage'],
+        suggestion: 'Verify compensation meets federal minimum wage of $7.25/hour (NH follows federal rate).'
       },
       paid_leave_and_required_time_off: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'NO state-mandated paid leave',
-        flaggedPhrases: ['paid leave and required time off']
+        flaggedPhrases: ['paid leave and required time off'],
+        suggestion: 'No state-mandated paid leave in New Hampshire. Company policy governs leave benefits.'
       },
       at_will_employment: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'At-will employment applies',
-        flaggedPhrases: ['at will employment']
+        flaggedPhrases: ['at will employment'],
+        suggestion: 'At-will language is acceptable. Ensure consistency with other contract terms.'
       },
       arbitration: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'Arbitration enforceable',
-        flaggedPhrases: ['arbitration']
+        flaggedPhrases: ['arbitration'],
+        suggestion: 'Arbitration clause is enforceable. Ensure fair procedures and cost-sharing provisions.'
       },
       drug_screening: {
         severity: 'info',
         lawReference: 'New Hampshire common law',
         message: 'Drug testing permitted',
-        flaggedPhrases: ['drug screening']
+        flaggedPhrases: ['drug screening'],
+        suggestion: 'Drug testing is permitted in New Hampshire without significant restrictions.'
       },
       final_pay: {
         severity: 'info',
         lawReference: 'New Hampshire RSA 275:44',
         message: 'Final wages due within 72 hours or next payday',
-        flaggedPhrases: ['final pay']
+        flaggedPhrases: ['final pay'],
+        suggestion: 'Final wages due within 72 hours or next payday. Ensure timely payment procedures.'
       },
       right_to_work: {
         severity: 'info',
         lawReference: 'New Hampshire RSA 275:1-a',
         message: 'New Hampshire is RIGHT TO WORK state',
-        flaggedPhrases: ['right to work']
+        flaggedPhrases: ['right to work'],
+        suggestion: 'New Hampshire is a right-to-work state. Union membership cannot be required as condition of employment.'
       },
       breaks: {
         severity: 'warning',
         lawReference: 'New Hampshire RSA 275:30-a',
         message: '30-minute meal break REQUIRED for 5+ hour shifts',
-        flaggedPhrases: ['breaks']
+        flaggedPhrases: ['breaks'],
+        suggestion: 'New Hampshire requires 30-minute meal break for shifts over 5 hours. Ensure break policy compliance.'
       },
     }
   },

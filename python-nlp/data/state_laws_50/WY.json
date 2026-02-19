@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is subject to reasonableness requirements under Wyoming law. Replace with: 'Employee agrees not to engage in activities that are in direct competition with the Company's business in Wyoming for a period of [insert reasonable time frame, e.g., 6-12 months], and only to the extent such activities are reasonably related to the Employee's job duties.' Alternatively, consider using a narrower confidentiality and trade secret protection clause to protect the Company's interests.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

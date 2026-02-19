@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is restricted under Washington law for agreements made after the effective date of Senate Bill 5935. Use only confidentiality and trade secret protection clauses instead, such as: \"Employee agrees to maintain the confidentiality of all trade secrets and proprietary information of the Company.\" Ensure any existing non-competes are reviewed for compliance with the new law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role' to comply with Washington law, which prohibits employers from inquiring about an applicant's salary history. This alternative language focuses on the applicant's expectations rather than their past salary.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

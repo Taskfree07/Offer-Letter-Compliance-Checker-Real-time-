@@ -450,12 +450,39 @@ const SearchableStateDropdown = ({
             </button>
           )}
 
-          {/* Dropdown chevron */}
-          <ChevronDown
-            size={18}
-            style={styles.chevron}
-            aria-hidden="true"
-          />
+          {/* Dropdown chevron toggle button */}
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-label={isOpen ? 'Close dropdown' : 'Open dropdown'}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (disabled) return;
+              if (isOpen) {
+                setIsOpen(false);
+                setSearchQuery('');
+              } else {
+                setIsOpen(true);
+                inputRef.current?.focus();
+              }
+            }}
+            style={{
+              padding: '4px',
+              border: 'none',
+              background: 'transparent',
+              cursor: disabled ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '4px'
+            }}
+          >
+            <ChevronDown
+              size={18}
+              style={styles.chevron}
+              aria-hidden="true"
+            />
+          </button>
         </div>
       </div>
 

@@ -18,8 +18,15 @@ INSTRUCTIONS:
 3. Be conservative - only flag issues you are confident about
 4. Provide specific citations from the laws above
 5. Quote the exact problematic text from the offer letter
-6. Suggest how to fix each issue
+6. Provide a SPECIFIC, ACTIONABLE suggestion for each issue (see below)
 7. Assign a confidence score (0.0 to 1.0) for each violation
+
+SUGGESTION GUIDELINES - Make suggestions specific and actionable:
+- For violations: Provide exact alternative language they should use instead
+- For warnings: Explain what to review or add to the clause
+- For acceptable clauses (info): Confirm it's acceptable but note any caveats
+- Include specific actions like "Remove this clause", "Add the following language...", "Modify to state..."
+- Reference the specific state requirement when suggesting changes
 
 IMPORTANT RULES:
 - Only flag ACTUAL violations based on the laws provided
@@ -27,6 +34,7 @@ IMPORTANT RULES:
 - Do NOT flag issues if you're uncertain (confidence < 0.7)
 - Always provide the exact law citation
 - Quote the specific problematic text from the offer letter
+- ALWAYS provide a helpful, specific suggestion - never leave it generic
 
 OUTPUT FORMAT (JSON only, no other text):
 {{
@@ -36,7 +44,7 @@ OUTPUT FORMAT (JSON only, no other text):
       "law_citation": "exact statute reference from laws above",
       "violation_text": "exact quote from offer letter",
       "explanation": "clear explanation of why this violates the law",
-      "suggestion": "specific recommendation to fix",
+      "suggestion": "SPECIFIC actionable recommendation - include alternative language if applicable",
       "confidence": 0.85,
       "source_url": "official government URL if available"
     }}

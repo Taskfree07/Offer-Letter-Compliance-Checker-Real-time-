@@ -1,0 +1,29 @@
+{
+    "name": "ComplianceSearch",
+    "nameLocale": {
+        "en": "Compliance Search"
+    },
+    "guid": "asc.{B5E5F0F1-C1A2-4D3E-9F4A-6B7C8D9E0F1A}",
+    "version": "1.0.0",
+    "baseUrl": "",
+    "provider": "Compliance Checker",
+    "description": "Searches and highlights compliance text in the document",
+    "descriptionLocale": {
+        "en": "Searches and highlights compliance text in the document"
+    },
+    "variations": [
+        {
+            "url": "index.html",
+            "description": "Compliance Search",
+            "isViewer": true,
+            "EditorsSupport": ["word"],
+            "isVisual": false,
+            "isSystem": true,
+            "isAutostart": true,
+            "initDataType": "none",
+            "initData": "",
+            "buttons": [],
+            "events": ["onExternalPluginMessage"]
+        }
+    ]
+}

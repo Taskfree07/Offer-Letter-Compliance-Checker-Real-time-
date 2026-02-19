@@ -13,7 +13,7 @@
       "flagged_phrases": [
         "non compete"
       ],
-      "suggestion": "Review non compete requirements",
+      "suggestion": "Remove the non-compete clause entirely as it is expected to be void under New York law, given the recent passage of a non-compete ban. Use only confidentiality and trade secret protection clauses instead, such as: \"Employee agrees to maintain confidentiality of company trade secrets and proprietary information.\" Ensure all other contract terms comply with New York law.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,
@@ -28,7 +28,7 @@
       "flagged_phrases": [
         "salary history"
       ],
-      "suggestion": "Review salary history requirements",
+      "suggestion": "Remove salary history questions. Replace with: 'Please provide your salary expectations for this role, as required by New York law, we do not ask for prior salary information.",
       "source_url": "",
       "effective_date": "Unknown",
       "confidence": 0.6,

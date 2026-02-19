@@ -153,7 +153,7 @@ class ComplianceAnalyzer:
                 state=state,
                 document_text=text,
                 top_k=10,
-                min_similarity=0.3
+                min_similarity=0.05  # Very permissive for testing - adjust based on results
             )
 
             if not relevant_laws:
