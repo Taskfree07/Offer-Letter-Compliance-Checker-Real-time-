@@ -89,3 +89,8 @@ test_*.json
 # Scraped raw data & experiments
 python-nlp/data/scraped_laws/
 python-nlp/data/test_*.py
+
+# Temporary build directories
+temp-backend-build/
+temp-frontend-build/
+temp-onlyoffice-build/
