@@ -1284,27 +1284,26 @@ useEffect(() => {
 
   // Professional Compliance Summary Component
   const ComplianceSummaryPanel = ({ summary, selectedState }) => {
-    // Show prompt to select state if none selected
     if (!selectedState) {
       return (
         <div style={{
           backgroundColor: '#f0f9ff',
           border: '1px solid #bae6fd',
           color: '#0369a1',
-          padding: '16px',
+          padding: '14px',
           borderRadius: '8px',
           margin: '12px 0',
           display: 'flex',
           alignItems: 'center',
           gap: '10px'
         }}>
-          <Shield size={20} style={{ color: '#0284c7' }} />
+          <Shield size={18} style={{ color: '#0284c7', flexShrink: 0 }} />
           <div>
-            <span style={{ fontWeight: '600', display: 'block' }}>
+            <span style={{ fontWeight: '600', display: 'block', fontSize: '13px' }}>
               Select a state to begin compliance check
             </span>
-            <span style={{ fontSize: '12px', color: '#0369a1', marginTop: '4px', display: 'block' }}>
-              Choose a state from the dropdown above to analyze your document for legal compliance
+            <span style={{ fontSize: '12px', color: '#0369a1', marginTop: '3px', display: 'block' }}>
+              Choose a state from the dropdown above
             </span>
           </div>
         </div>
@@ -1319,76 +1318,51 @@ useEffect(() => {
           backgroundColor: '#d4edda',
           border: '1px solid #c3e6cb',
           color: '#155724',
-          padding: '12px 16px',
+          padding: '12px 14px',
           borderRadius: '8px',
           margin: '12px 0',
           display: 'flex',
           alignItems: 'center',
           gap: '8px'
         }}>
-          <Shield size={18} style={{ color: '#28a745' }} />
-          <span style={{ fontWeight: '600' }}>
-            No compliance issues detected for {selectedState}
+          <Shield size={16} style={{ color: '#28a745' }} />
+          <span style={{ fontWeight: '600', fontSize: '13px' }}>
+            No compliance issues for {selectedState}
           </span>
         </div>
       );
     }
 
     return (
-      <div style={{
-        backgroundColor: '#fff3cd',
-        border: '1px solid #ffeaa7',
-        padding: '16px',
-        borderRadius: '8px',
-        margin: '12px 0'
-      }}>
-        <h4 style={{ 
-          margin: '0 0 12px 0', 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '8px',
-          color: '#856404'
-        }}>
-          <Shield size={18} />
-          Compliance Status for {selectedState}:
-        </h4>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          {summary.error > 0 && (
-            <span style={{ 
-              backgroundColor: '#f8d7da',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              color: '#721c24',
-              fontWeight: '600',
-              fontSize: '14px'
-            }}>
-              Critical Issues: {summary.error}
-            </span>
-          )}
-          {summary.warning > 0 && (
-            <span style={{ 
-              backgroundColor: '#fff3e0',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              color: '#ef6c00',
-              fontWeight: '600',
-              fontSize: '14px'
-            }}>
-              Warnings: {summary.warning}
-            </span>
-          )}
-          {summary.info > 0 && (
-            <span style={{ 
-              backgroundColor: '#e8f4f8',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              color: '#0277bd',
-              fontWeight: '600',
-              fontSize: '14px'
-            }}>
-              Notices: {summary.info}
-            </span>
-          )}
+      <div style={{ marginBottom: '14px' }}>
+        <div style={{ fontSize: '12px', fontWeight: '500', color: '#64748b', marginBottom: '8px' }}>
+          Compliance Status for {selectedState}
+        </div>
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            padding: '3px 8px', borderRadius: '12px',
+            backgroundColor: '#fee2e2', color: '#dc2626', fontSize: '11px', fontWeight: '600'
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#dc2626', display: 'inline-block' }} />
+            Critical Issues: {summary.error}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            padding: '3px 8px', borderRadius: '12px',
+            backgroundColor: '#fef3c7', color: '#d97706', fontSize: '11px', fontWeight: '600'
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#f59e0b', display: 'inline-block' }} />
+            Warnings: {summary.warning}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            padding: '3px 8px', borderRadius: '12px',
+            backgroundColor: '#dbeafe', color: '#2563eb', fontSize: '11px', fontWeight: '600'
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#3b82f6', display: 'inline-block' }} />
+            Notices: {summary.info}
+          </span>
         </div>
       </div>
     );
@@ -1724,54 +1698,29 @@ useEffect(() => {
 
   const renderStateConfigTab = () => (
     <div className="tab-content" style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      {/* Fixed Action Header - Non-Scrolling */}
+      {/* Header - White background, Figma style */}
       <div style={{
         flexShrink: 0,
-        padding: '12px 20px 16px 20px',
+        padding: '16px 16px 12px 16px',
         backgroundColor: '#fff',
-        borderBottom: '1px solid #e2e8f0'
+        borderBottom: '1px solid #e2e8f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
       }}>
-        <h2 style={{
-          margin: '0 0 14px 0',
-          fontSize: '20px',
-          fontWeight: 'bold',
-          color: '#1e293b',
-          fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
-        }}>
+        <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '700', color: '#0f172a' }}>
           Compliance
         </h2>
-
-        {/* Manage Rules button - Responsive Width */}
         <button
           onClick={() => setShowRulesManager(!showRulesManager)}
+          title="Manage Rules"
           style={{
-            width: '100%',
-            maxWidth: '310px',
-            height: '34px',
-            padding: '0 12px',
-            fontSize: '14px',
-            backgroundColor: '#fff',
-            color: '#3b82f6',
-            border: '1px solid #3b82f6',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            fontWeight: '500',
-            transition: 'all 0.2s',
-            whiteSpace: 'nowrap'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#eff6ff';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#fff';
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#64748b', padding: '4px', display: 'flex', alignItems: 'center',
+            borderRadius: '4px'
           }}
         >
-          <BookOpen size={14} />
-          {showRulesManager ? 'Hide' : 'Manage'} Rules
+          <BookOpen size={16} />
         </button>
       </div>
 
@@ -1780,34 +1729,24 @@ useEffect(() => {
         flex: 1,
         overflowY: 'auto',
         overflowX: 'hidden',
-        padding: '16px 20px',
-        minHeight: 0
+        padding: '14px 14px',
+        minHeight: 0,
+        backgroundColor: '#f8fafc'
       }}>
-        {/* State Selection (removed "Legal Compliance Configuration" heading) */}
-        <div style={{ marginBottom: '24px' }}>
-
-          <div style={{ marginBottom: '16px' }}>
-            <label style={{ fontWeight: '500', marginBottom: '8px', display: 'block', fontSize: '14px', color: '#374151' }}>
-              Select state for legal compliance check:
-            </label>
-            <SearchableStateDropdown
-              value={stateConfig.selectedState}
-              onChange={handleStateChange}
-              placeholder="Search or select a state..."
-              id="compliance-state-select"
-              style={{ marginBottom: '12px' }}
-            />
-
-            <div style={{ marginTop: '8px', color: '#6b7280', fontSize: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>Rules Last Updated: {currentRules[stateConfig.selectedState]?.lastUpdated || 'Default'}</span>
-              {isAnalyzingBackend && (
-                <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#4f46e5' }}>
-                  <RefreshCw size={12} style={{ animation: 'spin 1s linear infinite' }} />
-                  AI analyzing...
-                </span>
-              )}
+        {/* State Dropdown - Clean, no label */}
+        <div style={{ marginBottom: '12px' }}>
+          <SearchableStateDropdown
+            value={stateConfig.selectedState}
+            onChange={handleStateChange}
+            placeholder="Select a state..."
+            id="compliance-state-select"
+          />
+          {isAnalyzingBackend && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#4f46e5', fontSize: '12px', marginTop: '6px' }}>
+              <RefreshCw size={11} style={{ animation: 'spin 1s linear infinite' }} />
+              AI analyzing...
             </div>
-          </div>
+          )}
         </div>
         
         {showRulesManager && (
@@ -1923,236 +1862,191 @@ useEffect(() => {
           </div>
         )}
 
-        {/* Compliance Analysis */}
-        <div style={{ marginBottom: '24px', marginTop: '24px' }}>
-          <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '16px', color: '#374151' }}>
-            Compliance Analysis
-          </h3>
-
-          {/* Compliance Summary */}
+        {/* Compliance Summary */}
+        <div style={{ marginBottom: '4px' }}>
           <ComplianceSummaryPanel
             summary={getComplianceSummary()}
             selectedState={stateConfig.selectedState}
           />
 
-          {/* Unified Compliance Issues Report - Only show when state is selected */}
-          {stateConfig.selectedState && (backendAnalysisResults?.violations?.length > 0 || !backendAnalysisResults?.success || Object.keys(complianceFlags).length > 0) && (
-            <div style={{
-              marginTop: '20px',
-              padding: '16px',
-              backgroundColor: (() => {
-                // Dynamic background based on most severe issue
-                const allViolations = [
-                  ...(backendAnalysisResults?.violations || []),
-                  ...Object.values(complianceFlags).flat()
-                ];
-                const hasError = allViolations.some(v => v.severity === 'error');
-                const hasWarning = allViolations.some(v => v.severity === 'warning');
-                if (hasError) return '#fef2f2'; // Red for errors
-                if (hasWarning) return '#fffbeb'; // Amber for warnings
-                return '#eff6ff'; // Blue for info
-              })(),
-              border: (() => {
-                const allViolations = [
-                  ...(backendAnalysisResults?.violations || []),
-                  ...Object.values(complianceFlags).flat()
-                ];
-                const hasError = allViolations.some(v => v.severity === 'error');
-                const hasWarning = allViolations.some(v => v.severity === 'warning');
-                if (hasError) return '1px solid #fecaca';
-                if (hasWarning) return '1px solid #fde68a';
-                return '1px solid #bfdbfe';
-              })(),
-              borderRadius: '8px'
-            }}>
-              <h4 style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                marginBottom: '12px',
-                color: (() => {
-                  const allViolations = [
-                    ...(backendAnalysisResults?.violations || []),
-                    ...Object.values(complianceFlags).flat()
-                  ];
-                  const hasError = allViolations.some(v => v.severity === 'error');
-                  const hasWarning = allViolations.some(v => v.severity === 'warning');
-                  if (hasError) return '#991b1b';
-                  if (hasWarning) return '#92400e';
-                  return '#1e40af';
-                })(),
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <Shield size={16} />
-                Compliance Issues Detected
-              </h4>
+          {/* Grouped Compliance Issues - Figma Design */}
+          {stateConfig.selectedState && (() => {
+            // Collect all violations
+            const backendViolations = backendAnalysisResults?.success ? (backendAnalysisResults.violations || []) : [];
+            const patternViolations = sentences
+              .filter(s => complianceFlags[s.id])
+              .flatMap(s => complianceFlags[s.id].map(flag => ({ ...flag, sentence: s })));
 
-              {/* Error message if backend failed */}
-              {backendAnalysisResults && !backendAnalysisResults.success && (
-                <div style={{ color: '#991b1b', fontSize: '13px', marginBottom: '16px' }}>
+            const allItems = [
+              ...backendViolations.map(v => ({ source: 'backend', ...v })),
+              ...patternViolations.map(v => ({ source: 'pattern', ...v }))
+            ];
+
+            const criticals = allItems.filter(v => v.severity === 'error');
+            const warnings = allItems.filter(v => v.severity === 'warning');
+            const notices = allItems.filter(v => v.severity !== 'error' && v.severity !== 'warning');
+
+            if (allItems.length === 0 && backendAnalysisResults && !backendAnalysisResults.success) {
+              return (
+                <div style={{ color: '#991b1b', fontSize: '13px', marginTop: '16px', padding: '12px', backgroundColor: '#fef2f2', borderRadius: '8px' }}>
                   <strong>Analysis Error:</strong> {backendAnalysisResults.error || 'Unknown error'}
-                  <div style={{ marginTop: '8px', fontSize: '12px', color: '#6b7280' }}>
-                    Make sure the backend server is running (python-nlp Flask API) and Ollama is started.
+                  <div style={{ marginTop: '6px', fontSize: '12px', color: '#6b7280' }}>
+                    Ensure backend is running on port 5000.
                   </div>
                 </div>
-              )}
+              );
+            }
 
-              {/* Merged violations list */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {/* Backend violations */}
-                {backendAnalysisResults?.success && backendAnalysisResults.violations?.map((violation, idx) => (
+            if (allItems.length === 0) return null;
+
+            const ViolationCard = ({ item, accent }) => {
+              const [expanded, setExpanded] = React.useState(false);
+              const text = item.source === 'backend' ? item.violation_text : item.sentence?.text;
+              const suggestion = item.suggestion ||
+                generateSmartSuggestion(item.violation_text || item.type || item.law_citation, item.severity, stateConfig.selectedState);
+
+              return (
+                <div
+                  style={{
+                    backgroundColor: '#fff',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '6px',
+                    overflow: 'hidden',
+                    transition: 'box-shadow 0.15s ease'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.boxShadow = '0 1px 6px rgba(0,0,0,0.08)'}
+                  onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+                >
                   <div
-                    key={`backend-${idx}`}
-                    title="Compliance issue"
-                    style={{
-                      padding: '12px',
-                      backgroundColor: '#fff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '6px',
-                      borderLeft: `3px solid ${
-                        violation.severity === 'error' ? '#dc2626' :
-                        violation.severity === 'warning' ? '#f59e0b' : '#3b82f6'
-                      }`,
-                      cursor: violation.violation_text ? 'pointer' : 'default',
-                      transition: 'box-shadow 0.15s ease'
-                    }}
+                    style={{ padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', cursor: 'pointer' }}
                     onClick={() => {
-                      if (violation.violation_text && onlyofficeViewerRef.current) {
-                        onlyofficeViewerRef.current.scrollToText(violation.violation_text, violation.severity || 'warning');
+                      setExpanded(prev => !prev);
+                      if (text && onlyofficeViewerRef.current) {
+                        onlyofficeViewerRef.current.scrollToText(text, item.severity || 'warning');
                       }
                     }}
-                    onMouseEnter={(e) => { if (violation.violation_text) e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
                   >
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'flex-start',
-                      marginBottom: '8px'
-                    }}>
-                      <span style={{
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        color: violation.severity === 'error' ? '#dc2626' :
-                          violation.severity === 'warning' ? '#d97706' : '#2563eb',
-                        textTransform: 'uppercase'
-                      }}>
-                        {violation.severity === 'error' ? 'CRITICAL' : violation.severity || 'info'}
-                      </span>
-                    </div>
-
-                    {violation.violation_text && (
-                      <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', fontWeight: '600' }}>
-                        {violation.violation_text}
-                      </div>
-                    )}
-
-                    {violation.law_citation && (
-                      <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                        <strong>Law Reference:</strong> {violation.law_citation}
-                      </div>
-                    )}
-
-                    {violation.explanation && (
-                      <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                        {violation.explanation}
-                      </div>
-                    )}
-
-                    <div style={{
-                      fontSize: '12px',
-                      color: '#059669',
-                      padding: '8px',
-                      backgroundColor: '#ecfdf5',
-                      borderRadius: '4px',
-                      marginTop: '8px'
-                    }}>
-                      <strong>Suggested Action:</strong> {violation.suggestion || generateSmartSuggestion(violation.violation_text || violation.law_citation, violation.severity, stateConfig.selectedState)}
-                    </div>
+                    <span style={{ fontSize: '12px', color: '#334155', flex: 1, lineHeight: '1.5' }}>
+                      {text || item.type || item.message || 'Compliance issue'}
+                    </span>
+                    <span style={{ fontSize: '12px', color: '#94a3b8', flexShrink: 0, marginTop: '1px' }}>
+                      {expanded ? '▲' : '▼'}
+                    </span>
                   </div>
-                ))}
 
-                {/* Pattern matching violations */}
-                {sentences
-                  .filter(sentence => complianceFlags[sentence.id])
-                  .map(sentence => {
-                    const flags = complianceFlags[sentence.id];
-                    return flags.map((flag, flagIdx) => (
-                      <div
-                        key={`pattern-${sentence.id}-${flagIdx}`}
-                        title="Compliance issue"
-                        onClick={() => {
-                          if (onlyofficeViewerRef.current) {
-                            onlyofficeViewerRef.current.scrollToText(sentence.text, flag.severity || 'warning');
-                          }
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
-                        style={{
-                          padding: '12px',
-                          backgroundColor: '#fff',
-                          border: '1px solid #e5e7eb',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          transition: 'box-shadow 0.15s ease',
-                          borderLeft: `3px solid ${
-                            flag.severity === 'error' ? '#dc2626' :
-                            flag.severity === 'warning' ? '#f59e0b' : '#3b82f6'
-                          }`
-                        }}
-                      >
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'flex-start',
-                          marginBottom: '8px'
-                        }}>
-                          <span style={{
-                            fontSize: '12px',
-                            fontWeight: '600',
-                            color: flag.severity === 'error' ? '#dc2626' :
-                              flag.severity === 'warning' ? '#d97706' : '#2563eb',
-                            textTransform: 'uppercase'
-                          }}>
-                            {flag.severity === 'error' ? 'CRITICAL' : flag.severity.toUpperCase()}
-                          </span>
+                  {expanded && (
+                    <div style={{ padding: '8px 12px 12px 12px', borderTop: '1px solid #f1f5f9', backgroundColor: '#fafafa' }}>
+                      {(item.law_citation || item.lawReference) && (
+                        <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '6px' }}>
+                          <strong>Law Reference:</strong> {item.law_citation || item.lawReference}
                         </div>
-
-                        <div style={{ fontSize: '13px', color: '#1f2937', marginBottom: '8px', fontWeight: '600' }}>
-                          {flag.type}
+                      )}
+                      {(item.explanation || item.message) && (
+                        <div style={{ fontSize: '11px', color: '#475569', marginBottom: '6px', lineHeight: '1.5' }}>
+                          {item.explanation || item.message}
                         </div>
-
-                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '8px', fontStyle: 'italic', backgroundColor: '#f9fafb', padding: '8px', borderRadius: '4px' }}>
-                          "{sentence.text}"
+                      )}
+                      {suggestion && (
+                        <div style={{ fontSize: '11px', color: '#059669', backgroundColor: '#f0fdf4', padding: '6px 8px', borderRadius: '4px', marginTop: '6px', lineHeight: '1.5', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px' }}>
+                          <span><strong>Suggested:</strong> {suggestion}</span>
+                          <button
+                            title="Copy suggestion"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const btn = e.currentTarget;
+                              const markCopied = () => {
+                                btn.style.color = '#16a34a';
+                                btn.title = 'Copied!';
+                                setTimeout(() => { btn.style.color = '#6b7280'; btn.title = 'Copy suggestion'; }, 1500);
+                              };
+                              if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(suggestion).then(markCopied).catch(() => {
+                                  const ta = document.createElement('textarea');
+                                  ta.value = suggestion;
+                                  ta.style.position = 'fixed';
+                                  ta.style.opacity = '0';
+                                  document.body.appendChild(ta);
+                                  ta.focus();
+                                  ta.select();
+                                  document.execCommand('copy');
+                                  document.body.removeChild(ta);
+                                  markCopied();
+                                });
+                              } else {
+                                const ta = document.createElement('textarea');
+                                ta.value = suggestion;
+                                ta.style.position = 'fixed';
+                                ta.style.opacity = '0';
+                                document.body.appendChild(ta);
+                                ta.focus();
+                                ta.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(ta);
+                                markCopied();
+                              }
+                            }}
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', padding: '0', flexShrink: 0, display: 'flex', alignItems: 'center' }}
+                          >
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                          </button>
                         </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            };
 
-                        {flag.lawReference && (
-                          <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                            <strong>Law Reference:</strong> {flag.lawReference}
-                          </div>
-                        )}
+            const SectionGroup = ({ title, items, accent, bgColor, countBg, countColor }) => {
+              if (items.length === 0) return null;
+              return (
+                <div style={{
+                  marginTop: '12px',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  border: `1px solid ${accent}22`,
+                  borderLeft: `4px solid ${accent}`
+                }}>
+                  {/* Section header */}
+                  <div style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '10px 12px',
+                    backgroundColor: bgColor
+                  }}>
+                    <span style={{ fontSize: '13px', fontWeight: '700', color: '#1e293b' }}>
+                      {title}
+                    </span>
+                    <span style={{
+                      backgroundColor: countBg, color: countColor,
+                      fontSize: '11px', fontWeight: '700',
+                      width: '22px', height: '22px',
+                      borderRadius: '50%',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    }}>
+                      {items.length}
+                    </span>
+                  </div>
+                  {/* Cards */}
+                  <div style={{ padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', backgroundColor: '#fff' }}>
+                    {items.map((item, idx) => (
+                      <ViolationCard key={idx} item={item} accent={accent} />
+                    ))}
+                  </div>
+                </div>
+              );
+            };
 
-                        <div style={{ fontSize: '12px', color: '#4b5563', marginBottom: '6px' }}>
-                          {flag.message}
-                        </div>
-
-                        <div style={{
-                          fontSize: '12px',
-                          color: '#059669',
-                          padding: '8px',
-                          backgroundColor: '#ecfdf5',
-                          borderRadius: '4px',
-                          marginTop: '8px'
-                        }}>
-                          <strong>Suggested Action:</strong> {flag.suggestion || generateSmartSuggestion(flag.type, flag.severity, stateConfig.selectedState)}
-                        </div>
-                      </div>
-                    ));
-                  }).flat()}
-              </div>
-            </div>
-          )}
+            return (
+              <>
+                <SectionGroup title="Critical Issues" items={criticals} accent="#dc2626" bgColor="#fef2f2" countBg="#fca5a5" countColor="#7f1d1d" />
+                <SectionGroup title="Warnings" items={warnings} accent="#f59e0b" bgColor="#fffbeb" countBg="#fcd34d" countColor="#78350f" />
+                <SectionGroup title="Notices" items={notices} accent="#3b82f6" bgColor="#eff6ff" countBg="#93c5fd" countColor="#1e3a5f" />
+              </>
+            );
+          })()}
         </div>
       </div>
     </div>
@@ -2621,18 +2515,26 @@ useEffect(() => {
                 flexShrink: 0
               }}
             />
-            <span style={{
-              fontSize: '28px',
-              fontWeight: 600,
-              color: '#FFFFFF',
-              lineHeight: 1,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              maxWidth: '100%'
-            }}>
-              Onboarding Docs
-            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <span style={{
+                fontSize: '22px',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                lineHeight: 1.2,
+                whiteSpace: 'nowrap'
+              }}>
+                Onboarding Talks
+              </span>
+              <span style={{
+                fontSize: '11px',
+                color: 'rgba(255,255,255,0.75)',
+                fontWeight: 400,
+                whiteSpace: 'nowrap',
+                letterSpacing: '0.3px'
+              }}>
+                Powered by Techgene
+              </span>
+            </div>
           </div>
           <div style={{
             display: 'flex',

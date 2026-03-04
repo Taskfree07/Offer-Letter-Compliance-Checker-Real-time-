@@ -1,729 +1,273 @@
-# Email & Offer Letter Compliance System
+# Onboarding Talks — Offer Letter Compliance Checker
 
-A modern React application for ensuring legal compliance in offer letters and email templates across **all 50 U.S. states**. The system uses a **multi-layer AI compliance analysis** approach combining pattern matching, RAG (Retrieval Augmented Generation), and LLM (Large Language Model) analysis for comprehensive legal compliance checking.
+A full-stack web app that checks offer letters for legal compliance across all 50 U.S. states using multi-layer AI analysis. Built with React (frontend) + Flask (backend) + OnlyOffice document editor.
 
-## Multi-Layer Compliance Architecture
+---
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    OFFER LETTER DOCUMENT                        │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ LAYER 1: Pattern Matching (Frontend - Instant)                  │
-│ • complianceRules.js - 50 states, 400+ rules                   │
-│ • Keyword detection for prohibited clauses                      │
-│ • Real-time as-you-type analysis                               │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ LAYER 2: RAG Semantic Search (Backend - ChromaDB)              │
-│ • 469 state employment laws in vector database                  │
-│ • Semantic similarity matching                                  │
-│ • Retrieves relevant laws based on document content             │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ LAYER 3: LLM Analysis (Ollama + Phi-3 Mini)                    │
-│ • Deep contextual understanding                                 │
-│ • Explains WHY something is a violation                         │
-│ • Provides specific remediation suggestions                     │
-│ • Runs locally - no API costs                                   │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    COMBINED RESULTS                             │
-│ • Highest confidence answers from all layers                    │
-│ • Severity: Error > Warning > Info                              │
-│ • Law citations and suggestions                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+## Quick Start (First Time Setup — Read This Fully)
 
-## Features
+### 1. Clone the repo
 
-### 📝 Core Features
-- **Template Management**: Create, view, and manage email and offer letter templates
-- **Word Document Processing**: Upload, edit, and manage .docx offer letters
-- **PDF Processing**: Upload, preview, and generate compliant PDF documents
-- **ONLYOFFICE Integration**: Professional document editing with full formatting preservation
-- **Protected Variable Fields**: Content Controls prevent accidental deletion of `[Variable_Name]` placeholders
-- **Real-time Variable Updates**: Instant synchronization between variable panel and document preview
-- **Split-Screen Editor**: Edit templates with live preview and compliance feedback
-- **Modern UI**: Clean, responsive design with intuitive user experience
-
-### 🤖 AI-Powered Features
-- **GLiNER Entity Recognition**: Advanced NLP for intelligent entity detection
-- **Smart Variable Detection**: Automatically identifies and categorizes document variables:
-  - Person names (candidates, employees)
-  - Dates (start dates, deadlines)
-  - Monetary values (salary, compensation)
-  - Organizations (company names, departments)
-  - Locations (addresses, work sites)
-  - Job titles and positions
-- **Entity Type Inference**: Automatically determines variable types from naming patterns
-- **Context-Aware Suggestions**: Smart recommendations based on document analysis
-
-### ⚖️ Compliance Features
-- **All 50 U.S. States Supported**: Complete coverage of state employment laws
-- **469 Laws in RAG Database**: Comprehensive legal knowledge base
-- **Multi-Layer Analysis**: Pattern + RAG + LLM for highest accuracy
-- **Real-time Analysis**: Instant feedback on compliance issues
-- **Key Compliance Areas**:
-  - Non-compete clauses (prohibited in CA, NY, MN, ND, OK, etc.)
-  - Salary history bans (CA, NY, NJ, IL, MA, etc.)
-  - Pay transparency requirements
-  - Background check requirements (Fair Chance Act states)
-  - Drug testing regulations (including cannabis laws)
-  - Arbitration clauses
-  - At-will employment statements
-  - Paid leave requirements
-
-### 🚨 Compliance Analysis
-- **Visual Indicators**:
-  - ✅ Green: Compliant documents
-  - ❌ Red: Critical issues
-  - ⚠️ Yellow: Warnings
-- **Detailed Feedback**:
-  - Specific law references
-  - Violation details
-  - Suggested corrections
-  - Alternative compliant language
-
-## Getting Started
-
-### Prerequisites
-
-- **Node.js** (version 14 or higher)
-- **Python** (version 3.8 or higher)
-- **Docker** (for ONLYOFFICE Document Server)
-- npm or yarn
-
-### Installation
-
-#### 1. Clone the Repository
 ```bash
-cd Email-automation-MVP
+git clone https://github.com/Taskfree07/Offer-Letter-Compliance-Checker-Real-time-.git
+cd Offer-Letter-Compliance-Checker-Real-time-
 ```
 
-#### 2. Frontend Setup
-```bash
-npm install
-```
+---
 
-#### 3. Backend Setup
+### 2. Prerequisites — Install these first
+
+| Tool | Version | Download |
+|------|---------|----------|
+| Python | **3.10.x** | https://www.python.org/downloads/release/python-31010/ |
+| Node.js | 22.x | https://nodejs.org/en/download |
+| npm | 10.x | comes with Node.js |
+| Git | any | https://git-scm.com/downloads |
+
+> **Important:** Use **Python 3.10** specifically. Some dependencies (GLiNER, torch, sentence-transformers) are built for 3.10 and will fail on 3.11/3.12.
+
+---
+
+### 3. Backend Setup (Flask API — Port 5000)
+
 ```bash
+# Step into the backend folder
 cd python-nlp
+
+# Create a virtual environment using Python 3.10
 python -m venv .venv
-.venv\Scripts\activate  # On Windows
-# source .venv/bin/activate  # On Linux/Mac
 
-pip install -r requirements.txt
-```
-
-#### 4. ONLYOFFICE Document Server Setup
-```bash
-# Start ONLYOFFICE in Docker
-docker-compose up -d
-
-# Verify ONLYOFFICE is running
-# Open http://localhost:8080 in your browser
-```
-
-#### 5. Ollama LLM Setup (Required for AI Analysis)
-
-Ollama runs the Phi-3 Mini LLM locally for free - no API keys needed.
-
-**Step 1: Install Ollama**
-```bash
-# Download from: https://ollama.ai/download
-# Or on Windows, download OllamaSetup.exe and run installer
-```
-
-**Step 2: Pull the Phi-3 Mini Model**
-```bash
-# Open a terminal and run:
-ollama pull phi3:mini
-
-# This downloads ~2.2GB model (only needed once)
-```
-
-**Step 3: Start Ollama Server**
-```bash
-# Ollama runs as a background service automatically on Windows
-# To verify it's running:
-ollama list
-
-# Should show: phi3:mini
-```
-
-#### 6. Load 50 States Data into ChromaDB (RAG Database)
-
-The RAG system needs state employment laws loaded into the vector database.
-
-**Step 1: Activate Virtual Environment**
-```bash
-cd python-nlp
-.venv\Scripts\activate  # Windows
-# source .venv/bin/activate  # Linux/Mac
-```
-
-**Step 2: Load All State Laws**
-```bash
-# Load all 50 states into ChromaDB vector database
-python load_all_states.py --data-dir data/state_laws_final
-
-# Expected output:
-# [INFO] Found 50 state files
-# [1/50] Loading AL... [OK]
-# [2/50] Loading AK... [OK]
-# ...
-# [50/50] Loading WY... [OK]
-#
-# LOADING COMPLETE
-# Successful: 50/50
-# Total laws in database: 469
-```
-
-**Step 3: Verify Database**
-```bash
-# Check which states are loaded
-python check_db_states.py
-
-# Should show all 50 states with law counts
-```
-
-**Troubleshooting ChromaDB:**
-```bash
-# If you get schema errors, delete and reload:
-# 1. Delete the vector_store folder
-rmdir /s /q vector_store  # Windows
-# rm -rf vector_store      # Linux/Mac
-
-# 2. Reload all states
-python load_all_states.py --data-dir data/state_laws_final
-```
-
-#### 7. Start the Application
-
-You need 3 services running:
-
-**Terminal 1 - Ollama (LLM Server):**
-```bash
-# Usually runs automatically as a service on Windows
-# If not, start manually:
-ollama serve
-```
-
-**Terminal 2 - Python Backend:**
-```bash
-cd python-nlp
+# Activate it
+# Windows:
 .venv\Scripts\activate
-python app.py
+# Mac/Linux:
+source .venv/bin/activate
 
-# Should show:
-# ✅ RAG Service initialized with 50 states
-# ✅ LLM Service connected to Ollama (phi3:mini)
-# * Running on http://0.0.0.0:5000
+# Install all backend dependencies
+pip install -r requirements.txt
+
+# Download the spaCy English language model
+python -m spacy download en_core_web_sm
 ```
 
-**Terminal 3 - React Frontend:**
+#### Create the backend `.env` file
+
+Inside `python-nlp/`, create a file named `.env` with this exact content:
+
+```env
+# Microsoft Authentication
+REACT_APP_MICROSOFT_CLIENT_ID=2b74ef92-7feb-45c7-94c2-62978353fc66
+REACT_APP_MICROSOFT_TENANT_ID=b3235290-db90-4365-b033-ae68284de5bd
+REACT_APP_REDIRECT_URI=http://localhost:3000
+
+# API Config
+REACT_APP_API_URL=http://localhost:5000
+
+# Adobe PDF Embed API
+REACT_APP_PDF_EMBED_CLIENT_ID=7c151fb5b27e4214a5ffa12cd8c4159e
+
+# Groq AI API (LLM compliance analysis)
+# Get your key from: https://console.groq.com/keys
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
+```
+
+#### Start the backend
+
 ```bash
+# Make sure you're inside python-nlp/ with venv activated
+python app.py
+```
+
+You should see:
+```
+* Running on http://127.0.0.1:5000
+* Running on http://0.0.0.0:5000
+```
+
+---
+
+### 4. Frontend Setup (React App — Port 3000)
+
+Open a **new terminal**, go to the project root (not python-nlp/):
+
+```bash
+# From the project root
+npm install
+
+# Start the React app
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Opens automatically at: `http://localhost:3000`
 
-### Quick Verification
+---
 
-After starting all services, verify the multi-layer system:
+### 5. OnlyOffice Document Server (Required for document editing)
 
-1. **Frontend**: Open browser to http://localhost:3000
-2. **Backend API**: http://localhost:5000/api/health should return OK
-3. **Ollama**: `ollama list` should show phi3:mini
-4. **ChromaDB**: Backend logs should show "50 states loaded"
+OnlyOffice is the Word-compatible editor embedded inside the app.
 
-## Technical Architecture
-
-### System Overview
-```
-┌─────────────────┐      ┌─────────────────┐      ┌──────────────────┐
-│   React Frontend│◄────►│  Flask Backend  │◄────►│  ONLYOFFICE      │
-│   (Port 3000)   │      │  (Port 5000)    │      │  (Port 8080)     │
-└─────────────────┘      └─────────────────┘      └──────────────────┘
-         │                        │
-         │                        ▼
-         │               ┌─────────────────┐
-         │               │  Multi-Layer    │
-         │               │  Compliance     │
-         │               └─────────────────┘
-         │                   │   │   │
-         │          ┌────────┘   │   └────────┐
-         │          ▼           ▼            ▼
-         │    ┌──────────┐ ┌──────────┐ ┌──────────┐
-         │    │ Pattern  │ │   RAG    │ │   LLM    │
-         │    │ Matching │ │ ChromaDB │ │  Ollama  │
-         │    │(Frontend)│ │(469 Laws)│ │(Phi-3)   │
-         │    └──────────┘ └──────────┘ └──────────┘
-         │                        │
-         ▼                        ▼
-┌─────────────────────────────────────────┐
-│        Document Processing               │
-│  - Content Controls Conversion          │
-│  - Variable Protection                  │
-│  - Real-time Synchronization            │
-│  - 50 State Compliance Checking         │
-└─────────────────────────────────────────┘
-```
-
-### Frontend Components
-```
-src/
-├── components/
-│   ├── EmailEditor.js              # Main editor with variable management
-│   ├── OnlyOfficeViewer.js         # ONLYOFFICE integration component
-│   ├── WordDocumentEditor.js       # Word document editor (legacy)
-│   ├── HomeScreen.js               # Landing page and template selection
-│   ├── PDFGenerator.js             # PDF preview and generation
-│   ├── TemplateModal.js            # Template management
-│   └── compliance/
-│       ├── ComplianceChecker.js    # Compliance checking logic
-│       ├── ComplianceAnalysis.js   # Results display
-│       ├── complianceRules.js      # Rule definitions
-│       └── RulesManager.js         # Rule management
-├── services/
-│   ├── pdfTemplateService.js       # PDF handling
-│   └── pdfContentExtractor.js      # Text extraction
-```
-
-### Backend Services
-```
-python-nlp/
-├── app.py                          # Flask API server
-├── docx_service.py                 # Word document processing
-│   ├── Variable extraction
-│   ├── Content Controls conversion
-│   └── GLiNER integration
-├── gliner_service.py               # GLiNER NLP engine
-├── nlp_service.py                  # SpaCy NLP processing
-├── pdf_service.py                  # PDF processing
-└── enhanced_pdf_service.py         # Advanced PDF features
-```
-
-### Key Technologies
-
-#### Frontend
-- **React.js**: Frontend framework
-- **ONLYOFFICE Document Server**: Professional document editing
-- **pdf-lib**: PDF manipulation
-- **PDF.js**: PDF rendering and text extraction
-
-#### Backend
-- **Flask**: Python web framework
-- **GLiNER**: Generalized Linear Named Entity Recognition (AI model)
-- **SpaCy**: Advanced NLP library
-- **python-docx**: Word document manipulation
-- **PyMuPDF**: PDF processing
-
-#### Infrastructure
-- **Docker**: ONLYOFFICE containerization
-- **CORS**: Cross-origin resource sharing for API communication
-
-## New Features (Latest Update)
-
-### 1. ONLYOFFICE Integration
-- **Professional Editing**: Full Microsoft Word compatibility
-- **Real-time Collaboration**: Multi-user editing support (ready for future)
-- **Format Preservation**: Maintains all document formatting, styles, and layout
-- **Zero Learning Curve**: Familiar Word-like interface
-
-### 2. Content Controls (Variable Protection)
-- **Automatic Conversion**: `[Variable_Name]` placeholders are converted to Content Controls
-- **Deletion Prevention**: Users cannot accidentally delete variable fields
-- **Visual Distinction**: Protected fields are clearly marked in the editor
-- **Format Preservation**: Variables maintain their formatting
-
-### 3. GLiNER AI Integration
-- **Smart Entity Detection**: Automatically identifies important entities in documents
-- **Variable Enrichment**: Adds entity type metadata to detected variables:
-  ```javascript
-  {
-    "Candidate_Name": {
-      "name": "Candidate_Name",
-      "value": "",
-      "entity_type": "person",        // ← Detected by GLiNER
-      "suggested_value": "John Doe",  // ← Smart suggestion
-      "confidence": 0.95
-    }
-  }
-  ```
-- **Context-Aware**: Understands document structure and relationships
-
-### 4. Real-time Variable Updates
-- **Instant Synchronization**: Changes in variable panel update ONLYOFFICE editor immediately
-- **No Page Reload**: Smooth, seamless user experience
-- **Bi-directional Sync**: Changes in document update variable panel
-- **JavaScript API Bridge**: Direct communication with ONLYOFFICE editor
-
-### 5. Enhanced Variable Management
-- **Variable Panel**: Clean, organized sidebar for managing all document variables
-- **Type-Based Grouping**: Variables grouped by entity type (person, date, money, etc.)
-- **Smart Defaults**: Pre-filled suggestions based on GLiNER analysis
-- **Inline Editing**: Edit variables without leaving the document view
-
-## Usage
-
-### Importing and Editing Offer Letters
-
-#### Step 1: Import Document
-1. Click **"Import Offer Letter"** button on the home screen
-2. Select a `.docx` Word document from your computer
-3. Wait for the document to process:
-   - Variables are automatically extracted
-   - GLiNER analyzes entities and assigns types
-   - `[Variable_Name]` placeholders converted to Content Controls
-   - Document loads in ONLYOFFICE editor
-
-#### Step 2: Edit Variables
-1. **View Variables**: Check the right panel for all detected variables
-2. **Edit Values**: Click on any variable to edit its value
-3. **Real-time Updates**: Watch changes appear instantly in the document
-4. **Protected Fields**: Try to delete a `[Variable]` - it's protected!
-
-#### Step 3: Deep Editing (Optional)
-1. **Use ONLYOFFICE**: Click inside the document to edit formatting
-2. **Add Content**: Insert new paragraphs, tables, images
-3. **Format Text**: Apply bold, italic, colors, fonts
-4. **Track Changes**: All edits are automatically saved
-
-#### Step 4: Save & Export
-1. **Auto-Save**: Document saves automatically as you edit
-2. **Download**: Click "Download" to get the edited .docx file
-3. **Export PDF**: Convert to PDF while preserving all formatting
-
-### Creating New Documents
-1. **Home Screen**
-   - View all available templates in a card-based layout
-   - Click "Add New Template" to create a custom template
-   - Click "Edit Template" on any existing template to start editing
-
-2. **Template Editor**
-   - **Left Panel**: ONLYOFFICE document editor with live preview
-   - **Right Panel**: Variable management and compliance feedback
-   - **Compliance Status**: Visual indicators for document compliance
-
-### Checking Existing Documents
-1. **Upload Document**
-   - Click "Upload Document" button
-   - Select your PDF or Word document
-   - System automatically extracts and analyzes content
-
-2. **Compliance Review**
-   - Review automatic compliance analysis
-   - See highlighted issues with severity indicators
-   - Get specific law references and suggestions
-   - Access alternative compliant language
-
-3. **Document Generation**
-   - Make suggested corrections
-   - Preview updated content in real-time
-   - Generate new compliant document
-
-## API Endpoints
-
-### ONLYOFFICE Integration
-```
-POST   /api/onlyoffice/upload                # Upload document
-GET    /api/onlyoffice/config/:doc_id        # Get editor config
-GET    /api/onlyoffice/variables/:doc_id     # Get document variables
-POST   /api/onlyoffice/update-variables/:id  # Update variables
-GET    /api/onlyoffice/download/:doc_id      # Download document
-POST   /api/onlyoffice/callback/:doc_id      # ONLYOFFICE save callback
-```
-
-### Word Document Processing
-```
-POST   /api/docx-extract-variables           # Extract variables from .docx
-POST   /api/docx-replace-variables           # Replace variables in .docx
-POST   /api/docx-to-pdf                      # Convert .docx to PDF
-GET    /api/docx-health                      # Check service health
-```
-
-### GLiNER AI Services
-```
-POST   /api/extract-entities-gliner          # Extract entities with GLiNER
-POST   /api/extract-pdf-entities-gliner      # Extract from PDF using GLiNER
-GET    /api/gliner-health                    # Check GLiNER service health
-```
-
-### NLP Services
-```
-POST   /api/extract-entities                 # Extract entities (SpaCy)
-POST   /api/suggest-variables                # Suggest template variables
-POST   /api/process-document                 # Comprehensive document analysis
-```
-
-### Multi-Layer Compliance API (RAG + LLM)
-```
-POST   /api/v2/compliance-check              # Full multi-layer analysis
-       Body: {
-         "document_text": "offer letter text...",
-         "state": "CA",
-         "options": { "min_confidence": 0.3 }
-       }
-       Response: {
-         "success": true,
-         "violations": [
-           {
-             "severity": "error",
-             "law_citation": "CA Business & Professions Code §16600",
-             "violation_text": "Non-compete clause detected",
-             "explanation": "California prohibits...",
-             "suggestion": "Remove non-compete clause",
-             "confidence": 0.92
-           }
-         ],
-         "analysis_layers": ["pattern", "rag", "llm"]
-       }
-
-GET    /api/v2/states                        # List all 50 supported states
-GET    /api/v2/state/:code/laws              # Get laws for specific state
-GET    /api/v2/rag/coverage                  # Check RAG database coverage
-```
-
-## Configuration
-
-### Environment Variables
-
-**Backend (`python-nlp/.env`):**
+**Option A — Docker (recommended for local dev):**
 ```bash
-HOST=0.0.0.0
-DEBUG=False
-ONLYOFFICE_SERVER_URL=http://localhost:8080
-UPLOAD_FOLDER=./uploads
+docker run -i -t -d -p 80:80 -e JWT_ENABLED=false onlyoffice/documentserver
+```
+Runs at `http://localhost`
+
+**Option B — Use the already-deployed Azure instance:**
+`https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io`
+
+> The frontend is already configured to point to the Azure OnlyOffice. If running locally you may need to update `REACT_APP_ONLYOFFICE_URL` in the config.
+
+---
+
+## Running Everything (Summary)
+
+Open **2 terminals** (OnlyOffice is already live on Azure):
+
+| Terminal | Directory | Command |
+|----------|-----------|---------|
+| 1 — Backend | `python-nlp/` | `.venv\Scripts\activate` then `python app.py` |
+| 2 — Frontend | project root | `npm start` |
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5000
+- OnlyOffice: https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io
+
+---
+
+## Project Structure
+
+```
+Offer-Letter-Compliance-Checker-Real-time-/
+│
+├── src/                            # React frontend source
+│   ├── components/
+│   │   ├── EmailEditor.js          # Main editor + compliance panel UI
+│   │   ├── OnlyOfficeViewer.js     # Embeds OnlyOffice + click-to-highlight
+│   │   ├── UserMenu.js             # Top-right user avatar + name
+│   │   ├── SearchableStateDropdown.js
+│   │   └── compliance/
+│   │       └── complianceRules.js  # 50-state frontend rules (Layer 1)
+│   ├── services/
+│   │   └── complianceService.js    # Calls backend AI compliance API
+│   └── config/
+│       └── constants.js            # API_BASE_URL etc.
+│
+├── python-nlp/                     # Flask backend
+│   ├── app.py                      # Main Flask app (port 5000)
+│   ├── compliance_v2/
+│   │   ├── compliance_analyzer.py
+│   │   ├── llm_service.py          # Groq LLM (Layer 3)
+│   │   ├── rag_service.py          # ChromaDB vector search (Layer 2)
+│   │   └── prompts.py
+│   ├── vector_store/               # ChromaDB database — 469 state laws
+│   ├── data/
+│   │   └── state_laws_50/          # JSON for all 50 states
+│   ├── requirements.txt            # All Python dependencies
+│   └── .env                        # ← YOU MUST CREATE THIS (see above)
+│
+├── onlyoffice-plugin/
+│   └── compliance-search/
+│       ├── code.js                 # Plugin: highlights text in doc
+│       ├── relay.html              # Cross-origin bridge React ↔ OnlyOffice
+│       ├── config.json             # Plugin registration
+│       └── index.html
+│
+├── public/
+│   └── Main Offer Letter.docx      # Default document loaded on startup
+│
+├── Dockerfile.backend              # Docker build for backend
+├── Dockerfile.frontend             # Docker build for frontend
+└── deploy-update.ps1               # Azure redeployment script
 ```
 
-**ONLYOFFICE (`docker-compose.yml`):**
-```yaml
-services:
-  onlyoffice-documentserver:
-    image: onlyoffice/documentserver:latest
-    ports:
-      - "8080:80"
-    environment:
-      - JWT_ENABLED=false
-      - WOPI_ENABLED=false
-      - USE_UNAUTHORIZED_STORAGE=true
-```
+---
+
+## Features
+
+### Compliance Analysis (Right Panel)
+- Select a U.S. state from the dropdown
+- App analyzes the open document against that state's employment laws
+- Results grouped into **Critical Issues** (red), **Warnings** (amber), **Notices** (blue)
+- **Click any card** → highlights the relevant text in the OnlyOffice document
+- **Expand a card (▼)** → shows law reference, explanation, and suggested fix
+- **Copy icon on suggestions** → copies the suggested action text to clipboard
+
+### Document Editor
+- Upload any `.docx` offer letter or use the default `Main Offer Letter.docx`
+- Full Word-compatible editing via OnlyOffice
+
+### Microsoft Login
+- Login with Microsoft/Azure AD account via MSAL
+- User's first name shows in the top-right navbar next to their avatar
+
+### Multi-Layer AI Compliance Engine
+| Layer | What it does |
+|-------|-------------|
+| Layer 1 | Instant frontend pattern matching (400+ rules across 50 states) |
+| Layer 2 | RAG semantic search using ChromaDB (469 state employment laws) |
+| Layer 3 | Groq LLM `llama-3.3-70b` for detailed natural language analysis |
+
+---
+
+## Environment Variables
+
+### Backend — `python-nlp/.env`
+
+| Variable | Value |
+|----------|-------|
+| `GROQ_API_KEY` | Get from https://console.groq.com/keys — ask Sahithi for the team key |
+| `GROQ_MODEL` | `llama-3.3-70b-versatile` |
+| `REACT_APP_MICROSOFT_CLIENT_ID` | `2b74ef92-7feb-45c7-94c2-62978353fc66` |
+| `REACT_APP_MICROSOFT_TENANT_ID` | `b3235290-db90-4365-b033-ae68284de5bd` |
+| `REACT_APP_API_URL` | `http://localhost:5000` |
+
+---
 
 ## Troubleshooting
 
-### ONLYOFFICE Not Loading
-1. **Check Docker**: `docker ps` - ensure container is running
-2. **Check Port**: Visit http://localhost:8080 to verify ONLYOFFICE is accessible
-3. **Restart Docker**: `docker-compose restart`
-4. **Check Logs**: `docker-compose logs onlyoffice-documentserver`
+**Backend won't start**
+- Make sure you're using Python 3.10 (run `python --version`)
+- Run `pip install -r requirements.txt` again with venv activated
+- Make sure `.env` file exists inside `python-nlp/`
 
-### Variables Not Updating
-1. **Refresh Page**: Browser cache may need clearing
-2. **Check Backend**: Ensure Flask server is running on port 5000
-3. **Check Console**: Open browser DevTools for JavaScript errors
-4. **Verify Format**: Variables should be detected as objects `{}`, not arrays `[]`
+**Frontend shows blank page or login error**
+- Backend must be running on port 5000
+- Run `npm install` again if modules are missing
 
-### GLiNER Model Loading
-1. **First Run Delay**: GLiNER downloads ~50MB model on first run (takes 2-5 minutes)
-2. **Memory Requirements**: Ensure at least 2GB RAM available
-3. **Check Logs**: Backend console shows "GLiNER service initialized successfully"
-4. **Fallback Mode**: System works without GLiNER, but without AI entity detection
+**Document editor not loading**
+- OnlyOffice must be running (Docker locally or use Azure URL)
+- Check browser console for errors
 
-### Backend Connection Issues
-1. **CORS Errors**: Ensure Flask backend allows `http://localhost:3000`
-2. **Port Conflicts**: Check nothing else is using ports 3000, 5000, or 8080
-3. **Network IP**: Backend auto-detects IP for Docker communication
-4. **Firewall**: Ensure firewall allows localhost connections
+**Compliance analysis returns nothing**
+- Check `GROQ_API_KEY` is correct in `python-nlp/.env`
+- Make sure `vector_store/` folder exists in `python-nlp/` (has ChromaDB data)
 
-## Compliance Rules
+---
 
-### California Employment Law Focus
-Current implementation focuses on California employment law requirements:
+## Azure Deployment (Team use)
 
-1. **Non-compete Clauses**
-   - Automatically detects prohibited non-compete language
-   - Provides compliant alternatives
-   - References CA Business & Professions Code Section 16600
+Already deployed at:
+- **Frontend:** https://frontend.reddesert-f6724e64.centralus.azurecontainerapps.io
+- **Backend:** https://backend.reddesert-f6724e64.centralus.azurecontainerapps.io
+- **OnlyOffice:** https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io
 
-2. **Salary History**
-   - Identifies prohibited salary history questions
-   - Suggests compliant alternatives
-   - Based on California Labor Code Section 432.3
-
-3. **Background Checks**
-   - Ensures proper timing of checks
-   - Validates Fair Chance Act compliance
-   - References CA Labor Code Section 432.9
-
-4. **Drug Testing**
-   - Checks for compliant language
-   - Validates against recent cannabis laws
-   - Based on CA Government Code Section 12954
-
-## Development
-
-### Adding New Features
-
-#### Custom Variable Types
-Edit `python-nlp/docx_service.py`:
-```python
-def _infer_entity_type_from_name(self, var_name: str) -> str:
-    var_lower = var_name.lower()
-    if 'custom_keyword' in var_lower:
-        return 'custom_type'
-    # ... more patterns
+To redeploy after code changes (must be logged in via `az login`):
+```powershell
+.\deploy-update.ps1
 ```
 
-#### New Compliance Rules
-Edit `src/components/compliance/complianceRules.js`:
-```javascript
-export const complianceRules = {
-  newRule: {
-    severity: 'error',
-    message: 'Rule description',
-    lawReference: 'Legal citation',
-    flaggedPhrases: ['prohibited terms'],
-    suggestion: 'Compliant alternative'
-  }
-}
-```
+---
 
-### Running Tests
-```bash
-# Backend tests
-cd python-nlp
-python -m pytest
+## Tech Stack
 
-# Frontend tests
-npm test
-```
-
-## Future Enhancements
-
-### Planned Features
-- **Multi-user Collaboration**: Real-time collaborative editing
-- **Version History**: Track document changes over time
-- **Template Library**: Shared template marketplace
-- **Multi-state Compliance**: Support for all 50 US states
-- **Custom Rule Builder**: Visual interface for compliance rules
-- **Batch Processing**: Process multiple documents at once
-- **HR System Integration**: Connect with ATS/HRIS platforms
-- **E-signature Integration**: DocuSign, Adobe Sign support
-
-### Expansion Areas
-- **AI Improvements**:
-  - GPT-4 integration for intelligent suggestions
-  - Custom entity recognition training
-  - Automated compliance fixing
-- **Additional Formats**:
-  - Google Docs integration
-  - LibreOffice compatibility
-  - HTML/Markdown export
-- **Industry-Specific Rules**:
-  - Healthcare (HIPAA)
-  - Finance (FINRA)
-  - Technology (IP protection)
-
-## Technical Details
-
-### Content Controls Implementation
-Content Controls are XML structures in .docx files that protect text:
-```xml
-<w:sdt>
-  <w:sdtPr>
-    <w:tag w:val="Variable_Name"/>
-    <w:lock w:val="sdtContentLocked"/>
-  </w:sdtPr>
-  <w:sdtContent>
-    <w:t>[Variable_Name]</w:t>
-  </w:sdtContent>
-</w:sdt>
-```
-
-### GLiNER Entity Types
-```python
-ENTITY_LABELS = {
-    "offer_letter": [
-        "person",           # Names, candidates
-        "organization",     # Company names
-        "date",            # Start dates, deadlines
-        "money",           # Salary, compensation
-        "location",        # Addresses, offices
-        "job_title",       # Position names
-        "time",            # Work hours
-        "percentage",      # Benefits, equity
-    ]
-}
-```
-
-### Real-time Sync Architecture
-```javascript
-// Frontend triggers update
-handleVariableChange(varName, newValue) {
-  // 1. Update backend document
-  await fetch('/api/onlyoffice/update-variables', {
-    body: JSON.stringify({ variables: {...} })
-  });
-
-  // 2. Update ONLYOFFICE editor directly (no reload!)
-  onlyofficeViewerRef.current.updateVariable(varName, newValue);
-}
-
-// ONLYOFFICE API receives update
-updateVariable(varName, newValue) {
-  docEditorRef.current.serviceCommand('setMailMergeRecipients', {
-    [varName]: newValue
-  });
-}
-```
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Support
-
-For issues, questions, or contributions:
-1. Check the [Troubleshooting](#troubleshooting) section
-2. Review the [API documentation](#api-endpoints)
-3. Check Docker logs: `docker-compose logs`
-4. Check backend logs in the Python console
-5. Check browser console for frontend errors
-
-## Changelog
-
-### Latest Update (January 2026)
-- ✅ **Multi-Layer Compliance System**: Pattern + RAG + LLM analysis
-- ✅ **All 50 U.S. States Supported**: Complete coverage of employment laws
-- ✅ **469 Laws in RAG Database**: ChromaDB vector store with semantic search
-- ✅ **Ollama LLM Integration**: Local Phi-3 Mini model for deep analysis
-- ✅ **Automatic Analysis**: Triggers on document load and state change
-- ✅ **Searchable State Dropdown**: Type-to-filter with keyboard navigation
-- ✅ **Combined Results Display**: Shows findings from all analysis layers
-
-### Previous Updates (2025)
-- ✅ ONLYOFFICE Document Server integration
-- ✅ GLiNER AI-powered entity recognition
-- ✅ Content Controls for variable protection
-- ✅ Real-time variable synchronization
-- ✅ Enhanced Word document processing
-- ✅ Smart entity type inference
-- ✅ Docker containerization for ONLYOFFICE
-- ✅ Bi-directional document-variable sync
-
-### Previous Versions
-- v1.0: Initial release with PDF processing
-- v1.1: Added compliance checking
-- v1.2: California employment law rules
-- v1.3: Template management system
-- v2.0: Multi-layer AI compliance (current)
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, Microsoft MSAL auth |
+| Document Editor | OnlyOffice Document Server |
+| Backend | Python 3.10, Flask, Flask-SocketIO, SQLAlchemy |
+| AI / LLM | Groq Cloud (llama-3.3-70b-versatile) |
+| Vector DB | ChromaDB (469 state laws) |
+| NLP | spaCy, GLiNER, sentence-transformers |
+| Auth | Microsoft Azure AD (MSAL) |
+| Deployment | Azure Container Apps + ACR |

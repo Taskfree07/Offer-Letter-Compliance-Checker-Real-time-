@@ -56,7 +56,16 @@ const UserMenu = () => {
       <div
         className="user-profile-trigger"
         onClick={() => setIsOpen(!isOpen)}
+        style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
       >
+        <span style={{
+          color: '#FFFFFF',
+          fontSize: '14px',
+          fontWeight: 500,
+          whiteSpace: 'nowrap'
+        }}>
+          {user.name?.split(' ')[0] || user.email?.split('@')[0] || 'User'}
+        </span>
         <div className="user-avatar">
           <div className="user-avatar-image">
             {initials}
