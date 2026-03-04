@@ -103,20 +103,29 @@ Opens automatically at: `http://localhost:3000`
 
 ---
 
-### 5. OnlyOffice Document Server (Required for document editing)
+### 5. OnlyOffice Document Server (IMPORTANT — read carefully)
 
-OnlyOffice is the Word-compatible editor embedded inside the app.
+OnlyOffice is the Word-compatible editor embedded inside the app. The compliance click-to-highlight feature **requires a custom OnlyOffice image** with the compliance plugin baked in. Do NOT use the plain `onlyoffice/documentserver` image — the plugin will not work.
 
-**Option A — Docker (recommended for local dev):**
+**Option A — Build custom image (REQUIRED for compliance click feature to work):**
 ```bash
-docker run -i -t -d -p 80:80 -e JWT_ENABLED=false onlyoffice/documentserver
+# Run this from the project root (where Dockerfile.onlyoffice is)
+docker build -f Dockerfile.onlyoffice -t onlyoffice-compliance .
+
+# Then run it (takes ~2-3 minutes to start up fully)
+docker run -d -p 80:80 onlyoffice-compliance
 ```
 Runs at `http://localhost`
 
-**Option B — Use the already-deployed Azure instance:**
+> The build downloads the base OnlyOffice image and injects the compliance search plugin into it. This is a one-time step.
+
+**Option B — Use the already-deployed Azure instance (no Docker needed):**
 `https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io`
 
-> The frontend is already configured to point to the Azure OnlyOffice. If running locally you may need to update `REACT_APP_ONLYOFFICE_URL` in the config.
+The app is already configured to use this Azure URL by default in the backend. If the backend is running with its `.env` file, it will automatically point OnlyOffice to Azure.
+
+> **Why plain `docker run onlyoffice/documentserver` does NOT work for the compliance feature:**
+> The compliance click-to-highlight works via a plugin (`onlyoffice-plugin/compliance-search/code.js`) that must live inside the OnlyOffice container. Plain OnlyOffice has no plugin → `relay.html` returns 404 → clicking compliance cards in the panel does nothing.
 
 ---
 
@@ -126,12 +135,16 @@ Open **2 terminals** (OnlyOffice is already live on Azure):
 
 | Terminal | Directory | Command |
 |----------|-----------|---------|
-| 1 — Backend | `python-nlp/` | `.venv\Scripts\activate` then `python app.py` |
-| 2 — Frontend | project root | `npm start` |
+| 1 — OnlyOffice | project root | `docker build -f Dockerfile.onlyoffice -t onlyoffice-compliance . && docker run -d -p 80:80 onlyoffice-compliance` |
+| 2 — Backend | `python-nlp/` | `.venv\Scripts\activate` then `python app.py` |
+| 3 — Frontend | project root | `npm start` |
 
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
-- OnlyOffice: https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io
+- OnlyOffice (local): http://localhost (after Docker build)
+- OnlyOffice (Azure, already live): https://onlyoffice.reddesert-f6724e64.centralus.azurecontainerapps.io
+
+> If you skip building the custom OnlyOffice image and use the Azure URL instead, the compliance click-to-highlight feature will still work (Azure OnlyOffice already has the plugin).
 
 ---
 
@@ -238,6 +251,13 @@ Offer-Letter-Compliance-Checker-Real-time-/
 **Document editor not loading**
 - OnlyOffice must be running (Docker locally or use Azure URL)
 - Check browser console for errors
+
+**Compliance click-to-highlight NOT working (cards don't highlight text in doc)**
+- This is the most common issue on a new machine
+- You must use the **custom OnlyOffice image**, not the plain `onlyoffice/documentserver`
+- Run: `docker build -f Dockerfile.onlyoffice -t onlyoffice-compliance . && docker run -d -p 80:80 onlyoffice-compliance`
+- OR use the Azure OnlyOffice URL (already has the plugin, no Docker needed)
+- Root cause: The feature needs a plugin (`code.js`) inside OnlyOffice. Plain OnlyOffice doesn't have it.
 
 **Compliance analysis returns nothing**
 - Check `GROQ_API_KEY` is correct in `python-nlp/.env`
